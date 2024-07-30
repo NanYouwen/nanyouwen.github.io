@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://nanyouwen.github.io/hello-world/</loc>
+    <loc>https://nanyouwen.github.io/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2-JVM/</loc>
     
     <lastmod>2024-07-30</lastmod>
     
@@ -19,6 +19,20 @@
   </url>
 
   
+  <url>
+    <loc>https://nanyouwen.github.io/tags/java/</loc>
+    <lastmod>2024-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
+  
+  <url>
+    <loc>https://nanyouwen.github.io/categories/java/</loc>
+    <lastmod>2024-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 </urlset>
