@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://nanyouwen.github.io/Mysql%E4%B8%AD%E7%9A%84DML/</loc>
+    
+    <lastmod>2024-07-31</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nanyouwen.github.io/JVM/</loc>
     
     <lastmod>2024-07-31</lastmod>
@@ -36,7 +45,7 @@
   </url>
   
   <url>
-    <loc>https://nanyouwen.github.io/tags/MySQL/</loc>
+    <loc>https://nanyouwen.github.io/tags/mysql/</loc>
     <lastmod>2024-07-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -52,7 +61,7 @@
   </url>
   
   <url>
-    <loc>https://nanyouwen.github.io/categories/MySQL/</loc>
+    <loc>https://nanyouwen.github.io/categories/mysql/</loc>
     <lastmod>2024-07-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
