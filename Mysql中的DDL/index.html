@@ -28,15 +28,15 @@
 <meta property="og:site_name" content="南有文的小破站">
 <meta property="og:description" content="SQL简介：结构化查询语言（SQL）是一种特殊目的的编程语言,是一种数据库查询和程序设计语言，专用于存取数据以及查询、更新和管理关系数据库系统，同时也是数据库脚本文件的扩展名。    提示：以下是本篇文章正文内容，下面案例可供参考 一、使用DDL定义数据库表结构1.创建数据库示例如下： 1CREATE DATABASE database_name; 语法说明：database_name是数据库名">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://nanyouwen.github.io/img/1.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/2.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/2.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/mysql/1.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/mysql/2.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/mysql/2.png">
 <meta property="article:published_time" content="2021-06-02T12:29:59.000Z">
-<meta property="article:modified_time" content="2024-07-31T15:49:34.669Z">
+<meta property="article:modified_time" content="2024-07-31T15:55:36.895Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanyouwen.github.io/img/1.png">
+<meta name="twitter:image" content="https://nanyouwen.github.io/img/mysql/1.png">
   
   
   
@@ -304,12 +304,12 @@
             
               <div class="markdown-body">
                 
-                <font color="#999AAA">
+                <font color=#999AAA >
 SQL简介：结构化查询语言（SQL）是一种特殊目的的编程语言,是一种数据库查询和程序设计语言，专用于存取数据以及查询、更新和管理关系数据库系统，同时也是数据库脚本文件的扩展名。
 
 </font>
 
-<p><font color="#999AAA">提示：以下是本篇文章正文内容，下面案例可供参考</font></p>
+<p><font color=#999AAA >提示：以下是本篇文章正文内容，下面案例可供参考</p>
 <h1 id="一、使用DDL定义数据库表结构"><a href="#一、使用DDL定义数据库表结构" class="headerlink" title="一、使用DDL定义数据库表结构"></a>一、使用DDL定义数据库表结构</h1><p>1.<strong>创建数据库</strong>示例如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> DATABASE database_name;<br></code></pre></td></tr></table></figure>
 <p>语法说明：<br>database_name是数据库名。</p>
@@ -318,13 +318,13 @@ SQL简介：结构化查询语言（SQL）是一种特殊目的的编程语言,�
 
 <p>3.<strong>查看数据库</strong>语法如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> DATABASES;<br></code></pre></td></tr></table></figure>
-<p>如下，查询结果为所有MySQL-1连接中的数据库<br><img src="/img/1.png" srcset="/img/loading.gif" lazyload></p>
+<p>如下，查询结果为所有MySQL-1连接中的数据库<br><img src="/img/mysql/1.png" srcset="/img/loading.gif" lazyload></p>
 <p>4.<strong>创建表</strong>示例如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> t_user(<br>username <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span> <span class="hljs-keyword">primary</span> key,<br>pwd <span class="hljs-type">varchar</span>(<span class="hljs-number">10</span>)<span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>gender <span class="hljs-type">varchar</span>(<span class="hljs-number">2</span>),<br>birth <span class="hljs-type">date</span>,<br>balance <span class="hljs-type">decimal</span>(<span class="hljs-number">8</span>,<span class="hljs-number">2</span>)<br>)<br></code></pre></td></tr></table></figure>
 <p>示例说明：<br>varchar、date、decimal： 数据类型 （有关数据类型具体可参考第二章内容）<br>(20)：数据长度<br>not null :不为空<br>primary key :主键</p>
 <p>效果如下图：</p>
-<p><img src="/img/2.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/img/2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/img/mysql/2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/img/mysql/2.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="二、使用DDL维护数据表结构"><a href="#二、使用DDL维护数据表结构" class="headerlink" title="二、使用DDL维护数据表结构"></a>二、使用DDL维护数据表结构</h1><p><strong>修改表结构</strong>语法如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 修改子句;<br></code></pre></td></tr></table></figure>
 
