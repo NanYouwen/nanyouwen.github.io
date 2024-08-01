@@ -2,16 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://nanyouwen.github.io/Mysql%E4%B8%AD%E7%9A%84DML/</loc>
-    
-    <lastmod>2024-08-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nanyouwen.github.io/Mysql%E4%B8%AD%E7%9A%84DDL/</loc>
+    <loc>https://nanyouwen.github.io/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/</loc>
     
     <lastmod>2024-08-01</lastmod>
     
@@ -29,7 +20,16 @@
   </url>
   
   <url>
-    <loc>https://nanyouwen.github.io/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/</loc>
+    <loc>https://nanyouwen.github.io/Mysql%E4%B8%AD%E7%9A%84DML/</loc>
+    
+    <lastmod>2024-08-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nanyouwen.github.io/Mysql%E4%B8%AD%E7%9A%84DDL/</loc>
     
     <lastmod>2024-08-01</lastmod>
     

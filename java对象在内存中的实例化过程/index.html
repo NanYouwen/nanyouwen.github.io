@@ -21,18 +21,25 @@
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
   
-    <meta name="description" content="分享学习笔记,由Hexo+Github搭建.">
+    <meta name="description" content="java对象在内存中实例化的过程​	在Java类的实例化过程中，内存会使用到三个区域：栈区、堆区、方法区  堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身 栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java对象在内存中的实例化过程">
 <meta property="og:url" content="https://nanyouwen.github.io/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/">
 <meta property="og:site_name" content="南有文的小破站">
-<meta property="og:description" content="分享学习笔记,由Hexo+Github搭建.">
+<meta property="og:description" content="java对象在内存中实例化的过程​	在Java类的实例化过程中，内存会使用到三个区域：栈区、堆区、方法区  堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身 栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-01T00:47:37.000Z">
-<meta property="article:modified_time" content="2024-08-01T01:06:47.732Z">
+<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801093850304.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094224361.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094507538.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801095300609.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101009168.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101521000.png">
+<meta property="article:published_time" content="2022-04-11T00:47:37.000Z">
+<meta property="article:modified_time" content="2024-08-01T02:15:36.027Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="Java、python、go">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801093850304.png">
   
   
   
@@ -214,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-01 08:47" pubdate>
-          2024年8月1日 早上
+        <time datetime="2022-04-11 08:47" pubdate>
+          2022年4月11日 早上
         </time>
       </span>
     
@@ -226,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          712 字
         
       </span>
     
@@ -237,7 +244,7 @@
         
         
         
-          1 分钟
+          6 分钟
         
       </span>
     
@@ -288,7 +295,29 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="java对象在内存中实例化的过程"><a href="#java对象在内存中实例化的过程" class="headerlink" title="java对象在内存中实例化的过程"></a>java对象在内存中实例化的过程</h1><p>​	在Java类的实例化过程中，内存会使用到三个区域：<strong>栈区、堆区、方法区</strong></p>
+<ul>
+<li>堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身</li>
+<li>栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他栈无法访问</li>
+<li>方法区：又被称为静态区，跟堆一样被所有线程共享，方法区包含所有class信息和static修饰的变量。方法区中包含的都是整个程序中永远唯一的元素，如class，static变量等</li>
+</ul>
+<p><strong>类实例化时内存中发生的变化：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">People</span>&#123;<br>    String name; <span class="hljs-comment">// 定义一个成员变量 name</span><br>    <span class="hljs-type">int</span> age; <span class="hljs-comment">// 成员变量 age</span><br>    Double height; <span class="hljs-comment">// 成员变量 height</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">sing</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;人的姓名：&quot;</span>+name);<br>        System.out.println(<span class="hljs-string">&quot;人的年龄：&quot;</span>+age);<br>        System.out.println(<span class="hljs-string">&quot;人的身高：&quot;</span>+height);<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        String name; <span class="hljs-comment">// 定义一个局部变量 name</span><br>    	<span class="hljs-type">int</span> age; <span class="hljs-comment">// 局部变量 age</span><br>    	Double height; <span class="hljs-comment">// 局部变量 height</span><br>        <br>        <span class="hljs-type">People</span> <span class="hljs-variable">people</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">People</span>() ; <span class="hljs-comment">//实例化对象people</span><br>        people.name = <span class="hljs-string">&quot;张三&quot;</span> ;       <span class="hljs-comment">//赋值</span><br>        people.age = <span class="hljs-number">18</span>;             <span class="hljs-comment">//赋值</span><br>        people.stuid = <span class="hljs-number">180.0</span> ;   <span class="hljs-comment">//赋值</span><br>        people.sing();              <span class="hljs-comment">//调用方法sing</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>代码解析</strong>：首先定义了三个成员变量，但是都只声明，没有初始化，然后定义了一个成员方法。在main方法中定义了三个局部变量，然后实例化对象people，内存中在堆区会给实例化对象people分配一片地址，然后我们堆people进行赋值，people调用成员方法，main打印输出，系统执行完毕。下面我用图解法展示实例化过程中内存的变化：</p>
+<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801093850304.png" srcset="/img/loading.gif" lazyload alt="image-20240801093850304"></p>
+<p>首先类中的成员变量和方法体会进入到方法区，如图：</p>
+<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094224361.png" srcset="/img/loading.gif" lazyload alt="image-20240801094224361"></p>
+<p>程序执行main方法时，main()函数会方法体会进入栈区，这一过程叫压栈，定义了一个用于指向Person实例的变量person。如图：</p>
+<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094507538.png" srcset="/img/loading.gif" lazyload alt="image-20240801094507538"></p>
+<p>程序执行到Person person &#x3D; new Person()时就会在堆中开辟一块空间用来存放Person对象实例，然后将成员变量和成员方法放在new实例中，里面都是取成员变量或成员方法的地址值。如图：</p>
+<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801095300609.png" srcset="/img/loading.gif" lazyload alt="image-20240801095300609"></p>
+<p>接下来堆person对象进行赋值。如图：</p>
+<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101009168.png" srcset="/img/loading.gif" lazyload alt="image-20240801101009168"></p>
+<p>当程序走到sing()方法时，先到栈区找到person这个引用变量，然后根据该地址值这种堆内存中找到new Person()进行方法调用。在方法体void sing()被调用完成后，就立马从栈内弹出。</p>
+<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101521000.png" srcset="/img/loading.gif" lazyload alt="image-20240801101521000"></p>
+<p>以上就是Java对象在内存中实例化的全过程。</p>
+
                 
               </div>
             
@@ -339,7 +368,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月1日</div>
+          <div>2022年4月11日</div>
         </div>
       
       
@@ -371,12 +400,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/JVM/" title="JVM">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JVM</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/JVM/" title="JVM">
-                        <span class="hidden-mobile">JVM</span>
+                      <a href="/Mysql%E4%B8%AD%E7%9A%84DML/" title="Mysql中的DML">
+                        <span class="hidden-mobile">Mysql中的DML</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
