@@ -21,27 +21,27 @@
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
   
-    <meta name="description" content="GC垃圾回收想要实现垃圾自动回收，我们需要考虑三件事：  GC的作用区域：方法区和堆 JVM在进行GC时并不是对以下三个区统一回收，大部分时候都是回收新生区：  新生区 幸存区 老年区  GC两种种类：轻GC（普通GC，一般是清理新生区，偶尔清理幸存区）和重GC（全局GC） 引用计数法（JVM一般不采用这种方式）  复制算法  每次GC都会将Eden中活的对象移到幸存区中，一旦Eden区被GC后，">
+    <meta name="description" content="确保自己的yum是最新：sudo yum update 1.卸载旧版本：如果你从未安装过则不用执行 12345678sudo yum remove docker \                 docker-client \                 docker-client-latest \                 docker-common \">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GC垃圾回收">
-<meta property="og:url" content="https://nanyouwen.github.io/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+<meta property="og:title" content="Docker安装教程-Linux">
+<meta property="og:url" content="https://nanyouwen.github.io/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/">
 <meta property="og:site_name" content="南有文的小破站">
-<meta property="og:description" content="GC垃圾回收想要实现垃圾自动回收，我们需要考虑三件事：  GC的作用区域：方法区和堆 JVM在进行GC时并不是对以下三个区统一回收，大部分时候都是回收新生区：  新生区 幸存区 老年区  GC两种种类：轻GC（普通GC，一般是清理新生区，偶尔清理幸存区）和重GC（全局GC） 引用计数法（JVM一般不采用这种方式）  复制算法  每次GC都会将Eden中活的对象移到幸存区中，一旦Eden区被GC后，">
+<meta property="og:description" content="确保自己的yum是最新：sudo yum update 1.卸载旧版本：如果你从未安装过则不用执行 12345678sudo yum remove docker \                 docker-client \                 docker-client-latest \                 docker-common \">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://nanyouwen.github.io/img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801123908708.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801124535478.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801130446501.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801130941518.png">
-<meta property="article:published_time" content="2022-04-29T04:09:51.000Z">
-<meta property="article:modified_time" content="2024-08-01T05:20:40.243Z">
+<meta property="og:image" content="https://nanyouwen.github.io/img/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/image-20240801195441887.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/image-20240801195614707.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/image-20240801195746401.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/image-20240801195946566.png">
+<meta property="article:published_time" content="2022-05-01T11:04:52.000Z">
+<meta property="article:modified_time" content="2024-08-01T12:03:46.749Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="Java、python、go">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanyouwen.github.io/img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801123908708.png">
+<meta name="twitter:image" content="https://nanyouwen.github.io/img/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/image-20240801195441887.png">
   
   
   
-  <title>GC垃圾回收 - 南有文的小破站</title>
+  <title>Docker安装教程-Linux - 南有文的小破站</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -208,7 +208,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="GC垃圾回收"></span>
+            <span id="subtitle" data-typed-text="Docker安装教程-Linux"></span>
           
         </div>
 
@@ -219,8 +219,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-04-29 12:09" pubdate>
-          2022年4月29日 中午
+        <time datetime="2022-05-01 19:04" pubdate>
+          2022年5月1日 晚上
         </time>
       </span>
     
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          468 字
+          211 字
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          4 分钟
+          2 分钟
         
       </span>
     
@@ -288,56 +288,37 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">GC垃圾回收</h1>
+            <h1 id="seo-header">Docker安装教程-Linux</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="GC垃圾回收"><a href="#GC垃圾回收" class="headerlink" title="GC垃圾回收"></a>GC垃圾回收</h1><p><strong>想要实现垃圾自动回收，我们需要考虑三件事：</strong></p>
-<p><img src="/../img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801123908708.png" srcset="/img/loading.gif" lazyload alt="image-20240801123908708"></p>
-<p><strong>GC的作用区域：方法区和堆</strong></p>
-<p>JVM在进行GC时并不是对以下三个区统一回收，大部分时候都是回收新生区：</p>
-<ul>
-<li>新生区</li>
-<li>幸存区</li>
-<li>老年区</li>
-</ul>
-<p><strong>GC两种种类：轻GC（普通GC，一般是清理新生区，偶尔清理幸存区）和重GC（全局GC）</strong></p>
-<p><strong>引用计数法（JVM一般不采用这种方式）</strong></p>
-<p><img src="/../img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801124535478.png" srcset="/img/loading.gif" lazyload alt="image-20240801124535478"></p>
-<p><strong>复制算法</strong></p>
-<ul>
-<li>每次GC都会将Eden中活的对象移到幸存区中，一旦Eden区被GC后，就会是空的</li>
-<li>幸存区中的from和to区中，谁是空的谁为to区</li>
-<li>当一个对象经历15次GC没死，可以进入老年区</li>
-</ul>
-<p><strong>复制算法的好处是没有内存的碎片，坏处是浪费了内存空间：多了一半空间永远是空的</strong><br><strong>复制算法最佳使用场景：对象存活度较低；也就是新生区</strong></p>
-<p><strong>标记清除算法</strong></p>
-<p><img src="/../img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801130446501.png" srcset="/img/loading.gif" lazyload alt="image-20240801130446501"></p>
-<ul>
-<li>优点：不需要额外的空间</li>
-<li>缺点：两次扫描，严重浪费时间，会产生内存碎片</li>
-</ul>
-<p><strong>标记整理（标记压缩）</strong></p>
-<p>上述再优化：先标记清除几次，再进行压缩</p>
-<p><img src="/../img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801130941518.png" srcset="/img/loading.gif" lazyload alt="image-20240801130941518"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><ul>
-<li>内存效率：复制算法&gt;标记清除算法&gt;标记压缩算法（时间复杂度）</li>
-<li>内存整齐度：复制算法&#x3D;标记压缩算法&gt;标记清除算法</li>
-<li>内存利用率：标记压缩算法&#x3D;标记清除算法&gt;复制算法</li>
-</ul>
-<p><strong>没有最好的算法，只有最合适的算法—&gt;GC：分代收集算法</strong></p>
-<p>年轻代：</p>
-<ul>
-<li>存活率低</li>
-<li>复制算法</li>
-</ul>
-<p>老年代：</p>
-<ul>
-<li>存活率高，区域大</li>
-<li>标记清除（内存碎片不是太多）+标记压缩混合实现</li>
-</ul>
-<p><strong>JVM调优就是选择合适的内存设置以及垃圾收集器GC的选择</strong></p>
+                <p>确保自己的yum是最新：sudo yum update</p>
+<p><strong>1.卸载旧版本</strong>：如果你从未安装过则不用执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo yum remove docker \<br>                 docker-client \<br>                 docker-client-latest \<br>                 docker-common \<br>                 docker-latest \<br>                 docker-latest-logrotate \<br>                 docker-logrotate \<br>                 docker-engine<br></code></pre></td></tr></table></figure>
+
+<p><strong>2.配置Docker的yum库</strong></p>
+<p>首先安装yum工具</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install -y yum-utils \<br>           device-mapper-persistent-data \<br>           lvm2 --skip-broken<br></code></pre></td></tr></table></figure>
+
+<p>安装成功后执行命令配置Docker的yum源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum-config-manager \<br>    --add-repo \<br>    https://download.docker.com/linux/centos/docker-ce.repo<br></code></pre></td></tr></table></figure>
+
+<p><strong>3.安装Docker</strong></p>
+<p>执行命令安装docker</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin<br></code></pre></td></tr></table></figure>
+
+<p><strong>4.启动和校验docker</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 启动</span><br><span class="hljs-built_in">sudo</span> systemctl start docker<br><span class="hljs-comment"># 停止</span><br><span class="hljs-built_in">sudo</span> systemctl stop docker<br><span class="hljs-comment">#重启</span><br><span class="hljs-built_in">sudo</span> systemctl restart docker<br><span class="hljs-comment">#设置开机自启动</span><br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> docker<br><span class="hljs-comment">#执行docker ps命令，不报错则说明安装启动成功</span><br>docker ps<br></code></pre></td></tr></table></figure>
+
+<p><strong>5.配置镜像加速器</strong>：以阿里云为例</p>
+<ol>
+<li>访问官网<a target="_blank" rel="noopener" href="https://www.aliyun.com/">https://www.aliyun.com/</a>  注册账户</li>
+<li>找到容器镜像服务<img src="/../img/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/image-20240801195441887.png" srcset="/img/loading.gif" lazyload alt="image-20240801195441887"></li>
+<li>点击管理控制台<img src="/../img/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/image-20240801195614707.png" srcset="/img/loading.gif" lazyload alt="image-20240801195614707"></li>
+<li>选择镜像工具找到镜像加速器<img src="/../img/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/image-20240801195746401.png" srcset="/img/loading.gif" lazyload alt="image-20240801195746401"></li>
+<li>参考文档命令配置<img src="/../img/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/image-20240801195946566.png" srcset="/img/loading.gif" lazyload alt="image-20240801195946566"></li>
+</ol>
 
                 
               </div>
@@ -356,7 +337,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/java/" class="category-chain-item">java</a>
+  <a href="/categories/docker/" class="category-chain-item">docker</a>
   
   
 
@@ -376,8 +357,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>GC垃圾回收</div>
-      <div>https://nanyouwen.github.io/GC垃圾回收/</div>
+      <div>Docker安装教程-Linux</div>
+      <div>https://nanyouwen.github.io/Docker安装教程-Linux/</div>
     </div>
     <div class="license-meta">
       
@@ -389,7 +370,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年4月29日</div>
+          <div>2022年5月1日</div>
         </div>
       
       
@@ -421,18 +402,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/" title="Docker安装教程-Linux">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Docker安装教程-Linux</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/JVM%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="JVM基本概念">
-                        <span class="hidden-mobile">JVM基本概念</span>
+                      <a href="/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" title="GC垃圾回收">
+                        <span class="hidden-mobile">GC垃圾回收</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
