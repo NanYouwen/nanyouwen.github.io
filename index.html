@@ -231,21 +231,81 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/JVM/" target="_self">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="JVM">
+        <a href="/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" target="_self">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="GC垃圾回收">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/JVM/" target="_self">
-          JVM
+        <a href="/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" target="_self">
+          GC垃圾回收
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/JVM/" target="_self">
+      <a class="index-excerpt " href="/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" target="_self">
+        <div>
+          GC垃圾回收想要实现垃圾自动回收，我们需要考虑三件事：  GC的作用区域：方法区和堆 JVM在进行GC时并不是对以下三个区统一回收，大部分时候都是回收新生区：  新生区 幸存区 老年区  GC两种种类：轻GC（普通GC，一般是清理新生区，偶尔清理幸存区）和重GC（全局GC） 引用计数法（JVM一般不采用这种方式）  复制算法  每次GC都会将Eden中活的对象移到幸存区中，一旦Eden区被GC后，
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-29 12:09" pubdate>
+              2022-04-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/java/" class="category-chain-item">java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/JVM%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_self">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="JVM基本概念">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/JVM%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_self">
+          JVM基本概念
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/JVM%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_self">
         <div>
           Java虚拟机（JVM）简介Java虚拟机（Java Virtual Machine，简称JVM）是Java程序能够在各种不同平台上运行的关键。JVM的核心职责是将Java字节码翻译成机器码并执行。本文将深入浅出地介绍JVM的基本架构和工作原理。 JVM的架构JVM主要由以下几个部分组成： 1. 类加载子系统类加载子系统负责加载Java类文件，将其转换为内存中的类对象。这一过程包括以下几个步骤：
         </div>
