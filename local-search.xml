@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>java对象在内存中的实例化过程</title>
+    <link href="/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/"/>
+    <url>/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    <categories>
+      
+      <category>java</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>JVM</title>
     <link href="/JVM/"/>
     <url>/JVM/</url>
@@ -17,12 +36,6 @@
       
     </categories>
     
-    
-    <tags>
-      
-      <tag>java</tag>
-      
-    </tags>
     
   </entry>
   
@@ -43,12 +56,6 @@
     </categories>
     
     
-    <tags>
-      
-      <tag>mysql</tag>
-      
-    </tags>
-    
   </entry>
   
   
@@ -67,12 +74,6 @@
       
     </categories>
     
-    
-    <tags>
-      
-      <tag>mysql</tag>
-      
-    </tags>
     
   </entry>
   
