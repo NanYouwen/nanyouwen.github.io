@@ -21,27 +21,26 @@
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
   
-    <meta name="description" content="GC垃圾回收想要实现垃圾自动回收，我们需要考虑三件事：  GC的作用区域：方法区和堆 JVM在进行GC时并不是对以下三个区统一回收，大部分时候都是回收新生区：  新生区 幸存区 老年区  GC两种种类：轻GC（普通GC，一般是清理新生区，偶尔清理幸存区）和重GC（全局GC） 引用计数法（JVM一般不采用这种方式）  复制算法  每次GC都会将Eden中活的对象移到幸存区中，一旦Eden区被GC后，">
+    <meta name="description" content="SQL简介：结构化查询语言（SQL）是一种特殊目的的编程语言,是一种数据库查询和程序设计语言，专用于存取数据以及查询、更新和管理关系数据库系统，同时也是数据库脚本文件的扩展名。    提示：以下是本篇文章正文内容，下面案例可供参考 一、使用DDL定义数据库表结构1.创建数据库示例如下： 1CREATE DATABASE database_name; 语法说明：database_name是数据库名">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GC垃圾回收">
-<meta property="og:url" content="https://nanyouwen.github.io/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+<meta property="og:title" content="Mysql中的DDL">
+<meta property="og:url" content="https://nanyouwen.github.io/Mysql05/">
 <meta property="og:site_name" content="南有文的小破站">
-<meta property="og:description" content="GC垃圾回收想要实现垃圾自动回收，我们需要考虑三件事：  GC的作用区域：方法区和堆 JVM在进行GC时并不是对以下三个区统一回收，大部分时候都是回收新生区：  新生区 幸存区 老年区  GC两种种类：轻GC（普通GC，一般是清理新生区，偶尔清理幸存区）和重GC（全局GC） 引用计数法（JVM一般不采用这种方式）  复制算法  每次GC都会将Eden中活的对象移到幸存区中，一旦Eden区被GC后，">
+<meta property="og:description" content="SQL简介：结构化查询语言（SQL）是一种特殊目的的编程语言,是一种数据库查询和程序设计语言，专用于存取数据以及查询、更新和管理关系数据库系统，同时也是数据库脚本文件的扩展名。    提示：以下是本篇文章正文内容，下面案例可供参考 一、使用DDL定义数据库表结构1.创建数据库示例如下： 1CREATE DATABASE database_name; 语法说明：database_name是数据库名">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://nanyouwen.github.io/img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801123908708.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801124535478.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801130446501.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801130941518.png">
-<meta property="article:published_time" content="2022-04-29T04:09:51.000Z">
-<meta property="article:modified_time" content="2024-08-01T05:20:40.243Z">
+<meta property="og:image" content="https://nanyouwen.github.io/img/Mysql%E4%B8%AD%E7%9A%84DDL/1.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/Mysql%E4%B8%AD%E7%9A%84DDL/2.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/Mysql%E4%B8%AD%E7%9A%84DDL/3.png">
+<meta property="article:published_time" content="2021-06-02T12:29:59.000Z">
+<meta property="article:modified_time" content="2024-08-01T01:06:57.130Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="Java、python、go">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanyouwen.github.io/img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801123908708.png">
+<meta name="twitter:image" content="https://nanyouwen.github.io/img/Mysql%E4%B8%AD%E7%9A%84DDL/1.png">
   
   
   
-  <title>GC垃圾回收 - 南有文的小破站</title>
+  <title>Mysql中的DDL - 南有文的小破站</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -208,7 +207,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="GC垃圾回收"></span>
+            <span id="subtitle" data-typed-text="Mysql中的DDL"></span>
           
         </div>
 
@@ -219,8 +218,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-04-29 12:09" pubdate>
-          2022年4月29日 中午
+        <time datetime="2021-06-02 20:29" pubdate>
+          2021年6月2日 晚上
         </time>
       </span>
     
@@ -231,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          468 字
+          441 字
         
       </span>
     
@@ -288,56 +287,61 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">GC垃圾回收</h1>
+            <h1 id="seo-header">Mysql中的DDL</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="GC垃圾回收"><a href="#GC垃圾回收" class="headerlink" title="GC垃圾回收"></a>GC垃圾回收</h1><p><strong>想要实现垃圾自动回收，我们需要考虑三件事：</strong></p>
-<p><img src="/../img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801123908708.png" srcset="/img/loading.gif" lazyload alt="image-20240801123908708"></p>
-<p><strong>GC的作用区域：方法区和堆</strong></p>
-<p>JVM在进行GC时并不是对以下三个区统一回收，大部分时候都是回收新生区：</p>
-<ul>
-<li>新生区</li>
-<li>幸存区</li>
-<li>老年区</li>
-</ul>
-<p><strong>GC两种种类：轻GC（普通GC，一般是清理新生区，偶尔清理幸存区）和重GC（全局GC）</strong></p>
-<p><strong>引用计数法（JVM一般不采用这种方式）</strong></p>
-<p><img src="/../img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801124535478.png" srcset="/img/loading.gif" lazyload alt="image-20240801124535478"></p>
-<p><strong>复制算法</strong></p>
-<ul>
-<li>每次GC都会将Eden中活的对象移到幸存区中，一旦Eden区被GC后，就会是空的</li>
-<li>幸存区中的from和to区中，谁是空的谁为to区</li>
-<li>当一个对象经历15次GC没死，可以进入老年区</li>
-</ul>
-<p><strong>复制算法的好处是没有内存的碎片，坏处是浪费了内存空间：多了一半空间永远是空的</strong><br><strong>复制算法最佳使用场景：对象存活度较低；也就是新生区</strong></p>
-<p><strong>标记清除算法</strong></p>
-<p><img src="/../img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801130446501.png" srcset="/img/loading.gif" lazyload alt="image-20240801130446501"></p>
-<ul>
-<li>优点：不需要额外的空间</li>
-<li>缺点：两次扫描，严重浪费时间，会产生内存碎片</li>
-</ul>
-<p><strong>标记整理（标记压缩）</strong></p>
-<p>上述再优化：先标记清除几次，再进行压缩</p>
-<p><img src="/../img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801130941518.png" srcset="/img/loading.gif" lazyload alt="image-20240801130941518"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><ul>
-<li>内存效率：复制算法&gt;标记清除算法&gt;标记压缩算法（时间复杂度）</li>
-<li>内存整齐度：复制算法&#x3D;标记压缩算法&gt;标记清除算法</li>
-<li>内存利用率：标记压缩算法&#x3D;标记清除算法&gt;复制算法</li>
-</ul>
-<p><strong>没有最好的算法，只有最合适的算法—&gt;GC：分代收集算法</strong></p>
-<p>年轻代：</p>
-<ul>
-<li>存活率低</li>
-<li>复制算法</li>
-</ul>
-<p>老年代：</p>
-<ul>
-<li>存活率高，区域大</li>
-<li>标记清除（内存碎片不是太多）+标记压缩混合实现</li>
-</ul>
-<p><strong>JVM调优就是选择合适的内存设置以及垃圾收集器GC的选择</strong></p>
+                <font color=#999AAA >
+SQL简介：结构化查询语言（SQL）是一种特殊目的的编程语言,是一种数据库查询和程序设计语言，专用于存取数据以及查询、更新和管理关系数据库系统，同时也是数据库脚本文件的扩展名。
+
+</font>
+
+<p><font color=#999AAA >提示：以下是本篇文章正文内容，下面案例可供参考</p>
+<h1 id="一、使用DDL定义数据库表结构"><a href="#一、使用DDL定义数据库表结构" class="headerlink" title="一、使用DDL定义数据库表结构"></a>一、使用DDL定义数据库表结构</h1><p>1.<strong>创建数据库</strong>示例如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> DATABASE database_name;<br></code></pre></td></tr></table></figure>
+<p>语法说明：<br>database_name是数据库名。</p>
+<p>2.<strong>删除数据库</strong>示例如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> DATABASE database_name;<br></code></pre></td></tr></table></figure>
+
+<p>3.<strong>查看数据库</strong>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> DATABASES;<br></code></pre></td></tr></table></figure>
+<p>如下，查询结果为所有MySQL-1连接中的数据库<br><img src="/../img/Mysql%E4%B8%AD%E7%9A%84DDL/1.png" srcset="/img/loading.gif" lazyload alt="1"></p>
+<p>4.<strong>创建表</strong>示例如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> t_user(<br>username <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span> <span class="hljs-keyword">primary</span> key,<br>pwd <span class="hljs-type">varchar</span>(<span class="hljs-number">10</span>)<span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>name <span class="hljs-type">varchar</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>gender <span class="hljs-type">varchar</span>(<span class="hljs-number">2</span>),<br>birth <span class="hljs-type">date</span>,<br>balance <span class="hljs-type">decimal</span>(<span class="hljs-number">8</span>,<span class="hljs-number">2</span>)<br>)<br></code></pre></td></tr></table></figure>
+<p>示例说明：<br>varchar、date、decimal： 数据类型 （有关数据类型具体可参考第二章内容）<br>(20)：数据长度<br>not null :不为空<br>primary key :主键</p>
+<p>效果如下图：</p>
+<p><img src="/../img/Mysql%E4%B8%AD%E7%9A%84DDL/2.png" srcset="/img/loading.gif" lazyload alt="2"></p>
+<p><img src="/../img/Mysql%E4%B8%AD%E7%9A%84DDL/3.png" srcset="/img/loading.gif" lazyload alt="3"></p>
+<h1 id="二、使用DDL维护数据表结构"><a href="#二、使用DDL维护数据表结构" class="headerlink" title="二、使用DDL维护数据表结构"></a>二、使用DDL维护数据表结构</h1><p><strong>修改表结构</strong>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 修改子句;<br></code></pre></td></tr></table></figure>
+
+<p>1.<strong>新增字段子句</strong>示例如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 <span class="hljs-keyword">ADD</span> column_name <br>data_type [<span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>] [<span class="hljs-keyword">DEFAULT</span> default_value];<br></code></pre></td></tr></table></figure>
+<p>2.<strong>变更字段子句</strong>示例如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 CHANGE column_name new_column_name<br>data_type [<span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>] [<span class="hljs-keyword">DEFAULT</span> default_value];<br></code></pre></td></tr></table></figure>
+<p>说明：将字段column_name名变更为new_column_name</p>
+<p>3.<strong>更新字段子句</strong>示例如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 MODIFY column_name <br>new_data_type [<span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>] [<span class="hljs-keyword">DEFAULT</span> default_value];<br></code></pre></td></tr></table></figure>
+<p>说明：更新字段column_name 的数据类型为new_data_type</p>
+<p>4.<strong>删除字段子句</strong>示例如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 <span class="hljs-keyword">DROP</span> column_name ;<br></code></pre></td></tr></table></figure>
+<p>说明：删除字段column_name</p>
+<p>5.<strong>删除唯一约束子句</strong>示例如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">UNIQUE</span> constraint_name ;<br></code></pre></td></tr></table></figure>
+<p>说明：constraint_name为唯一约束字段名</p>
+<p>6.<strong>重命名表</strong>示例如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">RENAME <span class="hljs-keyword">TABLE</span> table_name <span class="hljs-keyword">TO</span> new_table_name;<br></code></pre></td></tr></table></figure>
+<p>说明：将表table_name 更新为new_table_name</p>
+<p>7.<strong>添加外键约束</strong>示例如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> table_name(<br><span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> constraint_name <span class="hljs-keyword">FOREIGN</span> KEY(fk_name)<br><span class="hljs-keyword">REFERENCES</span> referenced_table_name(ref_pk_name)<br>);<br></code></pre></td></tr></table></figure>
+<p>说明：</p>
+<ol>
+<li>constraint_name :约束名。</li>
+<li>fk_name：当前表中外键名。</li>
+<li>referenced_table_name：被引用表名（主表名）。</li>
+<li>ref_pk_name：被引用表主键。</li>
+</ol>
 
                 
               </div>
@@ -356,7 +360,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/java/" class="category-chain-item">java</a>
+  <a href="/categories/mysql/" class="category-chain-item">mysql</a>
   
   
 
@@ -376,8 +380,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>GC垃圾回收</div>
-      <div>https://nanyouwen.github.io/GC垃圾回收/</div>
+      <div>Mysql中的DDL</div>
+      <div>https://nanyouwen.github.io/Mysql05/</div>
     </div>
     <div class="license-meta">
       
@@ -389,7 +393,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年4月29日</div>
+          <div>2021年6月2日</div>
         </div>
       
       
@@ -421,21 +425,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/%E5%85%B6%E4%BB%9604/" title="Docker安装教程-Linux">
+                      <a href="/Mysql04/" title="Mysql中的DDL">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Docker安装教程-Linux</span>
+                        <span class="hidden-mobile">Mysql中的DDL</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/JVM%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="JVM基本概念">
-                        <span class="hidden-mobile">JVM基本概念</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>
