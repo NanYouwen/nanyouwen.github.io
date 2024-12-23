@@ -1,0 +1,747 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="Class 与 Style 绑定​		数据绑定的一个常见需求场景是操纵元素的 CSS class 列表和内联样式。因为 class 和 style 都是 attribute，我们可以和其他 attribute 一样使用 v-bind 将它们和动态的字符串绑定。但是，在处理比较复杂的绑定时，通过拼接生成字符串是麻烦且易出错的。因此，Vue 专门为 class 和 style 的 v-bind 用法提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类与样式绑定">
+<meta property="og:url" content="https://nanyouwen.github.io/vue-%E7%B1%BB%E4%B8%8E%E6%A0%B7%E5%BC%8F%E7%BB%91%E5%AE%9A/">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="Class 与 Style 绑定​		数据绑定的一个常见需求场景是操纵元素的 CSS class 列表和内联样式。因为 class 和 style 都是 attribute，我们可以和其他 attribute 一样使用 v-bind 将它们和动态的字符串绑定。但是，在处理比较复杂的绑定时，通过拼接生成字符串是麻烦且易出错的。因此，Vue 专门为 class 和 style 的 v-bind 用法提">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-29T13:02:12.000Z">
+<meta property="article:modified_time" content="2024-12-23T09:23:46.574Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="Java、python、go">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>类与样式绑定 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="类与样式绑定"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-29 21:02" pubdate>
+          2023年5月29日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">类与样式绑定</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Class-与-Style-绑定"><a href="#Class-与-Style-绑定" class="headerlink" title="Class 与 Style 绑定"></a>Class 与 Style 绑定</h1><p>​		数据绑定的一个常见需求场景是操纵元素的 CSS class 列表和内联样式。因为 <code>class</code> 和 <code>style</code> 都是 attribute，我们可以和其他 attribute 一样使用 <code>v-bind</code> 将它们和动态的字符串绑定。但是，在处理比较复杂的绑定时，通过拼接生成字符串是麻烦且易出错的。因此，Vue 专门为 <code>class</code> 和 <code>style</code> 的 <code>v-bind</code> 用法提供了特殊的功能增强。除了字符串外，表达式的值也可以是对象或数组。</p>
+<h2 id="绑定-HTML-class"><a href="#绑定-HTML-class" class="headerlink" title="绑定 HTML class"></a>绑定 HTML class</h2><h3 id="绑定对象"><a href="#绑定对象" class="headerlink" title="绑定对象"></a>绑定对象</h3><p>​		我们可以给 <code>:class</code> (<code>v-bind:class</code> 的缩写) 传递一个对象来动态切换 class：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div :class=&quot;&#123; active: isActive &#125;&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		上面的语法表示 <code>active</code> 是否存在取决于数据属性 <code>isActive</code> 的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/Truthy">真假值</a>。</p>
+<p>​		你可以在对象中写多个字段来操作多个 class。此外，<code>:class</code> 指令也可以和一般的 <code>class</code> attribute 共存。举例来说，下面这样的状态：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> isActive = <span class="hljs-title function_">ref</span>(<span class="hljs-literal">true</span>)<br><span class="hljs-keyword">const</span> hasError = <span class="hljs-title function_">ref</span>(<span class="hljs-literal">false</span>)<br></code></pre></td></tr></table></figure>
+
+<p>配合以下模板：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div<br>  class=&quot;static&quot;<br>  :class=&quot;&#123; active: isActive, &#x27;text-danger&#x27;: hasError &#125;&quot;<br>&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>渲染的结果会是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div class=&quot;static active&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		当 <code>isActive</code> 或者 <code>hasError</code> 改变时，class 列表会随之更新。举例来说，如果 <code>hasError</code> 变为 <code>true</code>，class 列表也会变成 <code>&quot;static active text-danger&quot;</code>。</p>
+<p>​		绑定的对象并不一定需要写成内联字面量的形式，也可以直接绑定一个对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> classObject = <span class="hljs-title function_">reactive</span>(&#123;<br>  <span class="hljs-attr">active</span>: <span class="hljs-literal">true</span>,<br>  <span class="hljs-string">&#x27;text-danger&#x27;</span>: <span class="hljs-literal">false</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div :class=&quot;classObject&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>这将渲染：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div class=&quot;active&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>我们也可以绑定一个返回对象的<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/essentials/computed.html">计算属性</a>。这是一个常见且很有用的技巧：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> isActive = <span class="hljs-title function_">ref</span>(<span class="hljs-literal">true</span>)<br><span class="hljs-keyword">const</span> error = <span class="hljs-title function_">ref</span>(<span class="hljs-literal">null</span>)<br><br><span class="hljs-keyword">const</span> classObject = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> (&#123;<br>  <span class="hljs-attr">active</span>: isActive.<span class="hljs-property">value</span> &amp;&amp; !error.<span class="hljs-property">value</span>,<br>  <span class="hljs-string">&#x27;text-danger&#x27;</span>: error.<span class="hljs-property">value</span> &amp;&amp; error.<span class="hljs-property">value</span>.<span class="hljs-property">type</span> === <span class="hljs-string">&#x27;fatal&#x27;</span><br>&#125;))<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div :class=&quot;classObject&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="绑定数组"><a href="#绑定数组" class="headerlink" title="绑定数组"></a>绑定数组</h3><p>我们可以给 <code>:class</code> 绑定一个数组来渲染多个 CSS class：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> activeClass = <span class="hljs-title function_">ref</span>(<span class="hljs-string">&#x27;active&#x27;</span>)<br><span class="hljs-keyword">const</span> errorClass = <span class="hljs-title function_">ref</span>(<span class="hljs-string">&#x27;text-danger&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div :class=&quot;[activeClass, errorClass]&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>渲染的结果是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div class=&quot;active text-danger&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>如果你也想在数组中有条件地渲染某个 class，你可以使用三元表达式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div :class=&quot;[isActive ? activeClass : &#x27;&#x27;, errorClass]&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p><code>errorClass</code> 会一直存在，但 <code>activeClass</code> 只会在 <code>isActive</code> 为真时才存在。</p>
+<p>然而，这可能在有多个依赖条件的 class 时会有些冗长。因此也可以在数组中嵌套对象：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div :class=&quot;[&#123; [activeClass]: isActive &#125;, errorClass]&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="在组件上使用"><a href="#在组件上使用" class="headerlink" title="在组件上使用"></a>在组件上使用</h3><blockquote>
+<p>本节假设你已经有 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/essentials/component-basics.html">Vue 组件</a>的知识基础。如果没有，你也可以暂时跳过，以后再阅读。</p>
+</blockquote>
+<p>​		对于只有一个根元素的组件，当你使用了 <code>class</code> attribute 时，这些 class 会被添加到根元素上并与该元素上已有的 class 合并。</p>
+<p>举例来说，如果你声明了一个组件名叫 <code>MyComponent</code>，模板如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;!-- 子组件模板 --&gt;<br>&lt;p class=&quot;foo bar&quot;&gt;Hi!&lt;/p&gt;<br></code></pre></td></tr></table></figure>
+
+<p>在使用时添加一些 class：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;!-- 在使用组件时 --&gt;<br>&lt;MyComponent class=&quot;baz boo&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>渲染出的 HTML 为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;p class=&quot;foo bar baz boo&quot;&gt;Hi!&lt;/p&gt;<br></code></pre></td></tr></table></figure>
+
+<p>Class 的绑定也是同样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;MyComponent :class=&quot;&#123; active: isActive &#125;&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>当 <code>isActive</code> 为真时，被渲染的 HTML 会是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;p class=&quot;foo bar active&quot;&gt;Hi!&lt;/p&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		如果你的组件有多个根元素，你将需要指定哪个根元素来接收这个 class。你可以通过组件的 <code>$attrs</code> 属性来指定接收的元素：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;!-- MyComponent 模板使用 $attrs 时 --&gt;<br>&lt;p :class=&quot;$attrs.class&quot;&gt;Hi!&lt;/p&gt;<br>&lt;span&gt;This is a child component&lt;/span&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;MyComponent class=&quot;baz&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>这将被渲染为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;baz&quot;</span>&gt;</span>Hi!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>This is a child component<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>你可以在<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/components/attrs.html">透传 Attribute</a> 一章中了解更多组件的 attribute 继承的细节。</p>
+<h2 id="绑定内联样式"><a href="#绑定内联样式" class="headerlink" title="绑定内联样式"></a>绑定内联样式</h2><h3 id="绑定对象-1"><a href="#绑定对象-1" class="headerlink" title="绑定对象"></a>绑定对象</h3><p><code>:style</code> 支持绑定 JavaScript 对象值，对应的是 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style">HTML 元素的 <code>style</code> 属性</a>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> activeColor = <span class="hljs-title function_">ref</span>(<span class="hljs-string">&#x27;red&#x27;</span>)<br><span class="hljs-keyword">const</span> fontSize = <span class="hljs-title function_">ref</span>(<span class="hljs-number">30</span>)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div :style=&quot;&#123; color: activeColor, fontSize: fontSize + &#x27;px&#x27; &#125;&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>尽管推荐使用 camelCase，但 <code>:style</code> 也支持 kebab-cased 形式的 CSS 属性 key (对应其 CSS 中的实际名称)，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div :style=&quot;&#123; &#x27;font-size&#x27;: fontSize + &#x27;px&#x27; &#125;&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>直接绑定一个样式对象通常是一个好主意，这样可以使模板更加简洁：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> styleObject = <span class="hljs-title function_">reactive</span>(&#123;<br>  <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;red&#x27;</span>,<br>  <span class="hljs-attr">fontSize</span>: <span class="hljs-string">&#x27;30px&#x27;</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div :style=&quot;styleObject&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>同样的，如果样式对象需要更复杂的逻辑，也可以使用返回样式对象的计算属性。</p>
+<h3 id="绑定数组-1"><a href="#绑定数组-1" class="headerlink" title="绑定数组"></a>绑定数组</h3><p>我们还可以给 <code>:style</code> 绑定一个包含多个样式对象的数组。这些对象会被合并后渲染到同一元素上：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div :style=&quot;[baseStyles, overridingStyles]&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="自动前缀"><a href="#自动前缀" class="headerlink" title="自动前缀"></a>自动前缀</h3><p>​		当你在 <code>:style</code> 中使用了需要<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix">浏览器特殊前缀</a>的 CSS 属性时，Vue 会自动为他们加上相应的前缀。Vue 是在运行时检查该属性是否支持在当前浏览器中使用。如果浏览器不支持某个属性，那么将尝试加上各个浏览器特殊前缀，以找到哪一个是被支持的。</p>
+<h3 id="样式多值"><a href="#样式多值" class="headerlink" title="样式多值"></a>样式多值</h3><p>你可以对一个样式属性提供多个 (不同前缀的) 值，举例来说：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div :style=&quot;&#123; display: [&#x27;-webkit-box&#x27;, &#x27;-ms-flexbox&#x27;, &#x27;flex&#x27;] &#125;&quot;&gt;&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>数组仅会渲染浏览器支持的最后一个值。在这个示例中，在支持不需要特别前缀的浏览器中都会渲染为 <code>display: flex</code>。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/vue/" class="category-chain-item">vue</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>类与样式绑定</div>
+      <div>https://nanyouwen.github.io/vue-类与样式绑定/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月29日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/vue-%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/" title="条件渲染">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">条件渲染</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/vue-%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/" title="计算属性">
+                        <span class="hidden-mobile">计算属性</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -21,22 +21,22 @@
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
   
-    <meta name="description" content="·">
+    <meta name="description" content="条件渲染v-if​		v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回真值时才被渲染。 1&lt;h1 v-if&#x3D;&quot;awesome&quot;&gt;Vue is awesome!&lt;&#x2F;h1&gt;  v-else​		你也可以使用 v-else 为 v-if 添加一个“else 区块”。 1234&lt;button @click&#x3D;&quot;awesome">
 <meta property="og:type" content="article">
-<meta property="og:title" content="南有文的小破站">
-<meta property="og:url" content="https://nanyouwen.github.io/z%E6%A8%A1%E6%9D%BF/">
+<meta property="og:title" content="条件渲染">
+<meta property="og:url" content="https://nanyouwen.github.io/vue-%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/">
 <meta property="og:site_name" content="南有文的小破站">
-<meta property="og:description" content="·">
+<meta property="og:description" content="条件渲染v-if​		v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回真值时才被渲染。 1&lt;h1 v-if&#x3D;&quot;awesome&quot;&gt;Vue is awesome!&lt;&#x2F;h1&gt;  v-else​		你也可以使用 v-else 为 v-if 添加一个“else 区块”。 1234&lt;button @click&#x3D;&quot;awesome">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-08T13:12:19.000Z">
-<meta property="article:modified_time" content="2024-12-23T09:24:08.428Z">
+<meta property="article:published_time" content="2023-06-03T14:18:11.000Z">
+<meta property="article:modified_time" content="2024-12-23T09:23:55.507Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="Java、python、go">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>南有文的小破站</title>
+  <title>条件渲染 - 南有文的小破站</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="条件渲染"></span>
           
         </div>
 
@@ -214,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-08 21:12" pubdate>
-          2023年5月8日 晚上
+        <time datetime="2023-06-03 22:18" pubdate>
+          2023年6月3日 晚上
         </time>
       </span>
     
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          771 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          1 分钟
+          7 分钟
         
       </span>
     
@@ -283,12 +283,42 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">条件渲染</h1>
             
             
               <div class="markdown-body">
                 
-                <p>·</p>
+                <h1 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h1><h2 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a><code>v-if</code></h2><p>​		<code>v-if</code> 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回真值时才被渲染。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;h1 v-if=&quot;awesome&quot;&gt;Vue is awesome!&lt;/h1&gt;<br></code></pre></td></tr></table></figure>
+
+<h2 id="v-else"><a href="#v-else" class="headerlink" title="v-else"></a><code>v-else</code></h2><p>​		你也可以使用 <code>v-else</code> 为 <code>v-if</code> 添加一个“else 区块”。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;button @click=&quot;awesome = !awesome&quot;&gt;Toggle&lt;/button&gt;<br><br>&lt;h1 v-if=&quot;awesome&quot;&gt;Vue is awesome!&lt;/h1&gt;<br>&lt;h1 v-else&gt;Oh no 😢&lt;/h1&gt;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://play.vuejs.org/#eNpFjkEOgjAQRa8ydIMulLA1hegJ3LnqBskAjdA27RQXhHu4M/GEHsEiKLv5mfdf/sBOxux7j+zAuCutNAQOyZtcKNkZbQkGsFjBCJXVHcQBjYUSqtTKERR3dLpDyCZmQ9bjViiezKKgCIGwM21BGBIAv3oireBYtrK8ZYKtgmg5BctJ13WLPJnhr0YQb1Lod7JaS4G8eATpfjMinjTphC8wtg7zcwNKw/v5eC1fnvwnsfEDwaha7w==">在演练场中尝试一下</a></p>
+<p>一个 <code>v-else</code> 元素必须跟在一个 <code>v-if</code> 或者 <code>v-else-if</code> 元素后面，否则它将不会被识别。</p>
+<h2 id="v-else-if"><a href="#v-else-if" class="headerlink" title="v-else-if"></a><code>v-else-if</code></h2><p>顾名思义，<code>v-else-if</code> 提供的是相应于 <code>v-if</code> 的“else if 区块”。它可以连续多次重复使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div v-if=&quot;type === &#x27;A&#x27;&quot;&gt;<br>  A<br>&lt;/div&gt;<br>&lt;div v-else-if=&quot;type === &#x27;B&#x27;&quot;&gt;<br>  B<br>&lt;/div&gt;<br>&lt;div v-else-if=&quot;type === &#x27;C&#x27;&quot;&gt;<br>  C<br>&lt;/div&gt;<br>&lt;div v-else&gt;<br>  Not A/B/C<br>&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>和 <code>v-else</code> 类似，一个使用 <code>v-else-if</code> 的元素必须紧跟在一个 <code>v-if</code> 或一个 <code>v-else-if</code> 元素后面。</p>
+<h2 id="上的-v-if"><a href="#上的-v-if" class="headerlink" title="&lt;template&gt; 上的 v-if"></a><code>&lt;template&gt;</code> 上的 <code>v-if</code></h2><p>​		因为 <code>v-if</code> 是一个指令，他必须依附于某个元素。但如果我们想要切换不止一个元素呢？在这种情况下我们可以在一个 <code>&lt;template&gt;</code> 元素上使用 <code>v-if</code>，这只是一个不可见的包装器元素，最后渲染的结果并不会包含这个 <code>&lt;template&gt;</code> 元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;template v-if=&quot;ok&quot;&gt;<br>  &lt;h1&gt;Title&lt;/h1&gt;<br>  &lt;p&gt;Paragraph 1&lt;/p&gt;<br>  &lt;p&gt;Paragraph 2&lt;/p&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p><code>v-else</code> 和 <code>v-else-if</code> 也可以在 <code>&lt;template&gt;</code> 上使用。</p>
+<h2 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a><code>v-show</code></h2><p>另一个可以用来按条件显示一个元素的指令是 <code>v-show</code>。其用法基本一样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;h1 v-show=&quot;ok&quot;&gt;Hello!&lt;/h1&gt;<br></code></pre></td></tr></table></figure>
+
+<p>不同之处在于 <code>v-show</code> 会在 DOM 渲染中保留该元素；<code>v-show</code> 仅切换了该元素上名为 <code>display</code> 的 CSS 属性。</p>
+<p><code>v-show</code> 不支持在 <code>&lt;template&gt;</code> 元素上使用，也不能和 <code>v-else</code> 搭配使用。</p>
+<h2 id="v-if-vs-v-show"><a href="#v-if-vs-v-show" class="headerlink" title="v-if vs. v-show"></a><code>v-if</code> vs. <code>v-show</code></h2><ol>
+<li><code>v-if</code> 是“真实的”按条件渲染，因为它确保了在切换时，条件区块内的事件监听器和子组件都会被销毁与重建。</li>
+<li><code>v-if</code> 也是<strong>惰性</strong>的：如果在初次渲染时条件值为 false，则不会做任何事。条件区块只有当条件首次变为 true 时才被渲染。</li>
+<li>相比之下，<code>v-show</code> 简单许多，元素无论初始条件如何，始终会被渲染，只有 CSS <code>display</code> 属性会被切换。</li>
+<li>总的来说，<code>v-if</code> 有更高的切换开销，而 <code>v-show</code> 有更高的初始渲染开销。因此，如果需要频繁切换，则使用 <code>v-show</code> 较好；如果在运行时绑定条件很少改变，则 <code>v-if</code> 会更合适。</li>
+</ol>
+<h2 id="v-if-和-v-for"><a href="#v-if-和-v-for" class="headerlink" title="v-if 和 v-for"></a><code>v-if</code> 和 <code>v-for</code></h2><ul>
+<li>同时使用 <code>v-if</code> 和 <code>v-for</code> 是<strong>不推荐的</strong>，因为这样二者的优先级不明显。请查看<a target="_blank" rel="noopener" href="https://cn.vuejs.org/style-guide/rules-essential.html#avoid-v-if-with-v-for">风格指南</a>获得更多信息。</li>
+<li>当 <code>v-if</code> 和 <code>v-for</code> 同时存在于一个元素上的时候，<code>v-if</code> 会首先被执行。</li>
+</ul>
 
                 
               </div>
@@ -296,6 +326,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/vue/" class="category-chain-item">vue</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -306,8 +357,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>https://nanyouwen.github.io/z模板/</div>
+      <div>条件渲染</div>
+      <div>https://nanyouwen.github.io/vue-条件渲染/</div>
     </div>
     <div class="license-meta">
       
@@ -319,7 +370,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月8日</div>
+          <div>2023年6月3日</div>
         </div>
       
       
@@ -351,9 +402,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/vue-%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95/" title="模板语法">
+                      <a href="/vue-%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93/" title="条件渲染">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">模板语法</span>
+                        <span class="hidden-mobile">条件渲染</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -361,8 +412,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/vue-vue3%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="vue3生命周期">
-                        <span class="hidden-mobile">vue3生命周期</span>
+                      <a href="/vue-%E7%B1%BB%E4%B8%8E%E6%A0%B7%E5%BC%8F%E7%BB%91%E5%AE%9A/" title="类与样式绑定">
+                        <span class="hidden-mobile">类与样式绑定</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
