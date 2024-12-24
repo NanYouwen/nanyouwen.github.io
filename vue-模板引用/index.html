@@ -1,0 +1,694 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="模板引用​		虽然 Vue 的声明性渲染模型为你抽象了大部分对 DOM 的直接操作，但在某些情况下，我们仍然需要直接访问底层 DOM 元素。要实现这一点，我们可以使用特殊的 ref attribute： 1&lt;input ref&#x3D;&quot;input&quot;&gt;  ​		ref 是一个特殊的 attribute，和 v-for 章节中提到的 key 类似。它允许我们在一个特定的 DO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模板引用">
+<meta property="og:url" content="https://nanyouwen.github.io/vue-%E6%A8%A1%E6%9D%BF%E5%BC%95%E7%94%A8/">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="模板引用​		虽然 Vue 的声明性渲染模型为你抽象了大部分对 DOM 的直接操作，但在某些情况下，我们仍然需要直接访问底层 DOM 元素。要实现这一点，我们可以使用特殊的 ref attribute： 1&lt;input ref&#x3D;&quot;input&quot;&gt;  ​		ref 是一个特殊的 attribute，和 v-for 章节中提到的 key 类似。它允许我们在一个特定的 DO">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-28T14:12:11.000Z">
+<meta property="article:modified_time" content="2024-12-24T08:26:42.481Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="Java、python、go">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>模板引用 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="模板引用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-28 22:12" pubdate>
+          2023年6月28日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">模板引用</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="模板引用"><a href="#模板引用" class="headerlink" title="模板引用"></a>模板引用</h1><p>​		虽然 Vue 的声明性渲染模型为你抽象了大部分对 DOM 的直接操作，但在某些情况下，我们仍然需要直接访问底层 DOM 元素。要实现这一点，我们可以使用特殊的 <code>ref</code> attribute：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;input ref=&quot;input&quot;&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		<code>ref</code> 是一个特殊的 attribute，和 <code>v-for</code> 章节中提到的 <code>key</code> 类似。它允许我们在一个特定的 DOM 元素或子组件实例被挂载后，获得对它的直接引用。这可能很有用，比如说在组件挂载时将焦点设置到一个 input 元素上，或在一个元素上初始化一个第三方库。</p>
+<h2 id="访问模板引用"><a href="#访问模板引用" class="headerlink" title="访问模板引用"></a>访问模板引用</h2><p>​		要在组合式 API 中获取引用，我们可以使用辅助函数 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/composition-api-helpers.html#usetemplateref"><code>useTemplateRef()</code></a> ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import &#123; useTemplateRef, onMounted &#125; from &#x27;vue&#x27;<br><br>// 第一个参数必须与模板中的 ref 值匹配<br>const input = useTemplateRef(&#x27;my-input&#x27;)<br><br>onMounted(() =&gt; &#123;<br>  input.value.focus()<br>&#125;)<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>  &lt;input ref=&quot;my-input&quot; /&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		在使用 TypeScript 时，Vue 的 IDE 支持和 <code>vue-tsc</code> 将根据匹配的 <code>ref</code> attribute 所用的元素或组件自动推断 <code>inputRef.value</code> 的类型。</p>
+<details style="box-sizing: border-box; display: block;"><summary style="box-sizing: border-box; display: list-item; touch-action: manipulation; margin-bottom: 1.2em; width: fit-content; cursor: pointer;">3.5 前的用法</summary><p style="box-sizing: border-box; margin: 0px 0px 1.2em;"><code style="box-sizing: border-box; font-family: var(--vt-font-family-mono); font-size: var(--vt-doc-code-font-size); background-color: var(--vt-c-bg-mute); padding: 0.15em 0.5em; border-radius: 4px; color: var(--vt-c-text-code); transition: color 0.5s, background-color 0.5s; white-space: nowrap;"></code></p><div class="language-vue" style="box-sizing: border-box; position: relative; margin: 28px 0px; background-color: rgb(41, 45, 62); overflow-x: auto; transition: background-color 0.5s; border-radius: 8px;"><button title="Copy Code" class="copy" style="box-sizing: border-box; font-family: inherit; font-size: 16px; line-height: inherit; margin: 0px; overflow: visible; text-transform: none; appearance: button; touch-action: manipulation; border: 0px; padding: 0px; color: inherit; background-color: rgb(41, 45, 62); background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E&quot;); cursor: pointer; position: absolute; top: 4px; right: 4px; z-index: 3; display: block; justify-content: center; align-items: center; border-radius: 4px; width: 40px; height: 40px; opacity: 0; background-position: 50% center; background-size: 20px; background-repeat: no-repeat; transition: opacity 0.4s;"></button><span class="lang" style="box-sizing: border-box; position: absolute; top: 4px; right: 10px; z-index: 2; font-size: 12px; font-weight: 500; color: var(--vt-c-text-dark-3); transition: color 0.5s;"></span><pre class="shiki github-dark vp-code" tabindex="0" style="box-sizing: border-box; font-family: var(--vt-font-family-mono); font-size: 1em; margin: 0px; text-align: left; white-space: pre; word-spacing: normal; word-break: normal; overflow-wrap: normal; tab-size: 4; hyphens: none; position: relative; z-index: 1; padding: 14px 0px; background: transparent; overflow-x: auto;"><code style="box-sizing: border-box; font-family: var(--vt-font-family-mono); font-size: var(--vt-doc-code-font-size); text-align: left; white-space: pre; word-spacing: normal; word-break: normal; overflow-wrap: normal; tab-size: 4; hyphens: none; display: block; padding: 0px 24px; width: fit-content; min-width: 100%; line-height: var(--vt-doc-code-line-height); color: rgb(166, 172, 205); transition: color 0.5s;"><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(158, 203, 255);"></span></span><span class="line" style="box-sizing: border-box;"></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(106, 115, 125);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(106, 115, 125);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(121, 184, 255);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(121, 184, 255);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(158, 203, 255);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span></code></pre></div><p style="box-sizing: border-box; margin: 0px 0px 1.2em;"><code style="box-sizing: border-box; font-family: var(--vt-font-family-mono); font-size: var(--vt-doc-code-font-size); background-color: var(--vt-c-bg-mute); padding: 0.15em 0.5em; border-radius: 4px; color: var(--vt-c-text-code); transition: color 0.5s, background-color 0.5s; white-space: nowrap;"></code><code style="box-sizing: border-box; font-family: var(--vt-font-family-mono); font-size: var(--vt-doc-code-font-size); background-color: var(--vt-c-bg-mute); padding: 0.15em 0.5em; border-radius: 4px; color: var(--vt-c-text-code); transition: color 0.5s, background-color 0.5s; white-space: nowrap;"></code></p><div class="language-js" style="box-sizing: border-box; position: relative; margin: 28px 0px; background-color: rgb(41, 45, 62); overflow-x: auto; transition: background-color 0.5s; border-radius: 8px;"><button title="Copy Code" class="copy" style="box-sizing: border-box; font-family: inherit; font-size: 16px; line-height: inherit; margin: 0px; overflow: visible; text-transform: none; appearance: button; touch-action: manipulation; border: 0px; padding: 0px; color: inherit; background-color: rgb(41, 45, 62); background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E&quot;); cursor: pointer; position: absolute; top: 4px; right: 4px; z-index: 3; display: block; justify-content: center; align-items: center; border-radius: 4px; width: 40px; height: 40px; opacity: 0; background-position: 50% center; background-size: 20px; background-repeat: no-repeat; transition: opacity 0.4s;"></button><span class="lang" style="box-sizing: border-box; position: absolute; top: 4px; right: 10px; z-index: 2; font-size: 12px; font-weight: 500; color: var(--vt-c-text-dark-3); transition: color 0.5s;"></span><pre class="shiki github-dark vp-code" tabindex="0" style="box-sizing: border-box; font-family: var(--vt-font-family-mono); font-size: 1em; margin: 0px; text-align: left; white-space: pre; word-spacing: normal; word-break: normal; overflow-wrap: normal; tab-size: 4; hyphens: none; position: relative; z-index: 1; padding: 14px 0px; background: transparent; overflow-x: auto;"><code style="box-sizing: border-box; font-family: var(--vt-font-family-mono); font-size: var(--vt-doc-code-font-size); text-align: left; white-space: pre; word-spacing: normal; word-break: normal; overflow-wrap: normal; tab-size: 4; hyphens: none; display: block; padding: 0px 24px; width: fit-content; min-width: 100%; line-height: var(--vt-doc-code-line-height); color: rgb(166, 172, 205); transition: color 0.5s;"><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(121, 184, 255);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(121, 184, 255);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(106, 115, 125);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line highlighted" style="box-sizing: border-box; background-color: rgba(0, 0, 0, 0.3); transition: background-color 0.5s; margin: 0px -24px; padding: 0px 24px; width: calc(100% + 48px); display: inline-block;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span></code></pre></div></details>
+
+<p>​		注意，你只可以<strong>在组件挂载后</strong>才能访问模板引用。如果你想在模板中的表达式上访问 <code>input</code>，在初次渲染时会是 <code>null</code>。这是因为在初次渲染前这个元素还不存在呢！</p>
+<p>​		如果你需要侦听一个模板引用 ref 的变化，确保考虑到其值为 <code>null</code> 的情况：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">watchEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (input.<span class="hljs-property">value</span>) &#123;<br>    input.<span class="hljs-property">value</span>.<span class="hljs-title function_">focus</span>()<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-comment">// 此时还未挂载，或此元素已经被卸载（例如通过 v-if 控制）</span><br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>也可参考：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/typescript/composition-api.html#typing-template-refs">为模板引用标注类型</a> </p>
+<h2 id="v-for-中的模板引用"><a href="#v-for-中的模板引用" class="headerlink" title="v-for 中的模板引用"></a><code>v-for</code> 中的模板引用</h2><blockquote>
+<p>需要 v3.2.25 及以上版本</p>
+</blockquote>
+<p>​		当在 <code>v-for</code> 中使用模板引用时，对应的 ref 中包含的值是一个数组，它将在元素被挂载后包含对应整个列表的所有元素：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import &#123; ref, useTemplateRef, onMounted &#125; from &#x27;vue&#x27;<br><br>const list = ref([<br>  /* ... */<br>])<br><br>const itemRefs = useTemplateRef(&#x27;items&#x27;)<br><br>onMounted(() =&gt; console.log(itemRefs.value))<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>  &lt;ul&gt;<br>    &lt;li v-for=&quot;item in list&quot; ref=&quot;items&quot;&gt;<br>      &#123;&#123; item &#125;&#125;<br>    &lt;/li&gt;<br>  &lt;/ul&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://play.vuejs.org/#eNp9UsluwjAQ/ZWRLwQpDepyQoDUIg6t1EWUW91DFAZq6tiWF4oU5d87dtgqVRyyzLw3b+aN3bB7Y4ptQDZkI1dZYTw49MFMuBK10dZDAxZXOQSHC6yNLD3OY6zVsw7K4xJaWFldQ49UelxxVWnlPEhBr3GszT6uc7jJ4fazf4KFx5p0HFH+Kme9CLle4h6bZFkfxhNouAIoJVqfHQSKbSkDFnVpMhEpovC481NNVcr3SaWlZzTovJErCqgydaMIYBRk+tKfFLC9Wmk75iyqg1DJBWfRxT7pONvTAZom2YC23QsMpOg0B0l0NDh2YjnzjpyvxLrYOK1o3ckLZ5WujSBHr8YL2gxnw85lxEop9c9TynkbMD/kqy+svv/Jb9wu5jh7s+jQbpGzI+ZLu0byEuHZ+wvt6Ays9TJIYl8A5+i0DHHGjvYQ1JLGPuOlaR/TpRFqvXCzHR2BO5iKg0Zmm/ic0W2ZXrB+Gve2uEt1dJKs/QXbwePE">在演练场中尝试一下</a></p>
+<details style="box-sizing: border-box; display: block;"><summary style="box-sizing: border-box; display: list-item; touch-action: manipulation; margin-bottom: 1.2em; width: fit-content; cursor: pointer;">3.5 前的用法</summary><div class="language-vue" style="box-sizing: border-box; position: relative; margin: 28px 0px; background-color: rgb(41, 45, 62); overflow-x: auto; transition: background-color 0.5s; border-radius: 8px;"><button title="Copy Code" class="copy" style="box-sizing: border-box; font-family: inherit; font-size: 16px; line-height: inherit; margin: 0px; overflow: visible; text-transform: none; appearance: button; touch-action: manipulation; border: 0px; padding: 0px; color: inherit; background-color: rgb(41, 45, 62); background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E&quot;); cursor: pointer; position: absolute; top: 4px; right: 4px; z-index: 3; display: block; justify-content: center; align-items: center; border-radius: 4px; width: 40px; height: 40px; opacity: 0; background-position: 50% center; background-size: 20px; background-repeat: no-repeat; transition: opacity 0.4s;"></button><span class="lang" style="box-sizing: border-box; position: absolute; top: 4px; right: 10px; z-index: 2; font-size: 12px; font-weight: 500; color: var(--vt-c-text-dark-3); transition: color 0.5s;"></span><pre class="shiki github-dark vp-code" tabindex="0" style="box-sizing: border-box; font-family: var(--vt-font-family-mono); font-size: 1em; margin: 0px; text-align: left; white-space: pre; word-spacing: normal; word-break: normal; overflow-wrap: normal; tab-size: 4; hyphens: none; position: relative; z-index: 1; padding: 14px 0px; background: transparent; overflow-x: auto;"><code style="box-sizing: border-box; font-family: var(--vt-font-family-mono); font-size: var(--vt-doc-code-font-size); text-align: left; white-space: pre; word-spacing: normal; word-break: normal; overflow-wrap: normal; tab-size: 4; hyphens: none; display: block; padding: 0px 24px; width: fit-content; min-width: 100%; line-height: var(--vt-doc-code-line-height); color: rgb(166, 172, 205); transition: color 0.5s;"><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(158, 203, 255);"></span></span><span class="line" style="box-sizing: border-box;"></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(121, 184, 255);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(106, 115, 125);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(121, 184, 255);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(158, 203, 255);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(158, 203, 255);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(158, 203, 255);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span></code></pre></div></details>
+
+<p>应该注意的是，ref 数组<strong>并不</strong>保证与源数组相同的顺序。</p>
+<h2 id="函数模板引用"><a href="#函数模板引用" class="headerlink" title="函数模板引用"></a>函数模板引用</h2><p>​		除了使用字符串值作名字，<code>ref</code> attribute 还可以绑定为一个函数，会在每次组件更新时都被调用。该函数会收到元素引用作为其第一个参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;input :ref=&quot;(el) =&gt; &#123; /* 将 el 赋值给一个数据属性或 ref 变量 */ &#125;&quot;&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		注意我们这里需要使用动态的 <code>:ref</code> 绑定才能够传入一个函数。当绑定的元素被卸载时，函数也会被调用一次，此时的 <code>el</code> 参数会是 <code>null</code>。你当然也可以绑定一个组件方法而不是内联函数。</p>
+<h2 id="组件上的-ref"><a href="#组件上的-ref" class="headerlink" title="组件上的 ref"></a>组件上的 ref</h2><p>​		模板引用也可以被用在一个子组件上。这种情况下引用中获得的值是组件实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import &#123; useTemplateRef, onMounted &#125; from &#x27;vue&#x27;<br>import Child from &#x27;./Child.vue&#x27;<br><br>const childRef = useTemplateRef(&#x27;child&#x27;)<br><br>onMounted(() =&gt; &#123;<br>  // childRef.value 将持有 &lt;Child /&gt; 的实例<br>&#125;)<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>  &lt;Child ref=&quot;child&quot; /&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<details style="box-sizing: border-box; display: block;"><summary style="box-sizing: border-box; display: list-item; touch-action: manipulation; margin-bottom: 1.2em; width: fit-content; cursor: pointer;">3.5 前的用法</summary><div class="language-vue" style="box-sizing: border-box; position: relative; margin: 28px 0px; background-color: rgb(41, 45, 62); overflow-x: auto; transition: background-color 0.5s; border-radius: 8px;"><button title="Copy Code" class="copy" style="box-sizing: border-box; font-family: inherit; font-size: 16px; line-height: inherit; margin: 0px; overflow: visible; text-transform: none; appearance: button; touch-action: manipulation; border: 0px; padding: 0px; color: inherit; background-color: rgb(41, 45, 62); background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E&quot;); cursor: pointer; position: absolute; top: 4px; right: 4px; z-index: 3; display: block; justify-content: center; align-items: center; border-radius: 4px; width: 40px; height: 40px; opacity: 0; background-position: 50% center; background-size: 20px; background-repeat: no-repeat; transition: opacity 0.4s;"></button><span class="lang" style="box-sizing: border-box; position: absolute; top: 4px; right: 10px; z-index: 2; font-size: 12px; font-weight: 500; color: var(--vt-c-text-dark-3); transition: color 0.5s;"></span><pre class="shiki github-dark vp-code" tabindex="0" style="box-sizing: border-box; font-family: var(--vt-font-family-mono); font-size: 1em; margin: 0px; text-align: left; white-space: pre; word-spacing: normal; word-break: normal; overflow-wrap: normal; tab-size: 4; hyphens: none; position: relative; z-index: 1; padding: 14px 0px; background: transparent; overflow-x: auto;"><code style="box-sizing: border-box; font-family: var(--vt-font-family-mono); font-size: var(--vt-doc-code-font-size); text-align: left; white-space: pre; word-spacing: normal; word-break: normal; overflow-wrap: normal; tab-size: 4; hyphens: none; display: block; padding: 0px 24px; width: fit-content; min-width: 100%; line-height: var(--vt-doc-code-line-height); color: rgb(166, 172, 205); transition: color 0.5s;"><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(158, 203, 255);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(158, 203, 255);"></span></span><span class="line" style="box-sizing: border-box;"></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(121, 184, 255);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(121, 184, 255);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(249, 117, 131);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(106, 115, 125);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(179, 146, 240);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(158, 203, 255);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span><span class="line" style="box-sizing: border-box;"><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span><span style="box-sizing: border-box; color: rgb(133, 232, 157);"></span><span style="box-sizing: border-box; color: rgb(225, 228, 232);"></span></span></code></pre></div></details>
+
+<p>​		如果一个子组件使用的是选项式 API 或没有使用 <code>&lt;script setup&gt;</code>，被引用的组件实例和该子组件的 <code>this</code> 完全一致，这意味着父组件对子组件的每一个属性和方法都有完全的访问权。这使得在父组件和子组件之间创建紧密耦合的实现细节变得很容易，当然也因此，应该只在绝对需要时才使用组件引用。大多数情况下，你应该首先使用标准的 props 和 emit 接口来实现父子组件交互。</p>
+<p>​		有一个例外的情况，使用了 <code>&lt;script setup&gt;</code> 的组件是<strong>默认私有</strong>的：一个父组件无法访问到一个使用了 <code>&lt;script setup&gt;</code> 的子组件中的任何东西，除非子组件在其中通过 <code>defineExpose</code> 宏显式暴露：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import &#123; ref &#125; from &#x27;vue&#x27;<br><br>const a = 1<br>const b = ref(2)<br><br>// 像 defineExpose 这样的编译器宏不需要导入<br>defineExpose(&#123;<br>  a,<br>  b<br>&#125;)<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		当父组件通过模板引用获取到了该组件的实例时，得到的实例类型为 <code>&#123; a: number, b: number &#125;</code> (ref 都会自动解包，和一般的实例一样)。</p>
+<p>TypeScript 用户请参考：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/typescript/composition-api.html#typing-component-template-refs">为组件的模板引用标注类型</a> </p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/vue%E5%9F%BA%E7%A1%80/" class="category-chain-item">vue基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>模板引用</div>
+      <div>https://nanyouwen.github.io/vue-模板引用/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年6月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/vue-%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/" title="组件基础">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">组件基础</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/vue-%E4%BE%A6%E5%90%AC%E5%99%A8/" title="侦听器">
+                        <span class="hidden-mobile">侦听器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

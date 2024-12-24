@@ -1,0 +1,792 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="组件基础​		组件允许我们将 UI 划分为独立的、可重用的部分，并且可以对每个部分进行单独的思考。在实际应用中，组件常常被组织成一个层层嵌套的树状结构：  ​		这和我们嵌套 HTML 元素的方式类似，Vue 实现了自己的组件模型，使我们可以在每个组件内封装自定义内容与逻辑。Vue 同样也能很好地配合原生 Web Component。如果你想知道 Vue 组件与原生 Web Components">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组件基础">
+<meta property="og:url" content="https://nanyouwen.github.io/vue-%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="组件基础​		组件允许我们将 UI 划分为独立的、可重用的部分，并且可以对每个部分进行单独的思考。在实际应用中，组件常常被组织成一个层层嵌套的树状结构：  ​		这和我们嵌套 HTML 元素的方式类似，Vue 实现了自己的组件模型，使我们可以在每个组件内封装自定义内容与逻辑。Vue 同样也能很好地配合原生 Web Component。如果你想知道 Vue 组件与原生 Web Components">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nanyouwen.github.io/img/vue-%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/image-20241224161949530-17350283926022.png">
+<meta property="og:image" content="https://nanyouwen.github.io/img/vue-%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/image-20241224162431047-17350286720763.png">
+<meta property="article:published_time" content="2023-07-02T15:41:12.000Z">
+<meta property="article:modified_time" content="2024-12-24T08:27:10.323Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="Java、python、go">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nanyouwen.github.io/img/vue-%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/image-20241224161949530-17350283926022.png">
+  
+  
+  
+  <title>组件基础 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="组件基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-02 23:41" pubdate>
+          2023年7月2日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">组件基础</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="组件基础"><a href="#组件基础" class="headerlink" title="组件基础"></a>组件基础</h1><p>​		组件允许我们将 UI 划分为独立的、可重用的部分，并且可以对每个部分进行单独的思考。在实际应用中，组件常常被组织成一个层层嵌套的树状结构：</p>
+<p><img src="/../img/vue-%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/image-20241224161949530-17350283926022.png" srcset="/img/loading.gif" lazyload alt="image-20241224161949530"></p>
+<p>​		这和我们嵌套 HTML 元素的方式类似，Vue 实现了自己的组件模型，使我们可以在每个组件内封装自定义内容与逻辑。Vue 同样也能很好地配合原生 Web Component。如果你想知道 Vue 组件与原生 Web Components 之间的关系</p>
+<h2 id="定义一个组件"><a href="#定义一个组件" class="headerlink" title="定义一个组件"></a>定义一个组件</h2><p>​		当使用构建步骤时，我们一般会将 Vue 组件定义在一个单独的 <code>.vue</code> 文件中，这被叫做<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/scaling-up/sfc.html">单文件组件</a> (简称 SFC)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import &#123; ref &#125; from &#x27;vue&#x27;<br><br>const count = ref(0)<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>  &lt;button @click=&quot;count++&quot;&gt;You clicked me &#123;&#123; count &#125;&#125; times.&lt;/button&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		当不使用构建步骤时，一个 Vue 组件以一个包含 Vue 特定选项的 JavaScript 对象来定义：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; ref &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-title function_">setup</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">const</span> count = <span class="hljs-title function_">ref</span>(<span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">return</span> &#123; count &#125;<br>  &#125;,<br>  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span><br><span class="hljs-string">    &lt;button @click=&quot;count++&quot;&gt;</span><br><span class="hljs-string">      You clicked me &#123;&#123; count &#125;&#125; times.</span><br><span class="hljs-string">    &lt;/button&gt;`</span><br>  <span class="hljs-comment">// 也可以针对一个 DOM 内联模板：</span><br>  <span class="hljs-comment">// template: &#x27;#my-template-element&#x27;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>​		这里的模板是一个内联的 JavaScript 字符串，Vue 将会在运行时编译它。你也可以使用 ID 选择器来指向一个元素 (通常是原生的 <code>&lt;template&gt;</code> 元素)，Vue 将会使用其内容作为模板来源。</p>
+<p>​		上面的例子中定义了一个组件，并在一个 <code>.js</code> 文件里默认导出了它自己，但你也可以通过具名导出在一个文件中导出多个组件。</p>
+<h2 id="使用组件"><a href="#使用组件" class="headerlink" title="使用组件"></a>使用组件</h2><p>​		我们会在接下来的指引中使用单文件组件语法，无论你是否使用构建步骤，组件相关的概念都是相同的。<a target="_blank" rel="noopener" href="https://cn.vuejs.org/examples/">示例</a>一节中展示了两种场景中的组件使用情况。</p>
+<p>​		要使用一个子组件，我们需要在父组件中导入它。假设我们把计数器组件放在了一个叫做 <code>ButtonCounter.vue</code> 的文件中，这个组件将会以默认导出的形式被暴露给外部。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import ButtonCounter from &#x27;./ButtonCounter.vue&#x27;<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>  &lt;h1&gt;Here is a child component!&lt;/h1&gt;<br>  &lt;ButtonCounter /&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p>通过 <code>&lt;script setup&gt;</code>，导入的组件都在模板中直接可用。</p>
+<p>​		当然，你也可以全局地注册一个组件，使得它在当前应用中的任何组件上都可以使用，而不需要额外再导入。关于组件的全局注册和局部注册两种方式的利弊，我们放在了<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/components/registration.html">组件注册</a>这一章节中专门讨论。</p>
+<p>组件可以被重用任意多次：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;h1&gt;Here is a child component!&lt;/h1&gt;<br>&lt;ButtonCounter /&gt;<br>&lt;ButtonCounter /&gt;<br>&lt;ButtonCounter /&gt;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://play.vuejs.org/#eNqVj91KAzEQhV/lmJsqlY3eSlr8ufEVhNys6ZQGNz8kE0GWfXez2SJUsdCLuZiZM9+ZM4qnGLvPQuJBqGySjYxMXOJWe+tiSIznwhz8SyieKWGfgsOqkyfTGbDSXsmFUG9rw+Ti0DPNHavD/faVEqGv5Xr/BXOwww4mVBNPnvOVklXTtKeO8qKhkj++4lb8+fL/mCMS7TEdAy6BtDfBZ65fVgA2s+L67uZMUEC9N0s8msGaj40W7Xa91qKtgbdQ0Ha0gyOM45E+TWDrKHeNIhfMr0DTN4U0me8=">在演练场中尝试一下</a></p>
+<p>​		你会注意到，每当点击这些按钮时，每一个组件都维护着自己的状态，是不同的 <code>count</code>。这是因为每当你使用一个组件，就创建了一个新的<strong>实例</strong>。</p>
+<p>​		在单文件组件中，推荐为子组件使用 <code>PascalCase</code> 的标签名，以此来和原生的 HTML 元素作区分。虽然原生 HTML 标签名是不区分大小写的，但 Vue 单文件组件是可以在编译中区分大小写的。我们也可以使用 <code>/&gt;</code> 来关闭一个标签。</p>
+<p>​		如果你是直接在 DOM 中书写模板 (例如原生 <code>&lt;template&gt;</code> 元素的内容)，模板的编译需要遵从浏览器中 HTML 的解析行为。在这种情况下，你应该需要使用 <code>kebab-case</code> 形式并显式地关闭这些组件的标签。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;!-- 如果是在 DOM 中书写该模板 --&gt;<br>&lt;button-counter&gt;&lt;/button-counter&gt;<br>&lt;button-counter&gt;&lt;/button-counter&gt;<br>&lt;button-counter&gt;&lt;/button-counter&gt;<br></code></pre></td></tr></table></figure>
+
+<h1 id="传递-props"><a href="#传递-props" class="headerlink" title="传递 props"></a>传递 props</h1><p>​		如果我们正在构建一个博客，我们可能需要一个表示博客文章的组件。我们希望所有的博客文章分享相同的视觉布局，但有不同的内容。要实现这样的效果自然必须向组件中传递数据，例如每篇文章标题和内容，这就会使用到 props。</p>
+<p>​		Props 是一种特别的 attributes，你可以在组件上声明注册。要传递给博客文章组件一个标题，我们必须在组件的 props 列表上声明它。这里要用到 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/sfc-script-setup.html#defineprops-defineemits"><code>defineProps</code></a> 宏：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;!-- BlogPost.vue --&gt;<br>&lt;script setup&gt;<br>defineProps([&#x27;title&#x27;])<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>  &lt;h4&gt;&#123;&#123; title &#125;&#125;&lt;/h4&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		<code>defineProps</code> 是一个仅 <code>&lt;script setup&gt;</code> 中可用的编译宏命令，并不需要显式地导入。声明的 props 会自动暴露给模板。<code>defineProps</code> 会返回一个对象，其中包含了可以传递给组件的所有 props：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> props = <span class="hljs-title function_">defineProps</span>([<span class="hljs-string">&#x27;title&#x27;</span>])<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(props.<span class="hljs-property">title</span>)<br></code></pre></td></tr></table></figure>
+
+<p>TypeScript 用户请参考：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/typescript/composition-api.html#typing-component-props">为组件 props 标注类型</a></p>
+<p>​		如果你没有使用 <code>&lt;script setup&gt;</code>，props 必须以 <code>props</code> 选项的方式声明，props 对象会作为 <code>setup()</code> 函数的第一个参数被传入：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">props</span>: [<span class="hljs-string">&#x27;title&#x27;</span>],<br>  <span class="hljs-title function_">setup</span>(<span class="hljs-params">props</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(props.<span class="hljs-property">title</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>一个组件可以有任意多的 props，默认情况下，所有 prop 都接受任意类型的值。</p>
+<p>当一个 prop 被注册后，可以像这样以自定义 attribute 的形式传递数据给它：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;BlogPost title=&quot;My journey with Vue&quot; /&gt;<br>&lt;BlogPost title=&quot;Blogging with Vue&quot; /&gt;<br>&lt;BlogPost title=&quot;Why Vue is so fun&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>在实际应用中，我们可能在父组件中会有如下的一个博客文章数组：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> posts = <span class="hljs-title function_">ref</span>([<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;My journey with Vue&#x27;</span> &#125;,<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Blogging with Vue&#x27;</span> &#125;,<br>  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Why Vue is so fun&#x27;</span> &#125;<br>])<br></code></pre></td></tr></table></figure>
+
+<p>这种情况下，我们可以使用 <code>v-for</code> 来渲染它们：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;BlogPost<br>  v-for=&quot;post in posts&quot;<br>  :key=&quot;post.id&quot;<br>  :title=&quot;post.title&quot;<br> /&gt;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://play.vuejs.org/#eNp9kU9PhDAUxL/KpBfWBCH+OZEuid5N9qSHrQezFKhC27RlDSF8d1tYQBP1+N78OpN5HciD1sm54yQj1J6M0A6Wu07nTIpWK+MwwPASI0qjWkQejVbpsVHVQVl30ZJ0WQRHjwFMnpT0gPZLi32w2h2DMEAUGW5iOOEaniF66vGuOiN5j0/hajx7B4zxxt5ubIiphKz+IO828qXugw5hYRXKTnqSydcrJmk61/VF/eB4q5s3x8Pk6FJjauDO16Uye0ZCBwg5d2EkkED2wfuLlogibMOTbMpf9tMwP8jpeiMfRdM1l8Tk+/F++Y6Cl0Lyg1Ha7o7R5Bn9WwSg9X0+DPMxMI409fPP1PELlVmwdQ==">在演练场中尝试一下</a></p>
+<p>​		留意我们是如何使用 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/built-in-directives.html#v-bind"><code>v-bind</code> 语法</a> (<code>:title=&quot;post.title&quot;</code>) 来传递动态 prop 值的。当事先不知道要渲染的确切内容时，这一点特别有用。</p>
+<p>​		以上就是目前你需要了解的关于 props 的全部了。如果你看完本章节后还想知道更多细节，我们推荐你深入阅读关于 props 的<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/components/props.html">完整指引</a>。</p>
+<h2 id="监听事件"><a href="#监听事件" class="headerlink" title="监听事件"></a>监听事件</h2><p>​		让我们继续关注我们的 <code>&lt;BlogPost&gt;</code> 组件。我们会发现有时候它需要与父组件进行交互。例如，要在此处实现无障碍访问的需求，将博客文章的文字能够放大，而页面的其余部分仍使用默认字号。</p>
+<p>在父组件中，我们可以添加一个 <code>postFontSize</code> ref 来实现这个效果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> posts = <span class="hljs-title function_">ref</span>([<br>  <span class="hljs-comment">/* ... */</span><br>])<br><br><span class="hljs-keyword">const</span> postFontSize = <span class="hljs-title function_">ref</span>(<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+<p>在模板中用它来控制所有博客文章的字体大小：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div :style=&quot;&#123; fontSize: postFontSize + &#x27;em&#x27; &#125;&quot;&gt;<br>  &lt;BlogPost<br>    v-for=&quot;post in posts&quot;<br>    :key=&quot;post.id&quot;<br>    :title=&quot;post.title&quot;<br>   /&gt;<br>&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>然后，给 <code>&lt;BlogPost&gt;</code> 组件添加一个按钮：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;!-- BlogPost.vue, 省略了 &lt;script&gt; --&gt;<br>&lt;template&gt;<br>  &lt;div class=&quot;blog-post&quot;&gt;<br>    &lt;h4&gt;&#123;&#123; title &#125;&#125;&lt;/h4&gt;<br>    &lt;button&gt;Enlarge text&lt;/button&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		这个按钮目前还没有做任何事情，我们想要点击这个按钮来告诉父组件它应该放大所有博客文章的文字。要解决这个问题，组件实例提供了一个自定义事件系统。父组件可以通过 <code>v-on</code> 或 <code>@</code> 来选择性地监听子组件上抛的事件，就像监听原生 DOM 事件那样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;BlogPost<br>  ...<br>  @enlarge-text=&quot;postFontSize += 0.1&quot;<br> /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>子组件可以通过调用内置的 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/component-instance.html#emit"><strong><code>$emit</code></strong> 方法</a>，通过传入事件名称来抛出一个事件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;!-- BlogPost.vue, 省略了 &lt;script&gt; --&gt;<br>&lt;template&gt;<br>  &lt;div class=&quot;blog-post&quot;&gt;<br>    &lt;h4&gt;&#123;&#123; title &#125;&#125;&lt;/h4&gt;<br>    &lt;button @click=&quot;$emit(&#x27;enlarge-text&#x27;)&quot;&gt;Enlarge text&lt;/button&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p>因为有了 <code>@enlarge-text=&quot;postFontSize += 0.1&quot;</code> 的监听，父组件会接收这一事件，从而更新 <code>postFontSize</code> 的值。</p>
+<p><a target="_blank" rel="noopener" href="https://play.vuejs.org/#eNp1Uk1PwkAQ/SuTxqQYgYp6ahaiJngzITHRA/UAZQor7W7TnaK16X93th8UEuHEvPdm5s3bls5Tmo4POTq+I0yYyZTAIOXpLFAySXVGUEKGEVQQZToBl6XukXqO9XahDbXc2OsAO5FlAIEKtWJByqCBqR01WFqiBLnxYTIEkhSjD+5rAV86zxQW8C1pB+88Aaphr73rtXbNVqrtBeV9r/zYFZYHacBoiHLFykB9Xgfq1NmLVvQmf7E1OGFaeE0anAMXhEkarwhtRWIjD+AbKmKcBk4JUdvtn8+6ARcTu87hLuCf6NJpSoDDKNIZj7BtIFUTUuB0tL/HomXHcnOC18d1TF305COqeJVtcUT4Q62mtzSF2/GkE8/E8b1qh8Ljw/if8I7nOkPn9En/+Ug2GEmFi0ynZrB0azOujbfB54kki5+aqumL8bING28Yr4xh+2vePrI39CnuHmZl2TwwVJXwuG6ZdU6kFTyGsQz33HyFvH5wvvyaB80bACwgvKbrYgLVH979DQc=">在演练场中尝试一下</a></p>
+<p>我们可以通过 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/sfc-script-setup.html#defineprops-defineemits"><code>defineEmits</code></a> 宏来声明需要抛出的事件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;!-- BlogPost.vue --&gt;<br>&lt;script setup&gt;<br>defineProps([&#x27;title&#x27;])<br>defineEmits([&#x27;enlarge-text&#x27;])<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		这声明了一个组件可能触发的所有事件，还可以对事件的参数进行<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/components/events.html#validate-emitted-events">验证</a>。同时，这还可以让 Vue 避免将它们作为原生事件监听器隐式地应用于子组件的根元素。</p>
+<p>​		和 <code>defineProps</code> 类似，<code>defineEmits</code> 仅可用于 <code>&lt;script setup&gt;</code> 之中，并且不需要导入，它返回一个等同于 <code>$emit</code> 方法的 <code>emit</code> 函数。它可以被用于在组件的 <code>&lt;script setup&gt;</code> 中抛出事件，因为此处无法直接访问 <code>$emit</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>const emit = defineEmits([&#x27;enlarge-text&#x27;])<br><br>emit(&#x27;enlarge-text&#x27;)<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>TypeScript 用户请参考：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/typescript/composition-api.html#typing-component-emits">为组件 emits 标注类型</a></p>
+<p>​		如果你没有在使用 <code>&lt;script setup&gt;</code>，你可以通过 <code>emits</code> 选项定义组件会抛出的事件。你可以从 <code>setup()</code> 函数的第二个参数，即 setup 上下文对象上访问到 <code>emit</code> 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">emits</span>: [<span class="hljs-string">&#x27;enlarge-text&#x27;</span>],<br>  <span class="hljs-title function_">setup</span>(<span class="hljs-params">props, ctx</span>) &#123;<br>    ctx.<span class="hljs-title function_">emit</span>(<span class="hljs-string">&#x27;enlarge-text&#x27;</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="通过插槽来分配内容"><a href="#通过插槽来分配内容" class="headerlink" title="通过插槽来分配内容"></a>通过插槽来分配内容</h1><p>一些情况下我们会希望能和 HTML 元素一样向组件中传递内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;AlertBox&gt;<br>  Something bad happened.<br>&lt;/AlertBox&gt;<br></code></pre></td></tr></table></figure>
+
+<p>我们期望能渲染成这样：</p>
+<p><img src="/../img/vue-%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/image-20241224162431047-17350286720763.png" srcset="/img/loading.gif" lazyload alt="image-20241224162431047"></p>
+<p>这可以通过 Vue 的自定义 <code>&lt;slot&gt;</code> 元素来实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;!-- AlertBox.vue --&gt;<br>&lt;template&gt;<br>  &lt;div class=&quot;alert-box&quot;&gt;<br>    &lt;strong&gt;This is an Error for Demo Purposes&lt;/strong&gt;<br>    &lt;slot /&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;style scoped&gt;<br>.alert-box &#123;<br>  /* ... */<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+<p>如上所示，我们使用 <code>&lt;slot&gt;</code> 作为一个占位符，父组件传递进来的内容就会渲染在这里。</p>
+<p><a target="_blank" rel="noopener" href="https://play.vuejs.org/#eNpVUEtOwzAQvcpgFt3QBBCqUAiRisQJ2GbjxG4a4Xis8aQKqnp37PyUyqv3mZn3fBVH55JLr0Umcl9T6xi85t4VpW07h8RwNJr4Cwc4EXawS9KFiGO70ubpNBcmAmDdOSNZR8T5Yg0IoOQf7DSfW9tAJRWcpXPaapWM1nVt8ObpukY8ie29GHNzAiBX7QVqI73/LIWMzn2FQylGMcieCW1TfBMhPYSoE5zFitLVZ5BhQnkadt6nGKt5/jMafI1Oq8Ak6zW4xrEaDVIGj4fD4SPiCknpQLy4ATyaVgFptVH2JFXb+wze3DDSTioV/iaD1+eZqWT92xD2Vu2X7af3+IJ6G7/UToVigpJnTzwTO42eWDnELsTtH/wUqH4=">在演练场中尝试一下</a></p>
+<p>​		以上就是目前你需要了解的关于插槽的所有知识了。如果你看完本章节后还想知道更多细节，请深入阅读<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/components/slots.html">组件插槽</a>章节。</p>
+<h1 id="动态组件"><a href="#动态组件" class="headerlink" title="动态组件"></a>动态组件</h1><p>有些场景会需要在两个组件间来回切换，比如 Tab 界面：</p>
+<p><a target="_blank" rel="noopener" href="https://play.vuejs.org/#eNqNVMGOmzAQ/ZURe2BXCiHbrXpwk1X31mMPvS1V5RiTWAEb2SZNhPLvHdvggLZRE6TIM/P8/N5gpk/e2nZ57HhCkrVhWrQWDLdd+1pI0bRKW/iuGg6VVg2ky9wFDp7G8g9lrIl1H80Bb5rtxfFKMcRzUA+aV3AZQKEEhWRKGgus05pL+5NuYeNwj6mTkT4VckRYujVY63GT17twC6/Fr4YjC3kp5DoPNtEgBpY3bU0txwhgXYojsJoasymSkjeqSHweK9vOWoUbXIC/Y1YpjaDH3wt39hMI6TUUSYSQAz8jArPT5Mj+nmIhC6zpAu1TZlEhmXndbBwpXH5NGL6xWrADMsyaMj1lkAzQ92E7mvYe8nCcM24xZApbL5ECiHCSnP73KyseGnvh6V/XedwS2pVjv3C1ziddxNDYc+2WS9fC8E4qJW1W0UbUZwKGSpMZrkX11dW2SpdcE3huT2BULUp44JxPSpmmpegMgU/tyadbWpZC7jCxwj0v+OfTDdU7ITOrWiTjzTS3Vei8IfB5xHZ4PmqoObMEJHryWXXkuqrVn+xEgHZWYRKbh06uLyv4iQq+oIDnkXSQiwKymlc26n75WNdit78FmLWCMeZL+GKMwlKrhLRcBzhlh51WnSwJPFQr9/zLdIZ007w/O6bR4MQe2bseBJMzer5yzwf8MtzbOzYMkNsOY0+HfoZv1d+lZJGMg8fNqdsfbbio4b77uRVv7I0Li8xxZN1PHWbeHdyTWXc/+zgw/8t/+QsROe9h">在演练场中查看示例</a></p>
+<p>上面的例子是通过 Vue 的 <code>&lt;component&gt;</code> 元素和特殊的 <code>is</code> attribute 实现的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;!-- currentTab 改变时组件也改变 --&gt;<br>&lt;component :is=&quot;tabs[currentTab]&quot;&gt;&lt;/component&gt;<br></code></pre></td></tr></table></figure>
+
+<p>在上面的例子中，被传给 <code>:is</code> 的值可以是以下几种：</p>
+<ul>
+<li>被注册的组件名</li>
+<li>导入的组件对象</li>
+</ul>
+<p>你也可以使用 <code>is</code> attribute 来创建一般的 HTML 元素。</p>
+<p>​		当使用 <code>&lt;component :is=&quot;...&quot;&gt;</code> 来在多个组件间作切换时，被切换掉的组件会被卸载。我们可以通过 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/built-ins/keep-alive.html">&#96;&#96; 组件</a>强制被切换掉的组件仍然保持“存活”的状态。</p>
+<h2 id="DOM-内模板解析注意事项"><a href="#DOM-内模板解析注意事项" class="headerlink" title="DOM 内模板解析注意事项"></a>DOM 内模板解析注意事项</h2><p>​		如果你想在 DOM 中直接书写 Vue 模板，Vue 则必须从 DOM 中获取模板字符串。由于浏览器的原生 HTML 解析行为限制，有一些需要注意的事项。</p>
+<p>​		请注意下面讨论只适用于直接在 DOM 中编写模板的情况。如果你使用来自以下来源的字符串模板，就不需要顾虑这些限制了：</p>
+<ul>
+<li>单文件组件</li>
+<li>内联模板字符串 (例如 <code>template: &#39;...&#39;</code>)</li>
+<li><code>&lt;script type=&quot;text/x-template&quot;&gt;</code></li>
+</ul>
+<h3 id="大小写区分"><a href="#大小写区分" class="headerlink" title="大小写区分"></a>大小写区分</h3><p>​		HTML 标签和属性名称是不分大小写的，所以浏览器会把任何大写的字符解释为小写。这意味着当你使用 DOM 内的模板时，无论是 PascalCase 形式的组件名称、camelCase 形式的 prop 名称还是 v-on 的事件名称，都需要转换为相应等价的 kebab-case (短横线连字符) 形式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// JavaScript 中的 camelCase</span><br><span class="hljs-keyword">const</span> <span class="hljs-title class_">BlogPost</span> = &#123;<br>  <span class="hljs-attr">props</span>: [<span class="hljs-string">&#x27;postTitle&#x27;</span>],<br>  <span class="hljs-attr">emits</span>: [<span class="hljs-string">&#x27;updatePost&#x27;</span>],<br>  <span class="hljs-attr">template</span>: <span class="hljs-string">`</span><br><span class="hljs-string">    &lt;h3&gt;&#123;&#123; postTitle &#125;&#125;&lt;/h3&gt;</span><br><span class="hljs-string">  `</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;!-- HTML 中的 kebab-case --&gt;<br>&lt;blog-post post-title=&quot;hello!&quot; @update-post=&quot;onUpdatePost&quot;&gt;&lt;/blog-post&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="闭合标签"><a href="#闭合标签" class="headerlink" title="闭合标签"></a>闭合标签</h3><p>我们在上面的例子中已经使用过了闭合标签 (self-closing tag)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;MyComponent /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>这是因为 Vue 的模板解析器支持任意标签使用 <code>/&gt;</code> 作为标签关闭的标志。</p>
+<p>然而在 DOM 内模板中，我们必须显式地写出关闭标签：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;my-component&gt;&lt;/my-component&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		这是由于 HTML 只允许<a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/syntax.html#void-elements">一小部分特殊的元素</a>省略其关闭标签，最常见的就是 <code>&lt;input&gt;</code> 和 <code>&lt;img&gt;</code>。对于其他的元素来说，如果你省略了关闭标签，原生的 HTML 解析器会认为开启的标签永远没有结束，用下面这个代码片段举例来说：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;my-component /&gt; &lt;!-- 我们想要在这里关闭标签... --&gt;<br>&lt;span&gt;hello&lt;/span&gt;<br></code></pre></td></tr></table></figure>
+
+<p>将被解析为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;my-component&gt;<br>  &lt;span&gt;hello&lt;/span&gt;<br>&lt;/my-component&gt; &lt;!-- 但浏览器会在这里关闭标签 --&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="元素位置限制"><a href="#元素位置限制" class="headerlink" title="元素位置限制"></a>元素位置限制</h3><p>​		某些 HTML 元素对于放在其中的元素类型有限制，例如 <code>&lt;ul&gt;</code>，<code>&lt;ol&gt;</code>，<code>&lt;table&gt;</code> 和 <code>&lt;select&gt;</code>，相应的，某些元素仅在放置于特定元素中时才会显示，例如 <code>&lt;li&gt;</code>，<code>&lt;tr&gt;</code> 和 <code>&lt;option&gt;</code>。</p>
+<p>​		这将导致在使用带有此类限制元素的组件时出现问题。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;table&gt;<br>  &lt;blog-post-row&gt;&lt;/blog-post-row&gt;<br>&lt;/table&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		自定义的组件 <code>&lt;blog-post-row&gt;</code> 将作为无效的内容被忽略，因而在最终呈现的输出中造成错误。我们可以使用特殊的 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/built-in-special-attributes.html#is"><code>is</code> attribute</a> 作为一种解决方案：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;table&gt;<br>  &lt;tr is=&quot;vue:blog-post-row&quot;&gt;&lt;/tr&gt;<br>&lt;/table&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		当使用在原生 HTML 元素上时，<code>is</code> 的值必须加上前缀 <code>vue:</code> 才可以被解析为一个 Vue 组件。这一点是必要的，为了避免和原生的<a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example">自定义内置元素</a>相混淆。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/vue%E5%9F%BA%E7%A1%80/" class="category-chain-item">vue基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>组件基础</div>
+      <div>https://nanyouwen.github.io/vue-组件基础/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年7月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/vue-keep-alive%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" title="&lt;keep-alive&gt;的原理和使用场景">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">&lt;keep-alive&gt;的原理和使用场景</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/vue-%E6%A8%A1%E6%9D%BF%E5%BC%95%E7%94%A8/" title="模板引用">
+                        <span class="hidden-mobile">模板引用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
