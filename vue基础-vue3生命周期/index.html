@@ -21,29 +21,24 @@
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
   
-    <meta name="description" content="java对象在内存中实例化的过程​	在Java类的实例化过程中，内存会使用到三个区域：栈区、堆区、方法区  堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身 栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他">
+    <meta name="description" content="选项式API中的生命周期vue3的生命周期主要分为：  创建阶段（Created） 挂载阶段（Mounted） 更新阶段（Updated） 销毁阶段（Destoryed）  在每个阶段，vue3都会触发一些生命周期钩子，允许我们在不同时间点执行特定的逻辑 创建阶段： beforeCreate  在vue实例被初始化之后，数据观测和事件配置之前调用  此时，数据和事件尚未设置  一般不常用，通常用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java对象在内存中的实例化过程">
-<meta property="og:url" content="https://nanyouwen.github.io/java-%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/">
+<meta property="og:title" content="vue3生命周期">
+<meta property="og:url" content="https://nanyouwen.github.io/vue%E5%9F%BA%E7%A1%80-vue3%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
 <meta property="og:site_name" content="南有文的小破站">
-<meta property="og:description" content="java对象在内存中实例化的过程​	在Java类的实例化过程中，内存会使用到三个区域：栈区、堆区、方法区  堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身 栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他">
+<meta property="og:description" content="选项式API中的生命周期vue3的生命周期主要分为：  创建阶段（Created） 挂载阶段（Mounted） 更新阶段（Updated） 销毁阶段（Destoryed）  在每个阶段，vue3都会触发一些生命周期钩子，允许我们在不同时间点执行特定的逻辑 创建阶段： beforeCreate  在vue实例被初始化之后，数据观测和事件配置之前调用  此时，数据和事件尚未设置  一般不常用，通常用">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801093850304.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094224361.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094507538.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801095300609.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101009168.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101521000.png">
-<meta property="article:published_time" content="2023-04-11T00:47:37.000Z">
-<meta property="article:modified_time" content="2024-12-24T08:27:32.161Z">
+<meta property="og:image" content="https://nanyouwen.github.io/img/vue-vue3%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/image-20241224160412939-17350274743921.png">
+<meta property="article:published_time" content="2023-05-08T12:52:12.000Z">
+<meta property="article:modified_time" content="2024-12-27T08:15:25.079Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="Java、python、go">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801093850304.png">
+<meta name="twitter:image" content="https://nanyouwen.github.io/img/vue-vue3%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/image-20241224160412939-17350274743921.png">
   
   
   
-  <title>java对象在内存中的实例化过程 - 南有文的小破站</title>
+  <title>vue3生命周期 - 南有文的小破站</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +205,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="java对象在内存中的实例化过程"></span>
+            <span id="subtitle" data-typed-text="vue3生命周期"></span>
           
         </div>
 
@@ -221,8 +216,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-11 08:47" pubdate>
-          2023年4月11日 早上
+        <time datetime="2023-05-08 20:52" pubdate>
+          2023年5月8日 晚上
         </time>
       </span>
     
@@ -233,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          712 字
+          761 字
         
       </span>
     
@@ -244,7 +239,7 @@
         
         
         
-          6 分钟
+          7 分钟
         
       </span>
     
@@ -290,33 +285,80 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">java对象在内存中的实例化过程</h1>
+            <h1 id="seo-header">vue3生命周期</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="java对象在内存中实例化的过程"><a href="#java对象在内存中实例化的过程" class="headerlink" title="java对象在内存中实例化的过程"></a>java对象在内存中实例化的过程</h1><p>​	在Java类的实例化过程中，内存会使用到三个区域：<strong>栈区、堆区、方法区</strong></p>
+                <p><img src="/../img/vue-vue3%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/image-20241224160412939-17350274743921.png" srcset="/img/loading.gif" lazyload alt="image-20241224160412939"></p>
+<h1 id="选项式API中的生命周期"><a href="#选项式API中的生命周期" class="headerlink" title="选项式API中的生命周期"></a>选项式API中的生命周期</h1><p>vue3的生命周期主要分为：</p>
+<ol>
+<li>创建阶段（Created）</li>
+<li>挂载阶段（Mounted）</li>
+<li>更新阶段（Updated）</li>
+<li>销毁阶段（Destoryed）</li>
+</ol>
+<p><strong>在每个阶段，vue3都会触发一些生命周期钩子，允许我们在不同时间点执行特定的逻辑</strong></p>
+<p><strong>创建阶段：</strong></p>
+<p><strong>beforeCreate</strong></p>
 <ul>
-<li>堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身</li>
-<li>栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他栈无法访问</li>
-<li>方法区：又被称为静态区，跟堆一样被所有线程共享，方法区包含所有class信息和static修饰的变量。方法区中包含的都是整个程序中永远唯一的元素，如class，static变量等</li>
+<li><p>在vue实例被初始化之后，数据观测和事件配置之前调用</p>
+</li>
+<li><p>此时，数据和事件尚未设置</p>
+</li>
+<li><p>一般不常用，通常用于调试或者需要手动设置某些操作时使用</p>
+</li>
+<li><pre><code class="vue">beforeCreate()&#123;
+    console.log(&quot;beforeCreate: Vue 实例尚未初始化，数据和事件未设置&quot;);
+&#125;
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><br><span class="hljs-strong">**created**</span><br><br><span class="hljs-bullet">- </span>在实例创建后立即调用，数据观测、属性和方法的初始化已经完成，事件和侦听器也设置完毕<br><br><span class="hljs-bullet">- </span>但此时DOM还未挂载，$el属性还无法访问<br><br><span class="hljs-bullet">- </span><span class="hljs-code">```vue</span><br><span class="hljs-code">  beforeMount() &#123;</span><br><span class="hljs-code">    console.log(&quot;beforeMount: 组件模板已编译，挂载即将开始&quot;);</span><br><span class="hljs-code">  &#125;</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
 </ul>
-<p><strong>类实例化时内存中发生的变化：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">People</span>&#123;<br>    String name; <span class="hljs-comment">// 定义一个成员变量 name</span><br>    <span class="hljs-type">int</span> age; <span class="hljs-comment">// 成员变量 age</span><br>    Double height; <span class="hljs-comment">// 成员变量 height</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">sing</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;人的姓名：&quot;</span>+name);<br>        System.out.println(<span class="hljs-string">&quot;人的年龄：&quot;</span>+age);<br>        System.out.println(<span class="hljs-string">&quot;人的身高：&quot;</span>+height);<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        String name; <span class="hljs-comment">// 定义一个局部变量 name</span><br>    	<span class="hljs-type">int</span> age; <span class="hljs-comment">// 局部变量 age</span><br>    	Double height; <span class="hljs-comment">// 局部变量 height</span><br>        <br>        <span class="hljs-type">People</span> <span class="hljs-variable">people</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">People</span>() ; <span class="hljs-comment">//实例化对象people</span><br>        people.name = <span class="hljs-string">&quot;张三&quot;</span> ;       <span class="hljs-comment">//赋值</span><br>        people.age = <span class="hljs-number">18</span>;             <span class="hljs-comment">//赋值</span><br>        people.stuid = <span class="hljs-number">180.0</span> ;   <span class="hljs-comment">//赋值</span><br>        people.sing();              <span class="hljs-comment">//调用方法sing</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-<p><strong>代码解析</strong>：首先定义了三个成员变量，但是都只声明，没有初始化，然后定义了一个成员方法。在main方法中定义了三个局部变量，然后实例化对象people，内存中在堆区会给实例化对象people分配一片地址，然后我们堆people进行赋值，people调用成员方法，main打印输出，系统执行完毕。下面我用图解法展示实例化过程中内存的变化：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801093850304.png" srcset="/img/loading.gif" lazyload alt="image-20240801093850304"></p>
-<p>首先类中的成员变量和方法体会进入到方法区，如图：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094224361.png" srcset="/img/loading.gif" lazyload alt="image-20240801094224361"></p>
-<p>程序执行main方法时，main()函数会方法体会进入栈区，这一过程叫压栈，定义了一个用于指向Person实例的变量person。如图：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094507538.png" srcset="/img/loading.gif" lazyload alt="image-20240801094507538"></p>
-<p>程序执行到Person person &#x3D; new Person()时就会在堆中开辟一块空间用来存放Person对象实例，然后将成员变量和成员方法放在new实例中，里面都是取成员变量或成员方法的地址值。如图：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801095300609.png" srcset="/img/loading.gif" lazyload alt="image-20240801095300609"></p>
-<p>接下来堆person对象进行赋值。如图：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101009168.png" srcset="/img/loading.gif" lazyload alt="image-20240801101009168"></p>
-<p>当程序走到sing()方法时，先到栈区找到person这个引用变量，然后根据该地址值这种堆内存中找到new Person()进行方法调用。在方法体void sing()被调用完成后，就立马从栈内弹出。</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101521000.png" srcset="/img/loading.gif" lazyload alt="image-20240801101521000"></p>
-<p>以上就是Java对象在内存中实例化的全过程。</p>
+<p><strong>挂载阶段</strong></p>
+<p><strong>beforeMount</strong></p>
+<ul>
+<li><p>在挂载开始前调用，此时模板已经编译，vue实例和dom元素都已存在，但dom尚未更新</p>
+</li>
+<li><p>在这个钩子中无法访问到最终的渲染内容</p>
+</li>
+<li><pre><code class="vue">beforeMount() &#123;
+  console.log(&quot;beforeMount: 组件模板已编译，挂载即将开始&quot;);
+&#125;
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><br><span class="hljs-strong">**mounted**</span><br><br><span class="hljs-bullet">- </span>在挂载完成后调用，此时vue实例已经被挂载到真实的dom上，并且可以访问到dom<br><br><span class="hljs-bullet">- </span>常用于初始化dom相关操作，比如第三方插件的初始化等等<br><br><span class="hljs-bullet">- </span><span class="hljs-code">```vue</span><br><span class="hljs-code">  mounted() &#123;</span><br><span class="hljs-code">    console.log(&quot;mounted: 组件已挂载到 DOM 上，可以访问到 DOM&quot;);</span><br><span class="hljs-code">  &#125;</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<p><strong>更新阶段</strong></p>
+<p><strong>beforeUpdate</strong></p>
+<ul>
+<li><p>在数据更新前调用，当数据发生变化时，dom尚未更新，但响应式数据已经被更新</p>
+</li>
+<li><p>可用于在数据更强前进行某些操作，例如保存旧值或执行其他逻辑</p>
+</li>
+<li><pre><code class="vue">beforeUpdate() &#123;
+  console.log(&quot;beforeUpdate: 数据更新前，DOM 尚未更新&quot;);
+&#125;
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><br><span class="hljs-strong">**updated**</span><br><br><span class="hljs-bullet">- </span>在数据更新后调用，dom也会随之更新<br><br><span class="hljs-bullet">- </span>在这个钩子中，可以执行dom操作或进行组件更新后的处理工作<br><br><span class="hljs-bullet">- </span><span class="hljs-code">```vue</span><br><span class="hljs-code">  updated() &#123;</span><br><span class="hljs-code">    console.log(&quot;updated: 数据更新后，DOM 已经更新&quot;);</span><br><span class="hljs-code">  &#125;</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<p><strong>卸载阶段</strong></p>
+<p><strong>beforeUnmount</strong></p>
+<ul>
+<li><p>在组件销毁之前调用</p>
+</li>
+<li><p>可用于清理定时器，事件监听器等</p>
+</li>
+<li><pre><code class="vue">beforeUnmount() &#123;
+  console.log(&quot;beforeUnmount: 组件销毁前，可以执行清理工作&quot;);
+&#125;
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><br><span class="hljs-strong">**unmounted**</span><br><br><span class="hljs-bullet">- </span>组件销毁后调用<br><br><span class="hljs-bullet">- </span>此时所有与该组件相关的事件监听和子组件都已销毁<br><br><span class="hljs-bullet">- </span><span class="hljs-code">```vue</span><br><span class="hljs-code">  unmounted() &#123;</span><br><span class="hljs-code">    console.log(&quot;unmounted: 组件销毁后，所有事件和子组件已销毁&quot;);</span><br><span class="hljs-code">  &#125;</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<h1 id="组合式API中的生命周期"><a href="#组合式API中的生命周期" class="headerlink" title="组合式API中的生命周期"></a>组合式API中的生命周期</h1><p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>import &#123; onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted &#125; from &#x27;vue&#x27;;<br><br>// beforeMount 和 mounted<br>onBeforeMount(() =&gt; &#123;<br>  console.log(&quot;onBeforeMount: 组件挂载前&quot;);<br>&#125;);<br>onMounted(() =&gt; &#123;<br>  console.log(&quot;onMounted: 组件已挂载&quot;);<br>&#125;);<br><br>// beforeUpdate 和 updated<br>onBeforeUpdate(() =&gt; &#123;<br>  console.log(&quot;onBeforeUpdate: 数据更新前&quot;);<br>&#125;);<br>onUpdated(() =&gt; &#123;<br>  console.log(&quot;onUpdated: 数据更新后&quot;);<br>&#125;);<br><br>// beforeUnmount 和 unmounted<br>onBeforeUnmount(() =&gt; &#123;<br>  console.log(&quot;onBeforeUnmount: 组件销毁前&quot;);<br>&#125;);<br>onUnmounted(() =&gt; &#123;<br>  console.log(&quot;onUnmounted: 组件销毁后&quot;);<br>&#125;);<br>&lt;/script&gt;<br><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -335,7 +377,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/java%E5%9F%BA%E7%A1%80/" class="category-chain-item">java基础</a>
+  <a href="/categories/vue%E5%9F%BA%E7%A1%80/" class="category-chain-item">vue基础</a>
   
   
 
@@ -355,8 +397,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>java对象在内存中的实例化过程</div>
-      <div>https://nanyouwen.github.io/java-对象在内存中的实例化过程/</div>
+      <div>vue3生命周期</div>
+      <div>https://nanyouwen.github.io/vue基础-vue3生命周期/</div>
     </div>
     <div class="license-meta">
       
@@ -368,7 +410,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月11日</div>
+          <div>2023年5月8日</div>
         </div>
       
       
@@ -400,15 +442,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/java%E5%9F%BA%E7%A1%80-JVM%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="JVM基本概念">
+                      <a href="/vue%E5%9F%BA%E7%A1%80-%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95/" title="模板语法">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JVM基本概念</span>
+                        <span class="hidden-mobile">模板语法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/%E5%85%B6%E4%BB%96-Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/" title="Docker安装教程-Linux">
+                        <span class="hidden-mobile">Docker安装教程-Linux</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>

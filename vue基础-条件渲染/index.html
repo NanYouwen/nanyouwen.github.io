@@ -21,29 +21,22 @@
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
   
-    <meta name="description" content="java对象在内存中实例化的过程​	在Java类的实例化过程中，内存会使用到三个区域：栈区、堆区、方法区  堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身 栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他">
+    <meta name="description" content="条件渲染v-if​		v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回真值时才被渲染。 1&lt;h1 v-if&#x3D;&quot;awesome&quot;&gt;Vue is awesome!&lt;&#x2F;h1&gt;  v-else​		你也可以使用 v-else 为 v-if 添加一个“else 区块”。 1234&lt;button @click&#x3D;&quot;awesome">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java对象在内存中的实例化过程">
-<meta property="og:url" content="https://nanyouwen.github.io/java-%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/">
+<meta property="og:title" content="条件渲染">
+<meta property="og:url" content="https://nanyouwen.github.io/vue%E5%9F%BA%E7%A1%80-%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/">
 <meta property="og:site_name" content="南有文的小破站">
-<meta property="og:description" content="java对象在内存中实例化的过程​	在Java类的实例化过程中，内存会使用到三个区域：栈区、堆区、方法区  堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身 栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他">
+<meta property="og:description" content="条件渲染v-if​		v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回真值时才被渲染。 1&lt;h1 v-if&#x3D;&quot;awesome&quot;&gt;Vue is awesome!&lt;&#x2F;h1&gt;  v-else​		你也可以使用 v-else 为 v-if 添加一个“else 区块”。 1234&lt;button @click&#x3D;&quot;awesome">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801093850304.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094224361.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094507538.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801095300609.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101009168.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101521000.png">
-<meta property="article:published_time" content="2023-04-11T00:47:37.000Z">
-<meta property="article:modified_time" content="2024-12-24T08:27:32.161Z">
+<meta property="article:published_time" content="2023-06-03T14:18:11.000Z">
+<meta property="article:modified_time" content="2024-12-27T08:14:54.927Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="Java、python、go">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801093850304.png">
   
   
   
-  <title>java对象在内存中的实例化过程 - 南有文的小破站</title>
+  <title>条件渲染 - 南有文的小破站</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="java对象在内存中的实例化过程"></span>
+            <span id="subtitle" data-typed-text="条件渲染"></span>
           
         </div>
 
@@ -221,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-11 08:47" pubdate>
-          2023年4月11日 早上
+        <time datetime="2023-06-03 22:18" pubdate>
+          2023年6月3日 晚上
         </time>
       </span>
     
@@ -233,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          712 字
+          771 字
         
       </span>
     
@@ -244,7 +237,7 @@
         
         
         
-          6 分钟
+          7 分钟
         
       </span>
     
@@ -290,33 +283,42 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">java对象在内存中的实例化过程</h1>
+            <h1 id="seo-header">条件渲染</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="java对象在内存中实例化的过程"><a href="#java对象在内存中实例化的过程" class="headerlink" title="java对象在内存中实例化的过程"></a>java对象在内存中实例化的过程</h1><p>​	在Java类的实例化过程中，内存会使用到三个区域：<strong>栈区、堆区、方法区</strong></p>
-<ul>
-<li>堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身</li>
-<li>栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他栈无法访问</li>
-<li>方法区：又被称为静态区，跟堆一样被所有线程共享，方法区包含所有class信息和static修饰的变量。方法区中包含的都是整个程序中永远唯一的元素，如class，static变量等</li>
-</ul>
-<p><strong>类实例化时内存中发生的变化：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">People</span>&#123;<br>    String name; <span class="hljs-comment">// 定义一个成员变量 name</span><br>    <span class="hljs-type">int</span> age; <span class="hljs-comment">// 成员变量 age</span><br>    Double height; <span class="hljs-comment">// 成员变量 height</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">sing</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;人的姓名：&quot;</span>+name);<br>        System.out.println(<span class="hljs-string">&quot;人的年龄：&quot;</span>+age);<br>        System.out.println(<span class="hljs-string">&quot;人的身高：&quot;</span>+height);<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        String name; <span class="hljs-comment">// 定义一个局部变量 name</span><br>    	<span class="hljs-type">int</span> age; <span class="hljs-comment">// 局部变量 age</span><br>    	Double height; <span class="hljs-comment">// 局部变量 height</span><br>        <br>        <span class="hljs-type">People</span> <span class="hljs-variable">people</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">People</span>() ; <span class="hljs-comment">//实例化对象people</span><br>        people.name = <span class="hljs-string">&quot;张三&quot;</span> ;       <span class="hljs-comment">//赋值</span><br>        people.age = <span class="hljs-number">18</span>;             <span class="hljs-comment">//赋值</span><br>        people.stuid = <span class="hljs-number">180.0</span> ;   <span class="hljs-comment">//赋值</span><br>        people.sing();              <span class="hljs-comment">//调用方法sing</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+                <h1 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h1><h2 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a><code>v-if</code></h2><p>​		<code>v-if</code> 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回真值时才被渲染。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;h1 v-if=&quot;awesome&quot;&gt;Vue is awesome!&lt;/h1&gt;<br></code></pre></td></tr></table></figure>
 
-<p><strong>代码解析</strong>：首先定义了三个成员变量，但是都只声明，没有初始化，然后定义了一个成员方法。在main方法中定义了三个局部变量，然后实例化对象people，内存中在堆区会给实例化对象people分配一片地址，然后我们堆people进行赋值，people调用成员方法，main打印输出，系统执行完毕。下面我用图解法展示实例化过程中内存的变化：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801093850304.png" srcset="/img/loading.gif" lazyload alt="image-20240801093850304"></p>
-<p>首先类中的成员变量和方法体会进入到方法区，如图：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094224361.png" srcset="/img/loading.gif" lazyload alt="image-20240801094224361"></p>
-<p>程序执行main方法时，main()函数会方法体会进入栈区，这一过程叫压栈，定义了一个用于指向Person实例的变量person。如图：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094507538.png" srcset="/img/loading.gif" lazyload alt="image-20240801094507538"></p>
-<p>程序执行到Person person &#x3D; new Person()时就会在堆中开辟一块空间用来存放Person对象实例，然后将成员变量和成员方法放在new实例中，里面都是取成员变量或成员方法的地址值。如图：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801095300609.png" srcset="/img/loading.gif" lazyload alt="image-20240801095300609"></p>
-<p>接下来堆person对象进行赋值。如图：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101009168.png" srcset="/img/loading.gif" lazyload alt="image-20240801101009168"></p>
-<p>当程序走到sing()方法时，先到栈区找到person这个引用变量，然后根据该地址值这种堆内存中找到new Person()进行方法调用。在方法体void sing()被调用完成后，就立马从栈内弹出。</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101521000.png" srcset="/img/loading.gif" lazyload alt="image-20240801101521000"></p>
-<p>以上就是Java对象在内存中实例化的全过程。</p>
+<h2 id="v-else"><a href="#v-else" class="headerlink" title="v-else"></a><code>v-else</code></h2><p>​		你也可以使用 <code>v-else</code> 为 <code>v-if</code> 添加一个“else 区块”。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;button @click=&quot;awesome = !awesome&quot;&gt;Toggle&lt;/button&gt;<br><br>&lt;h1 v-if=&quot;awesome&quot;&gt;Vue is awesome!&lt;/h1&gt;<br>&lt;h1 v-else&gt;Oh no 😢&lt;/h1&gt;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://play.vuejs.org/#eNpFjkEOgjAQRa8ydIMulLA1hegJ3LnqBskAjdA27RQXhHu4M/GEHsEiKLv5mfdf/sBOxux7j+zAuCutNAQOyZtcKNkZbQkGsFjBCJXVHcQBjYUSqtTKERR3dLpDyCZmQ9bjViiezKKgCIGwM21BGBIAv3oireBYtrK8ZYKtgmg5BctJ13WLPJnhr0YQb1Lod7JaS4G8eATpfjMinjTphC8wtg7zcwNKw/v5eC1fnvwnsfEDwaha7w==">在演练场中尝试一下</a></p>
+<p>一个 <code>v-else</code> 元素必须跟在一个 <code>v-if</code> 或者 <code>v-else-if</code> 元素后面，否则它将不会被识别。</p>
+<h2 id="v-else-if"><a href="#v-else-if" class="headerlink" title="v-else-if"></a><code>v-else-if</code></h2><p>顾名思义，<code>v-else-if</code> 提供的是相应于 <code>v-if</code> 的“else if 区块”。它可以连续多次重复使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;div v-if=&quot;type === &#x27;A&#x27;&quot;&gt;<br>  A<br>&lt;/div&gt;<br>&lt;div v-else-if=&quot;type === &#x27;B&#x27;&quot;&gt;<br>  B<br>&lt;/div&gt;<br>&lt;div v-else-if=&quot;type === &#x27;C&#x27;&quot;&gt;<br>  C<br>&lt;/div&gt;<br>&lt;div v-else&gt;<br>  Not A/B/C<br>&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
+<p>和 <code>v-else</code> 类似，一个使用 <code>v-else-if</code> 的元素必须紧跟在一个 <code>v-if</code> 或一个 <code>v-else-if</code> 元素后面。</p>
+<h2 id="上的-v-if"><a href="#上的-v-if" class="headerlink" title="&lt;template&gt; 上的 v-if"></a><code>&lt;template&gt;</code> 上的 <code>v-if</code></h2><p>​		因为 <code>v-if</code> 是一个指令，他必须依附于某个元素。但如果我们想要切换不止一个元素呢？在这种情况下我们可以在一个 <code>&lt;template&gt;</code> 元素上使用 <code>v-if</code>，这只是一个不可见的包装器元素，最后渲染的结果并不会包含这个 <code>&lt;template&gt;</code> 元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;template v-if=&quot;ok&quot;&gt;<br>  &lt;h1&gt;Title&lt;/h1&gt;<br>  &lt;p&gt;Paragraph 1&lt;/p&gt;<br>  &lt;p&gt;Paragraph 2&lt;/p&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<p><code>v-else</code> 和 <code>v-else-if</code> 也可以在 <code>&lt;template&gt;</code> 上使用。</p>
+<h2 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a><code>v-show</code></h2><p>另一个可以用来按条件显示一个元素的指令是 <code>v-show</code>。其用法基本一样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;h1 v-show=&quot;ok&quot;&gt;Hello!&lt;/h1&gt;<br></code></pre></td></tr></table></figure>
+
+<p>不同之处在于 <code>v-show</code> 会在 DOM 渲染中保留该元素；<code>v-show</code> 仅切换了该元素上名为 <code>display</code> 的 CSS 属性。</p>
+<p><code>v-show</code> 不支持在 <code>&lt;template&gt;</code> 元素上使用，也不能和 <code>v-else</code> 搭配使用。</p>
+<h2 id="v-if-vs-v-show"><a href="#v-if-vs-v-show" class="headerlink" title="v-if vs. v-show"></a><code>v-if</code> vs. <code>v-show</code></h2><ol>
+<li><code>v-if</code> 是“真实的”按条件渲染，因为它确保了在切换时，条件区块内的事件监听器和子组件都会被销毁与重建。</li>
+<li><code>v-if</code> 也是<strong>惰性</strong>的：如果在初次渲染时条件值为 false，则不会做任何事。条件区块只有当条件首次变为 true 时才被渲染。</li>
+<li>相比之下，<code>v-show</code> 简单许多，元素无论初始条件如何，始终会被渲染，只有 CSS <code>display</code> 属性会被切换。</li>
+<li>总的来说，<code>v-if</code> 有更高的切换开销，而 <code>v-show</code> 有更高的初始渲染开销。因此，如果需要频繁切换，则使用 <code>v-show</code> 较好；如果在运行时绑定条件很少改变，则 <code>v-if</code> 会更合适。</li>
+</ol>
+<h2 id="v-if-和-v-for"><a href="#v-if-和-v-for" class="headerlink" title="v-if 和 v-for"></a><code>v-if</code> 和 <code>v-for</code></h2><ul>
+<li>同时使用 <code>v-if</code> 和 <code>v-for</code> 是<strong>不推荐的</strong>，因为这样二者的优先级不明显。请查看<a target="_blank" rel="noopener" href="https://cn.vuejs.org/style-guide/rules-essential.html#avoid-v-if-with-v-for">风格指南</a>获得更多信息。</li>
+<li>当 <code>v-if</code> 和 <code>v-for</code> 同时存在于一个元素上的时候，<code>v-if</code> 会首先被执行。</li>
+</ul>
 
                 
               </div>
@@ -335,7 +337,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/java%E5%9F%BA%E7%A1%80/" class="category-chain-item">java基础</a>
+  <a href="/categories/vue%E5%9F%BA%E7%A1%80/" class="category-chain-item">vue基础</a>
   
   
 
@@ -355,8 +357,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>java对象在内存中的实例化过程</div>
-      <div>https://nanyouwen.github.io/java-对象在内存中的实例化过程/</div>
+      <div>条件渲染</div>
+      <div>https://nanyouwen.github.io/vue基础-条件渲染/</div>
     </div>
     <div class="license-meta">
       
@@ -368,7 +370,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月11日</div>
+          <div>2023年6月3日</div>
         </div>
       
       
@@ -400,15 +402,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/java%E5%9F%BA%E7%A1%80-JVM%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="JVM基本概念">
+                      <a href="/vue%E5%9F%BA%E7%A1%80-%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93/" title="条件渲染">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JVM基本概念</span>
+                        <span class="hidden-mobile">条件渲染</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/vue%E5%9F%BA%E7%A1%80-%E7%B1%BB%E4%B8%8E%E6%A0%B7%E5%BC%8F%E7%BB%91%E5%AE%9A/" title="类与样式绑定">
+                        <span class="hidden-mobile">类与样式绑定</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>

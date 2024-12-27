@@ -1,0 +1,787 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="Props 声明​		一个组件需要显式声明它所接受的 props，这样 Vue 才能知道外部传入的哪些是 props，哪些是透传 attribute (关于透传 attribute，我们会在专门的章节中讨论)。 ​		在使用 &lt;script setup&gt; 的单文件组件中，props 可以使用 defineProps() 宏来声明： 12345&lt;script setup&gt;co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Props">
+<meta property="og:url" content="https://nanyouwen.github.io/vue%E6%B7%B1%E5%85%A5-Props/">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="Props 声明​		一个组件需要显式声明它所接受的 props，这样 Vue 才能知道外部传入的哪些是 props，哪些是透传 attribute (关于透传 attribute，我们会在专门的章节中讨论)。 ​		在使用 &lt;script setup&gt; 的单文件组件中，props 可以使用 defineProps() 宏来声明： 12345&lt;script setup&gt;co">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-05T12:00:10.000Z">
+<meta property="article:modified_time" content="2024-12-27T08:15:20.070Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="Java、python、go">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Props - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Props"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-05 20:00" pubdate>
+          2023年7月5日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Props</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Props-声明"><a href="#Props-声明" class="headerlink" title="Props 声明"></a>Props 声明</h2><p>​		一个组件需要显式声明它所接受的 props，这样 Vue 才能知道外部传入的哪些是 props，哪些是透传 attribute (关于透传 attribute，我们会在<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/components/attrs.html">专门的章节</a>中讨论)。</p>
+<p>​		在使用 <code>&lt;script setup&gt;</code> 的单文件组件中，props 可以使用 <code>defineProps()</code> 宏来声明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>const props = defineProps([&#x27;foo&#x27;])<br><br>console.log(props.foo)<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		在没有使用 <code>&lt;script setup&gt;</code> 的组件中，props 可以使用 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/options-state.html#props"><code>props</code></a> 选项来声明：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">props</span>: [<span class="hljs-string">&#x27;foo&#x27;</span>],<br>  <span class="hljs-title function_">setup</span>(<span class="hljs-params">props</span>) &#123;<br>    <span class="hljs-comment">// setup() 接收 props 作为第一个参数</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(props.<span class="hljs-property">foo</span>)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>​		注意传递给 <code>defineProps()</code> 的参数和提供给 <code>props</code> 选项的值是相同的，两种声明方式背后其实使用的都是 props 选项。</p>
+<p>​		除了使用字符串数组来声明 props 外，还可以使用对象的形式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 使用 &lt;script setup&gt;</span><br><span class="hljs-title function_">defineProps</span>(&#123;<br>  <span class="hljs-attr">title</span>: <span class="hljs-title class_">String</span>,<br>  <span class="hljs-attr">likes</span>: <span class="hljs-title class_">Number</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 非 &lt;script setup&gt;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">props</span>: &#123;<br>    <span class="hljs-attr">title</span>: <span class="hljs-title class_">String</span>,<br>    <span class="hljs-attr">likes</span>: <span class="hljs-title class_">Number</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>​		对于以对象形式声明的每个属性，key 是 prop 的名称，而值则是该 prop 预期类型的构造函数。比如，如果要求一个 prop 的值是 <code>number</code> 类型，则可使用 <code>Number</code> 构造函数作为其声明的值。</p>
+<p>​		对象形式的 props 声明不仅可以一定程度上作为组件的文档，而且如果其他开发者在使用你的组件时传递了错误的类型，也会在浏览器控制台中抛出警告。我们将在本章节稍后进一步讨论有关 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/components/props.html#prop-validation">prop 校验</a>的更多细节。</p>
+<p>​		如果你正在搭配 TypeScript 使用 <code>&lt;script setup&gt;</code>，也可以使用类型标注来声明 props：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup lang=&quot;ts&quot;&gt;<br>defineProps&lt;&#123;<br>  title?: string<br>  likes?: number<br>&#125;&gt;()<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		更多关于基于类型的声明的细节请参考<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/typescript/composition-api.html#typing-component-props">组件 props 类型标注</a>。</p>
+<h2 id="响应式-Props-解构"><a href="#响应式-Props-解构" class="headerlink" title="响应式 Props 解构"></a>响应式 Props 解构</h2><p>​		Vue 的响应系统基于属性访问跟踪状态的使用情况。例如，在计算属性或侦听器中访问 <code>props.foo</code> 时，<code>foo</code> 属性将被跟踪为依赖项。</p>
+<p>​		因此，在以下代码的情况下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> &#123; foo &#125; = <span class="hljs-title function_">defineProps</span>([<span class="hljs-string">&#x27;foo&#x27;</span>])<br><br><span class="hljs-title function_">watchEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-comment">// 在 3.5 之前只运行一次</span><br>  <span class="hljs-comment">// 在 3.5+ 中在 &quot;foo&quot; prop 变化时重新执行</span><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(foo)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>​		在 3.4 及以下版本，<code>foo</code> 是一个实际的常量，永远不会改变。在 3.5 及以上版本，当在同一个 <code>&lt;script setup&gt;</code> 代码块中访问由 <code>defineProps</code> 解构的变量时，Vue 编译器会自动在前面添加 <code>props.</code>。因此，上面的代码等同于以下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> props = <span class="hljs-title function_">defineProps</span>([<span class="hljs-string">&#x27;foo&#x27;</span>])<br><br><span class="hljs-title function_">watchEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-comment">// `foo` 由编译器转换为 `props.foo`</span><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(props.<span class="hljs-property">foo</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>​		此外，你可以使用 JavaScript 原生的默认值语法声明 props 默认值。这在使用基于类型的 props 声明时特别有用。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">const</span> &#123; foo = <span class="hljs-string">&#x27;hello&#x27;</span> &#125; = defineProps&lt;&#123; foo?: <span class="hljs-built_in">string</span> &#125;&gt;()<br></code></pre></td></tr></table></figure>
+
+<p>​		如果你希望在 IDE 中在解构的 props 和普通变量之间有更多视觉上的区分，Vue 的 VSCode 扩展提供了一个设置来启用解构 props 的内联提示。</p>
+<h3 id="将解构的-props-传递到函数中"><a href="#将解构的-props-传递到函数中" class="headerlink" title="将解构的 props 传递到函数中"></a>将解构的 props 传递到函数中</h3><p>​		当我们将解构的 prop 传递到函数中时，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> &#123; foo &#125; = <span class="hljs-title function_">defineProps</span>([<span class="hljs-string">&#x27;foo&#x27;</span>])<br><br><span class="hljs-title function_">watch</span>(foo, <span class="hljs-comment">/* ... */</span>)<br></code></pre></td></tr></table></figure>
+
+<p>​		这并不会按预期工作，因为它等价于 <code>watch(props.foo, ...)</code>——我们给 <code>watch</code> 传递的是一个值而不是响应式数据源。实际上，Vue 的编译器会捕捉这种情况并发出警告。</p>
+<p>​		与使用 <code>watch(() =&gt; props.foo, ...)</code> 来侦听普通 prop 类似，我们也可以通过将其包装在 getter 中来侦听解构的 prop：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">watch</span>(<span class="hljs-function">() =&gt;</span> foo, <span class="hljs-comment">/* ... */</span>)<br></code></pre></td></tr></table></figure>
+
+<p>​		此外，当我们需要传递解构的 prop 到外部函数中并保持响应性时，这是推荐做法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">useComposable</span>(<span class="hljs-function">() =&gt;</span> foo)<br></code></pre></td></tr></table></figure>
+
+<p>​		外部函数可以调用 getter (或使用 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/reactivity-utilities.html#tovalue">toValue</a> 进行规范化) 来追踪提供的 prop 变更。例如，在计算属性或侦听器的 getter 中。</p>
+<h1 id="传递-prop-的细节"><a href="#传递-prop-的细节" class="headerlink" title="传递 prop 的细节"></a>传递 prop 的细节</h1><h3 id="Prop-名字格式"><a href="#Prop-名字格式" class="headerlink" title="Prop 名字格式"></a>Prop 名字格式</h3><p>​		如果一个 prop 的名字很长，应使用 camelCase 形式，因为它们是合法的 JavaScript 标识符，可以直接在模板的表达式中使用，也可以避免在作为属性 key 名时必须加上引号。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">defineProps</span>(&#123;<br>  <span class="hljs-attr">greetingMessage</span>: <span class="hljs-title class_">String</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;span&gt;&#123;&#123; greetingMessage &#125;&#125;&lt;/span&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		虽然理论上你也可以在向子组件传递 props 时使用 camelCase 形式 (使用 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/essentials/component-basics.html#in-dom-template-parsing-caveats">DOM 内模板</a>时例外)，但实际上为了和 HTML attribute 对齐，我们通常会将其写为 kebab-case 形式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;MyComponent greeting-message=&quot;hello&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		对于组件名我们推荐使用 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/components/registration.html#component-name-casing">PascalCase</a>，因为这提高了模板的可读性，能帮助我们区分 Vue 组件和原生 HTML 元素。然而对于传递 props 来说，使用 camelCase 并没有太多优势，因此我们推荐更贴近 HTML 的书写风格。</p>
+<h3 id="静态-vs-动态-Props"><a href="#静态-vs-动态-Props" class="headerlink" title="静态 vs. 动态 Props"></a>静态 vs. 动态 Props</h3><p>​		至此，你已经见过了很多像这样的静态值形式的 props：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;BlogPost title=&quot;My journey with Vue&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		相应地，还有使用 <code>v-bind</code> 或缩写 <code>:</code> 来进行动态绑定的 props：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;!-- 根据一个变量的值动态传入 --&gt;<br>&lt;BlogPost :title=&quot;post.title&quot; /&gt;<br><br>&lt;!-- 根据一个更复杂表达式的值动态传入 --&gt;<br>&lt;BlogPost :title=&quot;post.title + &#x27; by &#x27; + post.author.name&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="传递不同的值类型"><a href="#传递不同的值类型" class="headerlink" title="传递不同的值类型"></a>传递不同的值类型</h3><p>​		在上述的两个例子中，我们只传入了字符串值，但实际上<strong>任何</strong>类型的值都可以作为 props 的值被传递。</p>
+<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;!-- 虽然 `42` 是个常量，我们还是需要使用 v-bind --&gt;<br>&lt;!-- 因为这是一个 JavaScript 表达式而不是一个字符串 --&gt;<br>&lt;BlogPost :likes=&quot;42&quot; /&gt;<br><br>&lt;!-- 根据一个变量的值动态传入 --&gt;<br>&lt;BlogPost :likes=&quot;post.likes&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;!-- 仅写上 prop 但不传值，会隐式转换为 `true` --&gt;<br>&lt;BlogPost is-published /&gt;<br><br>&lt;!-- 虽然 `false` 是静态的值，我们还是需要使用 v-bind --&gt;<br>&lt;!-- 因为这是一个 JavaScript 表达式而不是一个字符串 --&gt;<br>&lt;BlogPost :is-published=&quot;false&quot; /&gt;<br><br>&lt;!-- 根据一个变量的值动态传入 --&gt;<br>&lt;BlogPost :is-published=&quot;post.isPublished&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;!-- 虽然这个数组是个常量，我们还是需要使用 v-bind --&gt;<br>&lt;!-- 因为这是一个 JavaScript 表达式而不是一个字符串 --&gt;<br>&lt;BlogPost :comment-ids=&quot;[234, 266, 273]&quot; /&gt;<br><br>&lt;!-- 根据一个变量的值动态传入 --&gt;<br>&lt;BlogPost :comment-ids=&quot;post.commentIds&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;!-- 虽然这个对象字面量是个常量，我们还是需要使用 v-bind --&gt;<br>&lt;!-- 因为这是一个 JavaScript 表达式而不是一个字符串 --&gt;<br>&lt;BlogPost<br>  :author=&quot;&#123;<br>    name: &#x27;Veronica&#x27;,<br>    company: &#x27;Veridian Dynamics&#x27;<br>  &#125;&quot;<br> /&gt;<br><br>&lt;!-- 根据一个变量的值动态传入 --&gt;<br>&lt;BlogPost :author=&quot;post.author&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="使用一个对象绑定多个-prop"><a href="#使用一个对象绑定多个-prop" class="headerlink" title="使用一个对象绑定多个 prop"></a>使用一个对象绑定多个 prop</h3><p>​		如果你想要将一个对象的所有属性都当作 props 传入，你可以使用<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/essentials/template-syntax.html#dynamically-binding-multiple-attributes">没有参数的 <code>v-bind</code></a>，即只使用 <code>v-bind</code> 而非 <code>:prop-name</code>。例如，这里有一个 <code>post</code> 对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> post = &#123;<br>  <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,<br>  <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;My Journey with Vue&#x27;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>​		以及下面的模板：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;BlogPost v-bind=&quot;post&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		而这实际上等价于：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;BlogPost :id=&quot;post.id&quot; :title=&quot;post.title&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<h2 id="单向数据流"><a href="#单向数据流" class="headerlink" title="单向数据流"></a>单向数据流</h2><p>​		所有的 props 都遵循着<strong>单向绑定</strong>原则，props 因父组件的更新而变化，自然地将新的状态向下流往子组件，而不会逆向传递。这避免了子组件意外修改父组件的状态的情况，不然应用的数据流将很容易变得混乱而难以理解。</p>
+<p>​		另外，每次父组件更新后，所有的子组件中的 props 都会被更新到最新值，这意味着你<strong>不应该</strong>在子组件中去更改一个 prop。若你这么做了，Vue 会在控制台上向你抛出警告：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> props = <span class="hljs-title function_">defineProps</span>([<span class="hljs-string">&#x27;foo&#x27;</span>])<br><br><span class="hljs-comment">// ❌ 警告！prop 是只读的！</span><br>props.<span class="hljs-property">foo</span> = <span class="hljs-string">&#x27;bar&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>​		导致你想要更改一个 prop 的需求通常来源于以下两种场景：</p>
+<ol>
+<li><p><strong>prop 被用于传入初始值；而子组件想在之后将其作为一个局部数据属性</strong>。在这种情况下，最好是新定义一个局部数据属性，从 props 上获取初始值即可：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> props = <span class="hljs-title function_">defineProps</span>([<span class="hljs-string">&#x27;initialCounter&#x27;</span>])<br><br><span class="hljs-comment">// 计数器只是将 props.initialCounter 作为初始值</span><br><span class="hljs-comment">// 像下面这样做就使 prop 和后续更新无关了</span><br><span class="hljs-keyword">const</span> counter = <span class="hljs-title function_">ref</span>(props.<span class="hljs-property">initialCounter</span>)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>需要对传入的 prop 值做进一步的转换</strong>。在这种情况中，最好是基于该 prop 值定义一个计算属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> props = <span class="hljs-title function_">defineProps</span>([<span class="hljs-string">&#x27;size&#x27;</span>])<br><br><span class="hljs-comment">// 该 prop 变更时计算属性也会自动更新</span><br><span class="hljs-keyword">const</span> normalizedSize = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> props.<span class="hljs-property">size</span>.<span class="hljs-title function_">trim</span>().<span class="hljs-title function_">toLowerCase</span>())<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="更改对象-数组类型的-props"><a href="#更改对象-数组类型的-props" class="headerlink" title="更改对象 &#x2F; 数组类型的 props"></a>更改对象 &#x2F; 数组类型的 props</h3><p>​		当对象或数组作为 props 被传入时，虽然子组件无法更改 props 绑定，但仍然<strong>可以</strong>更改对象或数组内部的值。这是因为 JavaScript 的对象和数组是按引用传递，对 Vue 来说，阻止这种更改需要付出的代价异常昂贵。</p>
+<p>​		这种更改的主要缺陷是它允许了子组件以某种不明显的方式影响父组件的状态，可能会使数据流在将来变得更难以理解。在最佳实践中，你应该尽可能避免这样的更改，除非父子组件在设计上本来就需要紧密耦合。在大多数场景下，子组件应该<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/components/events.html">抛出一个事件</a>来通知父组件做出改变。</p>
+<h2 id="Prop-校验"><a href="#Prop-校验" class="headerlink" title="Prop 校验"></a>Prop 校验</h2><p>​		Vue 组件可以更细致地声明对传入的 props 的校验要求。比如我们上面已经看到过的类型声明，如果传入的值不满足类型要求，Vue 会在浏览器控制台中抛出警告来提醒使用者。这在开发给其他开发者使用的组件时非常有用。</p>
+<p>​		要声明对 props 的校验，你可以向 <code>defineProps()</code> 宏提供一个带有 props 校验选项的对象，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">defineProps</span>(&#123;<br>  <span class="hljs-comment">// 基础类型检查</span><br>  <span class="hljs-comment">// （给出 `null` 和 `undefined` 值则会跳过任何类型检查）</span><br>  <span class="hljs-attr">propA</span>: <span class="hljs-title class_">Number</span>,<br>  <span class="hljs-comment">// 多种可能的类型</span><br>  <span class="hljs-attr">propB</span>: [<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Number</span>],<br>  <span class="hljs-comment">// 必传，且为 String 类型</span><br>  <span class="hljs-attr">propC</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-title class_">String</span>,<br>    <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span><br>  &#125;,<br>  <span class="hljs-comment">// 必传但可为 null 的字符串</span><br>  <span class="hljs-attr">propD</span>: &#123;<br>    <span class="hljs-attr">type</span>: [<span class="hljs-title class_">String</span>, <span class="hljs-literal">null</span>],<br>    <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span><br>  &#125;,<br>  <span class="hljs-comment">// Number 类型的默认值</span><br>  <span class="hljs-attr">propE</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-title class_">Number</span>,<br>    <span class="hljs-attr">default</span>: <span class="hljs-number">100</span><br>  &#125;,<br>  <span class="hljs-comment">// 对象类型的默认值</span><br>  <span class="hljs-attr">propF</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-title class_">Object</span>,<br>    <span class="hljs-comment">// 对象或数组的默认值</span><br>    <span class="hljs-comment">// 必须从一个工厂函数返回。</span><br>    <span class="hljs-comment">// 该函数接收组件所接收到的原始 prop 作为参数。</span><br>    <span class="hljs-title function_">default</span>(<span class="hljs-params">rawProps</span>) &#123;<br>      <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;hello&#x27;</span> &#125;<br>    &#125;<br>  &#125;,<br>  <span class="hljs-comment">// 自定义类型校验函数</span><br>  <span class="hljs-comment">// 在 3.4+ 中完整的 props 作为第二个参数传入</span><br>  <span class="hljs-attr">propG</span>: &#123;<br>    <span class="hljs-title function_">validator</span>(<span class="hljs-params">value, props</span>) &#123;<br>      <span class="hljs-comment">// The value must match one of these strings</span><br>      <span class="hljs-keyword">return</span> [<span class="hljs-string">&#x27;success&#x27;</span>, <span class="hljs-string">&#x27;warning&#x27;</span>, <span class="hljs-string">&#x27;danger&#x27;</span>].<span class="hljs-title function_">includes</span>(value)<br>    &#125;<br>  &#125;,<br>  <span class="hljs-comment">// 函数类型的默认值</span><br>  <span class="hljs-attr">propH</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-title class_">Function</span>,<br>    <span class="hljs-comment">// 不像对象或数组的默认，这不是一个</span><br>    <span class="hljs-comment">// 工厂函数。这会是一个用来作为默认值的函数</span><br>    <span class="hljs-title function_">default</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Default function&#x27;</span><br>    &#125;<br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>​		<code>defineProps()</code> 宏中的参数<strong>不可以访问 <code>&lt;script setup&gt;</code> 中定义的其他变量</strong>，因为在编译时整个表达式都会被移到外部的函数中。</p>
+<p>一些补充细节：</p>
+<ul>
+<li>所有 prop 默认都是可选的，除非声明了 <code>required: true</code>。</li>
+<li>除 <code>Boolean</code> 外的未传递的可选 prop 将会有一个默认值 <code>undefined</code>。</li>
+<li><code>Boolean</code> 类型的未传递 prop 将被转换为 <code>false</code>。这可以通过为它设置 <code>default</code> 来更改——例如：设置为 <code>default: undefined</code> 将与非布尔类型的 prop 的行为保持一致。</li>
+<li>如果声明了 <code>default</code> 值，那么在 prop 的值被解析为 <code>undefined</code> 时，无论 prop 是未被传递还是显式指明的 <code>undefined</code>，都会改为 <code>default</code> 值。</li>
+</ul>
+<p>​		当 prop 的校验失败后，Vue 会抛出一个控制台警告 (在开发模式下)。</p>
+<p>​		如果使用了<a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/sfc-script-setup.html#type-only-props-emit-declarations">基于类型的 prop 声明</a> ，Vue 会尽最大努力在运行时按照 prop 的类型标注进行编译。举例来说，<code>defineProps&lt;&#123; msg: string &#125;&gt;</code> 会被编译为 <code>&#123; msg: &#123; type: String, required: true &#125;&#125;</code>。</p>
+<h3 id="运行时类型检查"><a href="#运行时类型检查" class="headerlink" title="运行时类型检查"></a>运行时类型检查</h3><p>校验选项中的 <code>type</code> 可以是下列这些原生构造函数：</p>
+<ul>
+<li><code>String</code></li>
+<li><code>Number</code></li>
+<li><code>Boolean</code></li>
+<li><code>Array</code></li>
+<li><code>Object</code></li>
+<li><code>Date</code></li>
+<li><code>Function</code></li>
+<li><code>Symbol</code></li>
+<li><code>Error</code></li>
+</ul>
+<p>​		另外，<code>type</code> 也可以是自定义的类或构造函数，Vue 将会通过 <code>instanceof</code> 来检查类型是否匹配。例如下面这个类：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">firstName, lastName</span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">firstName</span> = firstName<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">lastName</span> = lastName<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>​		你可以将其作为一个 prop 的类型：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">defineProps</span>(&#123;<br>  <span class="hljs-attr">author</span>: <span class="hljs-title class_">Person</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>​		Vue 会通过 <code>instanceof Person</code> 来校验 <code>author</code> prop 的值是否是 <code>Person</code> 类的一个实例。</p>
+<h3 id="可为-null-的类型"><a href="#可为-null-的类型" class="headerlink" title="可为 null 的类型"></a>可为 null 的类型</h3><p>​		如果该类型是必传但可为 null 的，你可以用一个包含 <code>null</code> 的数组语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">defineProps</span>(&#123;<br>  <span class="hljs-attr">id</span>: &#123;<br>    <span class="hljs-attr">type</span>: [<span class="hljs-title class_">String</span>, <span class="hljs-literal">null</span>],<br>    <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span><br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>​		注意如果 <code>type</code> 仅为 <code>null</code> 而非使用数组语法，它将允许任何类型。</p>
+<h2 id="Boolean-类型转换"><a href="#Boolean-类型转换" class="headerlink" title="Boolean 类型转换"></a>Boolean 类型转换</h2><p>​		为了更贴近原生 boolean attributes 的行为，声明为 <code>Boolean</code> 类型的 props 有特别的类型转换规则。以带有如下声明的 <code>&lt;MyComponent&gt;</code> 组件为例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">defineProps</span>(&#123;<br>  <span class="hljs-attr">disabled</span>: <span class="hljs-title class_">Boolean</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>​		该组件可以被这样使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs template">&lt;!-- 等同于传入 :disabled=&quot;true&quot; --&gt;<br>&lt;MyComponent disabled /&gt;<br><br>&lt;!-- 等同于传入 :disabled=&quot;false&quot; --&gt;<br>&lt;MyComponent /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​		当一个 prop 被声明为允许多种类型时，<code>Boolean</code> 的转换规则也将被应用。然而，当同时允许 <code>String</code> 和 <code>Boolean</code> 时，有一种边缘情况——只有当 <code>Boolean</code> 出现在 <code>String</code> 之前时，<code>Boolean</code> 转换规则才适用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// disabled 将被转换为 true</span><br><span class="hljs-title function_">defineProps</span>(&#123;<br>  <span class="hljs-attr">disabled</span>: [<span class="hljs-title class_">Boolean</span>, <span class="hljs-title class_">Number</span>]<br>&#125;)<br><br><span class="hljs-comment">// disabled 将被转换为 true</span><br><span class="hljs-title function_">defineProps</span>(&#123;<br>  <span class="hljs-attr">disabled</span>: [<span class="hljs-title class_">Boolean</span>, <span class="hljs-title class_">String</span>]<br>&#125;)<br><br><span class="hljs-comment">// disabled 将被转换为 true</span><br><span class="hljs-title function_">defineProps</span>(&#123;<br>  <span class="hljs-attr">disabled</span>: [<span class="hljs-title class_">Number</span>, <span class="hljs-title class_">Boolean</span>]<br>&#125;)<br><br><span class="hljs-comment">// disabled 将被解析为空字符串 (disabled=&quot;&quot;)</span><br><span class="hljs-title function_">defineProps</span>(&#123;<br>  <span class="hljs-attr">disabled</span>: [<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Boolean</span>]<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/vue%E6%B7%B1%E5%85%A5/" class="category-chain-item">vue深入</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Props</div>
+      <div>https://nanyouwen.github.io/vue深入-Props/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年7月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/z-Template/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/vue%E5%9F%BA%E7%A1%80-%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/" title="组件基础">
+                        <span class="hidden-mobile">组件基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
