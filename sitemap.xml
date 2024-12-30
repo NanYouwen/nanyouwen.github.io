@@ -4,7 +4,16 @@
   <url>
     <loc>https://nanyouwen.github.io/z-Template/</loc>
     
-    <lastmod>2024-12-27</lastmod>
+    <lastmod>2024-12-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nanyouwen.github.io/vue%E5%8E%9F%E7%90%86-%E6%95%B0%E6%8D%AE%E4%BB%A3%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8A%AB%E6%8C%81/</loc>
+    
+    <lastmod>2024-12-30</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -213,6 +222,13 @@
   
   <url>
     <loc>https://nanyouwen.github.io/categories/vue%E6%B7%B1%E5%85%A5/</loc>
+    <lastmod>2024-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nanyouwen.github.io/categories/vue%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2024-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
