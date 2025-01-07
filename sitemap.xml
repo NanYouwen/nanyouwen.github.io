@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://nanyouwen.github.io/vue%E8%BF%9B%E9%98%B6-v-model/</loc>
+    
+    <lastmod>2025-01-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nanyouwen.github.io/js-dayjs%E5%BA%93/</loc>
     
     <lastmod>2025-01-07</lastmod>
