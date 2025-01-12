@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="小项目最容易让人放松警惕：东西少、参与的人少，于是许多约定只存在某个人的记忆里。这篇文章围绕“给自己的开发环境做一次小体检”展开，重点不是背一套术语，而是把检查版本、PATH、编辑器、SSH 和备份放到一次可以复现的小任务里。刚重装电脑后找不到一个能正常运行的项目。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给自己的开发环境做一次小体检">
+<meta property="og:url" content="https://nanyouwen.github.io/eng-001-%E7%BB%99%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%81%9A%E4%B8%80%E6%AC%A1%E5%B0%8F%E4%BD%93%E6%A3%80/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="小项目最容易让人放松警惕：东西少、参与的人少，于是许多约定只存在某个人的记忆里。这篇文章围绕“给自己的开发环境做一次小体检”展开，重点不是背一套术语，而是把检查版本、PATH、编辑器、SSH 和备份放到一次可以复现的小任务里。刚重装电脑后找不到一个能正常运行的项目。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-12T05:33:02.000Z">
+<meta property="article:modified_time" content="2025-01-12T05:33:02.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="开发环境">
+<meta property="article:tag" content="效率">
+<meta property="article:tag" content="习惯">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>给自己的开发环境做一次小体检 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="给自己的开发环境做一次小体检"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-01-12 13:33" pubdate>
+          2025年1月12日 13:33:02
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">给自己的开发环境做一次小体检</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>小项目最容易让人放松警惕：东西少、参与的人少，于是许多约定只存在某个人的记忆里。这篇文章围绕“给自己的开发环境做一次小体检”展开，重点不是背一套术语，而是把检查版本、PATH、编辑器、SSH 和备份放到一次可以复现的小任务里。刚重装电脑后找不到一个能正常运行的项目。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。</p>
+<span id="more"></span>
+
+<h2 id="先把问题说清楚"><a href="#先把问题说清楚" class="headerlink" title="先把问题说清楚"></a>先把问题说清楚</h2><p>面对“给自己的开发环境做一次小体检”，我会先写下三件事：现在看到的现象是什么，理想结果是什么，最不能接受的后果是什么。这样做的原因很简单：如果一开始只说“优化一下”“处理一下”，后面每个人都会拿自己的理解去补空白。技术工作最怕的不是没有方案，而是方案从来没有针对同一个问题。</p>
+<p>检查版本、PATH、编辑器、SSH 和备份时，最好把材料、环境和时间范围也写出来。例如是本地还是线上，是一台机器还是所有用户，是今天突然发生还是一直存在。范围越清楚，排查就越像走一条路，而不是在许多可能性之间来回跳。哪怕最后发现判断错了，留下的记录也能帮助下一次少走一步。</p>
+<h2 id="把过程拆成几个可检查的动作"><a href="#把过程拆成几个可检查的动作" class="headerlink" title="把过程拆成几个可检查的动作"></a>把过程拆成几个可检查的动作</h2><p>第一步是准备：保留原始文件或原始请求，确认当前分支和环境，避免一上来就覆盖证据。第二步是观察：用日志、浏览器面板、数据库查询或最小复现确认现象。第三步才是修改，而且一次尽量只动一类东西。最后是验证和记录，让别人能够沿着同样的步骤得到相近的结果。</p>
+<p>我会给每个动作补一句“如果失败怎么办”。例如没有权限时应该申请，而不是换一个未经说明的账号；请求超时时先确认是否真的发出，再决定重试；数据清洗前先备份，脚本执行前先输出预览。看似多写了一点，实际是在给未来的自己留下回头路。</p>
+<h2 id="一个可以马上做的小练习"><a href="#一个可以马上做的小练习" class="headerlink" title="一个可以马上做的小练习"></a>一个可以马上做的小练习</h2><p>可以从这个任务开始：列一张十分钟自检表并留一个可恢复的配置备份。先不要追求完整工具，只准备一份输入、一份预期结果和一份失败样例。执行时把每一步的命令、截图或输出保留在一个临时记录里；完成后删掉不必要的敏感信息，再把真正有用的步骤整理进项目文档。</p>
+<p>一个通用的记录格式是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs text">目标：这次要解决什么<br>环境：在哪台机器、哪个版本、哪个账号<br>输入：使用了哪些文件、参数和数据<br>动作：按什么顺序做了什么<br>结果：发生了什么，和预期是否一致<br>回退：如果失败，如何恢复到开始之前<br></code></pre></td></tr></table></figure>
+
+<p>这个格式并不要求写成长报告。它更像一张路标：当问题再次出现时，我们可以先复用已有路径；当别人接手时，也不必从“你当时是怎么想的”开始猜。把小练习跑通几次后，再考虑做成脚本、组件或正式流程。</p>
+<h2 id="让结果经得起交接"><a href="#让结果经得起交接" class="headerlink" title="让结果经得起交接"></a>让结果经得起交接</h2><p>完成以后，我会做一个很朴素的复核：把任务说明、输入样例和结果放在一起，请没有参与过程的人只看这些材料，判断他能不能重新走一遍。如果他必须靠我口头补充很多背景，说明流程还藏在个人记忆里。此时最值得补的，往往不是更多代码，而是一个名称、一句前置条件或一条失败处理说明。</p>
+<p>也要留意那些“正常时看不出来”的情况。空数据、重复点击、权限不足、网络中断、长文本、不同设备和不同日期，都可能让一个看似可靠的功能露出缝隙。没有必要一开始就覆盖所有边界，但至少挑两三个最可能、最贵、最难恢复的情况试一遍，并把结果写下来。这样下一次修改时，我们知道自己是在改善什么，而不是凭感觉移动代码。</p>
+<p>如果这件事会反复发生，我会顺手留一张变更记录：改了什么，为什么改，在哪个环境验证，是否需要通知别人。记录不用很长，关键是让未来的自己能回答“现在和上次有什么不同”。技术会换，项目会换人，但可复现、可验证、可回退的路径，始终是最便宜的维护成本。</p>
+<h2 id="过程里最容易被忽略的细节"><a href="#过程里最容易被忽略的细节" class="headerlink" title="过程里最容易被忽略的细节"></a>过程里最容易被忽略的细节</h2><p>第一是空值和边界。正常数据最容易让人产生错觉，真正的错误往往藏在空文件、长文本、重复点击、断网、时区变化和权限不足里。第二是名称。文件名、环境名和接口字段如果含糊，排查时会把大量时间花在确认“你说的是哪一个”。第三是恢复。任何会覆盖、删除、发布或改变数据的动作，都应该先知道怎么撤销。</p>
+<p>还有一个协作上的细节：不要只把结论发出去，也告诉别人证据在哪里。一个“已经修好了”很难复用；“在测试环境用三条数据验证，结果在某个记录文件里，生产还没动”则让人知道下一步该做什么。好的记录不是为了证明自己认真，而是为了让团队在压力下仍然能做出一致判断。</p>
+<h2 id="我会留给自己的检查表"><a href="#我会留给自己的检查表" class="headerlink" title="我会留给自己的检查表"></a>我会留给自己的检查表</h2><ol>
+<li>现象、目标和不接受的后果是否写清楚？</li>
+<li>原始输入、环境和版本是否可以复现？</li>
+<li>这次改动是否足够小，失败时能否回退？</li>
+<li>是否测试了空值、重复、权限、网络或设备差异？</li>
+<li>结论旁边是否放着别人能找到的证据？</li>
+</ol>
+<h2 id="最后的一点体会"><a href="#最后的一点体会" class="headerlink" title="最后的一点体会"></a>最后的一点体会</h2><p>我并不追求每个小项目都像大型系统一样复杂。真正有用的习惯，应该能在十分钟或半小时内完成，并且不会因为一个人休假就全部停摆。对“给自己的开发环境做一次小体检”来说，最值得留下的通常不是一段看起来聪明的代码，而是一条别人能够理解、验证、修改和恢复的路径。</p>
+<p>当我们愿意把这些小事做好，项目会慢慢变得不那么依赖记忆，协作也少一些猜测。技术当然还会更新，工具也会换，但“先说清楚、再动手、留证据、能回退”这几个动作，过几年依然有用。每次准备结束时，我还会问一句：下一位接手的人能不能在没有口头补充的情况下走完这条路；如果不能，就再补一行说明，让结果真正留下来。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF/" class="category-chain-item">工程习惯</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="print-no-link">#开发环境</a>
+      
+        <a href="/tags/%E6%95%88%E7%8E%87/" class="print-no-link">#效率</a>
+      
+        <a href="/tags/%E4%B9%A0%E6%83%AF/" class="print-no-link">#习惯</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>给自己的开发环境做一次小体检</div>
+      <div>https://nanyouwen.github.io/eng-001-给自己的开发环境做一次小体检/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年1月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/eng-002-git-%E6%8F%90%E4%BA%A4%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E8%AE%A9%E4%BA%BA%E4%B8%8D%E5%AE%89-%E4%B8%80%E5%A5%97%E4%B8%8D%E4%B8%A2%E4%BB%A3%E7%A0%81%E7%9A%84%E6%97%A5%E5%B8%B8%E4%B9%A0%E6%83%AF/" title="Git 提交为什么总让人不安：一套不丢代码的日常习惯">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git 提交为什么总让人不安：一套不丢代码的日常习惯</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/js-dayjs%E5%BA%93/" title="dayjs库的使用">
+                        <span class="hidden-mobile">dayjs库的使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
