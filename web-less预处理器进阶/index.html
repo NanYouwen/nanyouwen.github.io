@@ -21,29 +21,22 @@
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
   
-    <meta name="description" content="java对象在内存中实例化的过程​	在Java类的实例化过程中，内存会使用到三个区域：栈区、堆区、方法区  堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身 栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他">
+    <meta name="description" content="Less(css预处理器)进阶用法作用域与命名空间​		Less 中可以定义局部变量，防止变量污染。 12345678910@outer-variable: #f00;.outer &#123;  @inner-variable: #0f0;  .inner &#123;    color: @inner-variable;    background-color: @outer-variable">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java对象在内存中的实例化过程">
-<meta property="og:url" content="https://nanyouwen.github.io/java-%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/">
+<meta property="og:title" content="web-less预处理器进阶">
+<meta property="og:url" content="https://nanyouwen.github.io/web-less%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%9B%E9%98%B6/">
 <meta property="og:site_name" content="南有文的小破站">
-<meta property="og:description" content="java对象在内存中实例化的过程​	在Java类的实例化过程中，内存会使用到三个区域：栈区、堆区、方法区  堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身 栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他">
+<meta property="og:description" content="Less(css预处理器)进阶用法作用域与命名空间​		Less 中可以定义局部变量，防止变量污染。 12345678910@outer-variable: #f00;.outer &#123;  @inner-variable: #0f0;  .inner &#123;    color: @inner-variable;    background-color: @outer-variable">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801093850304.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094224361.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094507538.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801095300609.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101009168.png">
-<meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101521000.png">
-<meta property="article:published_time" content="2023-04-11T00:47:37.000Z">
-<meta property="article:modified_time" content="2024-12-24T08:27:32.161Z">
+<meta property="article:published_time" content="2023-07-28T14:41:11.000Z">
+<meta property="article:modified_time" content="2025-02-19T03:30:06.853Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="Java、python、go">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801093850304.png">
   
   
   
-  <title>java对象在内存中的实例化过程 - 南有文的小破站</title>
+  <title>web-less预处理器进阶 - 南有文的小破站</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="java对象在内存中的实例化过程"></span>
+            <span id="subtitle" data-typed-text="web-less预处理器进阶"></span>
           
         </div>
 
@@ -221,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-11 08:47" pubdate>
-          2023年4月11日 早上
+        <time datetime="2023-07-28 22:41" pubdate>
+          2023年7月28日 晚上
         </time>
       </span>
     
@@ -233,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          712 字
+          488 字
         
       </span>
     
@@ -244,7 +237,7 @@
         
         
         
-          6 分钟
+          5 分钟
         
       </span>
     
@@ -290,33 +283,47 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">java对象在内存中的实例化过程</h1>
+            <h1 id="seo-header">web-less预处理器进阶</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="java对象在内存中实例化的过程"><a href="#java对象在内存中实例化的过程" class="headerlink" title="java对象在内存中实例化的过程"></a>java对象在内存中实例化的过程</h1><p>​	在Java类的实例化过程中，内存会使用到三个区域：<strong>栈区、堆区、方法区</strong></p>
-<ul>
-<li>堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身</li>
-<li>栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他栈无法访问</li>
-<li>方法区：又被称为静态区，跟堆一样被所有线程共享，方法区包含所有class信息和static修饰的变量。方法区中包含的都是整个程序中永远唯一的元素，如class，static变量等</li>
-</ul>
-<p><strong>类实例化时内存中发生的变化：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">People</span>&#123;<br>    String name; <span class="hljs-comment">// 定义一个成员变量 name</span><br>    <span class="hljs-type">int</span> age; <span class="hljs-comment">// 成员变量 age</span><br>    Double height; <span class="hljs-comment">// 成员变量 height</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">sing</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;人的姓名：&quot;</span>+name);<br>        System.out.println(<span class="hljs-string">&quot;人的年龄：&quot;</span>+age);<br>        System.out.println(<span class="hljs-string">&quot;人的身高：&quot;</span>+height);<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        String name; <span class="hljs-comment">// 定义一个局部变量 name</span><br>    	<span class="hljs-type">int</span> age; <span class="hljs-comment">// 局部变量 age</span><br>    	Double height; <span class="hljs-comment">// 局部变量 height</span><br>        <br>        <span class="hljs-type">People</span> <span class="hljs-variable">people</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">People</span>() ; <span class="hljs-comment">//实例化对象people</span><br>        people.name = <span class="hljs-string">&quot;张三&quot;</span> ;       <span class="hljs-comment">//赋值</span><br>        people.age = <span class="hljs-number">18</span>;             <span class="hljs-comment">//赋值</span><br>        people.stuid = <span class="hljs-number">180.0</span> ;   <span class="hljs-comment">//赋值</span><br>        people.sing();              <span class="hljs-comment">//调用方法sing</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+                <h1 id="Less-css预处理器-进阶用法"><a href="#Less-css预处理器-进阶用法" class="headerlink" title="Less(css预处理器)进阶用法"></a>Less(css预处理器)进阶用法</h1><h4 id="作用域与命名空间"><a href="#作用域与命名空间" class="headerlink" title="作用域与命名空间"></a>作用域与命名空间</h4><p>​		Less 中可以定义局部变量，防止变量污染。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-keyword">@outer-variable</span>: #f00;<br><br><span class="hljs-selector-class">.outer</span> &#123;<br>  <span class="hljs-keyword">@inner-variable</span>: #<span class="hljs-number">0</span>f0;<br><br>  <span class="hljs-selector-class">.inner</span> &#123;<br>    <span class="hljs-attribute">color</span>: @inner-variable;<br>    <span class="hljs-attribute">background-color</span>: @outer-variable;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><strong>代码解析</strong>：首先定义了三个成员变量，但是都只声明，没有初始化，然后定义了一个成员方法。在main方法中定义了三个局部变量，然后实例化对象people，内存中在堆区会给实例化对象people分配一片地址，然后我们堆people进行赋值，people调用成员方法，main打印输出，系统执行完毕。下面我用图解法展示实例化过程中内存的变化：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801093850304.png" srcset="/img/loading.gif" lazyload alt="image-20240801093850304"></p>
-<p>首先类中的成员变量和方法体会进入到方法区，如图：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094224361.png" srcset="/img/loading.gif" lazyload alt="image-20240801094224361"></p>
-<p>程序执行main方法时，main()函数会方法体会进入栈区，这一过程叫压栈，定义了一个用于指向Person实例的变量person。如图：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801094507538.png" srcset="/img/loading.gif" lazyload alt="image-20240801094507538"></p>
-<p>程序执行到Person person &#x3D; new Person()时就会在堆中开辟一块空间用来存放Person对象实例，然后将成员变量和成员方法放在new实例中，里面都是取成员变量或成员方法的地址值。如图：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801095300609.png" srcset="/img/loading.gif" lazyload alt="image-20240801095300609"></p>
-<p>接下来堆person对象进行赋值。如图：</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101009168.png" srcset="/img/loading.gif" lazyload alt="image-20240801101009168"></p>
-<p>当程序走到sing()方法时，先到栈区找到person这个引用变量，然后根据该地址值这种堆内存中找到new Person()进行方法调用。在方法体void sing()被调用完成后，就立马从栈内弹出。</p>
-<p><img src="/../img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101521000.png" srcset="/img/loading.gif" lazyload alt="image-20240801101521000"></p>
-<p>以上就是Java对象在内存中实例化的全过程。</p>
+<h4 id="嵌套媒体查询"><a href="#嵌套媒体查询" class="headerlink" title="嵌套媒体查询"></a>嵌套媒体查询</h4><p>​		通过嵌套语法控制不同屏幕尺寸样式。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;<br><br>  <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">768px</span>) &#123;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">750px</span>;<br>  &#125;<br><br>  <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">1024px</span>) &#123;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">970px</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="生成-CSS-Sprites"><a href="#生成-CSS-Sprites" class="headerlink" title="生成 CSS Sprites"></a>生成 CSS Sprites</h4><p>​		使用 mixin 来管理 CSS Sprites。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-keyword">@sprite-path</span>: <span class="hljs-string">&quot;path/to/sprites.png&quot;</span>;<br><br><span class="hljs-selector-class">.icon</span>(<span class="hljs-keyword">@name</span>, @position) &#123;<br>  <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">@sprite-path</span>);<br>  <span class="hljs-attribute">background-position</span>: @position;<br>  <span class="hljs-attribute">display</span>: inline-block;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">32px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">32px</span>;<br>&#125;<br><br><span class="hljs-selector-class">.icon-home</span> &#123;<br>  <span class="hljs-selector-class">.icon</span>(home, <span class="hljs-number">0</span> <span class="hljs-number">0</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h4><p>​		Less 支持自定义函数以增强样式动态性。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css">darken-<span class="hljs-attribute">color</span>(<span class="hljs-keyword">@color</span>, @amount) &#123;<br>  return darken(<span class="hljs-keyword">@color</span>, @amount);<br>&#125;<br><br><span class="hljs-selector-class">.button</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">darken-color</span>(<span class="hljs-number">#4CAF50</span>, <span class="hljs-number">15%</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="动态生成类名"><a href="#动态生成类名" class="headerlink" title="动态生成类名"></a>动态生成类名</h4><p>​		根据条件动态生成不同样式。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-keyword">@color</span>: blue;<br><span class="hljs-keyword">@is-active</span>: true;<br><br><span class="hljs-selector-class">.button</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: @color;<br><br>  &amp;<span class="hljs-selector-class">.active</span> when (<span class="hljs-keyword">@is-active</span>) &#123;<br>    <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">darken</span>(@color, <span class="hljs-number">20%</span>);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="遍历数据结构"><a href="#遍历数据结构" class="headerlink" title="遍历数据结构"></a>遍历数据结构</h4><p>​		通过循环生成多个类。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-keyword">@colors</span>: red, green, blue;<br><br><span class="hljs-selector-class">.each-color</span> &#123;<br>  each(<span class="hljs-keyword">@colors</span>, &#123;<br>    <span class="hljs-selector-class">.color-</span>@&#123;value&#125; &#123;<br>      <span class="hljs-attribute">background-color</span>: @value;<br>      <span class="hljs-attribute">color</span>: white;<br>    &#125;<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Less-的优势"><a href="#Less-的优势" class="headerlink" title="Less 的优势"></a>Less 的优势</h3><ul>
+<li><strong>可维护性</strong>：变量、嵌套和混合使代码更具可读性和维护性。</li>
+<li><strong>灵活性</strong>：Less 提供的运算、条件和循环功能提高了样式管理的灵活性。</li>
+<li><strong>重用性</strong>：通过混合和导入，开发者可轻松复用代码。</li>
+<li><strong>社区支持</strong>：广泛的社区资源和工具支持。</li>
+</ul>
+<h3 id="实用建议"><a href="#实用建议" class="headerlink" title="实用建议"></a>实用建议</h3><ol>
+<li><p>控制嵌套层级：嵌套层级过深会降低代码可读性，建议控制在 3 层以内。</p>
+</li>
+<li><p>模块化样式：将样式拆分为多个文件，使用 @import 引入，保持项目清晰。</p>
+</li>
+<li><p>合理使用变量：将常用颜色、字体大小定义为变量，便于全局管理。</p>
+</li>
+<li><p>混合与命名规范：使用 BEM 命名规范有助于代码的复用和清晰度。</p>
+</li>
+<li><p>定期优化：在项目迭代时，重构 Less 代码，确保代码质量和维护性</p>
+</li>
+</ol>
 
                 
               </div>
@@ -335,7 +342,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/java%E5%9F%BA%E7%A1%80/" class="category-chain-item">java基础</a>
+  <a href="/categories/web/" class="category-chain-item">web</a>
   
   
 
@@ -355,8 +362,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>java对象在内存中的实例化过程</div>
-      <div>https://nanyouwen.github.io/java-对象在内存中的实例化过程/</div>
+      <div>web-less预处理器进阶</div>
+      <div>https://nanyouwen.github.io/web-less预处理器进阶/</div>
     </div>
     <div class="license-meta">
       
@@ -368,7 +375,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月11日</div>
+          <div>2023年7月28日</div>
         </div>
       
       
@@ -400,15 +407,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/java%E5%9F%BA%E7%A1%80-JVM%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="JVM基本概念">
+                      <a href="/web-js%E4%B8%8EjQuery/" title="js与jQuery">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JVM基本概念</span>
+                        <span class="hidden-mobile">js与jQuery</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/web-less%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/" title="web-less预处理器">
+                        <span class="hidden-mobile">web-less预处理器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
