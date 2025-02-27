@@ -19,19 +19,19 @@
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
   
-    <meta name="description" content="有些改动看起来只需要几分钟，真正花时间的却是出了意外之后，没人说得清刚才到底发生了什么。这篇文章围绕“日志不是越多越好：能回答问题才有用”展开，重点不是背一套术语，而是把从问题出发选择字段、级别、脱敏和保留时间放到一次可以复现的小任务里。日志铺满屏幕却找不到一次失败的路径。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。">
+    <meta name="description" content="有些改动看起来只需要几分钟，真正花时间的却是出了意外之后，没人说得清刚才到底发生了什么。这次我从“日志铺满屏幕却找不到一次失败的路径”这个具体瞬间开始，看看从问题出发选择字段、级别、脱敏和保留时间怎样落到手边的工作里。这里不需要先背一套术语，先把输入、动作和结果摆出来，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="日志不是越多越好：能回答问题才有用">
 <meta property="og:url" content="https://nanyouwen.github.io/eng-010-%E6%97%A5%E5%BF%97%E4%B8%8D%E6%98%AF%E8%B6%8A%E5%A4%9A%E8%B6%8A%E5%A5%BD-%E8%83%BD%E5%9B%9E%E7%AD%94%E9%97%AE%E9%A2%98%E6%89%8D%E6%9C%89%E7%94%A8/index.html">
 <meta property="og:site_name" content="南有文的小破站">
-<meta property="og:description" content="有些改动看起来只需要几分钟，真正花时间的却是出了意外之后，没人说得清刚才到底发生了什么。这篇文章围绕“日志不是越多越好：能回答问题才有用”展开，重点不是背一套术语，而是把从问题出发选择字段、级别、脱敏和保留时间放到一次可以复现的小任务里。日志铺满屏幕却找不到一次失败的路径。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。">
+<meta property="og:description" content="有些改动看起来只需要几分钟，真正花时间的却是出了意外之后，没人说得清刚才到底发生了什么。这次我从“日志铺满屏幕却找不到一次失败的路径”这个具体瞬间开始，看看从问题出发选择字段、级别、脱敏和保留时间怎样落到手边的工作里。这里不需要先背一套术语，先把输入、动作和结果摆出来，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-27T10:49:14.000Z">
 <meta property="article:modified_time" content="2025-02-27T10:49:14.000Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="排错">
-<meta property="article:tag" content="可观测性">
 <meta property="article:tag" content="日志">
+<meta property="article:tag" content="可观测性">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -279,7 +279,7 @@
             
               <div class="markdown-body">
                 
-                <p>有些改动看起来只需要几分钟，真正花时间的却是出了意外之后，没人说得清刚才到底发生了什么。这篇文章围绕“日志不是越多越好：能回答问题才有用”展开，重点不是背一套术语，而是把从问题出发选择字段、级别、脱敏和保留时间放到一次可以复现的小任务里。日志铺满屏幕却找不到一次失败的路径。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。</p>
+                <p>有些改动看起来只需要几分钟，真正花时间的却是出了意外之后，没人说得清刚才到底发生了什么。这次我从“日志铺满屏幕却找不到一次失败的路径”这个具体瞬间开始，看看从问题出发选择字段、级别、脱敏和保留时间怎样落到手边的工作里。这里不需要先背一套术语，先把输入、动作和结果摆出来，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。</p>
 <span id="more"></span>
 
 <h2 id="先把问题说清楚"><a href="#先把问题说清楚" class="headerlink" title="先把问题说清楚"></a>先把问题说清楚</h2><p>面对“日志不是越多越好：能回答问题才有用”，我会先写下三件事：现在看到的现象是什么，理想结果是什么，最不能接受的后果是什么。这样做的原因很简单：如果一开始只说“优化一下”“处理一下”，后面每个人都会拿自己的理解去补空白。技术工作最怕的不是没有方案，而是方案从来没有针对同一个问题。</p>
@@ -340,9 +340,9 @@
       
         <a href="/tags/%E6%8E%92%E9%94%99/" class="print-no-link">#排错</a>
       
-        <a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/" class="print-no-link">#可观测性</a>
-      
         <a href="/tags/%E6%97%A5%E5%BF%97/" class="print-no-link">#日志</a>
+      
+        <a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/" class="print-no-link">#可观测性</a>
       
     </div>
   
