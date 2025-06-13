@@ -19,18 +19,18 @@
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
   
-    <meta name="description" content="我喜欢从一个具体的小场景开始学习，因为它会逼着我们面对空值、失败、误操作和那些不漂亮的细节。这篇文章围绕“数据库索引：不背概念，先看它帮了什么”展开，重点不是背一套术语，而是把把索引当目录，从常查列表看何时有效、何时无效放到一次可以复现的小任务里。加了索引，慢查询却没有改善。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。">
+    <meta name="description" content="我喜欢从一个具体的小场景开始学习，因为它会逼着我们面对空值、失败、误操作和那些不漂亮的细节。这次我从“加了索引，慢查询却没有改善”这个具体瞬间开始，看看把索引当目录，从常查列表看何时有效、何时无效怎样落到手边的工作里。这里不需要先背一套术语，先把输入、动作和结果摆出来，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库索引：不背概念，先看它帮了什么">
 <meta property="og:url" content="https://nanyouwen.github.io/eng-031-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95-%E4%B8%8D%E8%83%8C%E6%A6%82%E5%BF%B5-%E5%85%88%E7%9C%8B%E5%AE%83%E5%B8%AE%E4%BA%86%E4%BB%80%E4%B9%88/index.html">
 <meta property="og:site_name" content="南有文的小破站">
-<meta property="og:description" content="我喜欢从一个具体的小场景开始学习，因为它会逼着我们面对空值、失败、误操作和那些不漂亮的细节。这篇文章围绕“数据库索引：不背概念，先看它帮了什么”展开，重点不是背一套术语，而是把把索引当目录，从常查列表看何时有效、何时无效放到一次可以复现的小任务里。加了索引，慢查询却没有改善。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。">
+<meta property="og:description" content="我喜欢从一个具体的小场景开始学习，因为它会逼着我们面对空值、失败、误操作和那些不漂亮的细节。这次我从“加了索引，慢查询却没有改善”这个具体瞬间开始，看看把索引当目录，从常查列表看何时有效、何时无效怎样落到手边的工作里。这里不需要先背一套术语，先把输入、动作和结果摆出来，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-13T00:17:50.000Z">
 <meta property="article:modified_time" content="2025-06-13T00:17:50.000Z">
 <meta property="article:author" content="南有文">
-<meta property="article:tag" content="性能">
 <meta property="article:tag" content="数据库">
+<meta property="article:tag" content="性能">
 <meta property="article:tag" content="索引">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -279,7 +279,7 @@
             
               <div class="markdown-body">
                 
-                <p>我喜欢从一个具体的小场景开始学习，因为它会逼着我们面对空值、失败、误操作和那些不漂亮的细节。这篇文章围绕“数据库索引：不背概念，先看它帮了什么”展开，重点不是背一套术语，而是把把索引当目录，从常查列表看何时有效、何时无效放到一次可以复现的小任务里。加了索引，慢查询却没有改善。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。</p>
+                <p>我喜欢从一个具体的小场景开始学习，因为它会逼着我们面对空值、失败、误操作和那些不漂亮的细节。这次我从“加了索引，慢查询却没有改善”这个具体瞬间开始，看看把索引当目录，从常查列表看何时有效、何时无效怎样落到手边的工作里。这里不需要先背一套术语，先把输入、动作和结果摆出来，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。</p>
 <span id="more"></span>
 
 <h2 id="先把问题说清楚"><a href="#先把问题说清楚" class="headerlink" title="先把问题说清楚"></a>先把问题说清楚</h2><p>面对“数据库索引：不背概念，先看它帮了什么”，我会先写下三件事：现在看到的现象是什么，理想结果是什么，最不能接受的后果是什么。这样做的原因很简单：如果一开始只说“优化一下”“处理一下”，后面每个人都会拿自己的理解去补空白。技术工作最怕的不是没有方案，而是方案从来没有针对同一个问题。</p>
@@ -338,9 +338,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%80%A7%E8%83%BD/" class="print-no-link">#性能</a>
-      
         <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="print-no-link">#数据库</a>
+      
+        <a href="/tags/%E6%80%A7%E8%83%BD/" class="print-no-link">#性能</a>
       
         <a href="/tags/%E7%B4%A2%E5%BC%95/" class="print-no-link">#索引</a>
       
