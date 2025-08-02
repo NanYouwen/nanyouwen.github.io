@@ -1,0 +1,681 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="给个人网站加搜索，听起来像是一个很自然的升级：文章多了，页面也多了，总该让人输几个字就找到答案。但真正动手以后，我发现最容易被忽略的不是搜索框怎么摆，而是“访客来这里到底想找什么”。没有先想清楚这个问题，很容易做出一个看起来完整、实际几乎没人使用的功能。 我曾把所有文章标题、正文和标签都塞进索引，搜索页第一次打开时很有成就感。后来自己试着找一篇旧笔记，输入“日期”，结果排在最前面的是几篇只在代码示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给小网站加搜索：先明确用户找什么">
+<meta property="og:url" content="https://nanyouwen.github.io/Web%E5%AE%9E%E8%B7%B5-%E7%BB%99%E5%B0%8F%E7%BD%91%E7%AB%99%E5%8A%A0%E6%90%9C%E7%B4%A2%E5%85%88%E6%98%8E%E7%A1%AE%E7%94%A8%E6%88%B7%E6%89%BE%E4%BB%80%E4%B9%88/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="给个人网站加搜索，听起来像是一个很自然的升级：文章多了，页面也多了，总该让人输几个字就找到答案。但真正动手以后，我发现最容易被忽略的不是搜索框怎么摆，而是“访客来这里到底想找什么”。没有先想清楚这个问题，很容易做出一个看起来完整、实际几乎没人使用的功能。 我曾把所有文章标题、正文和标签都塞进索引，搜索页第一次打开时很有成就感。后来自己试着找一篇旧笔记，输入“日期”，结果排在最前面的是几篇只在代码示">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-02T03:12:35.000Z">
+<meta property="article:modified_time" content="2025-08-02T03:12:35.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="用户体验">
+<meta property="article:tag" content="搜索">
+<meta property="article:tag" content="静态站">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>给小网站加搜索：先明确用户找什么 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="给小网站加搜索：先明确用户找什么"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-08-02 11:12" pubdate>
+          2025年8月2日 11:12:35
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">给小网站加搜索：先明确用户找什么</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>给个人网站加搜索，听起来像是一个很自然的升级：文章多了，页面也多了，总该让人输几个字就找到答案。但真正动手以后，我发现最容易被忽略的不是搜索框怎么摆，而是“访客来这里到底想找什么”。没有先想清楚这个问题，很容易做出一个看起来完整、实际几乎没人使用的功能。</p>
+<p>我曾把所有文章标题、正文和标签都塞进索引，搜索页第一次打开时很有成就感。后来自己试着找一篇旧笔记，输入“日期”，结果排在最前面的是几篇只在代码示例里出现过这个词的文章；真正想找的 dayjs 笔记反而要往下翻。那一刻才明白，搜索不是把文字堆起来，而是替读者缩短“我脑子里想到的词”和“站里实际写的词”之间的距离。</p>
+<span id="more"></span>
+
+<h2 id="先把搜索问题写下来"><a href="#先把搜索问题写下来" class="headerlink" title="先把搜索问题写下来"></a>先把搜索问题写下来</h2><p>小网站的搜索需求通常没有想象中复杂。可以先翻一遍最近的留言、朋友问过的问题，或者自己回忆一下重开旧项目时最常找什么。对技术博客来说，常见的不是“给我一篇包含某个字的文章”，而是下面几类问题：</p>
+<ul>
+<li>我记得写过一个主题，但忘了标题，例如“接口超时怎么处理”。</li>
+<li>我想找同一类内容，例如所有和 Git、发布、CSS 有关的文章。</li>
+<li>我只记得一段很具体的词，例如某个报错、库名或命令。</li>
+<li>我想知道站里有没有写过某件事，而不是一定要看全文。</li>
+</ul>
+<p>这几类问题决定了搜索要优先匹配什么。标题、分类、标签应当比正文更靠前；正文匹配可以保留，但不要把一段代码中的偶然字符串当成强结果。若文章数量不到几十篇，清楚的分类页、标签页和归档页已经能承担一部分“找内容”的工作，搜索不是一定要抢走它们的角色。</p>
+<p>一个很实用的做法是给每篇新文章补一行“读者可能会怎样搜到它”。例如写静态站部署时，除了“静态站”，还可能有人搜“博客发布”“GitHub Pages”“域名解析”。这些词未必要硬塞进正文，可以落在标签、摘要或文章开头的自然句子里。这样做不是迎合机器，而是在给未来的自己留路标。</p>
+<h2 id="先选够用的方案，不急着上服务"><a href="#先选够用的方案，不急着上服务" class="headerlink" title="先选够用的方案，不急着上服务"></a>先选够用的方案，不急着上服务</h2><p>我把站内搜索大致分成三个层次。第一层是页面内筛选：把文章标题和标签加载到浏览器里，输入后即时隐藏不匹配的卡片。它适合文章很少、希望零配置的站点，优点是简单，缺点是无法全文检索。</p>
+<p>第二层是静态索引。构建网站时生成一个 JSON 或 XML，把标题、链接、日期、摘要、标签和一小段正文放进去；浏览器下载索引后在本地查找。多数个人博客到了这个阶段就足够了：没有额外账号，没有服务端费用，更新文章时也会自动更新索引。代价是文章非常多时，首次加载会稍重一些。</p>
+<p>第三层才是外部搜索服务或自建搜索引擎。它能处理拼音、同义词、排序、拼写纠正甚至分析访问数据，但也带来密钥、隐私、费用和维护。除非站点内容规模很大，或确实需要“搜索是核心功能”，否则不必为了一个放大镜图标背上另一套系统。</p>
+<p>选择方案前，我会问三个小问题：索引文件会不会让首屏变慢；搜索结果能不能直接跳到文章；断网或服务异常时，页面是否仍然正常阅读。能答上来，方案通常就不会离实际太远。</p>
+<h2 id="静态搜索的最小实现思路"><a href="#静态搜索的最小实现思路" class="headerlink" title="静态搜索的最小实现思路"></a>静态搜索的最小实现思路</h2><p>如果使用静态站生成器，搜索并不神秘。构建时收集每篇文章的元信息，生成类似下面的记录：标题是“处理日期和时区时，别相信看起来没问题”，标签有“日期、时区”，链接指向文章页，摘要只保留一两段。页面加载后，把用户输入转换为小写、去掉两侧空格，再依次比较标题、标签和摘要。</p>
+<p>排序可以很朴素：标题命中排第一，标签命中排第二，摘要命中排第三；同一层里再按发布时间倒序。不要急着发明复杂的相关度公式。对于几十到几百篇文章，这样的规则很容易解释，也容易在出现奇怪结果时调整。</p>
+<p>结果列表要给出足够的线索：标题、日期、分类、命中的摘要片段和可点击的文章链接。只显示标题会让人反复点开再返回；整篇正文都展示又会让页面像一堵墙。摘要中把命中的字轻微高亮即可，颜色不要只靠红绿区分，键盘焦点也要看得见。</p>
+<h2 id="上线前我会这样试一遍"><a href="#上线前我会这样试一遍" class="headerlink" title="上线前我会这样试一遍"></a>上线前我会这样试一遍</h2><p>写完功能后，别只搜一次文章标题就宣布完成。我通常拿一张小纸条列出十个词：精确标题、常见简称、一个标签、一个正文词、一个不存在的词、带空格的词、英文大小写不同的词、中文标点附近的词、只命中旧文章的词，以及手机输入法下的一次搜索。每一个都看三件事：有没有结果、第一条是不是合理、点进去是否正确。</p>
+<p>还要刻意测试空状态。输入“火星技术”时，页面不该只留一大片空白，可以说“没有找到相关内容”，再给出分类页或归档页链接。搜索框清空后应立即恢复全部列表；按回车时不应莫名刷新页面；移动端键盘弹出后，结果最好仍在可见范围内。</p>
+<p>最后检查构建产物里的索引。它不应包含草稿、私密文章、环境变量或不想公开的备注。静态文件一旦发布就是公开内容，这一点比搜索做得多聪明都重要。</p>
+<h2 id="搜索是一条回来的路"><a href="#搜索是一条回来的路" class="headerlink" title="搜索是一条回来的路"></a>搜索是一条回来的路</h2><p>一个个人站最常使用搜索的人，往往就是作者自己。几年后你可能只记得“我好像记过这个坑”，却想不起文章标题。好的搜索不会显得炫耀，它只是安静地把那条旧路重新照亮。</p>
+<p>因此先把标题写清楚、分类和标签维护好，再用一套简单可预测的搜索把它们连起来。等真正出现“用户总在搜但搜不到”的证据，再升级同义词、拼音或外部服务。功能可以慢慢长，读者找到内容时那种少绕一步的轻松感，才是搜索最值得保留的部分。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web-%E5%AE%9E%E8%B7%B5/" class="category-chain-item">Web 实践</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/" class="print-no-link">#用户体验</a>
+      
+        <a href="/tags/%E6%90%9C%E7%B4%A2/" class="print-no-link">#搜索</a>
+      
+        <a href="/tags/%E9%9D%99%E6%80%81%E7%AB%99/" class="print-no-link">#静态站</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>给小网站加搜索：先明确用户找什么</div>
+      <div>https://nanyouwen.github.io/Web实践-给小网站加搜索先明确用户找什么/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年8月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4-%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%9A%84%E6%9B%B4%E6%96%B0%E6%B5%81%E7%A8%8B%E4%BB%8E%E5%86%99%E6%96%87%E7%AB%A0%E5%88%B0%E5%8F%91%E5%B8%83/" title="静态网站的更新流程：从写文章到发布">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">静态网站的更新流程：从写文章到发布</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/eng-040-%E8%B7%A8%E7%AB%AF%E4%B8%80%E8%87%B4%E6%80%A7-%E5%90%8C%E4%B8%80%E4%B8%AA%E5%8A%9F%E8%83%BD%E5%9C%A8%E6%89%8B%E6%9C%BA%E5%92%8C%E7%94%B5%E8%84%91%E4%B8%8A/" title="跨端一致性：同一个功能在手机和电脑上">
+                        <span class="hidden-mobile">跨端一致性：同一个功能在手机和电脑上</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
