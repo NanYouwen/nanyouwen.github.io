@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="“这个页面有点慢”是很常见也很难直接处理的一句话。它可能指白屏久，可能指图片迟迟不出来，也可能是页面已经显示但点按钮没有反应。把它们都叫作慢，最后很容易得到一个笼统的优化任务：压缩资源、加缓存、换机器。做了很多事，问题却不一定被碰到。 我现在遇到加载慢，会先把自己放到用户的位置：从点击链接到能看到主要内容，中间究竟发生了什么？浏览器先要找到服务器，再建立连接，下载 HTML，解析样式和脚本，取接口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="页面加载慢时，先分清是在等谁">
+<meta property="og:url" content="https://nanyouwen.github.io/Web%E5%AE%9E%E8%B7%B5-%E9%A1%B5%E9%9D%A2%E5%8A%A0%E8%BD%BD%E6%85%A2%E6%97%B6%E5%85%88%E5%88%86%E6%B8%85%E6%98%AF%E5%9C%A8%E7%AD%89%E8%B0%81/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="“这个页面有点慢”是很常见也很难直接处理的一句话。它可能指白屏久，可能指图片迟迟不出来，也可能是页面已经显示但点按钮没有反应。把它们都叫作慢，最后很容易得到一个笼统的优化任务：压缩资源、加缓存、换机器。做了很多事，问题却不一定被碰到。 我现在遇到加载慢，会先把自己放到用户的位置：从点击链接到能看到主要内容，中间究竟发生了什么？浏览器先要找到服务器，再建立连接，下载 HTML，解析样式和脚本，取接口">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-22T10:15:16.000Z">
+<meta property="article:modified_time" content="2025-08-22T10:15:16.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="排错">
+<meta property="article:tag" content="性能">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>页面加载慢时，先分清是在等谁 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="页面加载慢时，先分清是在等谁"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-08-22 18:15" pubdate>
+          2025年8月22日 18:15:16
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">页面加载慢时，先分清是在等谁</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>“这个页面有点慢”是很常见也很难直接处理的一句话。它可能指白屏久，可能指图片迟迟不出来，也可能是页面已经显示但点按钮没有反应。把它们都叫作慢，最后很容易得到一个笼统的优化任务：压缩资源、加缓存、换机器。做了很多事，问题却不一定被碰到。</p>
+<p>我现在遇到加载慢，会先把自己放到用户的位置：从点击链接到能看到主要内容，中间究竟发生了什么？浏览器先要找到服务器，再建立连接，下载 HTML，解析样式和脚本，取接口数据、图片、字体和第三方资源。任何一个环节等得太久，用户只会看到“页面慢”，但开发者必须分清它在等谁。</p>
+<span id="more"></span>
+
+<h2 id="先把“慢”描述成一个可观察的现象"><a href="#先把“慢”描述成一个可观察的现象" class="headerlink" title="先把“慢”描述成一个可观察的现象"></a>先把“慢”描述成一个可观察的现象</h2><p>排查开始前，尽量收集具体信息。是所有人都慢，还是某个城市、某种网络、某个手机慢？是第一次打开慢，刷新后就快，还是每次都慢？页面停在白屏、骨架屏、图片空位还是加载完成后按钮卡顿？有没有特定的时间段，例如晚上接口压力大时才出现？</p>
+<p>这些问题不是为了把用户问烦，而是为了缩小范围。第一次慢、第二次快，通常要想到缓存；只有某个页面慢，可能是它的图片、接口或脚本；页面内容出来了但无法点击，要看浏览器主线程是否忙；只有某地区异常，则需要观察网络、DNS 或 CDN。先记录现象，后面每一步才有验证标准。</p>
+<p>浏览器的 Network 面板很适合做这件事。打开它，勾选保留日志，模拟一次正常进入页面的过程。不要只看请求总数，重点看瀑布图：哪个请求最晚开始，哪个持续最久，是否有 404、重定向或反复失败。页面上的“慢”会在这里拆成许多小等待。</p>
+<h2 id="常见等待点各有不同的问法"><a href="#常见等待点各有不同的问法" class="headerlink" title="常见等待点各有不同的问法"></a>常见等待点各有不同的问法</h2><p>第一个等待点是 DNS 和连接。若第一个文档请求在真正开始下载前就花了很久，可能是域名解析、TLS 握手或服务器连接慢。它不适合用“再压一张图片”解决。可以对比同域名的其他页面、用不同网络测试，再检查部署区域、证书和 DNS 配置。</p>
+<p>第二个是服务器生成内容或接口响应。Network 中常显示为等待首字节很久：请求发出后，浏览器没有马上收到数据。静态页面很少有这类问题，动态接口则常由数据库查询、下游服务、冷启动或错误重试引起。此时应记录请求时间、状态码、接口参数和服务端日志关联号，而不是只对前端做加载动画。</p>
+<p>第三个是资源本身过大或过多。大图片、未压缩视频、整包下载的脚本和字体都会拉长下载时间。这里的原则是先找最大、最影响首屏的资源。把页面中最晚看到的那张大图优化掉，常比把十个很小的图标各减一点更有效。</p>
+<p>第四个是浏览器在本地忙不过来。脚本下载完不代表页面能交互；一段很重的初始化、频繁的 DOM 操作或复杂动画，都会让主线程短时间被占满。表现往往是页面看起来出来了，点击却迟钝。这时应在 Performance 面板里看长任务，拆分非关键工作，避免在首屏一次性执行所有逻辑。</p>
+<h2 id="用最小实验确认猜测"><a href="#用最小实验确认猜测" class="headerlink" title="用最小实验确认猜测"></a>用最小实验确认猜测</h2><p>不要同时改五个地方，否则速度变快后也不知道是哪一项起效。假设瀑布图显示首页头图有四兆，而正文在它下面，先只替换头图为合适尺寸的格式，记录改前改后的加载时间和视觉效果。假设接口等待两秒，先用固定返回数据试一次，看看页面是否立即顺畅；若是，问题就更可能在服务端或网络而不是组件渲染。</p>
+<p>我会给每次排查留一行记录：时间、环境、症状、怀疑点、做了什么、结果怎样。比如“手机 4G 首次打开文章页，最大图片 2.8MB；替换为 320KB WebP 后首屏提前出现，文字无变化”。这比“已优化性能”更能帮助下一次排错，也避免团队成员在同一个坑里重复猜。</p>
+<p>测试时记得换一个没有缓存的环境。开发者电脑开很多次以后，浏览器已经缓存脚本和图片，很容易误以为问题消失。无痕窗口、禁用缓存、手机流量或一台没访问过站点的设备，都会让结论更接近真实用户。网络慢时也别只追求秒数，骨架屏、明确的加载文案、可以重试的按钮同样能降低等待的不确定感。</p>
+<h2 id="快不是唯一目标，稳定才更像体验"><a href="#快不是唯一目标，稳定才更像体验" class="headerlink" title="快不是唯一目标，稳定才更像体验"></a>快不是唯一目标，稳定才更像体验</h2><p>有些“优化”会把问题藏起来，例如无限期显示转圈、默默重试很多次、为了少一个请求而把所有内容塞进首屏。用户并不只在乎理论上多快一点，也在乎出了问题时是否知道发生了什么、能否继续做下一步。请求超时时给出可重试提示，图片加载失败时保留替代信息，接口失败时不把整个页面打成空白，这些都属于性能体验的一部分。</p>
+<p>最后可以把页面分成关键和非关键：文章正文、登录、提交按钮这类必须尽快可靠；评论、统计、相关推荐可以稍后。先让最重要的路径可用，再慢慢改善周边。页面加载慢时，真正有效的第一步往往不是立刻动手优化，而是耐心地问一句：此刻它到底在等谁？答案清楚后，改动会少很多，也会更准。</p>
+<h2 id="把一次排查变成下一次的起点"><a href="#把一次排查变成下一次的起点" class="headerlink" title="把一次排查变成下一次的起点"></a>把一次排查变成下一次的起点</h2><p>问题定位后，最好补上一点能持续观察的东西。若曾经是某张大图拖慢首屏，可以在构建或上传时提醒资源尺寸；若是接口偶发变慢，可以记录关键接口的耗时分布；若第三方脚本常失败，可以给它设置超时和降级。这样不是为了给项目再加一套沉重监控，而是避免同样的症状每隔几周重新靠猜测处理。</p>
+<p>还要把处理结果翻译成用户看得见的改善。比如失败时多了重试入口、慢网下先显示正文、长列表先展示已拿到的部分。技术指标下降固然好，但用户能否少等、少点、少迷路才是最后的验证。一次不慌不忙的排查，不只解决一个页面，也会慢慢养成一种习惯：先看证据，再动手改。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web-%E5%AE%9E%E8%B7%B5/" class="category-chain-item">Web 实践</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%8E%92%E9%94%99/" class="print-no-link">#排错</a>
+      
+        <a href="/tags/%E6%80%A7%E8%83%BD/" class="print-no-link">#性能</a>
+      
+        <a href="/tags/%E7%BD%91%E7%BB%9C/" class="print-no-link">#网络</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>页面加载慢时，先分清是在等谁</div>
+      <div>https://nanyouwen.github.io/Web实践-页面加载慢时先分清是在等谁/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年8月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-%E6%8A%8A%E9%87%8D%E5%A4%8D%E7%9A%84%E8%A1%A8%E6%A0%BC%E5%B7%A5%E4%BD%9C%E4%BA%A4%E7%BB%99%E8%84%9A%E6%9C%AC/" title="把重复的表格工作交给脚本">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">把重复的表格工作交给脚本</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Web%E5%AE%9E%E8%B7%B5-%E7%94%A8Lighthouse%E7%9C%8B%E7%BD%91%E9%A1%B5%E4%B8%8D%E8%A2%AB%E5%88%86%E6%95%B0%E7%BB%91%E6%9E%B6/" title="用 Lighthouse 看网页，不被分数绑架">
+                        <span class="hidden-mobile">用 Lighthouse 看网页，不被分数绑架</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
