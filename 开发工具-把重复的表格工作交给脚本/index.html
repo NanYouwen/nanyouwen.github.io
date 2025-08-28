@@ -1,0 +1,676 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="有些工作第一次做时很合理，第二次也还能忍，第三次开始就会让人怀疑自己为什么还在复制粘贴。每周把几份表格合并、删掉空行、统一日期格式、按部门分成新文件，这类事情不难，却特别消耗注意力。更烦的是它会让人变得不敢休息：只要少看一眼，就可能复制错列、漏掉一行，或者把上周的旧数字一起带进去。 把表格工作交给脚本，不等于把判断也交出去。一个好用的小脚本更像是给自己准备了一张固定的工作台：重复的搬运、检查和生成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="把重复的表格工作交给脚本">
+<meta property="og:url" content="https://nanyouwen.github.io/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-%E6%8A%8A%E9%87%8D%E5%A4%8D%E7%9A%84%E8%A1%A8%E6%A0%BC%E5%B7%A5%E4%BD%9C%E4%BA%A4%E7%BB%99%E8%84%9A%E6%9C%AC/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="有些工作第一次做时很合理，第二次也还能忍，第三次开始就会让人怀疑自己为什么还在复制粘贴。每周把几份表格合并、删掉空行、统一日期格式、按部门分成新文件，这类事情不难，却特别消耗注意力。更烦的是它会让人变得不敢休息：只要少看一眼，就可能复制错列、漏掉一行，或者把上周的旧数字一起带进去。 把表格工作交给脚本，不等于把判断也交出去。一个好用的小脚本更像是给自己准备了一张固定的工作台：重复的搬运、检查和生成">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-28T01:21:44.000Z">
+<meta property="article:modified_time" content="2025-08-28T01:21:44.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="脚本">
+<meta property="article:tag" content="自动化">
+<meta property="article:tag" content="表格">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>把重复的表格工作交给脚本 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="把重复的表格工作交给脚本"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-08-28 09:21" pubdate>
+          2025年8月28日 09:21:44
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">把重复的表格工作交给脚本</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>有些工作第一次做时很合理，第二次也还能忍，第三次开始就会让人怀疑自己为什么还在复制粘贴。每周把几份表格合并、删掉空行、统一日期格式、按部门分成新文件，这类事情不难，却特别消耗注意力。更烦的是它会让人变得不敢休息：只要少看一眼，就可能复制错列、漏掉一行，或者把上周的旧数字一起带进去。</p>
+<p>把表格工作交给脚本，不等于把判断也交出去。一个好用的小脚本更像是给自己准备了一张固定的工作台：重复的搬运、检查和生成由它完成，关键的口径、异常情况和最终确认仍由人把关。这样既不会把简单事情做成庞大系统，也能让每周那段机械劳动变得可靠一点。</p>
+<span id="more"></span>
+
+<h2 id="先找出真正重复的那一段"><a href="#先找出真正重复的那一段" class="headerlink" title="先找出真正重复的那一段"></a>先找出真正重复的那一段</h2><p>自动化最适合处理规则稳定、输入格式相近、输出有明确样子的步骤。以每周报名数据汇总为例，可能包括：从多个 CSV 或 Excel 文件读取记录；删除完全空白的行；统一手机号或日期的格式；根据邮箱去重；把结果写进一份总表；把有问题的数据单独列出来。这里面“怎么判断两条记录是否是同一个人”需要先讲清规则，而“逐行复制”就是脚本最适合接手的部分。</p>
+<p>不要一上来就说“把整个报表自动化”。拿出最近三次实际操作，逐项标记：每次完全一样的、偶尔需要选择的、必须人工判断的。完全一样的最先做；偶尔变化的设计成参数，例如输入目录、日期范围、表名；必须判断的则保留一个人工确认口。这样脚本不会假装聪明，也不会在异常数据出现时悄悄做错决定。</p>
+<p>还有一个很有效的小测试：如果让同事照着你的步骤做，他能否在不问你的情况下得到相同结果？若不能，说明流程本身还没说清，先写成几条朴素规则，再谈代码。自动化只能放大已有的规则，模糊流程被放大后只会更难追。</p>
+<h2 id="输入、预览、执行、回看四步更安心"><a href="#输入、预览、执行、回看四步更安心" class="headerlink" title="输入、预览、执行、回看四步更安心"></a>输入、预览、执行、回看四步更安心</h2><p>我喜欢把表格脚本拆成四个阶段。第一步输入：明确读取哪些文件、哪些工作表、哪些列。脚本开始时打印文件清单和记录数，避免误把旧备份也读进去。第二步预览：先不写任何文件，显示识别到的列名、空值数量、重复数量和几条示例。发现列名从“手机号”改成“联系电话”时，可以在这里停下。</p>
+<p>第三步才是执行：按已确认的规则清洗、合并、生成结果。输出文件不要直接覆盖原文件，文件名里带日期或批次，例如 <code>汇总_20250828.xlsx</code>。第四步回看：脚本输出一个简短报告，告诉你总共读到多少行、删除了多少空行、合并了多少重复项、哪些数据被放进异常清单。人只需重点查看异常清单和汇总数字，就能完成最后确认。</p>
+<p>这个顺序看似比双击宏多了一点步骤，实际上减少了返工。尤其是刚开始使用脚本时，预览模式像一个安全阀：先让它说出准备做什么，再允许它真的写入结果。</p>
+<h2 id="一个小例子比“全自动”更可靠"><a href="#一个小例子比“全自动”更可靠" class="headerlink" title="一个小例子比“全自动”更可靠"></a>一个小例子比“全自动”更可靠</h2><p>假设每周会收到三个部门导出的报名表，字段并不完全一致。脚本可以先做一个字段映射：把“姓名”“参与人”“报名姓名”都归到 <code>name</code>；把“电话”“手机号”归到 <code>phone</code>。对于找不到的列，直接报告“缺少手机号列”，不要自作主张把其他列当成它。</p>
+<p>清洗日期时也要写清规则。日期既可能是 Excel 的日期对象，也可能是 <code>2025/8/1</code>、<code>08-01-2025</code> 或一段手填文字。脚本可以把成功识别的日期统一输出为 <code>YYYY-MM-DD</code>，但无法识别的值必须保留原样并标记出来。把不确定的数据留给人，比把它猜错后混进总表安全得多。</p>
+<p>去重也不能只写一句“删除重复”。可以约定：邮箱相同算同一人；没有邮箱时，姓名加手机号相同才算重复；同一人出现多次时保留最新提交的一条。规则写在脚本说明里，也写在输出报告里。以后有人问“为什么这条不见了”，你不用靠回忆解释。</p>
+<h2 id="给脚本留出人能理解的边界"><a href="#给脚本留出人能理解的边界" class="headerlink" title="给脚本留出人能理解的边界"></a>给脚本留出人能理解的边界</h2><p>表格里常有敏感信息：联系方式、工资、客户资料、身份证明。脚本日志不应把整行内容直接打印出来，调试时可以只显示行号和必要字段，输出文件也要放在约定的权限范围内。若使用第三方在线服务或把数据交给模型处理，更要先确认允许上传什么，不能因为“只是做个表”就忽略数据边界。</p>
+<p>脚本还应该对异常保持克制。输入文件为空、列不存在、输出目录没有权限、发现大量重复记录时，宁可带着清楚的信息停止，也不要生成一个看起来正常、实际上缺内容的结果。错误信息最好说人话：告诉你哪个文件、哪张表、哪个列出了问题，以及下一步可以检查什么。</p>
+<p>备份同样不可少。原始文件只读保存，结果文件另存，运行前或运行后保留一份可追溯的清单。这样即使规则写错，也可以重新运行，而不是从被覆盖的表里一点点找回数据。</p>
+<h2 id="从一次省十分钟开始"><a href="#从一次省十分钟开始" class="headerlink" title="从一次省十分钟开始"></a>从一次省十分钟开始</h2><p>第一次写脚本不必追求把所有格式都兼容。挑一份最常见的输入，先让它稳定完成一个动作，例如合并三个 CSV 并输出重复项。等连续使用几次、确实遇到新格式，再把新规则补进去。这样脚本会跟着真实工作长出来，不会变成没人敢碰的黑盒。</p>
+<p>如果某个流程每周只省十分钟，一年下来也能还给你不少安静的时间。更重要的是，那十分钟不再被用来盯着同样的单元格，而可以用来检查数据是否合理、和同事确认口径，或者只是喝口水。自动化最朴素的价值，常常就是把人从重复里松开一点。</p>
+<h2 id="让下一个人也敢运行它"><a href="#让下一个人也敢运行它" class="headerlink" title="让下一个人也敢运行它"></a>让下一个人也敢运行它</h2><p>脚本写完后，给它一份很短的使用说明：需要安装什么、输入文件放在哪里、如何先预览、结果会生成到哪里、常见报错怎么处理。再配一份脱敏的示例输入和期望输出，别人就不必靠猜测启动它。说明越贴近实际运行步骤，越有用；不要只留下“运行这个命令”而没有解释它会改什么。</p>
+<p>规则有变化时，把变化写进版本记录或脚本顶部的注释。例如从某天开始，去重改为以邮箱为准；新增的部门列默认填什么。表格自动化最怕的不是代码长，而是规则悄悄变了没人知道。能让人看懂输入、预览和结果的脚本，才是真正替团队省时间的脚本，而不只是某个人电脑里的一次性魔法。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="category-chain-item">开发工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%84%9A%E6%9C%AC/" class="print-no-link">#脚本</a>
+      
+        <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" class="print-no-link">#自动化</a>
+      
+        <a href="/tags/%E8%A1%A8%E6%A0%BC/" class="print-no-link">#表格</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>把重复的表格工作交给脚本</div>
+      <div>https://nanyouwen.github.io/开发工具-把重复的表格工作交给脚本/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年8月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%90%8E%E7%AB%AF-%E6%8E%A5%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9API%E6%97%B6%E6%88%91%E4%BC%9A%E5%85%88%E8%B5%B0%E5%AE%8C%E8%BF%99%E6%9D%A1%E8%B7%AF/" title="接入第三方 API 时，我会先走完这条路">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">接入第三方 API 时，我会先走完这条路</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Web%E5%AE%9E%E8%B7%B5-%E9%A1%B5%E9%9D%A2%E5%8A%A0%E8%BD%BD%E6%85%A2%E6%97%B6%E5%85%88%E5%88%86%E6%B8%85%E6%98%AF%E5%9C%A8%E7%AD%89%E8%B0%81/" title="页面加载慢时，先分清是在等谁">
+                        <span class="hidden-mobile">页面加载慢时，先分清是在等谁</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
