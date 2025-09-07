@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="做管理页面时，最直观的权限处理方式是：没有权限的人看不到“删除”“导出”“设置”这些按钮。它当然有用，页面更干净，普通用户也不会误点。但如果把它当成安全边界，就会留下一个很大的误会：按钮不见了，并不代表请求不能被构造；菜单不能点，也不代表接口不会被直接访问。 前端权限更像门口的导视牌，它告诉人该往哪里走、哪些功能与自己有关；真正的门锁必须在服务端。把这两件事分清，不是为了把简单功能搞复杂，而是为了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端权限，不是把按钮藏起来">
+<meta property="og:url" content="https://nanyouwen.github.io/%E5%AE%89%E5%85%A8%E4%B8%8E%E7%BB%B4%E6%8A%A4-%E5%89%8D%E7%AB%AF%E6%9D%83%E9%99%90%E4%B8%8D%E6%98%AF%E6%8A%8A%E6%8C%89%E9%92%AE%E8%97%8F%E8%B5%B7%E6%9D%A5/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="做管理页面时，最直观的权限处理方式是：没有权限的人看不到“删除”“导出”“设置”这些按钮。它当然有用，页面更干净，普通用户也不会误点。但如果把它当成安全边界，就会留下一个很大的误会：按钮不见了，并不代表请求不能被构造；菜单不能点，也不代表接口不会被直接访问。 前端权限更像门口的导视牌，它告诉人该往哪里走、哪些功能与自己有关；真正的门锁必须在服务端。把这两件事分清，不是为了把简单功能搞复杂，而是为了">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-07T04:06:49.000Z">
+<meta property="article:modified_time" content="2025-09-07T04:06:49.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="安全">
+<meta property="article:tag" content="权限">
+<meta property="article:tag" content="前后端">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>前端权限，不是把按钮藏起来 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="前端权限，不是把按钮藏起来"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-07 12:06" pubdate>
+          2025年9月7日 12:06:49
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">前端权限，不是把按钮藏起来</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>做管理页面时，最直观的权限处理方式是：没有权限的人看不到“删除”“导出”“设置”这些按钮。它当然有用，页面更干净，普通用户也不会误点。但如果把它当成安全边界，就会留下一个很大的误会：按钮不见了，并不代表请求不能被构造；菜单不能点，也不代表接口不会被直接访问。</p>
+<p>前端权限更像门口的导视牌，它告诉人该往哪里走、哪些功能与自己有关；真正的门锁必须在服务端。把这两件事分清，不是为了把简单功能搞复杂，而是为了在角色变化、链接被转发、接口被调用、数据需要保护时，系统仍然能给出可靠答案。</p>
+<span id="more"></span>
+
+<h2 id="先分清体验控制和安全控制"><a href="#先分清体验控制和安全控制" class="headerlink" title="先分清体验控制和安全控制"></a>先分清体验控制和安全控制</h2><p>前端根据当前用户的角色或权限点显示内容，是体验控制。它可以隐藏不相关的导航、禁用暂不可用的操作、在页面上解释“你需要管理员权限才能继续”。这些都很值得做，因为用户不必在一堆无权使用的入口里猜来猜去。</p>
+<p>服务端检查当前请求是否被允许，才是安全控制。它需要从可信的身份信息中得到用户是谁、属于什么组织、拥有什么范围，然后根据资源和动作做判断。即使某个用户通过开发者工具把隐藏按钮显示出来，或复制别人发来的接口地址，服务端也应该拒绝不该完成的操作。</p>
+<p>一个简单的判断句式很有帮助：前端负责“是否展示和如何提示”，后端负责“是否允许和如何保护”。两边都做，不是重复，而是在不同位置承担不同风险。</p>
+<h2 id="权限不是只有管理员和普通用户"><a href="#权限不是只有管理员和普通用户" class="headerlink" title="权限不是只有管理员和普通用户"></a>权限不是只有管理员和普通用户</h2><p>很多项目一开始只有两种角色，后来很快出现更多现实情况：运营能看数据但不能改配置；财务能导出本部门报表但不能看其他部门；项目负责人能管理成员却不能删除整个组织。若仍只靠一个 <code>isAdmin</code> 字段，页面和接口都会慢慢堆满例外。</p>
+<p>更容易维护的方式是按“资源 + 动作 + 范围”思考。资源可能是订单、文章、成员、配置；动作是查看、创建、编辑、删除、导出；范围是自己的、所在项目的、全组织的。这样“能编辑自己的草稿”和“能编辑所有文章”是两条不同的权限，名字也更容易说清。</p>
+<p>不必一次设计出大型权限平台。小项目可以先列一张权限表，把每个角色允许做什么写出来。表格一旦清楚，前端展示条件、后端接口检查、测试用例和产品文案就有了同一份依据。真正容易出错的不是权限粒度小，而是大家脑子里的规则不一致。</p>
+<h2 id="页面上怎样表现才不让人困惑"><a href="#页面上怎样表现才不让人困惑" class="headerlink" title="页面上怎样表现才不让人困惑"></a>页面上怎样表现才不让人困惑</h2><p>无权操作时，常见做法有三种。完全不显示，适合功能与当前角色毫无关系；显示但禁用，适合用户需要知道有这个能力、却暂时不能用；允许进入但在提交时提示权限不足，适合链接可分享、页面仍有可读信息的场景。哪种都可以，重点是提示要清楚下一步：联系谁、需要什么角色、是否可以申请。</p>
+<p>不要只靠前端路由守卫。路由守卫能阻止用户从菜单进入页面，但刷新、深链接、权限刚变更或缓存过期时都可能出现特殊情况。进入页面后仍要处理接口返回的 401 或 403：未登录时引导重新登录，已登录但无权限时展示说明，而不是让页面一直转圈或报一个“未知错误”。</p>
+<p>当权限发生变化，例如管理员刚刚移除了某人的角色，前端还缓存着旧菜单，服务端拒绝请求是正常的。页面应当能优雅地接住这种不一致，刷新权限状态后给出解释，而不是假定客户端永远正确。</p>
+<h2 id="后端要检查对象，而不只检查角色"><a href="#后端要检查对象，而不只检查角色" class="headerlink" title="后端要检查对象，而不只检查角色"></a>后端要检查对象，而不只检查角色</h2><p>一个常见漏洞是：接口只判断“当前用户有编辑订单的角色”，却没有检查这张订单是否属于他所在的组织。这样只要把 URL 里的订单 ID 换成别人的，就可能越权读取或修改数据。权限校验需要同时看“谁在请求”和“他正在请求哪个对象”。</p>
+<p>最小的防线可以包括：从登录会话或令牌中读取用户身份，而不是相信前端传来的 userId；查询资源时带上组织或所有者范围；修改、删除、导出等动作在服务端再次检查；重要操作写入审计记录。审计记录不必保存所有敏感正文，但应能回答谁在什么时候对哪个对象做了什么。</p>
+<p>对于删除、付款、改权限、导出大量数据等高风险动作，可以增加二次确认、短时验证或更严格的角色要求。不要因为“内部系统”就跳过这些边界。内部账号也会误操作，权限错误造成的损失并不会因为页面在内网而变小。</p>
+<h2 id="用反向思路测一次权限"><a href="#用反向思路测一次权限" class="headerlink" title="用反向思路测一次权限"></a>用反向思路测一次权限</h2><p>权限测试最有效的方式，往往是故意从不该走的路进去。用普通账号直接输入管理员页面地址；复制一个高权限接口请求后只换登录身份；把资源 ID 改成另一个组织的；在权限刚被移除后尝试提交；在手机和电脑上分别登录不同账号。预期结果不只是“按钮没有”，而是服务端明确拒绝，页面也没有泄露敏感内容。</p>
+<p>再检查两件容易忘的事：导出文件和图片链接是否需要鉴权；缓存、日志和错误信息里有没有把不该显示的数据暴露出来。权限保护不是一个 if 判断，而是一条从界面、接口、存储到运维记录都连得起来的线。</p>
+<p>把按钮藏好，能让产品更顺手；把服务端锁好，才能让产品值得信任。两件事一起做，用户既不会被多余功能打扰，也不必承担系统侥幸留下的风险。</p>
+<h2 id="权限规则也需要被维护"><a href="#权限规则也需要被维护" class="headerlink" title="权限规则也需要被维护"></a>权限规则也需要被维护</h2><p>角色和权限不是配置一次就不动的东西。新功能上线、组织调整、员工离开、合作方接入时，都可能让原来的规则过期。定期看一眼高权限账号、长期未用账号和例外授权，确认它们仍有业务理由；重要权限变更最好留下审批或操作记录。这样出问题时，才能知道权限是何时、为何被授予或收回。</p>
+<p>权限模型越复杂，越要让产品、前端、后端和测试使用同一份清单。文档不用很华丽，只要能说清每种角色能看什么、能做什么、范围到哪里。把权限当作产品的一部分，而不是藏在若干接口判断里的细节，才能在功能不断增加时仍然守住边界。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AE%89%E5%85%A8%E4%B8%8E%E7%BB%B4%E6%8A%A4/" class="category-chain-item">安全与维护</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AE%89%E5%85%A8/" class="print-no-link">#安全</a>
+      
+        <a href="/tags/%E6%9D%83%E9%99%90/" class="print-no-link">#权限</a>
+      
+        <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF/" class="print-no-link">#前后端</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>前端权限，不是把按钮藏起来</div>
+      <div>https://nanyouwen.github.io/安全与维护-前端权限不是把按钮藏起来/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年9月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AF%A5%E4%BB%8E%E7%94%A8%E6%88%B7%E8%B7%AF%E7%BA%BF%E5%BC%80%E5%A7%8B/" title="测试用例该从用户路线开始">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">测试用例该从用户路线开始</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%90%8E%E7%AB%AF-%E6%8E%A5%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9API%E6%97%B6%E6%88%91%E4%BC%9A%E5%85%88%E8%B5%B0%E5%AE%8C%E8%BF%99%E6%9D%A1%E8%B7%AF/" title="接入第三方 API 时，我会先走完这条路">
+                        <span class="hidden-mobile">接入第三方 API 时，我会先走完这条路</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
