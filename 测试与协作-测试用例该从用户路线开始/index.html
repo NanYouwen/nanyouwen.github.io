@@ -1,0 +1,676 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="测试刚开始做时，很多人会从页面上的控件数起：这个按钮点过了吗，那条接口返回过了吗，这个弹窗关得掉吗。它们当然要测，但如果只按控件排列，很容易漏掉用户真正经历的一整段路。用户不会在意某个按钮单独能不能亮，他在意的是自己能否从进入页面、填写信息、提交，到最后看见一个可信的结果。 我喜欢先画“用户路线”，再补测试点。路线不需要画得很漂亮，拿一支笔写下“从哪里来—想完成什么—中间会遇到什么—完成后去哪儿”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="测试用例该从用户路线开始">
+<meta property="og:url" content="https://nanyouwen.github.io/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AF%A5%E4%BB%8E%E7%94%A8%E6%88%B7%E8%B7%AF%E7%BA%BF%E5%BC%80%E5%A7%8B/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="测试刚开始做时，很多人会从页面上的控件数起：这个按钮点过了吗，那条接口返回过了吗，这个弹窗关得掉吗。它们当然要测，但如果只按控件排列，很容易漏掉用户真正经历的一整段路。用户不会在意某个按钮单独能不能亮，他在意的是自己能否从进入页面、填写信息、提交，到最后看见一个可信的结果。 我喜欢先画“用户路线”，再补测试点。路线不需要画得很漂亮，拿一支笔写下“从哪里来—想完成什么—中间会遇到什么—完成后去哪儿”">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-12T13:06:42.000Z">
+<meta property="article:modified_time" content="2025-09-12T13:06:42.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="测试">
+<meta property="article:tag" content="质量">
+<meta property="article:tag" content="用户路径">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>测试用例该从用户路线开始 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="测试用例该从用户路线开始"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-12 21:06" pubdate>
+          2025年9月12日 21:06:42
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">测试用例该从用户路线开始</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>测试刚开始做时，很多人会从页面上的控件数起：这个按钮点过了吗，那条接口返回过了吗，这个弹窗关得掉吗。它们当然要测，但如果只按控件排列，很容易漏掉用户真正经历的一整段路。用户不会在意某个按钮单独能不能亮，他在意的是自己能否从进入页面、填写信息、提交，到最后看见一个可信的结果。</p>
+<p>我喜欢先画“用户路线”，再补测试点。路线不需要画得很漂亮，拿一支笔写下“从哪里来—想完成什么—中间会遇到什么—完成后去哪儿”就够。它会提醒我们，功能不是孤零零地存在在一个页面里：登录态、网络波动、返回上一页、重复点击、空数据、权限变化，都可能发生在这条路上。</p>
+<span id="more"></span>
+
+<h2 id="先挑最重要的一条路"><a href="#先挑最重要的一条路" class="headerlink" title="先挑最重要的一条路"></a>先挑最重要的一条路</h2><p>假设要测试一个报名功能。不要一开始就列几十个输入框校验，可以先写主路线：未登录用户打开活动页，登录后选择场次，填写资料，提交成功，回到详情页看到自己的报名状态。这个路径是产品承诺给用户的核心体验，只要它中间断了，其他页面再精致也救不了。</p>
+<p>主路线写清以后，再问每一步依赖什么。活动页需要可访问；登录后要返回原来的页面；场次要有库存或状态；资料提交需要校验；成功后的数据要能被后续页面读到。这样能自然发现跨页面、跨接口的问题，也方便产品、开发和测试对“完成”的理解对齐。</p>
+<p>对小团队来说，不必一口气覆盖所有功能。优先选使用频率高、涉及钱或数据、失败后难恢复的路线。注册、登录、下单、提交表单、导入数据、改权限，通常都比一个装饰性动画更值得先测。</p>
+<h2 id="从主路线向两边长出分支"><a href="#从主路线向两边长出分支" class="headerlink" title="从主路线向两边长出分支"></a>从主路线向两边长出分支</h2><p>主路线通了以后，测试才开始变得有意思。每一步都可以问四个问题：没有数据会怎样；输错了会怎样；网络或服务失败会怎样；用户返回或重复操作会怎样。它们比“再点一个按钮”更接近真实世界。</p>
+<p>仍以报名为例：活动结束后是否还允许提交；手机号格式错时提示是否靠近输入框；提交时断网是否有重试或明确失败；用户连续点两次提交会不会生成两条记录；提交成功后刷新页面还看不看得到状态；换一个账号能否看到不该看的资料。每个问题都可以变成一条小用例。</p>
+<p>空状态也值得专门写下来。没有活动、没有搜索结果、没有权限、没有历史记录时，页面是说明情况还是只留白？很多产品在演示数据充足时看不出问题，真正上线后却先被“什么都没有”的场景碰到。好的空状态不只是写一句“暂无数据”，还会告诉用户这是正常等待、筛选条件太窄，还是需要去做下一步。</p>
+<h2 id="用例写得能复现，比写得漂亮更重要"><a href="#用例写得能复现，比写得漂亮更重要" class="headerlink" title="用例写得能复现，比写得漂亮更重要"></a>用例写得能复现，比写得漂亮更重要</h2><p>一条可用的测试用例至少应让另一个人知道：测试环境和账号是什么；从哪个入口开始；具体操作哪些步骤；预期看到什么；若失败，留下什么证据。把“测试提交功能”改成“以普通用户账号登录，在活动未结束且场次有余量时提交合法资料，页面显示成功提示，刷新后详情页仍显示已报名”，执行起来就清楚得多。</p>
+<p>预期结果不要只写“正常”“无异常”。尽量写可观察的现象，例如按钮在提交中不可重复点击、接口返回指定状态、列表增加一条记录、错误提示包含下一步操作。这样失败时能快速定位是前端展示、接口数据还是业务规则出了问题。</p>
+<p>截图、请求日志、时间和账号信息是很好的证据，但涉及隐私时要脱敏。把问题报告写成“有时不行”只会让排查重新从猜测开始；写清环境、步骤、实际结果和证据，开发者通常能更快复现，也更愿意认真处理。</p>
+<h2 id="自动化从稳定的主路线开始"><a href="#自动化从稳定的主路线开始" class="headerlink" title="自动化从稳定的主路线开始"></a>自动化从稳定的主路线开始</h2><p>当一条路线被反复手工回归时，就适合考虑自动化。不要先挑视觉变化频繁、依赖太多外部服务的页面，而是从登录、创建、查询这类稳定且关键的流程入手。自动化用例要准备独立测试数据，使用稳定选择器，并在断言里检查真正的业务结果，而不是只等一个动画消失。</p>
+<p>自动化不是把所有人工测试消灭掉。探索新功能、感受文案、判断交互是否自然，仍需要人；脚本擅长的是每次都不嫌烦地走同一条关键路线。两者配合，测试才不会变成“机器跑绿了，所以什么都没问题”。</p>
+<p>每次线上问题发生后，也可以回到用户路线里找位置：它发生在入口、填写、提交、结果还是返回路径？若原来的用例没有覆盖，就补上一条。这样测试集会从真实事故里长出来，而不是只是一份很厚却无人相信的表格。</p>
+<h2 id="测试是在替用户提前走路"><a href="#测试是在替用户提前走路" class="headerlink" title="测试是在替用户提前走路"></a>测试是在替用户提前走路</h2><p>从用户路线开始，并不意味着要把每一个人的行为都预测出来。它只是提醒我们先照顾最重要的承诺，再逐步补上失败和边界。测试者不是在和开发者找茬，而是在上线前替许多看不见的用户多走几步路。</p>
+<p>当用例能说清用户从哪里来、做了什么、期待什么、失败后还剩什么选择，质量就不再只是一个抽象词。它会变成用户真的能顺利完成的一次体验。</p>
+<h2 id="路线会随着产品一起变化"><a href="#路线会随着产品一起变化" class="headerlink" title="路线会随着产品一起变化"></a>路线会随着产品一起变化</h2><p>用户路线不是写完就锁进表格的文档。一个入口改成了短信登录、一个步骤增加了确认页、一个权限规则调整了，原来的用例就应当一起更新。发布前快速走一遍核心路线，比只确认某个接口返回成功更接近真实使用。若某条路线已经没人走，也可以降级或删除，不必为了“覆盖率”硬保留。</p>
+<p>团队协作时，让产品、开发和测试一起读一次主路线很有价值。产品能补上真正的使用意图，开发能指出技术限制，测试能提出失败场景。三方提前把话说开，远比上线后围绕“我以为应该这样”反复解释轻松。测试用例最好的状态，是它既像检查清单，也像大家共同记得的用户故事。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C/" class="category-chain-item">测试与协作</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B5%8B%E8%AF%95/" class="print-no-link">#测试</a>
+      
+        <a href="/tags/%E8%B4%A8%E9%87%8F/" class="print-no-link">#质量</a>
+      
+        <a href="/tags/%E7%94%A8%E6%88%B7%E8%B7%AF%E5%BE%84/" class="print-no-link">#用户路径</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>测试用例该从用户路线开始</div>
+      <div>https://nanyouwen.github.io/测试与协作-测试用例该从用户路线开始/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年9月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E5%A6%82%E4%BD%95%E7%94%A8%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE%E6%97%A9%E4%B8%80%E7%82%B9%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98/" title="如何用模拟数据早一点发现问题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">如何用模拟数据早一点发现问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E5%AE%89%E5%85%A8%E4%B8%8E%E7%BB%B4%E6%8A%A4-%E5%89%8D%E7%AB%AF%E6%9D%83%E9%99%90%E4%B8%8D%E6%98%AF%E6%8A%8A%E6%8C%89%E9%92%AE%E8%97%8F%E8%B5%B7%E6%9D%A5/" title="前端权限，不是把按钮藏起来">
+                        <span class="hidden-mobile">前端权限，不是把按钮藏起来</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
