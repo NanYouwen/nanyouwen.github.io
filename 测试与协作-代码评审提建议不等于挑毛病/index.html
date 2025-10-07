@@ -1,0 +1,675 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="代码评审容易让人紧张。提交的人担心自己的思路被否定，评审的人担心说重了像挑刺，最后评论区只剩“LGTM”或者一串很难读懂的术语。可一份改动如果只靠作者一个人看过，许多边界、命名、权限和测试缺口就只能等线上问题来提醒。评审真正有价值的地方，不是证明谁更懂，而是让一段代码在合并前多经过一双愿意负责的眼睛。 我喜欢把评审想成一起检查一份要交出去的东西。作者最熟悉意图，评审者更容易发现“读起来像什么”“换">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码评审：提建议不等于挑毛病">
+<meta property="og:url" content="https://nanyouwen.github.io/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1%E6%8F%90%E5%BB%BA%E8%AE%AE%E4%B8%8D%E7%AD%89%E4%BA%8E%E6%8C%91%E6%AF%9B%E7%97%85/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="代码评审容易让人紧张。提交的人担心自己的思路被否定，评审的人担心说重了像挑刺，最后评论区只剩“LGTM”或者一串很难读懂的术语。可一份改动如果只靠作者一个人看过，许多边界、命名、权限和测试缺口就只能等线上问题来提醒。评审真正有价值的地方，不是证明谁更懂，而是让一段代码在合并前多经过一双愿意负责的眼睛。 我喜欢把评审想成一起检查一份要交出去的东西。作者最熟悉意图，评审者更容易发现“读起来像什么”“换">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-07T10:38:23.000Z">
+<meta property="article:modified_time" content="2025-10-07T10:38:23.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="协作">
+<meta property="article:tag" content="代码评审">
+<meta property="article:tag" content="沟通">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>代码评审：提建议不等于挑毛病 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="代码评审：提建议不等于挑毛病"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-10-07 18:38" pubdate>
+          2025年10月7日 18:38:23
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">代码评审：提建议不等于挑毛病</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>代码评审容易让人紧张。提交的人担心自己的思路被否定，评审的人担心说重了像挑刺，最后评论区只剩“LGTM”或者一串很难读懂的术语。可一份改动如果只靠作者一个人看过，许多边界、命名、权限和测试缺口就只能等线上问题来提醒。评审真正有价值的地方，不是证明谁更懂，而是让一段代码在合并前多经过一双愿意负责的眼睛。</p>
+<p>我喜欢把评审想成一起检查一份要交出去的东西。作者最熟悉意图，评审者更容易发现“读起来像什么”“换个输入会怎样”“以后的人能不能接手”。这两种视角不是对立的，配合得好时，评论会变成可行动的建议，而不是给人打分。</p>
+<span id="more"></span>
+
+<h2 id="提交前先替评审者铺一小段路"><a href="#提交前先替评审者铺一小段路" class="headerlink" title="提交前先替评审者铺一小段路"></a>提交前先替评审者铺一小段路</h2><p>好的评审从提交说明开始。它不需要复述每一行代码，但应该回答：这次要解决什么问题；大致怎么做；哪些地方需要重点看；怎样验证；有没有已知限制。若改动很大，也可以拆成几个相对独立的提交或拉取请求，让每次讨论聚焦一个主题。</p>
+<p>不要把格式化、重命名、功能变更和依赖升级全混在一次提交里。它们不是不能同时发生，而是混在一起会掩盖真正的逻辑差异。能分开时分开，评审者才能把注意力放到风险最高的部分，作者也更容易得到具体反馈。</p>
+<p>在请求评审前先自己读一次差异，像第一次看到它的人一样。检查调试输出、临时注释、无意加入的文件和没更新的文档。这不是为了让评审者没有意见，而是把显而易见的噪声先清掉，让讨论留给真正值得讨论的内容。</p>
+<h2 id="评审时先理解，再提出问题"><a href="#评审时先理解，再提出问题" class="headerlink" title="评审时先理解，再提出问题"></a>评审时先理解，再提出问题</h2><p>打开差异后，我会先读提交说明，再顺着主要数据流走一遍：输入从哪里来，经过哪些转换，最后影响哪里。还没理解意图时就逐行挑格式，常常会错过更大的问题。对不清楚的地方，先问“这里是否是为了处理某种场景”，比直接断言“这样不对”更容易得到有效信息。</p>
+<p>评审可以围绕四类问题展开。第一是正确性：正常输入、空输入、异常输入会怎样，返回值和状态是否一致。第二是边界和安全：权限是否在服务端检查，是否可能重复提交、越权、泄露敏感信息。第三是可维护性：名字能否表达意图，重复逻辑是否有一个清晰归处，错误处理是否可读。第四是验证：关键分支有没有测试，手工验证步骤是否覆盖主要路线。</p>
+<p>不是每条意见都有同样重量。可以明确标注“必须修改”“建议讨论”“可选优化”，并说明原因。比如“这里若请求超时后直接重试，可能重复创建订单，建议先使用幂等键”就是一条可执行的风险提示；“我个人更喜欢另一个写法”则适合降级为可选建议，别把偏好伪装成缺陷。</p>
+<h2 id="让评论能被人接住"><a href="#让评论能被人接住" class="headerlink" title="让评论能被人接住"></a>让评论能被人接住</h2><p>具体比笼统更有帮助。与其写“这里不好”，不如指出“空数组时会访问第一项，页面会报错；是否需要先返回空状态”。与其只贴一段替代代码，不如先解释它解决的情况，再给出一个方向。作者知道为什么，才能在相似地方做出正确选择，而不是机械修改。</p>
+<p>语气也影响结果。把人和代码分开：说“这个分支可能漏掉了权限校验”，不要说“你怎么又没做权限”；说“我没看懂这里的意图，能否补一句注释”，不要说“这写得太绕”。技术讨论可以直接，但不必伤人。团队里每个人都会提交不完美的改动，留出安全感，才会有人愿意把不确定的地方提前说出来。</p>
+<p>作者收到评论时也不必把每一条建议当成考试判错。先确认对方发现的是事实、风险还是偏好；对合理意见快速回应并修改；对需要讨论的地方补充背景或约一个短会；对不采纳的建议说明原因。沉默会让评审者不知道问题是否被看见，清楚的回应则能慢慢建立信任。</p>
+<h2 id="评审结束不等于责任结束"><a href="#评审结束不等于责任结束" class="headerlink" title="评审结束不等于责任结束"></a>评审结束不等于责任结束</h2><p>合并前确认所有关键意见都有结论，测试和构建状态真实可信。合并后若发现遗漏，不必追究“当时谁没看出来”，先修复、补测试、把经验变成检查项。评审的目标本来就是降低风险，不是承诺零错误。</p>
+<p>还可以不定期回头看一看：哪些评论总在重复出现？若每次都提醒空状态，也许需要组件或测试模板；若每次都讨论命名或格式，也许应该交给自动化工具；若大改动总难评审，也许可以改善拆分方式。让流程吸收经验，比要求某个人永远更仔细有效。</p>
+<p>一段被认真评审过的代码，未必更华丽，却更容易被团队理解和接住。提出建议不是挑毛病，而是在项目还来得及从容修正的时候，替彼此多问一次“这样真的可以吗”。</p>
+<h2 id="把评审节奏设计得有人愿意参与"><a href="#把评审节奏设计得有人愿意参与" class="headerlink" title="把评审节奏设计得有人愿意参与"></a>把评审节奏设计得有人愿意参与</h2><p>再好的原则，如果拉取请求长期没人看，也很难发挥作用。小团队可以约定一个轻量节奏：改动尽量控制在可读范围，作者在描述里标出风险和验证方式，评审者在合理时间内给出至少一个明确结论。遇到难以靠文字解释的地方，直接约十分钟一起过代码，往往比评论区来回二十条更快。</p>
+<p>也别把评审当成资深同事单向授课。新同事提出的问题，常常正好暴露了命名、文档或结构不够清楚；熟悉业务的人则能补上纯代码看不到的边界。轮流评审不同模块，能让知识不只停在某一两个人手里。评审结束时若能让作者和读者都更理解系统，它就不仅是在找 bug，也是在给团队积累共同语言。</p>
+<p>需要快速修复时，可以先走最小评审和必要验证，事后补齐说明和复盘。速度与质量不是只能二选一，关键是让“什么时候可以例外、事后如何补回”也成为清楚的约定。这样紧急不会变成绕过协作的常态。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C/" class="category-chain-item">测试与协作</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8D%8F%E4%BD%9C/" class="print-no-link">#协作</a>
+      
+        <a href="/tags/%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1/" class="print-no-link">#代码评审</a>
+      
+        <a href="/tags/%E6%B2%9F%E9%80%9A/" class="print-no-link">#沟通</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>代码评审：提建议不等于挑毛病</div>
+      <div>https://nanyouwen.github.io/测试与协作-代码评审提建议不等于挑毛病/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年10月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Web%E5%AE%9E%E8%B7%B5-%E6%8A%8A%E8%AE%BE%E8%AE%A1%E7%A8%BF%E5%BD%93%E7%BA%A6%E6%9D%9F%E4%B8%8D%E5%BD%93%E5%83%8F%E7%B4%A0%E8%80%83%E9%A2%98/" title="把设计稿当约束，不当像素考题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">把设计稿当约束，不当像素考题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF-%E4%BE%9D%E8%B5%96%E5%8D%87%E7%BA%A7%E4%B9%8B%E5%89%8D%E5%85%88%E7%9C%8B%E8%B0%81%E5%9C%A8%E7%94%A8%E5%AE%83/" title="依赖升级之前，先看谁在用它">
+                        <span class="hidden-mobile">依赖升级之前，先看谁在用它</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
