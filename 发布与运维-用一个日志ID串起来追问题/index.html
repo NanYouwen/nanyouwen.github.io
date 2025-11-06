@@ -1,0 +1,676 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="线上问题最让人无力的场景，是用户说“刚才提交失败了”，而系统里同一分钟有几千条日志。前端看到一个网络错误，网关记录一次请求，服务端又有几条数据库日志，第三方接口还有自己的编号。它们像散在桌上的纸片，单独看都合理，合起来却不知道是不是同一件事。 给一次请求一个统一的日志 ID，或叫 request ID、trace ID，就像给一段行程发一张车票。请求从浏览器出发时带上它，经过网关、服务、任务队列和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用一个日志 ID 串起来追问题">
+<meta property="og:url" content="https://nanyouwen.github.io/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4-%E7%94%A8%E4%B8%80%E4%B8%AA%E6%97%A5%E5%BF%97ID%E4%B8%B2%E8%B5%B7%E6%9D%A5%E8%BF%BD%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="线上问题最让人无力的场景，是用户说“刚才提交失败了”，而系统里同一分钟有几千条日志。前端看到一个网络错误，网关记录一次请求，服务端又有几条数据库日志，第三方接口还有自己的编号。它们像散在桌上的纸片，单独看都合理，合起来却不知道是不是同一件事。 给一次请求一个统一的日志 ID，或叫 request ID、trace ID，就像给一段行程发一张车票。请求从浏览器出发时带上它，经过网关、服务、任务队列和">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-06T11:04:03.000Z">
+<meta property="article:modified_time" content="2025-11-06T11:04:03.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="排错">
+<meta property="article:tag" content="日志">
+<meta property="article:tag" content="Trace ID">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>用一个日志 ID 串起来追问题 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="用一个日志 ID 串起来追问题"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-06 19:04" pubdate>
+          2025年11月6日 19:04:03
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">用一个日志 ID 串起来追问题</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>线上问题最让人无力的场景，是用户说“刚才提交失败了”，而系统里同一分钟有几千条日志。前端看到一个网络错误，网关记录一次请求，服务端又有几条数据库日志，第三方接口还有自己的编号。它们像散在桌上的纸片，单独看都合理，合起来却不知道是不是同一件事。</p>
+<p>给一次请求一个统一的日志 ID，或叫 request ID、trace ID，就像给一段行程发一张车票。请求从浏览器出发时带上它，经过网关、服务、任务队列和外部调用时尽量继续携带它；各处日志都写下同一个值。排错时只要拿到这张“车票”，就能把原本分散的痕迹串成一条路。</p>
+<span id="more"></span>
+
+<h2 id="它解决的不是日志少，而是线索断开"><a href="#它解决的不是日志少，而是线索断开" class="headerlink" title="它解决的不是日志少，而是线索断开"></a>它解决的不是日志少，而是线索断开</h2><p>没有关联 ID 时，排查常常靠时间、用户名、参数片段去猜。时间可能有时区偏差，用户名可能为空或重复，参数又不该完整写进日志。即便最终找到，过程也很难复述。一个随机生成、无业务含义的 ID 则可以安全地作为索引：它不暴露用户身份，却能唯一指向一轮处理。</p>
+<p>对小系统来说，不必一开始就部署复杂的分布式追踪平台。先让每个进入服务的 HTTP 请求拥有一个 ID，并在响应头中返回；服务端所有关键日志都带这个字段；调用下游时通过请求头传递它。前端报错上报时也把响应里的 ID 一并带回。这样已经能覆盖许多从“页面报错”到“服务端原因”的排查。</p>
+<p>关键是把它当成结构化字段，而不是把一段文字拼在日志末尾。结构化日志能按 <code>request_id</code>、<code>service</code>、<code>action</code>、<code>status</code>、<code>duration_ms</code> 查询和聚合，检索速度和准确性都会高很多。字段名在不同服务之间尽量统一，别让一个叫 <code>trace</code>、一个叫 <code>reqNo</code>、另一个叫 <code>uuid</code>。</p>
+<h2 id="一次失败应该怎样被串起来"><a href="#一次失败应该怎样被串起来" class="headerlink" title="一次失败应该怎样被串起来"></a>一次失败应该怎样被串起来</h2><p>假设用户提交资料后看到失败提示。浏览器向 API 发请求，网关生成 <code>r-8f3...</code> 并写入访问日志；应用服务接到请求，记录“开始校验”“写入数据库”“调用短信服务”；短信服务超时后，应用记录错误类型和耗时，再把失败结果连同同一个 ID 返回浏览器。用户截图或前端上报里如果包含这个 ID，排查的人就能搜索一串明确结果。</p>
+<p>沿着这条线，可以回答很多原本模糊的问题：请求有没有到服务端；在哪个步骤开始慢；数据库是否写入；第三方调用有没有返回；失败发生在部署前还是部署后；同一个用户重试后是否是另一轮请求。它不会自动修复问题，却能把“好像哪里不对”变成一个可验证的故事。</p>
+<p>异步任务需要额外注意。用户请求创建了一个后台任务后，任务不一定能保留原始 HTTP 连接，但应保存父请求 ID 或生成一个新的任务 ID 并建立关联。消息队列、定时任务和回调都可以沿用这个思路：日志里既有当前动作的 ID，也能追到触发它的上游。不要让后台处理变成完全独立的黑箱。</p>
+<h2 id="日志里记录什么，什么不能记录"><a href="#日志里记录什么，什么不能记录" class="headerlink" title="日志里记录什么，什么不能记录"></a>日志里记录什么，什么不能记录</h2><p>关联 ID 不是给日志无限加内容的理由。每条关键日志至少可以有时间、级别、服务、动作、ID、结果和耗时；异常时再补脱敏后的上下文。比如“导入任务失败，batch_id 为某值，失败行数为三十，原因是缺少列”，通常比完整打印 CSV 内容更有用也更安全。</p>
+<p>密码、令牌、完整手机号、身份证号、银行卡号、原始会话信息不应原样写进日志。若排错确实需要识别某条记录，可以记录哈希、部分掩码或内部资源 ID，并确保查看日志的人有相应权限。日志会被长期保存、复制和检索，任何“只是在调试”时写进去的秘密，都可能在未来变成风险。</p>
+<p>采样和保留期限也应有边界。高频成功请求可以只保留摘要或按比例采样，错误和关键业务动作保留更完整但仍脱敏的记录。数据量少时看不出问题，项目一大，毫无节制的日志会先把成本和检索体验拖垮。</p>
+<h2 id="从一个入口开始，逐步连线"><a href="#从一个入口开始，逐步连线" class="headerlink" title="从一个入口开始，逐步连线"></a>从一个入口开始，逐步连线</h2><p>引入 request ID 的第一步很小：在网关或应用入口检查请求头里是否已有 ID，没有就生成；把它放进当前请求上下文；日志函数自动携带；响应时返回给前端。第二步是向下游服务、队列和第三方请求传播。第三步才是接入完整链路追踪、可视化瀑布和性能分析。</p>
+<p>上线前用一个故意失败的小请求演练一下：从浏览器看到 ID，能否在网关、应用和下游日志里搜到；日志时间是否一致；错误信息是否足够判断下一步；有没有意外泄露敏感值。能走通一次，之后面对真实故障时就不会第一次临场拼接。</p>
+<p>一个日志 ID 看起来只是一串随机字符，却能在最混乱的时候给问题留下一根线。系统不需要一开始就无所不知，只要每次出门的请求都能留下可追的脚印，排错就会从翻箱倒柜慢慢变成沿线查找。</p>
+<h2 id="给用户和支持同学一个可说出口的编号"><a href="#给用户和支持同学一个可说出口的编号" class="headerlink" title="给用户和支持同学一个可说出口的编号"></a>给用户和支持同学一个可说出口的编号</h2><p>若页面在失败提示里适当地展示“参考编号”，用户联系支持时就不必描述一整段操作过程。这个编号可以对应 request ID，也可以对应更适合展示的错误编号；关键是支持人员能用它快速查到关联日志。提示文案要避免把内部实现细节直接暴露给用户，同时给出下一步，例如“请稍后重试；若持续失败，请提供参考编号”。</p>
+<p>支持人员也应知道如何使用这个编号：在哪个系统搜索、需要确认哪些字段、什么时候升级给开发者。把这条最短路径写进内部说明，能避免用户已经提供了关键线索，处理人却还要重新索要截图和时间。技术上的关联 ID 只有进入实际沟通，才真正发挥价值。</p>
+<p>随着服务变多，可以再引入跨服务追踪、采样和可视化链路；但不要等到系统复杂才开始记录关联。越早统一字段和传播方式，后面越少历史包袱。一根线先系起来，未来才有地方继续延伸。</p>
+<p>编号可以随机，排查思路却应当稳定：先拿到它，再顺着它看时间、状态和上下游。这个小习惯会在故障发生时替人省下很多无谓的猜测。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4/" class="category-chain-item">发布与运维</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%8E%92%E9%94%99/" class="print-no-link">#排错</a>
+      
+        <a href="/tags/%E6%97%A5%E5%BF%97/" class="print-no-link">#日志</a>
+      
+        <a href="/tags/Trace-ID/" class="print-no-link">#Trace ID</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>用一个日志 ID 串起来追问题</div>
+      <div>https://nanyouwen.github.io/发布与运维-用一个日志ID串起来追问题/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年11月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/security-password-and-keys-not-in-repository/" title="密码和密钥：别把它们留在仓库">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">密码和密钥：别把它们留在仓库</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9A%84%E4%B8%8D%E6%98%AF%E6%9B%B4%E5%A4%9A%E7%9B%91%E6%8E%A7%E8%80%8C%E6%98%AF%E6%B8%85%E6%A5%9A%E6%8A%A5%E8%AD%A6/" title="你需要的不是更多监控，而是清楚报警">
+                        <span class="hidden-mobile">你需要的不是更多监控，而是清楚报警</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
