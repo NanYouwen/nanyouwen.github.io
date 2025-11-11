@@ -1,0 +1,683 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="有一次帮朋友看一个小项目，问题并不复杂：项目跑不起来。打开仓库后才发现，真正能让它连接数据库的账号密码只躺在某个人电脑上的配置文件里；另一个更糟的版本，是密码直接写在代码里，随后又被提交到了远端。两种做法看起来相反，一个是“谁也拿不到”，一个是“谁都可能拿到”，本质上都是把重要信息交给了运气。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码和密钥：别把它们留在仓库">
+<meta property="og:url" content="https://nanyouwen.github.io/security-password-and-keys-not-in-repository/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="有一次帮朋友看一个小项目，问题并不复杂：项目跑不起来。打开仓库后才发现，真正能让它连接数据库的账号密码只躺在某个人电脑上的配置文件里；另一个更糟的版本，是密码直接写在代码里，随后又被提交到了远端。两种做法看起来相反，一个是“谁也拿不到”，一个是“谁都可能拿到”，本质上都是把重要信息交给了运气。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-11T15:15:59.000Z">
+<meta property="article:modified_time" content="2025-11-11T15:15:59.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="安全">
+<meta property="article:tag" content="密钥">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>密码和密钥：别把它们留在仓库 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="密码和密钥：别把它们留在仓库"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-11 23:15" pubdate>
+          2025年11月11日 23:15:59
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">密码和密钥：别把它们留在仓库</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>有一次帮朋友看一个小项目，问题并不复杂：项目跑不起来。打开仓库后才发现，真正能让它连接数据库的账号密码只躺在某个人电脑上的配置文件里；另一个更糟的版本，是密码直接写在代码里，随后又被提交到了远端。两种做法看起来相反，一个是“谁也拿不到”，一个是“谁都可能拿到”，本质上都是把重要信息交给了运气。</p>
+<span id="more"></span>
+
+<p>密码、令牌和密钥常被一起叫作“配置”，但它们并不只是普通配置。普通配置可以是页面每页显示多少条数据、接口地址的前缀；而一把 API Key、一段数据库密码、一个私钥，拿到的人可能就能读数据、发消息，甚至发布新版本。把它们和普通代码混在一起，后面总会遇到两个问题：该用的人找不到，不该看的人却看得到。</p>
+<h2 id="先分清手里的是什么"><a href="#先分清手里的是什么" class="headerlink" title="先分清手里的是什么"></a>先分清手里的是什么</h2><p>我现在会先做一个很朴素的分类。第一类是<strong>账号密码</strong>，例如数据库用户、第三方平台登录账户；它们通常可以人工登录或由程序使用。第二类是<strong>令牌</strong>，例如 GitHub Token、机器人 Token、访问某个云服务的 API Key；它们一般权限更明确，也更适合定期失效和重发。第三类是<strong>密钥文件</strong>，例如 SSH 私钥、签名证书；它们往往不能只靠“改个密码”解决，一旦泄露需要立即替换。</p>
+<p>分类不是为了写一张漂亮表格，而是为了知道出问题时该做什么。数据库密码泄露，先改密码并查访问日志；一个有写权限的 Token 泄露，要先撤销它，再检查它做过的操作；私钥被上传，则应当把旧密钥视为已经失效，生成新密钥、更新使用位置。不要因为仓库后来删掉了那一行，就以为事情结束了。Git 的历史、缓存、fork 和本地克隆都可能已经留下副本。</p>
+<h2 id="仓库里应该留下什么"><a href="#仓库里应该留下什么" class="headerlink" title="仓库里应该留下什么"></a>仓库里应该留下什么</h2><p>一个可交接的小项目，通常需要三个文件，而不是一个“万能配置”。第一个是 <code>.env</code>，只放本机或部署环境真正使用的值，并且写进 <code>.gitignore</code>。第二个是 <code>.env.example</code>，提交到仓库，保留变量名和安全的示例值，让新成员知道需要准备哪些东西。第三个是简短的说明，例如 README 里的“如何获取测试账号”和“哪些变量不能发到群里”。</p>
+<p>例如，<code>.env.example</code> 可以只写：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">API_BASE_URL=https://api.example.com<br>DATABASE_URL=请在本地填写<br>PAYMENT_WEBHOOK_SECRET=请向管理员申请<br></code></pre></td></tr></table></figure>
+
+<p>这里最重要的是变量名和用途，而不是把真实值换成几个星号。<code>sk-****</code> 这类“打码后的真值”有时仍会暴露长度、前缀或环境信息；更实际的做法是用明显无效的占位文字。这样，读配置的人不会误以为复制过去就能上线，扫描工具也更不容易把示例当作泄露。</p>
+<h2 id="让“拿到配置”成为一条正常路径"><a href="#让“拿到配置”成为一条正常路径" class="headerlink" title="让“拿到配置”成为一条正常路径"></a>让“拿到配置”成为一条正常路径</h2><p>许多泄露并不是有人故意粗心，而是对方卡在“项目怎么启动”这一步。为了赶进度，他把自己的 <code>.env</code> 直接打包发出去；或者新同事把配置贴进群聊，后来又被转发。解决方法不是反复提醒“注意安全”，而是给出不绕路的获取方式。</p>
+<p>我会在项目说明里写清楚：开发环境的非敏感配置在哪里；测试账号向谁申请；生产环境的配置由哪个部署平台保存；需要临时权限时如何申请、多久收回。哪怕只有两个人维护，也值得留下这几句话。它让大家知道安全不是“会不会记得”，而是流程的一部分。</p>
+<p>同时，权限要尽量小。用于本地调试的 Token 不需要拥有删除线上数据的能力；用于读取统计的账号不需要创建新用户；一个临时脚本结束后，其令牌也不该一直有效。最小权限听起来像大团队的术语，其实就是少给一把没必要的钥匙。钥匙越少，遗失时要担心的门也越少。</p>
+<h2 id="真提交过怎么办"><a href="#真提交过怎么办" class="headerlink" title="真提交过怎么办"></a>真提交过怎么办</h2><p>如果密钥已经进了远端仓库，第一步不是急着改历史，而是<strong>立即撤销或轮换</strong>。这是最能降低风险的动作。第二步再删除当前文件里的值，并检查提交记录、构建日志、截图和聊天记录是否也带出了它。第三步才是用工具清理 Git 历史；历史清理能减少后来的人误用旧密钥，但不能保证已经拿到副本的人消失。</p>
+<p>事后可以补一个很轻的检查：提交前搜索 <code>password</code>、<code>secret</code>、<code>token</code>、<code>BEGIN PRIVATE KEY</code> 等高风险词；CI 中也可加入密钥扫描。工具会有误报，所以不必把每次提示都当事故，但应当认真确认。比起在出事后翻遍几十次提交，提交前多花半分钟更便宜。</p>
+<h2 id="一份放在手边的清单"><a href="#一份放在手边的清单" class="headerlink" title="一份放在手边的清单"></a>一份放在手边的清单</h2><ul>
+<li>真实 <code>.env</code>、私钥和证书文件是否被忽略，而示例文件是否已提交？</li>
+<li>新成员能否在不索要别人电脑文件的情况下拿到开发所需配置？</li>
+<li>Token 是否区分开发、测试、生产，且权限没有超过用途？</li>
+<li>一旦泄露，是否知道去哪里撤销、轮换和查看日志？</li>
+<li>最近一次离开项目的人，是否仍保留不需要的访问权限？</li>
+</ul>
+<p>安全并不靠把所有东西锁进抽屉。真正可靠的状态是：需要的人能通过正当路径拿到恰好够用的权限，不需要的人没有机会顺手看到，而任何一次意外都能被快速收回。对个人项目来说，这已经是一种很舒服的秩序。</p>
+<h2 id="在交接和离开时再检查一次"><a href="#在交接和离开时再检查一次" class="headerlink" title="在交接和离开时再检查一次"></a>在交接和离开时再检查一次</h2><p>密钥管理最容易出问题的时刻，往往不是写代码的时候，而是交接、换电脑、结束合作的时候。有人换了电脑，便把整个配置目录压缩到网盘；有人离开项目，账号没有及时撤销；有人接手发布，发现只有旧同事知道部署平台的二次验证在哪台手机上。平时看起来顺手的捷径，在人员和设备变化时会突然变成单点风险。</p>
+<p>所以每隔一段时间，不妨做一次“假装今天换人维护”的检查：一台没有历史文件的电脑，能否按说明启动项目？现有管理员是否仍然需要全部权限？如果某个 Token 今天被撤销，是否知道哪些脚本、构建或服务会受影响？这类检查不需要频繁，但每次做完都会让配置从“某个人的经验”变成“项目能延续的能力”。</p>
+<p>还有一点很现实：不要把安全做成只有最懂技术的人才能完成的事。变量名清楚、申请路径明确、异常联系人可见，都会降低别人为了赶进度而走捷径的可能。一个人不必记住全部密钥在哪里，只要知道该向哪里申请、哪些内容绝不能复制、发现异常后先做什么，就已经帮助项目避开了很多不必要的风险。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AE%89%E5%85%A8%E4%B8%8E%E7%BB%B4%E6%8A%A4/" class="category-chain-item">安全与维护</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Git/" class="print-no-link">#Git</a>
+      
+        <a href="/tags/%E5%AE%89%E5%85%A8/" class="print-no-link">#安全</a>
+      
+        <a href="/tags/%E5%AF%86%E9%92%A5/" class="print-no-link">#密钥</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>密码和密钥：别把它们留在仓库</div>
+      <div>https://nanyouwen.github.io/security-password-and-keys-not-in-repository/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年11月11日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/maintenance-dependency-incident-retrospective/" title="一次依赖故障后的复盘模板">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一次依赖故障后的复盘模板</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4-%E7%94%A8%E4%B8%80%E4%B8%AA%E6%97%A5%E5%BF%97ID%E4%B8%B2%E8%B5%B7%E6%9D%A5%E8%BF%BD%E9%97%AE%E9%A2%98/" title="用一个日志 ID 串起来追问题">
+                        <span class="hidden-mobile">用一个日志 ID 串起来追问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
