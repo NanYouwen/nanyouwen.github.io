@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="页面慢的时候，人很容易先怪网络，接着怪服务器，最后把希望寄托在“加一个索引”上。索引确实经常有用，但它不是给数据库贴上的加速贴纸。一次慢查询真正值得做的，是先看清它究竟在等什么：是在读取太多数据、在排序、在和别的表连接，还是其实请求根本没有走到数据库。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="慢查询从哪里来：先学会看执行">
+<meta property="og:url" content="https://nanyouwen.github.io/backend-slow-query-learn-to-observe/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="页面慢的时候，人很容易先怪网络，接着怪服务器，最后把希望寄托在“加一个索引”上。索引确实经常有用，但它不是给数据库贴上的加速贴纸。一次慢查询真正值得做的，是先看清它究竟在等什么：是在读取太多数据、在排序、在和别的表连接，还是其实请求根本没有走到数据库。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-21T11:34:03.000Z">
+<meta property="article:modified_time" content="2025-11-21T11:34:03.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="性能">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="慢查询">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>慢查询从哪里来：先学会看执行 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="慢查询从哪里来：先学会看执行"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-21 19:34" pubdate>
+          2025年11月21日 19:34:03
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">慢查询从哪里来：先学会看执行</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>页面慢的时候，人很容易先怪网络，接着怪服务器，最后把希望寄托在“加一个索引”上。索引确实经常有用，但它不是给数据库贴上的加速贴纸。一次慢查询真正值得做的，是先看清它究竟在等什么：是在读取太多数据、在排序、在和别的表连接，还是其实请求根本没有走到数据库。</p>
+<span id="more"></span>
+
+<p>我见过最常见的误会，是后台列表打开要四五秒，大家立刻问“索引是不是没建”。后来查下来，SQL 只用了几十毫秒，真正慢的是接口查完后又逐条补了十几个关联信息。这个例子不说明索引不重要，反而说明先测量更重要。没有一段实际 SQL 和实际耗时，任何优化都只是猜谜。</p>
+<h2 id="从用户的一次等待开始"><a href="#从用户的一次等待开始" class="headerlink" title="从用户的一次等待开始"></a>从用户的一次等待开始</h2><p>先把问题说得具体一点。不要写“列表页很慢”，而要记下：哪个页面、带了什么筛选条件、数据量大约多少、首次打开和翻页是否都慢、哪个账号或时间段更明显。然后从浏览器 Network 面板看接口耗时，再在服务端日志里确认请求什么时候进来、SQL 花了多久、序列化和网络传输各花了多久。</p>
+<p>这样会得到一条简单的链路：浏览器等待 3.2 秒，其中服务端 2.8 秒；服务端里有一条 SQL 用了 2.4 秒。到这一步，才值得进入数据库。若 SQL 只有 30 毫秒，应该回头查循环请求、图片、缓存或服务端代码；若 SQL 真慢，也不应急着改语句，先保存原样，避免在反复试验时丢掉现场。</p>
+<h2 id="先问数据库“你是怎么做的”"><a href="#先问数据库“你是怎么做的”" class="headerlink" title="先问数据库“你是怎么做的”"></a>先问数据库“你是怎么做的”</h2><p>大多数数据库都能通过执行计划告诉我们查询的大致路线。它不需要一开始读得很深，只要先看几个朴素信号：扫描了多少行、用了哪个索引、是否出现全表扫描、是否在临时排序、是否把不必要的列都取回来了。执行计划像导航记录，告诉你车走了高速还是在小巷里绕圈。</p>
+<p>例如，一个常见列表查询会按 <code>created_at</code> 倒序、再按 <code>status</code> 筛选。如果表已经有几十万行，却没有能支持这两个条件的索引，数据库可能只能先找一大批记录再排序。另一个坑是写了 <code>WHERE DATE(created_at) = ...</code> 这样的函数包裹；看起来方便，却可能让原本的时间索引派不上用场。把条件改成时间范围，往往比新增复杂索引更稳妥。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 不利于使用 created_at 索引的写法</span><br><span class="hljs-keyword">WHERE</span> <span class="hljs-type">DATE</span>(created_at) <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;2025-11-21&#x27;</span><br><br><span class="hljs-comment">-- 更容易利用范围索引的写法</span><br><span class="hljs-keyword">WHERE</span> created_at <span class="hljs-operator">&gt;=</span> <span class="hljs-string">&#x27;2025-11-21 00:00:00&#x27;</span><br>  <span class="hljs-keyword">AND</span> created_at <span class="hljs-operator">&lt;</span>  <span class="hljs-string">&#x27;2025-11-22 00:00:00&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="索引不是越多越安心"><a href="#索引不是越多越安心" class="headerlink" title="索引不是越多越安心"></a>索引不是越多越安心</h2><p>索引会占空间，也会让插入和更新多做一些工作。给每一列都加一个索引，可能让查询仍然不快，写入反而变慢。更可靠的思路是从真实的高频查询出发：它用哪些条件过滤、按照什么顺序排序、最终需要哪些字段。把这些信息写在一起，再和执行计划对照，才知道是否需要单列索引或组合索引。</p>
+<p>组合索引尤其容易让人困惑。可以把它想成按“省份—城市—姓名”排好的电话簿：查某个省很快，查某个省里的城市也很快，但直接找所有叫张三的人未必快，因为第一层顺序没用上。具体的数据库规则会有差异，实践中最安全的方法仍是：改前看计划、改后用相同数据测一次，不要只凭别人博客里的结论照搬。</p>
+<h2 id="常见的慢，不止发生在-sql-里"><a href="#常见的慢，不止发生在-sql-里" class="headerlink" title="常见的慢，不止发生在 SQL 里"></a>常见的慢，不止发生在 SQL 里</h2><p>还有几种很值得顺手检查的情况。第一是一次取回了远超过页面需要的数据，例如列表只显示二十条，却 <code>SELECT *</code> 取出长文本、附件信息和大字段。第二是 N+1 查询：先查到二十条订单，再为每条订单查一次用户和商品。第三是分页越来越靠后时越来越慢，因为数据库不得不跳过大量旧记录。第四是锁等待，查询本身不复杂，却正好碰上一个长事务占住了资源。</p>
+<p>这些问题的共同点是，它们都能通过记录数量、调用次数和耗时暴露出来。性能优化不必从神秘参数开始。先让日志告诉你“这条请求执行了几次查询、每次返回多少行、最慢的一步是什么”，很多答案会自己浮出来。</p>
+<h2 id="一个不容易走偏的小流程"><a href="#一个不容易走偏的小流程" class="headerlink" title="一个不容易走偏的小流程"></a>一个不容易走偏的小流程</h2><ol>
+<li>用真实但脱敏的条件复现一次，记录浏览器、接口、SQL 三层耗时。</li>
+<li>保存原始 SQL 和执行计划，不先改代码。</li>
+<li>明确是扫描、排序、关联、返回量、分页还是锁导致的等待。</li>
+<li>一次只改一个因素：条件写法、索引、返回字段或关联方式。</li>
+<li>用同一组数据重测，并观察写入是否受到副作用。</li>
+</ol>
+<p>慢查询并不总要被“优化成极限”。一个后台一年只打开两次的报表，花一秒半也许完全可以接受；一个每次打开首页都会跑的查询，则值得认真照顾。知道哪一种是用户真正的等待，才是性能工作最开始的判断力。</p>
+<h2 id="优化前，也给自己留一份基线"><a href="#优化前，也给自己留一份基线" class="headerlink" title="优化前，也给自己留一份基线"></a>优化前，也给自己留一份基线</h2><p>做性能改动时，最好把“原来多慢”留下来。记录查询条件、数据量、执行计划、平均和最慢耗时，再记录改动后的相同指标。这样不仅能证明优化是否有效，也能避免一种常见情况：为了省几十毫秒引入了难懂的 SQL，后来数据量变化后收益不见了，维护成本却一直留着。</p>
+<p>基线还会提醒我们区分偶发和持续。某次测试环境正好有批量任务在跑，出现一次尖峰，并不一定说明常规查询需要重构；反过来，平均值看起来不高，但 P95 或最慢的一小部分请求让真实用户一直等待，也不能被平均数掩盖。对小项目来说，不必搭一整套复杂指标，只要能定期看见“慢的是哪条、在什么条件下慢”就已经很有价值。</p>
+<p>优化后别忘了重新回到使用场景里点一点。查询快了，排序是否仍正确？分页会不会漏项？缓存是否让用户看到旧数据？性能和正确性从来不是二选一。一次好改动应当让用户更快到达正确结果，而不是只让一份基准测试更漂亮。</p>
+<p>如果暂时不能改代码，也可以先做一点务实的缓解：为重报表加明确的时间范围，限制一次导出的最大行数，把非实时统计放到后台生成，或在页面上说明预计等待时间。性能问题不总要靠一次大改解决。先让用户少等一点、让系统少承受一点，也是在为后续更稳的优化争取空间。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%90%8E%E7%AB%AF/" class="category-chain-item">数据与后端</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%80%A7%E8%83%BD/" class="print-no-link">#性能</a>
+      
+        <a href="/tags/SQL/" class="print-no-link">#SQL</a>
+      
+        <a href="/tags/%E6%85%A2%E6%9F%A5%E8%AF%A2/" class="print-no-link">#慢查询</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>慢查询从哪里来：先学会看执行</div>
+      <div>https://nanyouwen.github.io/backend-slow-query-learn-to-observe/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年11月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/frontend-when-to-extract-a-component/" title="组件什么时候值得抽出来">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">组件什么时候值得抽出来</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/maintenance-dependency-incident-retrospective/" title="一次依赖故障后的复盘模板">
+                        <span class="hidden-mobile">一次依赖故障后的复盘模板</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
