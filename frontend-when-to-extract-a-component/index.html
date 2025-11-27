@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="写页面时，看到两段相似的代码，很多人的第一反应是“抽一个组件吧”。这当然有道理：重复会带来重复修改。但另一种情况也很常见——页面刚写到一半，就被拆成十几个文件，参数层层传递，想改一行文字反而要来回找。组件化不是把文件切小的比赛，它真正解决的是变化如何被关在合适的范围里。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组件什么时候值得抽出来">
+<meta property="og:url" content="https://nanyouwen.github.io/frontend-when-to-extract-a-component/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="写页面时，看到两段相似的代码，很多人的第一反应是“抽一个组件吧”。这当然有道理：重复会带来重复修改。但另一种情况也很常见——页面刚写到一半，就被拆成十几个文件，参数层层传递，想改一行文字反而要来回找。组件化不是把文件切小的比赛，它真正解决的是变化如何被关在合适的范围里。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-27T07:00:07.000Z">
+<meta property="article:modified_time" content="2025-11-27T07:00:07.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="维护">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="组件化">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>组件什么时候值得抽出来 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="组件什么时候值得抽出来"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-27 15:00" pubdate>
+          2025年11月27日 15:00:07
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">组件什么时候值得抽出来</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>写页面时，看到两段相似的代码，很多人的第一反应是“抽一个组件吧”。这当然有道理：重复会带来重复修改。但另一种情况也很常见——页面刚写到一半，就被拆成十几个文件，参数层层传递，想改一行文字反而要来回找。组件化不是把文件切小的比赛，它真正解决的是变化如何被关在合适的范围里。</p>
+<span id="more"></span>
+
+<p>我现在会把“要不要抽”先放一会儿，观察两个问题：这段东西是否会在不同地方以同样的规则出现？它以后会不会独立变化？只要其中一个答案还不明显，先留在当前页面通常没有问题。代码靠近使用场景，并不丢脸；过早抽象才容易把尚未想清楚的差异藏进一堆布尔参数里。</p>
+<h2 id="重复，不等于可复用"><a href="#重复，不等于可复用" class="headerlink" title="重复，不等于可复用"></a>重复，不等于可复用</h2><p>假设有两个卡片：一个展示订单，一个展示退款。它们都有标题、时间、金额和按钮，外形很像。但订单卡片会显示物流，退款卡片会显示进度和失败原因。若为了“少写一点 HTML”强行抽成 <code>InfoCard</code>，很快可能长出 <code>showShipping</code>、<code>showRefundReason</code>、<code>isWarning</code> 之类的参数。最后组件既不表达业务，也不真的简单。</p>
+<p>更好的开始是抽出真正稳定的部分，例如卡片的边框、间距、标题区，或者一个负责展示金额的 <code>MoneyText</code>。业务差异仍留在各自页面里。这样以后发现两种卡片的变化真的同步，再向上抽一层也来得及。反过来，一开始把它们捆死，等需求分叉时拆开通常更痛。</p>
+<h2 id="四个值得抽取的信号"><a href="#四个值得抽取的信号" class="headerlink" title="四个值得抽取的信号"></a>四个值得抽取的信号</h2><p>第一个信号是<strong>重复的结构和规则同时出现</strong>。不只是标签长得像，连加载态、空态、点击行为、校验方式也相同。第二个信号是<strong>有明确名字</strong>。如果你能自然地说“这是地址选择器”“这是操作确认框”，它往往已经是一个独立概念；如果只能叫“右边那一坨”，不妨再等等。</p>
+<p>第三个信号是<strong>变化需要集中处理</strong>。例如站内所有头像都要支持加载失败的兜底，那么统一组件能减少漏改。第四个信号是<strong>边界容易测试</strong>。一个输入框组件可以测值、禁用状态、错误提示；一段夹在复杂页面里的临时逻辑则未必需要单独搬家。</p>
+<p>这些信号不是必须凑齐四个才行动。它们更像体温计：信号越多，抽取越顺；信号很少时，先把当前页面写清楚，通常更省时间。</p>
+<h2 id="参数少一点，表达多一点"><a href="#参数少一点，表达多一点" class="headerlink" title="参数少一点，表达多一点"></a>参数少一点，表达多一点</h2><p>组件抽出来之后，最容易失控的是参数。看到 <code>type=&quot;a&quot;</code>、<code>mode=&quot;b&quot;</code>、<code>compact</code>、<code>full</code>、<code>withFooter</code> 一起出现时，可以停下来想一下：它是不是已经承担了两三个不同的角色？有时把一个巨大的万能组件拆成两个名字清楚的小组件，反而更好理解。</p>
+<p>参数也应尽量表达“需要什么”，而不是“内部如何做”。例如传入 <code>user</code> 和一个 <code>onSelect</code> 回调，通常比传入一串 <code>name</code>、<code>avatarUrl</code>、<code>isVip</code>、<code>showBorder</code> 更接近使用场景。前者给组件一个完整对象和一个行为，后者会让调用处泄露太多内部细节。当然，这不是绝对规则；重要的是调用者读一眼就知道该组件在做什么。</p>
+<h2 id="从页面里搬出去之前"><a href="#从页面里搬出去之前" class="headerlink" title="从页面里搬出去之前"></a>从页面里搬出去之前</h2><p>我会做一个小小的准备动作：先把当前页面的重复代码整理成同一种写法，再抽取。这样能避免把两个历史包袱一起搬进新组件。随后列出最小的输入、输出和状态：它需要哪些数据，发生点击后通知谁，加载或失败时怎样表现。最后在原页面保留一个真实用法，先确认读起来是否更自然。</p>
+<p>如果抽取后调用处变成这样，通常是健康的：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">&lt;UserPicker value=&quot;当前用户&quot; onSelect=&quot;更新选择&quot; /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>如果变成一长串控制内部细节的开关，说明边界还可以再想想。组件不应该让调用者替它做决定，也不应该把每个页面的特殊情况都塞进自己肚子里。</p>
+<h2 id="给未来变化留一点余地"><a href="#给未来变化留一点余地" class="headerlink" title="给未来变化留一点余地"></a>给未来变化留一点余地</h2><p>组件化最好的结果不是“复用率很高”，而是有人接手时能很快找到变化应该发生在哪里。一个订单状态样式改变，改状态标签；一处权限规则调整，改操作区；一个页面的布局不同，留在页面布局层处理。边界清楚后，改动不会像水渗进每个文件。</p>
+<p>所以，下次看到重复代码时，不妨先问四个问题：它们是否共享规则？有没有自然名字？会不会一起变化？抽出后参数会更少还是更多？回答之后再动手，组件就不再是为了“看起来高级”，而是为了让下一次改动更轻。</p>
+<h2 id="给组件一个容易理解的说明"><a href="#给组件一个容易理解的说明" class="headerlink" title="给组件一个容易理解的说明"></a>给组件一个容易理解的说明</h2><p>抽出组件后，不妨在第一次使用它的地方留一句说明，或者在组件文件顶部写清它解决什么问题、输入是什么、有哪些不处理的边界。不是为了补齐文档格式，而是防止几个月后有人把它当成万能积木。比如一个“用户选择器”只负责展示和选择，不负责请求用户列表；一个“确认框”只负责确认交互，不替调用者决定删除逻辑。边界说清楚，后续修改才不会不断加开关。</p>
+<p>还可以有意识地保留一两个示例用法。示例不是展示炫技，而是组件最小的契约：传入正常数据时应该怎样显示，禁用或为空时应该怎样处理，事件会在何时触发。当组件内部重构时，先跑一遍这些真实用法，比只看类型定义更容易发现意外变化。</p>
+<p>如果某个组件后来确实变得臃肿，也不必把最初的抽取当成错误。需求变了，边界就可以重新划。把大组件按当前业务拆开、删除不再使用的分支、把罕见场景留回页面，都是正常维护。组件化最健康的状态不是永远不动，而是它的每一次变化都能被清楚地理解和验证。</p>
+<p>在团队协作里，组件的名字也值得多花一分钟。名字若只描述外观，例如 <code>BlueBox</code>、<code>SmallItem</code>，需求一变就会显得别扭；若描述角色，例如 <code>OrderSummary</code>、<code>EmptyState</code>，读代码的人更容易判断能否复用。名字不是细枝末节，它是组件边界最先被看到的一句话。</p>
+<p>当拿不准时，可以先在当前页面复制一份实现，等第二次真实使用出现后再抽取。多保留一点局部重复，有时比提前制造复杂抽象更诚实。等规则真的稳定下来，抽取会变得很自然。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web-%E5%AE%9E%E8%B7%B5/" class="category-chain-item">Web 实践</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BB%B4%E6%8A%A4/" class="print-no-link">#维护</a>
+      
+        <a href="/tags/%E5%89%8D%E7%AB%AF/" class="print-no-link">#前端</a>
+      
+        <a href="/tags/%E7%BB%84%E4%BB%B6%E5%8C%96/" class="print-no-link">#组件化</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>组件什么时候值得抽出来</div>
+      <div>https://nanyouwen.github.io/frontend-when-to-extract-a-component/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年11月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/data-invisible-number-errors-in-tables/" title="表格里那种“看不出来错”的数字">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">表格里那种“看不出来错”的数字</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/backend-slow-query-learn-to-observe/" title="慢查询从哪里来：先学会看执行">
+                        <span class="hidden-mobile">慢查询从哪里来：先学会看执行</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
