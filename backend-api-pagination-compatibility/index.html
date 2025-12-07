@@ -1,0 +1,683 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="列表页很容易被当成最简单的页面：给接口两个参数，前端拿到一页数据，再点下一页。数据少的时候确实如此。可当用户一边翻页，另一边又有人新增、删除或更新记录时，分页会开始露出性格：上一页最后一条在下一页又出现了，或者某条记录悄悄不见了；越翻到后面越慢；搜索条件一变，页面还停在第九页，结果只剩一个空白。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="接口分页的兼容性，不只是一句 limit 和 offset">
+<meta property="og:url" content="https://nanyouwen.github.io/backend-api-pagination-compatibility/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="列表页很容易被当成最简单的页面：给接口两个参数，前端拿到一页数据，再点下一页。数据少的时候确实如此。可当用户一边翻页，另一边又有人新增、删除或更新记录时，分页会开始露出性格：上一页最后一条在下一页又出现了，或者某条记录悄悄不见了；越翻到后面越慢；搜索条件一变，页面还停在第九页，结果只剩一个空白。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-07T12:06:19.000Z">
+<meta property="article:modified_time" content="2025-12-07T12:06:19.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="接口">
+<meta property="article:tag" content="分页">
+<meta property="article:tag" content="兼容性">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>接口分页的兼容性，不只是一句 limit 和 offset - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="接口分页的兼容性，不只是一句 limit 和 offset"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-07 20:06" pubdate>
+          2025年12月7日 20:06:19
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">接口分页的兼容性，不只是一句 limit 和 offset</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>列表页很容易被当成最简单的页面：给接口两个参数，前端拿到一页数据，再点下一页。数据少的时候确实如此。可当用户一边翻页，另一边又有人新增、删除或更新记录时，分页会开始露出性格：上一页最后一条在下一页又出现了，或者某条记录悄悄不见了；越翻到后面越慢；搜索条件一变，页面还停在第九页，结果只剩一个空白。</p>
+<span id="more"></span>
+
+<p>分页真正要回答的不是“每页多少条”，而是“用户正在看的这段数据是什么顺序、在数据变化时允许发生什么、前后端怎样表达还有没有下一页”。先把这几个问题讲明白，具体用 offset 还是 cursor 才有判断依据。</p>
+<h2 id="两种常见方式，各有适合的地方"><a href="#两种常见方式，各有适合的地方" class="headerlink" title="两种常见方式，各有适合的地方"></a>两种常见方式，各有适合的地方</h2><p><code>limit + offset</code> 最直观：取二十条、跳过前四十条，就是第三页。它适合后台管理、数据量不大、需要跳到指定页码的场景。用户能看到“第 3 &#x2F; 12 页”，也能快速跳到最后一页。代价是 offset 很大时，数据库可能仍需要跳过前面很多行；数据持续变化时，位置也容易移动。</p>
+<p>cursor 分页则更像“从我现在看到的最后一条之后继续”。接口返回数据的同时给一个游标，下一次把游标带回去。它常用于时间线、消息流、操作日志等不断增长的列表，因为顺序更稳定，越往后通常也不会越来越慢。它不擅长直接跳到第 87 页，也不天然告诉你总页数，所以不该为了时髦强行替代普通分页。</p>
+<p>不管选哪种，都要有确定的排序。只按 <code>created_at</code> 排序看似够用，但两条记录在同一秒创建时顺序可能不稳定。实际项目里常会补上唯一 ID 作为第二排序条件，例如先按创建时间倒序，再按 ID 倒序。这样翻页时，前后端才在谈同一条队列。</p>
+<h2 id="返回数据时别让前端猜"><a href="#返回数据时别让前端猜" class="headerlink" title="返回数据时别让前端猜"></a>返回数据时别让前端猜</h2><p>一个友好的分页响应，不止有 <code>items</code>。offset 场景可带上 <code>page</code>、<code>pageSize</code>、<code>total</code>；cursor 场景至少应有 <code>nextCursor</code> 和 <code>hasMore</code>。字段命名不必追求唯一正确，但含义必须清楚：<code>total</code> 是筛选后的总数还是全部总数？<code>nextCursor</code> 为 null 是没有下一页，还是系统暂时算不出来？这些细节写进接口文档后，前端才能正确设计空态和按钮。</p>
+<p>例如，用户切换了筛选条件，页面应当回到第一页或清空当前游标，而不是继续拿旧条件的第九页去请求。用户快速连续点击“加载更多”时，要防止同一游标发出多次请求；网络慢时还需要显示正在加载，避免数据插入顺序混乱。分页接口很小，交互的边角却很多。</p>
+<h2 id="数据变化时，先约定体验"><a href="#数据变化时，先约定体验" class="headerlink" title="数据变化时，先约定体验"></a>数据变化时，先约定体验</h2><p>列表不是账本快照。若有人正在浏览订单，同时有新订单不断进来，你必须决定新数据出现在哪里。后台管理页可以在顶部提示“有 3 条新记录，点击刷新”；消息流可以直接插入，但要避免把用户正看的内容推走；导出报表则应该固定一个查询时间，保证分页结果一致。</p>
+<p>不要承诺一个实现不了的“绝不重复、绝不遗漏”。在普通业务列表里，允许刷新后少量位置变化，往往比为了绝对一致引入复杂事务更划算。关键是让用户知道发生了什么，并让接口排序和前端刷新策略保持一致。</p>
+<h2 id="一个上线前检查表"><a href="#一个上线前检查表" class="headerlink" title="一个上线前检查表"></a>一个上线前检查表</h2><ul>
+<li>每个列表是否有稳定且文档化的默认排序？</li>
+<li>改搜索、筛选、排序后，页码或游标是否会重置？</li>
+<li>空列表、最后一页、网络失败、重复点击时，界面分别显示什么？</li>
+<li>总数是否真的有必要实时计算，还是可异步或近似？</li>
+<li>数据变动时，用户会看到刷新提示、自动插入，还是固定快照？</li>
+</ul>
+<p>分页不是炫技，它只是让用户从一堆数据里顺畅地找到下一段。把顺序、边界和变化讲清楚之后，<code>limit</code>、<code>offset</code>、<code>cursor</code> 都只是合适的工具，而不是后期不断修补的起点。</p>
+<h2 id="兼容老接口时，宁可多说一句"><a href="#兼容老接口时，宁可多说一句" class="headerlink" title="兼容老接口时，宁可多说一句"></a>兼容老接口时，宁可多说一句</h2><p>分页规则一旦被客户端使用，修改时要格外小心。把原来的 <code>page</code> 改成 cursor，不只是服务端少改几行 SQL；旧版前端、导出脚本、第三方调用都可能仍在依赖页码和总数。比较温和的迁移方式是先增加新字段、保留旧字段一段时间，在文档中写明推荐方式和废弃时间，再通过日志确认旧调用是否已经消失。</p>
+<p>参数也要给合理默认值和上限。没有传 pageSize 时使用安全默认值；传了几千条时限制最大值并返回清楚提示；传了无效游标时告诉调用者应当刷新，而不是悄悄从头开始。接口越早把边界表达出来，前端越不需要用猜测补漏洞。</p>
+<p>最后别忘了把真实的列表交给人试一试。开发者常关注“第二页能不能拿到”，用户更在乎筛选后是否突然空白、回到上一页是否还在原位置、手机上加载更多是否有明确反馈。分页是数据规则，也是交互承诺。后端的稳定顺序和前端的清楚反馈一起存在，用户才会感觉这张列表是可信的。</p>
+<p>若列表允许导出，也要写清导出是否遵循当前筛选和排序、是否有单独的大小限制、异步任务完成后如何通知。不要默认导出就是“把所有页拼起来”。导出常常比浏览列表更接近真实的数据需求，它更需要一个固定条件和可追踪的结果。把这些约定在接口旁边写明，分页就不会在需要交付数据时突然失去边界。</p>
+<p>此外，给分页请求加上必要的日志也很有帮助：筛选条件、排序、页码或游标、返回条数和耗时。它们能在用户说“我找不到刚才那条”时快速还原当时看见的范围。没有这些信息，排查往往会退化成反复刷新和猜测；有了它们，问题会清楚得多。</p>
+<p>这样设计后，列表即使面对持续新增的数据，也不会显得不可预测。用户知道自己看到的顺序，开发者知道如何还原问题，分页才真正成了一段可靠的浏览体验。</p>
+<h2 id="一个小场景可以检验约定是否完整"><a href="#一个小场景可以检验约定是否完整" class="headerlink" title="一个小场景可以检验约定是否完整"></a>一个小场景可以检验约定是否完整</h2><p>比如用户筛选“本月待处理”，浏览到第二页后有一条新记录插入最前面。此时接口若没有稳定排序，第二页可能重复一条或漏掉一条；若使用游标，前端又要知道游标对应的是哪组筛选条件。把这个场景写成测试用例：固定排序字段、翻页时保留筛选、刷新后明确提示列表可能已更新。它能把分页从抽象参数变成用户真正会遇到的变化。</p>
+<p>对无限滚动也一样。加载中、到底了、失败可重试、切换筛选后重置位置，这几种状态都应有清楚反馈。用户不必理解 cursor 或 offset，但应该始终知道自己在看一段连续而可信的内容。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%90%8E%E7%AB%AF/" class="category-chain-item">数据与后端</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%8E%A5%E5%8F%A3/" class="print-no-link">#接口</a>
+      
+        <a href="/tags/%E5%88%86%E9%A1%B5/" class="print-no-link">#分页</a>
+      
+        <a href="/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/" class="print-no-link">#兼容性</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>接口分页的兼容性，不只是一句 limit 和 offset</div>
+      <div>https://nanyouwen.github.io/backend-api-pagination-compatibility/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/maintenance-leave-a-recovery-button/" title="给项目留一个“恢复按钮”">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">给项目留一个“恢复按钮”</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/data-invisible-number-errors-in-tables/" title="表格里那种“看不出来错”的数字">
+                        <span class="hidden-mobile">表格里那种“看不出来错”的数字</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
