@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="“恢复按钮”不一定真的是页面上的一个按钮。它可能是一条清楚的回退命令、一份部署前快照、一个可以关闭的新功能开关，或者一张写着联系人和步骤的小纸条。它们的共同点是：当事情没有按预期发生时，不用靠记忆和勇气，能把系统拉回一个已知安全的状态。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给项目留一个“恢复按钮”">
+<meta property="og:url" content="https://nanyouwen.github.io/maintenance-leave-a-recovery-button/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="“恢复按钮”不一定真的是页面上的一个按钮。它可能是一条清楚的回退命令、一份部署前快照、一个可以关闭的新功能开关，或者一张写着联系人和步骤的小纸条。它们的共同点是：当事情没有按预期发生时，不用靠记忆和勇气，能把系统拉回一个已知安全的状态。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-12T01:34:46.000Z">
+<meta property="article:modified_time" content="2025-12-12T01:34:46.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="发布">
+<meta property="article:tag" content="恢复">
+<meta property="article:tag" content="回滚">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>给项目留一个“恢复按钮” - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="给项目留一个“恢复按钮”"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-12 09:34" pubdate>
+          2025年12月12日 09:34:46
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">给项目留一个“恢复按钮”</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>“恢复按钮”不一定真的是页面上的一个按钮。它可能是一条清楚的回退命令、一份部署前快照、一个可以关闭的新功能开关，或者一张写着联系人和步骤的小纸条。它们的共同点是：当事情没有按预期发生时，不用靠记忆和勇气，能把系统拉回一个已知安全的状态。</p>
+<span id="more"></span>
+
+<p>小项目尤其容易忽略这件事。因为人少、改动小，大家会觉得“真出问题再说”。但恰恰在只有一个人维护、没有专职运维的项目里，出错时最缺的是冷静的第二双手。提前留一条恢复路径，就是给未来紧张的自己减压。</p>
+<h2 id="先列出最怕的三种意外"><a href="#先列出最怕的三种意外" class="headerlink" title="先列出最怕的三种意外"></a>先列出最怕的三种意外</h2><p>不必把所有灾难都想一遍，先从最常发生的开始。第一类是发布错误：新版本页面打不开、接口地址配错、依赖没有打进去。第二类是数据误操作：批量导入了错误文件、误删了用户、脚本更新了不该更新的状态。第三类是配置变化：域名解析、权限、密钥或环境变量改错，导致系统连不上外部服务。</p>
+<p>每一类都问一个问题：如果现在发生，我能否在十分钟内恢复核心功能？这里的“恢复”不一定是修好根因，而是先让用户能继续使用。例如发布错误可以回退到上一个静态构建；批量导入可以撤销这一次任务；配置变更可以切回上一份经过验证的值。能先止住影响，后续才有空间慢慢查。</p>
+<h2 id="回退需要被练习过"><a href="#回退需要被练习过" class="headerlink" title="回退需要被练习过"></a>回退需要被练习过</h2><p>很多项目表面上有备份，真正需要时却发现不知道在哪儿、权限过期、文件打不开。恢复路径只有被实际走过一次，才算存在。可以选一个影响很小的时间，做一次演练：部署一个明显的小改动，然后回退；导出一份测试数据，再从备份恢复到临时环境；开关一个非关键功能，再确认日志和页面都符合预期。</p>
+<p>演练会暴露许多细节：构建产物是否保留、上一个版本的编号是否看得懂、谁有发布权限、数据库备份是否带着附件、回退后缓存是否还在展示旧页面。把这些问题记下来并不丢人，反而说明恢复机制正在变真实。</p>
+<h2 id="给变化加一道缓冲"><a href="#给变化加一道缓冲" class="headerlink" title="给变化加一道缓冲"></a>给变化加一道缓冲</h2><p>不是每个改动都需要完整的回滚系统，但重要改动最好有“先小后大”的空间。新功能可以先通过开关只给自己或一小群测试者打开；数据迁移可以先跑预览，确认影响行数后再执行；高风险脚本可先输出将要修改的记录，不立即写入。这个缓冲区让错误停在小范围，而不是等所有用户都碰到才开始补救。</p>
+<p>配置也适合保留版本。不要只在部署平台里直接覆盖一个值，至少记录改动时间、用途和旧值的恢复位置。敏感值不应写进普通文档，但可以写“旧版本保存在受限的密钥管理处，回退步骤见部署说明”。关键不是让每个人都能看到秘密，而是有权限的人能在需要时迅速找到它。</p>
+<h2 id="出问题时的顺序"><a href="#出问题时的顺序" class="headerlink" title="出问题时的顺序"></a>出问题时的顺序</h2><p>发生异常时，第一反应常是立刻改代码。更稳的顺序是：先确认影响；若影响正在扩大，先停掉或回退；记录当时版本、时间、错误信息；恢复可用状态后，再找原因。记录不是拖慢救火，而是避免修到一半忘记自己已经动过哪些地方。</p>
+<p>如果必须做手工补数据，也请把操作写成可审查的脚本或清单，哪怕只有十行。手工在控制台里逐条改，短期最快，长期最难解释。未来有人问“这三条状态为什么不同”，你至少能给出一条可以复看和复现的路径。</p>
+<h2 id="最小恢复清单"><a href="#最小恢复清单" class="headerlink" title="最小恢复清单"></a>最小恢复清单</h2><ol>
+<li>上一个可用版本在哪里，如何一键或两步回退？</li>
+<li>关键数据多久备份一次，是否试过恢复？</li>
+<li>哪些功能可以用开关快速关闭？</li>
+<li>谁拥有发布、数据库、域名和密钥的恢复权限？</li>
+<li>出现事故时，在哪里记录时间线与处理动作？</li>
+</ol>
+<p>一个项目不可能永远不出错。真正让人安心的不是“我们很小心”，而是“我们知道错了以后怎么回来”。这个恢复按钮平时不显眼，真正需要它时，却比一段再漂亮的新功能都重要。</p>
+<h2 id="恢复信息也需要被保护"><a href="#恢复信息也需要被保护" class="headerlink" title="恢复信息也需要被保护"></a>恢复信息也需要被保护</h2><p>恢复路径常常会包含很敏感的内容：备份的位置、管理员账号、密钥轮换方式、数据库操作说明。把它们全部贴在公开 README 里显然不合适，但把它们只放在某个人脑子里同样危险。可以把普通步骤留在仓库文档，把具体凭证和受限链接放在权限管理工具中，并在文档里说明“谁有权限、如何申请、紧急情况找谁”。</p>
+<p>恢复还应留下版本证据。每一次重要发布最好能对应一个明确的构建版本、变更说明和时间；每一次数据批量操作最好能对应一个批次编号。这样当需要回退时，不用依靠“我记得好像是周二那个版本”，而能准确地选择一个可验证的目标。小项目不需要复杂发布平台，一个命名清楚的标签和一份简短记录也能起作用。</p>
+<p>真正的安全感来自可重复，而不是靠英雄式救火。把最常见的恢复步骤练到不用临场发明，把最关键的联系人和权限确认好，项目就拥有了一种很朴素的韧性：即使出错，也不会因此失去继续工作的能力。</p>
+<p>恢复后还有一件容易遗漏的事：告诉受影响的人已经恢复了什么、仍有哪些限制、下一步会怎样处理。用户不一定需要所有技术细节，却需要知道自己是否可以继续操作。对内部协作也是如此，一句清楚的状态说明能避免大家重复尝试、重复修改或错误地以为问题已经彻底解决。</p>
+<p>恢复结束后不必马上进入下一个功能。花几分钟确认核心路径、错误日志和监控是否恢复正常，再决定是否关闭事故记录。这个小停顿能避免“回退成功但缓存仍异常”之类的半恢复状态，也让之后的复盘有一个明确的结束点。</p>
+<p>每一次顺利恢复，都是一次对项目韧性的验证。把有效步骤沉淀下来，下次面对相似情况时，团队就不必从慌乱开始，而能更快回到服务用户这件事上。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AE%89%E5%85%A8%E4%B8%8E%E7%BB%B4%E6%8A%A4/" class="category-chain-item">安全与维护</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8F%91%E5%B8%83/" class="print-no-link">#发布</a>
+      
+        <a href="/tags/%E6%81%A2%E5%A4%8D/" class="print-no-link">#恢复</a>
+      
+        <a href="/tags/%E5%9B%9E%E6%BB%9A/" class="print-no-link">#回滚</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>给项目留一个“恢复按钮”</div>
+      <div>https://nanyouwen.github.io/maintenance-leave-a-recovery-button/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/testing-first-automation-start-with-fragile-flow/" title="第一次写自动化测试：从最易坏的流程开始">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第一次写自动化测试：从最易坏的流程开始</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/backend-api-pagination-compatibility/" title="接口分页的兼容性，不只是一句 limit 和 offset">
+                        <span class="hidden-mobile">接口分页的兼容性，不只是一句 limit 和 offset</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
