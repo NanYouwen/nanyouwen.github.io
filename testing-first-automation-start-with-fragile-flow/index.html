@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="第一次给项目加自动化测试时，很容易卡在两个极端：要么觉得什么都该测，于是还没写第一条就被工具、框架和覆盖率压住；要么觉得页面一改测试就坏，索性继续靠手点。其实一条真正有用的测试，不需要证明系统完美，它只要替你守住一条每次发布都担心会坏的用户路径。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一次写自动化测试：从最易坏的流程开始">
+<meta property="og:url" content="https://nanyouwen.github.io/testing-first-automation-start-with-fragile-flow/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="第一次给项目加自动化测试时，很容易卡在两个极端：要么觉得什么都该测，于是还没写第一条就被工具、框架和覆盖率压住；要么觉得页面一改测试就坏，索性继续靠手点。其实一条真正有用的测试，不需要证明系统完美，它只要替你守住一条每次发布都担心会坏的用户路径。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-17T05:57:33.000Z">
+<meta property="article:modified_time" content="2025-12-17T05:57:33.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="质量">
+<meta property="article:tag" content="自动化测试">
+<meta property="article:tag" content="实践">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>第一次写自动化测试：从最易坏的流程开始 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第一次写自动化测试：从最易坏的流程开始"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-17 13:57" pubdate>
+          2025年12月17日 13:57:33
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">第一次写自动化测试：从最易坏的流程开始</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>第一次给项目加自动化测试时，很容易卡在两个极端：要么觉得什么都该测，于是还没写第一条就被工具、框架和覆盖率压住；要么觉得页面一改测试就坏，索性继续靠手点。其实一条真正有用的测试，不需要证明系统完美，它只要替你守住一条每次发布都担心会坏的用户路径。</p>
+<span id="more"></span>
+
+<p>我通常会从“如果它坏了，用户马上走不下去”的地方开始。登录、提交表单、下单、上传文件、保存资料，都比一个纯展示卡片更值得先测。它们往往涉及输入、网络请求、权限、跳转和错误提示，也是手工回归时最容易漏掉步骤的地方。</p>
+<h2 id="先选一条短而完整的路"><a href="#先选一条短而完整的路" class="headerlink" title="先选一条短而完整的路"></a>先选一条短而完整的路</h2><p>以登录为例，不要一开始测试所有登录方式、所有浏览器和所有权限。先固定一个测试账号，做一件清楚的事：打开登录页，输入账号密码，点击提交，看到首页上的用户名。这样一条测试有明确起点、明确动作、明确成功信号。它失败时，你知道用户在主路径上被卡住了；它成功时，至少说明最基本的一道门还开着。</p>
+<p>选路径时可以问三个问题：它是否高频？它失败后是否没有替代方案？它是否经常因为改动而被影响？三项里占两项，就很适合作为第一条。不要为了方便，先测一个永远不会变的静态标题；那样测试绿得很开心，却没有替你挡住风险。</p>
+<h2 id="测“用户看见的”，少测实现细节"><a href="#测“用户看见的”，少测实现细节" class="headerlink" title="测“用户看见的”，少测实现细节"></a>测“用户看见的”，少测实现细节</h2><p>自动化测试最脆弱的原因之一，是它依赖了页面内部结构。比如用第七个 <code>div</code>、某个样式类名、动画结束时间来定位元素，一旦设计调整，功能没坏测试却全红。更稳的方式是给关键输入和按钮使用稳定、可读的标记，例如 <code>data-testid=&quot;login-submit&quot;</code>，或根据可访问性名称找到“登录”按钮。</p>
+<p>断言也尽量站在用户角度。与其断言某个组件内部状态变成 true，不如断言页面出现了欢迎语、地址栏跳到预期路径、提交按钮恢复可点击。实现可以重构，用户体验不该随意改变。测试描述的正是这份对外承诺。</p>
+<h2 id="别跳过失败路径"><a href="#别跳过失败路径" class="headerlink" title="别跳过失败路径"></a>别跳过失败路径</h2><p>只有成功路径的测试像只检查门能不能打开，却没检查钥匙不对时会不会把人锁在里面。为第一条关键流程至少补两个分支：输入错误时有没有清楚提示；网络失败时是否能重新尝试、按钮是否不会永久加载。它们不需要模拟所有服务器异常，只要覆盖用户最能感知的失败方式。</p>
+<p>测试数据也要独立。不要使用某个同事的真实账号，也不要依赖一份每天变化的线上数据。准备固定的测试账号、测试记录和初始化步骤，必要时每次运行前创建、运行后清理。这样失败才更可能说明代码问题，而不是环境今天心情不好。</p>
+<h2 id="让它跑得稳定一点"><a href="#让它跑得稳定一点" class="headerlink" title="让它跑得稳定一点"></a>让它跑得稳定一点</h2><p>浏览器测试最常见的假失败来自等待。页面还没加载完，测试就去点击；接口偶尔慢一点，断言已经开始；多个测试共用同一条数据，前一个修改影响了后一个。解决思路不是无脑加十秒等待，而是等一个真正表示“准备好了”的条件，例如按钮可点击、列表出现、加载提示消失。</p>
+<p>每条测试还应尽量只验证一个故事。登录失败和个人资料保存最好分开；这样失败日志短，维护者也能快速定位。运行时间不必一开始追求极限，但不要让十条基础测试花半小时，否则大家会自然地绕开它。</p>
+<h2 id="一个可以从今天开始的顺序"><a href="#一个可以从今天开始的顺序" class="headerlink" title="一个可以从今天开始的顺序"></a>一个可以从今天开始的顺序</h2><ol>
+<li>写下最怕坏的一条用户路径和成功标志。</li>
+<li>准备不依赖个人数据的测试账号或数据。</li>
+<li>用稳定标记定位关键控件，不绑定样式结构。</li>
+<li>先实现成功路径，再补一个错误提示和一次网络失败。</li>
+<li>把测试接到提交前或发布前，让它真的被运行。</li>
+</ol>
+<p>自动化测试不是取代人工体验。它更像一个不嫌烦的同事，每次改完都帮你确认那条重要道路还通着。当最易坏的几条路先被守住，再慢慢扩展范围，测试才会成为项目的安全感，而不是额外负担。</p>
+<h2 id="失败时，让测试告诉你下一步"><a href="#失败时，让测试告诉你下一步" class="headerlink" title="失败时，让测试告诉你下一步"></a>失败时，让测试告诉你下一步</h2><p>一条测试失败后，最没用的信息是“超时了”。尽量让它留下页面截图、当前地址、关键网络请求和可读的步骤名称。例如“登录后等待用户名出现”比“第 42 行断言失败”更能帮助半天后接手的人。很多测试框架都能保存这些信息，不必一次配置得很花哨，但至少要让失败可复看。</p>
+<p>也要区分产品缺陷和测试不稳定。若同一条在没有代码改动时偶尔失败，不要长期靠重新运行掩盖；记录发生条件，检查等待逻辑、共享数据和外部依赖。测试偶发变红会很快消耗团队的信任，最后大家只会习惯性点击忽略。稳定性本身，就是自动化测试需要维护的功能。</p>
+<p>当主路径积累到几条后，可以给它们一个简单的分组：每次提交跑最短的一组，每天或发布前跑完整的一组。这样既不会拖慢日常节奏，也能让真正重要的保障持续发生。测试不需要一下子覆盖整个世界；它只要每次都可靠地守住已经承诺的那几条路，就已经很有价值。</p>
+<p>刚开始时，也可以把一次手工回归过程录成最简单的步骤表，再从里面挑最稳定、最重要的两三步自动化。这样测试不会脱离真实使用，而是从团队已经在做的检查里长出来。每补上一条，下一次发布就少一次重复点击，这就是最直观的回报。</p>
+<p>测试名称也尽量写成用户故事，而不是实现步骤。例如“密码正确时可以进入首页”“网络异常时可以重新提交”，失败报告一眼就能看懂影响。名字清楚后，非测试作者也能参与判断这条保障是否仍值得保留。</p>
+<p>当测试真正对应用户能感知的承诺，维护它就不再是额外工作。每一次变更前的绿灯，都是在提醒我们：关键路径刚刚又被认真地走过一遍。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C/" class="category-chain-item">测试与协作</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%B4%A8%E9%87%8F/" class="print-no-link">#质量</a>
+      
+        <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" class="print-no-link">#自动化测试</a>
+      
+        <a href="/tags/%E5%AE%9E%E8%B7%B5/" class="print-no-link">#实践</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>第一次写自动化测试：从最易坏的流程开始</div>
+      <div>https://nanyouwen.github.io/testing-first-automation-start-with-fragile-flow/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/engineering-ten-minute-maintenance-habit/" title="把每天十分钟的维护变成习惯">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">把每天十分钟的维护变成习惯</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/maintenance-leave-a-recovery-button/" title="给项目留一个“恢复按钮”">
+                        <span class="hidden-mobile">给项目留一个“恢复按钮”</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
