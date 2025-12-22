@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="项目失控很少发生在某个下午。更多时候，它是在一连串“以后再看”的小事里慢慢长出来的：依赖提示有更新、控制台偶尔有警告、文章里的链接似乎失效了、备份已经很久没有确认。每件事单独看都不紧急，于是它们一直排在最后。等真的要发布或排错时，才发现桌面、仓库和待办一起变得吵闹。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="把每天十分钟的维护变成习惯">
+<meta property="og:url" content="https://nanyouwen.github.io/engineering-ten-minute-maintenance-habit/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="项目失控很少发生在某个下午。更多时候，它是在一连串“以后再看”的小事里慢慢长出来的：依赖提示有更新、控制台偶尔有警告、文章里的链接似乎失效了、备份已经很久没有确认。每件事单独看都不紧急，于是它们一直排在最后。等真的要发布或排错时，才发现桌面、仓库和待办一起变得吵闹。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-22T01:51:23.000Z">
+<meta property="article:modified_time" content="2025-12-22T01:51:23.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="效率">
+<meta property="article:tag" content="习惯">
+<meta property="article:tag" content="维护">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>把每天十分钟的维护变成习惯 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="把每天十分钟的维护变成习惯"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-22 09:51" pubdate>
+          2025年12月22日 09:51:23
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">把每天十分钟的维护变成习惯</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>项目失控很少发生在某个下午。更多时候，它是在一连串“以后再看”的小事里慢慢长出来的：依赖提示有更新、控制台偶尔有警告、文章里的链接似乎失效了、备份已经很久没有确认。每件事单独看都不紧急，于是它们一直排在最后。等真的要发布或排错时，才发现桌面、仓库和待办一起变得吵闹。</p>
+<span id="more"></span>
+
+<p>我后来不再给自己定“每周全面整理”的大目标。这样的目标听起来正确，忙起来却最容易跳过。更能坚持的是每天留十分钟，只做一两件可以结束的小维护。十分钟不会让项目焕然一新，但会让问题不至于堆到必须花一个周末处理。</p>
+<h2 id="十分钟应该做什么"><a href="#十分钟应该做什么" class="headerlink" title="十分钟应该做什么"></a>十分钟应该做什么</h2><p>一个简单的分配方式是按频率来。每天可以看一次最近的错误、未提交的修改、重要待办和备份是否正常；每周选半小时看依赖、站点链接、内容草稿和发布记录；每月再处理权限、旧分支、过期账号和较大的升级。不是每件事都要每天碰，把节奏分开才不会像在给自己加班。</p>
+<p>日常十分钟里，我最常做的是三件事。第一，打开项目的状态页或日志，看有没有连续出现的错误。不是看到一条红色就立即修，而是留意“昨天也有、今天还在”的东西。第二，检查工作区是否有不知道从哪来的改动，给它提交、丢弃或写个说明。第三，处理一个很小的待办，例如补链接、改错字、把临时文件挪到合适位置。</p>
+<p>关键在于每次只挑一个完成得掉的动作。十分钟内无法搞定的性能问题，可以先写明现象和下一步；不要在临近结束时突然打开三份文档、开始一场没有边界的排查。维护习惯带来的不是“所有事都做完”，而是你始终知道下一件值得做的事是什么。</p>
+<h2 id="给维护留一份看得见的清单"><a href="#给维护留一份看得见的清单" class="headerlink" title="给维护留一份看得见的清单"></a>给维护留一份看得见的清单</h2><p>我喜欢把清单放在项目根目录或一个固定的任务页里，但它不应该长得像审计表。每项写成能勾掉的句子，例如“确认今天的备份可见”“查看本周失败的构建”“关闭两条已解决的错误提醒”。如果写成“优化稳定性”“整理项目”，很难在十分钟里判断自己是否完成，也容易越看越焦虑。</p>
+<p>清单还可以区分“提醒”和“行动”。例如依赖有新版本只是提醒，真正行动可能是阅读变更、建立测试分支、跑一次构建。把这两层分开，能避免把所有通知都当成必须立刻处理的事故。很多依赖可以晚些升级，很多警告也可以记录后集中处理；重要的是它们没有被遗忘。</p>
+<h2 id="别让工具替你制造噪声"><a href="#别让工具替你制造噪声" class="headerlink" title="别让工具替你制造噪声"></a>别让工具替你制造噪声</h2><p>监控、日历、通知、自动化脚本都可以帮忙，但太多提醒会让人麻木。一个好的提醒应该让你知道“现在需要做什么”，而不是只告诉你“系统还有很多事”。如果某个报警连续一周都没人处理，应该考虑调整阈值、归类或关闭，而不是继续让它占据注意力。</p>
+<p>同样，维护不等于不断安装新工具。小项目用一个待办清单、一份备份记录和一条构建命令就能开始。工具只有在它减少遗漏、缩短确认时间时才值得留下。否则它会变成另一项需要维护的项目。</p>
+<h2 id="忙的时候，保留最小版本"><a href="#忙的时候，保留最小版本" class="headerlink" title="忙的时候，保留最小版本"></a>忙的时候，保留最小版本</h2><p>总会有完全抽不出十分钟的日子。那时不要因为没完成完整清单就放弃所有维护，可以只做“最小版本”：确认没有未保存的关键改动、看一眼是否有影响用户的异常、把想到的风险记下来。三分钟也可以。习惯最怕的不是做得少，而是因为做不完就彻底中断。</p>
+<p>一段时间后，你会发现维护留下了很实在的回报：问题出现得更早，发布前要检查的东西更少，旧项目也不再让人不敢打开。它不是一种宏大的管理方法，只是每天给未来的自己一点点余地。十分钟看似很小，长期却足够把混乱挡在门外。</p>
+<h2 id="让记录比记忆可靠一点"><a href="#让记录比记忆可靠一点" class="headerlink" title="让记录比记忆可靠一点"></a>让记录比记忆可靠一点</h2><p>十分钟维护时，最值得顺手留下的是一两句记录：今天看到了什么、做了什么、下次从哪里继续。它可以是一条 issue、一行 changelog、一个已勾选的清单项，不需要写成日报。这样当某个问题隔几天再次出现时，不必靠“我好像看过”来回忆，而能顺着记录回到当时的线索。</p>
+<p>记录也能帮助判断哪些事总在重复。如果每周都要手工检查同一份报表、清理同一种临时文件、解释同一个错误，那可能已经值得写一个脚本、补一段文档或加一条自动提醒。维护不是永远做琐事，它会慢慢暴露出值得被改进的流程。</p>
+<p>最重要的是给自己留出“不做”的空间。某天只确认备份可用，已经足够；某周忙到没有整理依赖，也可以把它延后并写上日期。一个可持续的习惯不靠内疚驱动，它靠的是即使中断了，也知道怎样从很小的一步重新开始。</p>
+<p>如果想开始却不知道从哪儿下手，今天就选一个动作：查看最近的构建是否成功、删除一个确认无用的临时文件、把一个模糊待办改成下一步、验证一份备份能打开。完成后不要立刻再加十项计划。维护的意义恰恰在于让小事有机会真的结束。</p>
+<p>也可以把维护安排在一天中固定的空档，比如下班前或晨间打开项目后的十分钟。固定时间不代表必须严格打卡，而是减少每次重新决定“什么时候做”的消耗。只要入口足够轻，维护就更容易成为自然动作。</p>
+<p>久而久之，这种固定的小入口会让项目始终保持可接近的状态。即使暂时没有开发新功能，也不会因为积累太多未知而变得难以重新开始。</p>
+<p>可以把维护清单分成“今天能完成”和“需要专门安排”两层。前者例如看一次错误、确认一次备份、更新一个待办；后者例如升级框架、整理大目录、迁移服务。十分钟只碰前者，发现后者时只记录入口和原因。这样不会把一次轻量维护变成无底洞，也不会因为大任务太多而干脆什么都不开始。</p>
+<p>维护结束时留一个明确的停止点同样重要。写下“下次从这里继续”，关掉终端和编辑器，项目就不会在下班后继续占着注意力。可持续并不意味着永远在线，而是知道什么时候开始，也知道什么时候可以放心停下。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF/" class="category-chain-item">工程习惯</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%88%E7%8E%87/" class="print-no-link">#效率</a>
+      
+        <a href="/tags/%E4%B9%A0%E6%83%AF/" class="print-no-link">#习惯</a>
+      
+        <a href="/tags/%E7%BB%B4%E6%8A%A4/" class="print-no-link">#维护</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>把每天十分钟的维护变成习惯</div>
+      <div>https://nanyouwen.github.io/engineering-ten-minute-maintenance-habit/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/engineering-year-end-project-handover/" title="年末整理：把项目交给三个月后的自己">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">年末整理：把项目交给三个月后的自己</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/testing-first-automation-start-with-fragile-flow/" title="第一次写自动化测试：从最易坏的流程开始">
+                        <span class="hidden-mobile">第一次写自动化测试：从最易坏的流程开始</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
