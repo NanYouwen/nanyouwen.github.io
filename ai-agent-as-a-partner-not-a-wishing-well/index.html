@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="刚开始用 AI 时，我常常带着一种不太现实的期待：把一个模糊问题扔进去，等它替我想出正确答案。结果通常很像对着一个特别勤快、但不了解现场的同事说“你看着办”。它会立刻开始说话，甚至给出一大段看似完整的建议，可越具体越容易露出它其实不知道项目限制、用户背景和我真正想要什么。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="把 AI 当成搭档，而不是许愿池">
+<meta property="og:url" content="https://nanyouwen.github.io/ai-agent-as-a-partner-not-a-wishing-well/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="刚开始用 AI 时，我常常带着一种不太现实的期待：把一个模糊问题扔进去，等它替我想出正确答案。结果通常很像对着一个特别勤快、但不了解现场的同事说“你看着办”。它会立刻开始说话，甚至给出一大段看似完整的建议，可越具体越容易露出它其实不知道项目限制、用户背景和我真正想要什么。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-01T10:24:09.000Z">
+<meta property="article:modified_time" content="2026-01-01T10:24:09.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="协作">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Agent">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>把 AI 当成搭档，而不是许愿池 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="把 AI 当成搭档，而不是许愿池"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-01 18:24" pubdate>
+          2026年1月1日 18:24:09
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">把 AI 当成搭档，而不是许愿池</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>刚开始用 AI 时，我常常带着一种不太现实的期待：把一个模糊问题扔进去，等它替我想出正确答案。结果通常很像对着一个特别勤快、但不了解现场的同事说“你看着办”。它会立刻开始说话，甚至给出一大段看似完整的建议，可越具体越容易露出它其实不知道项目限制、用户背景和我真正想要什么。</p>
+<span id="more"></span>
+
+<p>后来我更愿意把 AI 当成搭档。搭档不是替你许愿的人，而是能帮助你把问题拆开、补充角度、完成重复劳动的人。你仍然要说明目的、提供材料、判断结果；它则可以帮你更快地比较方案、整理信息、写出初稿、发现遗漏。这个位置摆对了，用起来会轻松很多。</p>
+<h2 id="先把它放到合适的任务里"><a href="#先把它放到合适的任务里" class="headerlink" title="先把它放到合适的任务里"></a>先把它放到合适的任务里</h2><p>AI 很适合处理“有材料、有边界、可以检查”的工作。比如把一堆会议记录整理成待确认的事项；根据现有代码生成一份模块地图；把一封零散邮件改成语气清楚的草稿；根据给定规则把表格分类。它的价值往往不是替你作最终决定，而是减少你从零开始的时间。</p>
+<p>相反，涉及责任归属、对人承诺、重要金额、敏感信息，或者目标本身还没想清楚的事情，不适合直接交出去。例如“帮我决定要不要辞职”“直接给客户发报价”“把这份私密资料全部上传分析”，都需要人先在场。AI 可以参与准备，但不能替你承担后果。</p>
+<h2 id="像交接工作一样给上下文"><a href="#像交接工作一样给上下文" class="headerlink" title="像交接工作一样给上下文"></a>像交接工作一样给上下文</h2><p>和搭档协作时，你不会只说“把这个做好”。你会说事情为什么做、给谁看、已有材料在哪里、哪些不能改、何时需要回来确认。给 AI 也一样。一份好任务说明不必很长，却至少包含目标、输入、限制、输出形式和判断标准。</p>
+<p>例如，不要只说“帮我写一篇文章”，而可以说：“读下面三条笔记，为刚接触这个工具的人写一篇 1,500 字左右的上手说明；保留我列出的风险，不要补造数据；最后给一个三步操作清单。”这不是把提示词写成咒语，而是把合作的边界说清楚。说清楚之后，AI 的第一版通常就更接近能讨论的东西。</p>
+<h2 id="把第一次回答当成草稿"><a href="#把第一次回答当成草稿" class="headerlink" title="把第一次回答当成草稿"></a>把第一次回答当成草稿</h2><p>AI 输出得快，容易让人误以为它已经完成。实际上，第一版更像白板上的便利贴：可以用来讨论、删改、追问，却不应该因为排版整齐就直接交付。尤其是事实、数字、引用、代码和外部链接，最好回到来源核一遍。它擅长把语言组织得顺，却不天然知道哪一句对你的场景最重要。</p>
+<p>我会习惯问三个追问：这段结论依据是什么？有没有相反情况？如果信息不足，你最担心哪一点？这三个问题能把对话从“给我一个答案”变成“和我一起检查答案”。有时它会承认资料不足，这并不是失败；比起自信地编一个细节，这种停顿更值得信任。</p>
+<h2 id="留给人的部分，反而更重要"><a href="#留给人的部分，反而更重要" class="headerlink" title="留给人的部分，反而更重要"></a>留给人的部分，反而更重要</h2><p>把重复、整理、比对交给 AI 后，人不该只剩下点击确认。真正应该被腾出来的，是判断优先级、理解他人处境、做价值取舍和承担责任的时间。比如一份周报可以由 AI 汇总事实，但哪些问题要升级、怎样解释风险、哪件事值得投入，仍然需要熟悉现场的人决定。</p>
+<p>当 AI 说得很流畅时，最需要保留的是自己的问题意识：这是否回答了我原来的问题？它遗漏了谁的感受？它的建议在现实里由谁执行？把 AI 当搭档的好处就在这里——它帮你走得快一点，但方向仍在你手里。</p>
+<p>新的一年里，我更想练习的不是“怎样问出神奇提示词”，而是怎样把任务讲清楚、把结果看明白、把责任留在该留的位置。这样用 AI，既不会把它神化，也不会错过它确实能带来的帮助。</p>
+<h2 id="从一件小事开始建立默契"><a href="#从一件小事开始建立默契" class="headerlink" title="从一件小事开始建立默契"></a>从一件小事开始建立默契</h2><p>如果还不知道该把什么交给 AI，可以从一个每天都会出现的小麻烦开始：把零散笔记整理成待办草稿、把一段技术说明改成新人能读懂的版本、为代码改动列出可能受影响的地方。任务应该足够小，结果应该能在几分钟内被人检查。第一次的目标不是惊艳，而是弄清它在哪一步最容易误解、什么资料能让它更准确。</p>
+<p>用几次之后，可以把有效的说明方式和检查点留下来。比如写作任务总是先给读者对象和禁用说法；资料整理总是要求来源链接；代码建议总是先看差异再运行测试。这些小习惯会让协作逐渐稳定，也会让人明白哪些判断仍然必须自己完成。</p>
+<p>我不太相信“一句提示词解决所有问题”。更愿意相信的是，好的协作来自反复校准：AI 学会在合适的时候帮忙，人也学会在合适的时候追问和停止。把它当成搭档，恰好给这种校准留下了空间。</p>
+<h2 id="也要允许它没有帮上忙"><a href="#也要允许它没有帮上忙" class="headerlink" title="也要允许它没有帮上忙"></a>也要允许它没有帮上忙</h2><p>有些任务让 AI 参与后，确实没有比自己做更快。这很正常。也许材料太少，问题太依赖现场经验，或者审核成本超过了节省的时间。把这类尝试记成“不适合当前流程”，比强行找一个使用场景更有价值。搭档关系的基础不是每次都要分工，而是知道什么时候各自更擅长。</p>
+<p>当 AI 给出的初稿没有用，也可以反过来问：它缺了哪条信息、误解了哪个词、输出格式为什么不便于检查？这些答案往往能改进下一次的任务说明，或者提醒我们原本的工作目标就还不够清晰。AI 的失误不必被神化，也不必被遮掩；它只是一次很快暴露协作缺口的反馈。</p>
+<p>把这种心态保留下来，使用 AI 就不会变成“必须证明它有用”的表演。它在合适的地方替人减轻重复，在不合适的地方被及时收回，才是更可持续的合作方式。</p>
+<p>对我来说，最值得保留的是任务结束后的两分钟：看一眼哪些部分比预期好，哪些需要我改得更多。这个小复盘会慢慢把“用一次工具”变成“积累一套协作方法”，也让下一次不必从零试探。</p>
+<p>当人和 AI 都有清楚的职责，合作就不必靠兴奋感维持。它可以平静地融入日常，成为一种让思考更从容、而不是更匆忙的辅助。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI-%E9%9A%8F%E7%AC%94/" class="category-chain-item">AI 随笔</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8D%8F%E4%BD%9C/" class="print-no-link">#协作</a>
+      
+        <a href="/tags/AI/" class="print-no-link">#AI</a>
+      
+        <a href="/tags/Agent/" class="print-no-link">#Agent</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>把 AI 当成搭档，而不是许愿池</div>
+      <div>https://nanyouwen.github.io/ai-agent-as-a-partner-not-a-wishing-well/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年1月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/agent-from-chat-to-workflow/" title="从聊天框到工作流：我理解的 Agent">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">从聊天框到工作流：我理解的 Agent</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/engineering-year-end-project-handover/" title="年末整理：把项目交给三个月后的自己">
+                        <span class="hidden-mobile">年末整理：把项目交给三个月后的自己</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
