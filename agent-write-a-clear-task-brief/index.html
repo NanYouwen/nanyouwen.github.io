@@ -1,0 +1,687 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="“帮我把这些资料整理一下”看上去像一句很自然的话，但交给 Agent 后，往往会得到一份也很自然、却不一定有用的结果。它可能按自己的理解做成摘要，忽略你真正要比较的指标；也可能把不确定的地方补得很完整，让人误以为内容都来自原始资料。问题通常不在 Agent 不够聪明，而在任务说明里缺少了人类同事会追问的那些背景。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一次给 Agent 写任务说明：像交接工作一样具体">
+<meta property="og:url" content="https://nanyouwen.github.io/agent-write-a-clear-task-brief/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="“帮我把这些资料整理一下”看上去像一句很自然的话，但交给 Agent 后，往往会得到一份也很自然、却不一定有用的结果。它可能按自己的理解做成摘要，忽略你真正要比较的指标；也可能把不确定的地方补得很完整，让人误以为内容都来自原始资料。问题通常不在 Agent 不够聪明，而在任务说明里缺少了人类同事会追问的那些背景。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-16T05:34:45.000Z">
+<meta property="article:modified_time" content="2026-01-16T05:34:45.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="Agent">
+<meta property="article:tag" content="提示词">
+<meta property="article:tag" content="任务设计">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>第一次给 Agent 写任务说明：像交接工作一样具体 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第一次给 Agent 写任务说明：像交接工作一样具体"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-16 13:34" pubdate>
+          2026年1月16日 13:34:45
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">第一次给 Agent 写任务说明：像交接工作一样具体</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>“帮我把这些资料整理一下”看上去像一句很自然的话，但交给 Agent 后，往往会得到一份也很自然、却不一定有用的结果。它可能按自己的理解做成摘要，忽略你真正要比较的指标；也可能把不确定的地方补得很完整，让人误以为内容都来自原始资料。问题通常不在 Agent 不够聪明，而在任务说明里缺少了人类同事会追问的那些背景。</p>
+<span id="more"></span>
+
+<p>我把给 Agent 的任务说明当作一次小交接。你不需要写成长文，但应该让它知道：为什么做、手头有什么、哪些不能碰、结果长什么样、遇到不确定时怎么办。这样写的好处不只是提升一次回答的质量，还能让任务以后被别人复用。</p>
+<h2 id="五件最值得先写清的事"><a href="#五件最值得先写清的事" class="headerlink" title="五件最值得先写清的事"></a>五件最值得先写清的事</h2><p>第一是<strong>目标</strong>。不要只说整理资料，而要说“为下周评审准备一张对比表，帮助团队决定是否继续试用”。目标决定它该保留什么、忽略什么。第二是<strong>输入</strong>。列出文件、链接、已有笔记、数据范围，最好说明哪些来源更可信。Agent 如果没有材料，就只能依赖常识补全。</p>
+<p>第三是<strong>限制</strong>。例如不能上传外部服务、不得改动原文件、不能根据经验补造数字、只能在工作时间执行、不得给外部联系人发消息。限制不是给 Agent 增加障碍，而是在告诉它哪些边界不可跨越。第四是<strong>交付物</strong>。要 Markdown、表格、草稿、代码差异，还是一份待确认清单？给一个小样例通常比形容“简洁专业”更有效。</p>
+<p>第五是<strong>确认点</strong>。什么情况下可以继续，什么情况下必须停下来问你？例如遇到缺失字段、来源相互矛盾、会覆盖已有文件、需要花钱或发送外部消息时，应该暂停。这是让 Agent 和人协作，而不是让它盲目执行的关键。</p>
+<h2 id="把模糊请求改写一遍"><a href="#把模糊请求改写一遍" class="headerlink" title="把模糊请求改写一遍"></a>把模糊请求改写一遍</h2><p>下面这句很常见：</p>
+<blockquote>
+<p>帮我研究一下几个竞品，做个总结。</p>
+</blockquote>
+<p>它可以改成：</p>
+<blockquote>
+<p>阅读我提供的三个官网链接和两份 PDF，只比较定价、核心功能、数据导出限制和中文支持。输出一张 Markdown 表格，每个结论附来源链接；找不到的内容写“未找到”，不要推测。完成后再列出最多三项需要我确认的问题，不要对外注册账号或提交表单。</p>
+</blockquote>
+<p>后一个版本没有使用任何神秘技巧，却把目标、材料、范围、格式、证据和停止条件放在了同一处。Agent 即使做错了，也更容易知道错在什么地方；人审核时也不用猜它是否越过了边界。</p>
+<h2 id="任务要能被检查"><a href="#任务要能被检查" class="headerlink" title="任务要能被检查"></a>任务要能被检查</h2><p>“写得有洞察”“做得好看”这类要求并非无效，但单独交给 Agent 时很难判断完成。可以把它们转成可检查的条件：至少列出三个差异；每个事实有来源；表格不超过八列；结尾给出推荐与反例；面向刚接触此领域的人，不使用未解释的缩写。检查条件不是限制创造力，而是给第一版一个落点。</p>
+<p>如果任务很大，也不要一口气要求它完成。让 Agent 先复述理解和计划，再处理第一部分；确认方向后再继续。这样即使目标有偏差，也是在前十分钟发现，而不是等它处理完几十份文件后才推倒重来。</p>
+<h2 id="留下可复用的外壳"><a href="#留下可复用的外壳" class="headerlink" title="留下可复用的外壳"></a>留下可复用的外壳</h2><p>真正重复的工作，可以把任务说明做成模板：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs text">目标：<br>输入与可信来源：<br>不做什么：<br>交付格式与示例：<br>完成标准：<br>需要人工确认的情况：<br></code></pre></td></tr></table></figure>
+
+<p>每次只替换内容，不必从聊天框重新组织思路。随着使用次数增加，你会发现这份模板也在帮人理清工作本身。很多“AI 没做好”的任务，换成一位新同事也会问同样的问题。把交接写具体，既是与 Agent 协作的技巧，也是把自己的想法讲明白的练习。</p>
+<h2 id="在任务结束时，也让它自查一次"><a href="#在任务结束时，也让它自查一次" class="headerlink" title="在任务结束时，也让它自查一次"></a>在任务结束时，也让它自查一次</h2><p>交付前可以要求 Agent 用很短的清单回顾：它使用了哪些材料，哪些结论有来源，哪些部分是推测，是否触发过需要人工确认的条件。这个自查不能替代人审核，却能把隐藏的不确定性提到台面上。对于需要引用、整理、分析的任务，尤其值得加上这一环。</p>
+<p>人审核时也不用从头读完所有内容。可以先检查一两个最重要结论、一两个边界案例和所有标为“不确定”的项；若这些都可靠，再看格式和表达。这样的分工让 Agent 负责完成可重复的整理，人负责把注意力放在真正影响决定的地方。</p>
+<p>随着任务越来越熟，模板可以变得更短，因为共同语言已经形成。但不要把缩短说明误解为取消边界。最值得保留的通常是输入范围、不能做什么和何时确认——它们决定了 Agent 是否能在效率之外，也保持让人安心的分寸。</p>
+<h2 id="任务说明也应该带版本"><a href="#任务说明也应该带版本" class="headerlink" title="任务说明也应该带版本"></a>任务说明也应该带版本</h2><p>一份反复使用的 Agent 模板会慢慢演化。某次执行后发现需要补来源，下一次就把引用要求加进去；发现 Agent 常误解某个业务词，就在术语旁加一句解释。把这种修改写在模板里，比每次在聊天框临时补充可靠得多。必要时还可以保留版本号或修改日期，方便团队知道当前应该用哪一份。</p>
+<p>不要害怕在任务开始前要求 Agent 复述理解。它花的几十秒通常比执行偏了以后重做省得多。复述中若发现它把目标、范围或交付格式理解错了，马上修正即可；若理解正确，也等于为后续执行留下一条清楚的记录。</p>
+<p>写任务说明的目标不是把 Agent 变成只会照抄的机器，而是让它有足够清晰的空间去完成该完成的事，同时不把不该替人决定的事情偷偷替掉。</p>
+<p>遇到长期任务时，还可以要求它在每个阶段都汇报当前进度、已用资料和下一步计划。阶段性汇报比一次性等待最终结果更适合协作：方向错了能及时纠正，材料不足也能早点补齐，而不是把问题留到最后一分钟。</p>
+<p>任务说明越清楚，后续的追问就越有价值。人不再反复解释基础背景，而能把注意力放在真正需要判断的例外、风险和取舍上，这正是 Agent 最该帮忙腾出的空间。</p>
+<p>一份好说明也要允许回答“不知道”。若材料里没有答案、术语有歧义或需要外部权限，就要求 Agent 列出缺口而不是补写想象内容。把停止条件提前写进任务，既能保护结果，也会让后续补资料的动作更具体。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Agent-%E5%85%A5%E9%97%A8/" class="category-chain-item">Agent 入门</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Agent/" class="print-no-link">#Agent</a>
+      
+        <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D/" class="print-no-link">#提示词</a>
+      
+        <a href="/tags/%E4%BB%BB%E5%8A%A1%E8%AE%BE%E8%AE%A1/" class="print-no-link">#任务设计</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>第一次给 Agent 写任务说明：像交接工作一样具体</div>
+      <div>https://nanyouwen.github.io/agent-write-a-clear-task-brief/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年1月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/ai-agent-design-reversible-workflows/" title="模型会犯错，所以流程要能回头">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">模型会犯错，所以流程要能回头</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/agent-ai-memory-what-to-keep/" title="AI 的记忆，该记什么、不该记什么">
+                        <span class="hidden-mobile">AI 的记忆，该记什么、不该记什么</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
