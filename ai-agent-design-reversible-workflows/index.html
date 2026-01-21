@@ -1,0 +1,678 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="AI 最让人不安的地方，不一定是它会答错，而是它有时会带着很自然的语气答错。如果它只是在聊天框里给出一段建议，错误还容易被发现；可当 Agent 能改文件、整理数据、发出消息时，一次误解就可能变成真实动作。面对这种不确定性，最实用的办法不是期待模型永远正确，而是把流程设计成错了也能回来。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模型会犯错，所以流程要能回头">
+<meta property="og:url" content="https://nanyouwen.github.io/ai-agent-design-reversible-workflows/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="AI 最让人不安的地方，不一定是它会答错，而是它有时会带着很自然的语气答错。如果它只是在聊天框里给出一段建议，错误还容易被发现；可当 Agent 能改文件、整理数据、发出消息时，一次误解就可能变成真实动作。面对这种不确定性，最实用的办法不是期待模型永远正确，而是把流程设计成错了也能回来。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-21T03:17:23.000Z">
+<meta property="article:modified_time" content="2026-01-21T03:17:23.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Agent">
+<meta property="article:tag" content="可靠性">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>模型会犯错，所以流程要能回头 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="模型会犯错，所以流程要能回头"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-21 11:17" pubdate>
+          2026年1月21日 11:17:23
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">模型会犯错，所以流程要能回头</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>AI 最让人不安的地方，不一定是它会答错，而是它有时会带着很自然的语气答错。如果它只是在聊天框里给出一段建议，错误还容易被发现；可当 Agent 能改文件、整理数据、发出消息时，一次误解就可能变成真实动作。面对这种不确定性，最实用的办法不是期待模型永远正确，而是把流程设计成错了也能回来。</p>
+<span id="more"></span>
+
+<p>“能回头”并不意味着所有操作都要复杂审批。它更像日常写文档时的习惯：先看草稿，再确认发布；先保存副本，再批量替换；先在测试环境跑一次，再动线上数据。把这些普通经验放进 AI 工作流，就能把一次大错误拆成几次小检查。</p>
+<h2 id="把行动拆成可检查的小步"><a href="#把行动拆成可检查的小步" class="headerlink" title="把行动拆成可检查的小步"></a>把行动拆成可检查的小步</h2><p>一个容易失控的指令是：“把这批客户资料整理好并更新到系统。”它同时包含读取、理解、分类、修改多个动作。更稳的做法是拆开：先读取并输出分类建议；人确认规则；再生成将要修改的记录清单；确认无误后才执行写入；最后输出结果和未处理项。</p>
+<p>拆步的价值在于每一段都有可见产物。模型把“高级客户”判断错了，不会立即覆盖系统；格式解析失败，也不会悄悄跳过几百行。人可以在成本最低的时候纠正方向，Agent 则能带着确认后的规则继续干活。</p>
+<h2 id="草稿、预览和差异"><a href="#草稿、预览和差异" class="headerlink" title="草稿、预览和差异"></a>草稿、预览和差异</h2><p>涉及文字、代码、配置或数据修改时，优先让 Agent 生成草稿或 diff，而不是直接写入。草稿适合邮件、报告、文章；差异适合代码和配置；变更预览适合表格和数据库。它们都在回答同一个问题：如果现在允许执行，具体会改变什么？</p>
+<p>预览要尽量靠近真实结果。不要只说“将更新 120 条记录”，而应展示前几条样本、字段前后对比、规则和异常行数。这样人能在一分钟里判断它是否理解了任务，而不用先相信一段抽象总结。确认后保留这份预览，也便于以后解释操作是怎样发生的。</p>
+<h2 id="为高风险动作设置门槛"><a href="#为高风险动作设置门槛" class="headerlink" title="为高风险动作设置门槛"></a>为高风险动作设置门槛</h2><p>不同动作需要不同门槛。读取公开网页、给本地文件打标签，风险较低，可以自动完成；发送外部消息、删除文件、修改权限、付款、发布内容，应该要求明确确认。门槛不一定是复杂表单，一句“确认发送给这 3 位收件人，内容如下”也足够让人重新看一眼。</p>
+<p>还可以设置阈值：一次修改超过十个文件、金额超过某数值、即将访问敏感目录、工具连续失败两次时自动停止。这些条件不是对 AI 不信任，而是承认任何自动化在规模变大时都需要刹车。</p>
+<h2 id="失败后的出口"><a href="#失败后的出口" class="headerlink" title="失败后的出口"></a>失败后的出口</h2><p>流程能回头，还需要知道回到哪里。对文件来说，可以保留原文件或版本控制差异；对数据来说，可以记录批次 ID、修改前值和撤销脚本；对外部动作来说，要记录时间、对象和结果，便于补发或说明。没有这些信息，“撤销”两个字就只是一种愿望。</p>
+<p>Agent 遇到工具错误时也不应无限重试。把失败分成三类会更清楚：短暂网络问题可有限重试；缺少资料或权限应报告并等待；结果与预期不符则要停止，附上它已经做过什么。一个会诚实停下来的 Agent，远比一个坚持把错误做完的 Agent 更可靠。</p>
+<h2 id="最后再问一次：代价能否接受"><a href="#最后再问一次：代价能否接受" class="headerlink" title="最后再问一次：代价能否接受"></a>最后再问一次：代价能否接受</h2><p>设计流程时，我会在每个关键节点问：如果这里判断错了，最坏结果是什么？能否在十分钟内发现？能否在不伤害用户的情况下恢复？如果答案不好，就把动作再往后放，把预览再做得具体一点，或把权限再收窄一点。</p>
+<p>AI 的价值不在于让人放弃检查，而在于让检查发生得更早、更轻。一个能回头的流程，会让人敢于把合适的工作交给 Agent，也会让每一次自动化积累成可靠的经验，而不是一次碰运气的冒险。</p>
+<h2 id="小范围试运行，比一次放开更快"><a href="#小范围试运行，比一次放开更快" class="headerlink" title="小范围试运行，比一次放开更快"></a>小范围试运行，比一次放开更快</h2><p>新流程第一次上线时，可以先选十条数据、一个测试项目或一小组内部用户。观察它的输入、预览、执行和日志是否符合预期，再逐步扩大。这样做看似多了一步，实际上常常更省时间：若规则有误，修正十条样本远比恢复一万条记录轻松；若权限配置不对，也不会先影响所有人。</p>
+<p>试运行结束后，记录这次人工干预发生在哪里。如果每次都要手工改同一种格式，说明前置校验可以加强；如果每次都在确认同一个低风险动作，说明确认门槛可以更精细。可靠流程不是一开始就设计完美，而是在每次小范围反馈中把该自动的自动、该停下的停下。</p>
+<p>当“回头”成为默认能力时，大家反而更愿意尝试新的自动化。因为知道最坏结果被限制住，错误不会轻易扩大。谨慎并不等于慢，它是让速度能够长期持续的前提。</p>
+<h2 id="日志不是为了事后责备"><a href="#日志不是为了事后责备" class="headerlink" title="日志不是为了事后责备"></a>日志不是为了事后责备</h2><p>每一次可执行任务都应留下足够的操作记录：任务目标、输入范围、使用的工具、关键决定、执行时间、结果与失败原因。日志不必保存用户的全部原文，更不该存放不必要的敏感资料；它的作用是让人能回答“发生了什么”，而不是事后找一个人背锅。</p>
+<p>有了记录，恢复也会更准确。你能知道 Agent 只改了哪几份文件、在哪一步停止、是否已经发出过外部消息。没有记录时，人往往因为害怕遗漏而做更大的回滚；有记录时，可以把修复限制在真正受影响的范围内。</p>
+<p>可靠性不是模型单独拥有的属性，而是模型、工具、权限、预览、日志和人的确认一起构成的。流程越能说明自己的行动，越能在出错时保持冷静。</p>
+<p>在流程设计中，最值得优先补的是不可逆动作前的那一步。若发送、覆盖、删除前能多出一个清楚的预览和确认，很多后续复杂的恢复都不必发生。把刹车放在前面，通常比事后准备更大的救援更省力。</p>
+<p>这种设计并不会让 Agent 变慢得无法使用。相反，它把等待集中在真正高风险的地方，让低风险步骤仍然可以顺畅自动完成，速度和安全因此有了更好的分工。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI-%E5%B7%A5%E7%A8%8B/" class="category-chain-item">AI 工程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/AI/" class="print-no-link">#AI</a>
+      
+        <a href="/tags/Agent/" class="print-no-link">#Agent</a>
+      
+        <a href="/tags/%E5%8F%AF%E9%9D%A0%E6%80%A7/" class="print-no-link">#可靠性</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>模型会犯错，所以流程要能回头</div>
+      <div>https://nanyouwen.github.io/ai-agent-design-reversible-workflows/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年1月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/ai-prepare-repeated-materials-before-use/" title="把重复资料交给 AI 前，先做这三件事">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">把重复资料交给 AI 前，先做这三件事</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/agent-write-a-clear-task-brief/" title="第一次给 Agent 写任务说明：像交接工作一样具体">
+                        <span class="hidden-mobile">第一次给 Agent 写任务说明：像交接工作一样具体</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
