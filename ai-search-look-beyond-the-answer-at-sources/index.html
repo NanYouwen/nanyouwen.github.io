@@ -1,0 +1,683 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="AI 搜索最让人上瘾的地方，是它把原本要翻很多页面的过程压缩成一段顺滑的回答。问一个问题，几秒后就得到结论、要点和推荐阅读。可这种顺滑也容易让人跳过一个关键动作：它到底根据什么得出这个结论？如果答案涉及价格、规则、产品能力、新闻或任何会变化的事实，来源往往比措辞更值得先看。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一次 AI 搜索使用笔记：答案之外还要看来源">
+<meta property="og:url" content="https://nanyouwen.github.io/ai-search-look-beyond-the-answer-at-sources/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="AI 搜索最让人上瘾的地方，是它把原本要翻很多页面的过程压缩成一段顺滑的回答。问一个问题，几秒后就得到结论、要点和推荐阅读。可这种顺滑也容易让人跳过一个关键动作：它到底根据什么得出这个结论？如果答案涉及价格、规则、产品能力、新闻或任何会变化的事实，来源往往比措辞更值得先看。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-31T13:22:50.000Z">
+<meta property="article:modified_time" content="2026-01-31T13:22:50.000Z">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="AI 搜索">
+<meta property="article:tag" content="来源">
+<meta property="article:tag" content="核验">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>一次 AI 搜索使用笔记：答案之外还要看来源 - 南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="一次 AI 搜索使用笔记：答案之外还要看来源"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-31 21:22" pubdate>
+          2026年1月31日 21:22:50
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">一次 AI 搜索使用笔记：答案之外还要看来源</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>AI 搜索最让人上瘾的地方，是它把原本要翻很多页面的过程压缩成一段顺滑的回答。问一个问题，几秒后就得到结论、要点和推荐阅读。可这种顺滑也容易让人跳过一个关键动作：它到底根据什么得出这个结论？如果答案涉及价格、规则、产品能力、新闻或任何会变化的事实，来源往往比措辞更值得先看。</p>
+<span id="more"></span>
+
+<p>我现在把 AI 搜索的回答当作一张“阅读路线图”，而不是最终引用。它帮我定位可能的关键词、不同观点和原始资料；真正要用于决策、文章或对外沟通的内容，我仍会点回来源确认。这样做并不慢，反而比自己从零搜索更省力，因为第一轮范围已经被缩小了。</p>
+<h2 id="先问一个能被回答的问题"><a href="#先问一个能被回答的问题" class="headerlink" title="先问一个能被回答的问题"></a>先问一个能被回答的问题</h2><p>“某某工具怎么样”往往只会换来一段泛泛的评价。更适合 AI 搜索的问题带有对象、时间和判断角度，例如“截至本月，这个工具的免费版是否支持导出 CSV”“过去一年这个政策在什么日期发生过调整”“这三个方案在离线使用上分别有什么限制”。问题越具体，越容易检查来源是否真的支撑答案。</p>
+<p>如果问题涉及中文和英文资料，也可以要求它分别列出来源；若只想看官方说法，就明确限定到官网、文档、公告。不要把“搜索到的第一篇文章”默认当权威。媒体报道、个人评测、论坛讨论各有价值，但它们回答的是不同类型的问题。</p>
+<h2 id="看来源时我会检查四件事"><a href="#看来源时我会检查四件事" class="headerlink" title="看来源时我会检查四件事"></a>看来源时我会检查四件事</h2><p>第一，看<strong>是谁写的</strong>。产品功能、价格和政策最好回到官方文档或公告；学术结论尽量找论文、研究机构或原始数据；经验性问题可以参考实践文章，但要把它当作个案。第二，看<strong>什么时候写的</strong>。尤其软件版本、法规、套餐和人物信息，旧文章可能描述的是早已不存在的状态。</p>
+<p>第三，看<strong>来源是否真的说了这句话</strong>。AI 有时会把两段相近的信息拼成一个顺畅结论，或者只引用了支持其中一半的页面。点开后快速找关键词、数字和限定条件，花不了多久。第四，看<strong>是否还有相反证据</strong>。一个回答若只罗列支持观点的链接，可能只是搜索范围还不够广。多看一两个不同立场的来源，能避免被最流畅的叙述带着走。</p>
+<h2 id="把不确定性也写下来"><a href="#把不确定性也写下来" class="headerlink" title="把不确定性也写下来"></a>把不确定性也写下来</h2><p>好的搜索结果不应该只给“是”或“不是”，还要能说明条件。例如某功能可能只在企业版提供，某规则只适用于某地区，某篇报告的数据截至去年。把这些条件保留下来，后续引用时才不会把一条局部结论扩大成普遍事实。</p>
+<p>当 AI 没有给出处、来源打不开、资料之间互相矛盾时，最好的下一步不是继续换一种问法直到得到想要的答案，而是把它标为待确认。可以让 AI 帮你列出还缺什么资料、应当问谁、哪些词值得继续搜索。它依然在帮忙，只是没有假装已经知道。</p>
+<h2 id="一次实际使用的顺序"><a href="#一次实际使用的顺序" class="headerlink" title="一次实际使用的顺序"></a>一次实际使用的顺序</h2><ol>
+<li>先写清对象、时间范围和需要判断的维度。</li>
+<li>让 AI 给结论、关键词和每条结论对应的链接。</li>
+<li>优先打开一手来源，核对关键数字、日期和限定条件。</li>
+<li>对重要或容易变化的事实，再找一个独立来源交叉确认。</li>
+<li>记录“截至何时、来自哪里、仍有哪些不确定”，再把它写进自己的结论。</li>
+</ol>
+<p>AI 搜索没有让核验变得不重要，它只是让我们有更多时间去做核验。把答案当入口、把来源当证据，既能享受它带来的速度，也不会因为一句听起来很像真的话，替错误背书。</p>
+<h2 id="重要结论，给它留一个小档案"><a href="#重要结论，给它留一个小档案" class="headerlink" title="重要结论，给它留一个小档案"></a>重要结论，给它留一个小档案</h2><p>当搜索结果会被用于方案、文章或对外说明时，可以顺手记下三个东西：查询日期、原始来源、自己最终采用的表述。这样几个月后再次看到同一句话，不必猜它是来自 AI 的概括、某篇旧文章，还是已经核验过的官方资料。对不断变化的信息，日期尤其重要；它提醒读者这是一份当时的判断，而不是永远有效的事实。</p>
+<p>如果后来发现来源更新或原结论有误，也可以把修正留下来。承认“此前引用的版本已经过期，现按新公告更新”不会削弱内容，反而说明你愿意对信息负责。AI 搜索让资料流动更快，也更需要这样一条从答案回到证据、再从证据更新答案的循环。</p>
+<p>把这个习惯坚持下来，AI 搜索就不只是节省检索时间的工具。它会帮助你建立更清楚的信息判断：什么该马上相信，什么要点开确认，什么目前只能标为未知。这个判断力最终属于使用工具的人，而不是工具本身。</p>
+<h2 id="速度和慎重并不冲突"><a href="#速度和慎重并不冲突" class="headerlink" title="速度和慎重并不冲突"></a>速度和慎重并不冲突</h2><p>有人担心每次点开来源会把 AI 搜索的效率抵消。其实绝大多数任务不需要逐字核验全部内容。可以按影响分层：随手了解的话，看来源标题和日期即可；要写进方案或文章的，核对关键结论；会影响资金、合规、客户或公开承诺的，再找独立来源交叉确认。把精力用在风险最高的地方，既不会过度谨慎，也不会盲目相信。</p>
+<p>对搜索结果保留一点耐心还有另一个好处：你会逐渐认识哪些来源长期可靠、哪些站点常常过期、哪些问题总需要回到一手文档。这种知识会反过来提升下一次提问的质量。AI 负责帮你更快抵达资料，人则负责决定何时已经拥有足够证据。</p>
+<p>速度真正带来的价值，是让人有余裕做更好的判断，而不是让判断本身消失。</p>
+<p>若来源是付费墙、社交平台转述或无法长期访问的页面，也可以在笔记里说明这一点。可追溯性有时不完美，但把限制写出来，总比日后只剩一句没有出处的结论更负责。</p>
+<p>搜索的结尾，不妨再问自己一次：这条信息若被别人追问，我能否指出它来自哪里、在哪些条件下成立？能回答这个问题，才算把 AI 给出的线索真正变成了自己的判断。</p>
+<h2 id="记录时保留最小的来源线索"><a href="#记录时保留最小的来源线索" class="headerlink" title="记录时保留最小的来源线索"></a>记录时保留最小的来源线索</h2><p>把有用结论放进笔记或方案时，旁边留上来源标题、链接、发布日期和访问日期。若内容来自多处，不必把所有原文复制进去，只要标明哪一句结论主要依赖哪一份资料。以后来源更新、链接失效或同事提出疑问时，自己和别人都能从这个线索重新核对，而不是再次依赖一段无法回溯的摘要。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI-%E5%AE%9E%E8%B7%B5/" class="category-chain-item">AI 实践</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/AI-%E6%90%9C%E7%B4%A2/" class="print-no-link">#AI 搜索</a>
+      
+        <a href="/tags/%E6%9D%A5%E6%BA%90/" class="print-no-link">#来源</a>
+      
+        <a href="/tags/%E6%A0%B8%E9%AA%8C/" class="print-no-link">#核验</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>一次 AI 搜索使用笔记：答案之外还要看来源</div>
+      <div>https://nanyouwen.github.io/ai-search-look-beyond-the-answer-at-sources/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>南有文</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年1月31日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/ai-rag-in-plain-language/" title="RAG 用人话解释：让 AI 先翻资料再回答">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RAG 用人话解释：让 AI 先翻资料再回答</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/ai-prepare-repeated-materials-before-use/" title="把重复资料交给 AI 前，先做这三件事">
+                        <span class="hidden-mobile">把重复资料交给 AI 前，先做这三件事</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
