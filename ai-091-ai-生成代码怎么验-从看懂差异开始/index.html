@@ -19,18 +19,18 @@
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
   
-    <meta name="description" content="如果只看演示，很多 AI 功能都显得轻松；一旦放进真实工作，细节马上会一件件找上门。这篇记录的是“AI 生成代码怎么验：从看懂差异开始”背后的一个小问题：通过看差异、运行、测边界、查安全来判断代码能否合并。我不把它写成万能答案，只把自己会怎样观察、怎样动手、什么时候停下来留给人说明白。对正在尝试 Agent 的人来说，能说清楚边界，往往比多会一个名词更重要。">
+    <meta name="description" content="如果只看演示，很多 AI 功能都显得轻松；一旦放进真实工作，细节马上会一件件找上门。我想从“代码能编译却改变了原有行为”这个小场景开始，看看通过看差异、运行、测边界、查安全来判断代码能否合并在真实工作里会遇到什么摩擦。我不把它写成万能答案，只把自己会怎样观察、怎样动手、什么时候停下来留给人说明白。对正在尝试 Agent 的人来说，能说清楚边界，往往比多会一个名词更重要。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AI 生成代码怎么验：从看懂差异开始">
 <meta property="og:url" content="https://nanyouwen.github.io/ai-091-ai-%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81%E6%80%8E%E4%B9%88%E9%AA%8C-%E4%BB%8E%E7%9C%8B%E6%87%82%E5%B7%AE%E5%BC%82%E5%BC%80%E5%A7%8B/index.html">
 <meta property="og:site_name" content="南有文的小破站">
-<meta property="og:description" content="如果只看演示，很多 AI 功能都显得轻松；一旦放进真实工作，细节马上会一件件找上门。这篇记录的是“AI 生成代码怎么验：从看懂差异开始”背后的一个小问题：通过看差异、运行、测边界、查安全来判断代码能否合并。我不把它写成万能答案，只把自己会怎样观察、怎样动手、什么时候停下来留给人说明白。对正在尝试 Agent 的人来说，能说清楚边界，往往比多会一个名词更重要。">
+<meta property="og:description" content="如果只看演示，很多 AI 功能都显得轻松；一旦放进真实工作，细节马上会一件件找上门。我想从“代码能编译却改变了原有行为”这个小场景开始，看看通过看差异、运行、测边界、查安全来判断代码能否合并在真实工作里会遇到什么摩擦。我不把它写成万能答案，只把自己会怎样观察、怎样动手、什么时候停下来留给人说明白。对正在尝试 Agent 的人来说，能说清楚边界，往往比多会一个名词更重要。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-12T00:57:17.000Z">
 <meta property="article:modified_time" content="2026-04-12T00:57:17.000Z">
 <meta property="article:author" content="南有文">
-<meta property="article:tag" content="AI">
 <meta property="article:tag" content="测试">
+<meta property="article:tag" content="AI">
 <meta property="article:tag" content="代码审查">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.1k 字
         
       </span>
     
@@ -279,7 +279,7 @@
             
               <div class="markdown-body">
                 
-                <p>如果只看演示，很多 AI 功能都显得轻松；一旦放进真实工作，细节马上会一件件找上门。这篇记录的是“AI 生成代码怎么验：从看懂差异开始”背后的一个小问题：通过看差异、运行、测边界、查安全来判断代码能否合并。我不把它写成万能答案，只把自己会怎样观察、怎样动手、什么时候停下来留给人说明白。对正在尝试 Agent 的人来说，能说清楚边界，往往比多会一个名词更重要。</p>
+                <p>如果只看演示，很多 AI 功能都显得轻松；一旦放进真实工作，细节马上会一件件找上门。我想从“代码能编译却改变了原有行为”这个小场景开始，看看通过看差异、运行、测边界、查安全来判断代码能否合并在真实工作里会遇到什么摩擦。我不把它写成万能答案，只把自己会怎样观察、怎样动手、什么时候停下来留给人说明白。对正在尝试 Agent 的人来说，能说清楚边界，往往比多会一个名词更重要。</p>
 <span id="more"></span>
 
 <h2 id="先把场景摆到桌面上"><a href="#先把场景摆到桌面上" class="headerlink" title="先把场景摆到桌面上"></a>先把场景摆到桌面上</h2><p>最容易被忽略的场景是：代码能编译却改变了原有行为。在演示里，事情通常从一个干净的输入开始，工具也总能一次成功；真实环境却会有旧文件、半截信息、权限差异和临时变化。若不先承认这些摩擦，Agent 只会把不确定性藏到一段很顺滑的文字里，最后仍然需要人返工。</p>
@@ -338,9 +338,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/AI/" class="print-no-link">#AI</a>
-      
         <a href="/tags/%E6%B5%8B%E8%AF%95/" class="print-no-link">#测试</a>
+      
+        <a href="/tags/AI/" class="print-no-link">#AI</a>
       
         <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/" class="print-no-link">#代码审查</a>
       
