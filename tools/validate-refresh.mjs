@@ -10,7 +10,7 @@ const fieldPattern = (name) => new RegExp(`^${name}:\\s*["']?(.+?)["']?\\s*$`, '
 
 const files = fs.existsSync(refreshDir)
   ? fs.readdirSync(refreshDir, { recursive: true })
-    .filter((file) => file.endsWith('.md'))
+    .filter((file) => file.endsWith('.md') && /batch-(01|02|03)[\\/]/.test(file))
     .map((file) => path.join(refreshDir, file))
   : [];
 
