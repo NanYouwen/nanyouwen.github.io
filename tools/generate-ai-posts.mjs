@@ -54,7 +54,7 @@ const openings = [
 const makeBody = (post, index) => {
   const [number, date, title, category, tags, core, scene, action] = post;
   const opening = openings[index % openings.length];
-  return `${opening}这篇记录的是“${title}”背后的一个小问题：${core}。我不把它写成万能答案，只把自己会怎样观察、怎样动手、什么时候停下来留给人说明白。对正在尝试 Agent 的人来说，能说清楚边界，往往比多会一个名词更重要。
+  return `${opening}我想从“${scene}”这个小场景开始，看看${core}在真实工作里会遇到什么摩擦。我不把它写成万能答案，只把自己会怎样观察、怎样动手、什么时候停下来留给人说明白。对正在尝试 Agent 的人来说，能说清楚边界，往往比多会一个名词更重要。
 
 <!-- more -->
 

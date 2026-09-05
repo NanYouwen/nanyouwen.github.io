@@ -53,7 +53,7 @@ const openings = [
 
 const bodyFor = (post, index) => {
   const [number, date, title, category, tags, focus, scene, action] = post;
-  return `${openings[index % openings.length]}这篇文章围绕“${title}”展开，重点不是背一套术语，而是把${focus}放到一次可以复现的小任务里。${scene}。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+  return `${openings[index % openings.length]}这次我从“${scene}”这个具体瞬间开始，看看${focus}怎样落到手边的工作里。这里不需要先背一套术语，先把输入、动作和结果摆出来，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
 
 <!-- more -->
 
