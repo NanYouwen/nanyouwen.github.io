@@ -15,8 +15,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
@@ -24,12 +22,12 @@
     <meta name="description" content="列表渲染v-for ​		我们可以使用 v-for 指令基于一个数组来渲染一个列表。v-for 指令的值需要使用 item in items 形式的特殊语法，其中 items 是源数据的数组，而 item 是迭代项的别名： 1const items &#x3D; ref([&#123; message: &#x27;Foo&#x27; &#125;, &#123; message: &#x27;Bar&amp;#x">
 <meta property="og:type" content="article">
 <meta property="og:title" content="条件渲染">
-<meta property="og:url" content="https://nanyouwen.github.io/vue%E5%9F%BA%E7%A1%80-%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93/">
+<meta property="og:url" content="https://nanyouwen.github.io/vue%E5%9F%BA%E7%A1%80-%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93/index.html">
 <meta property="og:site_name" content="南有文的小破站">
 <meta property="og:description" content="列表渲染v-for ​		我们可以使用 v-for 指令基于一个数组来渲染一个列表。v-for 指令的值需要使用 item in items 形式的特殊语法，其中 items 是源数据的数组，而 item 是迭代项的别名： 1const items &#x3D; ref([&#123; message: &#x27;Foo&#x27; &#125;, &#123; message: &#x27;Bar&amp;#x">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-10T21:18:12.000Z">
-<meta property="article:modified_time" content="2024-12-27T08:14:27.680Z">
+<meta property="article:modified_time" content="2024-12-27T08:14:27.000Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="Java、python、go">
 <meta name="twitter:card" content="summary_large_image">
@@ -132,7 +130,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
+                <i class="icon-home-fill"></i>
                 <span>首页</span>
               </a>
             </li>
@@ -144,7 +142,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
+                <i class="icon-archive-fill"></i>
                 <span>归档</span>
               </a>
             </li>
@@ -156,7 +154,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
+                <i class="icon-category-fill"></i>
                 <span>分类</span>
               </a>
             </li>
@@ -168,7 +166,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
+                <i class="icon-user-fill"></i>
                 <span>关于</span>
               </a>
             </li>
@@ -215,7 +213,7 @@
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2023-06-11 05:18" pubdate>
-          2023年6月11日 凌晨
+          2023年6月11日 05:18:12
         </time>
       </span>
     
@@ -226,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          2.8k 字
         
       </span>
     
@@ -237,21 +235,12 @@
         
         
         
-          21 分钟
+          24 分钟
         
       </span>
     
 
     
-    
-      
-        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="leancloud-page-views"></span> 次
-        </span>
-        
-      
-      
     
   </div>
 
@@ -407,6 +396,105 @@
 <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">- return numbers.reverse()</span><br><span class="hljs-addition">+ return [...numbers].reverse()</span><br></code></pre></td></tr></table></figure>
 
                 
+<pre><code class="hljs">          &lt;/div&gt;
+        
+        &lt;hr/&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;post-metas my-3&quot;&gt;
+
+&lt;div class=&quot;post-meta mr-3 d-flex align-items-center&quot;&gt;
+  &lt;i class=&quot;iconfont icon-category&quot;&gt;&lt;/i&gt;
+  
+</code></pre>
+<span class="category-chains">
+  
+  
+    
+<pre><code class="hljs">  &lt;span class=&quot;category-chain&quot;&gt;
+    
+</code></pre>
+<p>  <a href="/categories/vue%E5%9F%BA%E7%A1%80/" class="category-chain-item">vue基础</a></p>
+<pre><code class="hljs">  &lt;/span&gt;
+</code></pre>
+</span>
+
+<pre><code class="hljs">&lt;/div&gt;
+</code></pre>
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>条件渲染</div>
+      <div>https://nanyouwen.github.io/vue基础-列表渲染/</div>
+    </div>
+    <div class="license-meta">
+      
+<pre><code class="hljs">    &lt;div class=&quot;license-meta-item&quot;&gt;
+      &lt;div&gt;作者&lt;/div&gt;
+      &lt;div&gt;南有文&lt;/div&gt;
+    &lt;/div&gt;
+  
+  
+    &lt;div class=&quot;license-meta-item license-meta-date&quot;&gt;
+      &lt;div&gt;发布于&lt;/div&gt;
+      &lt;div&gt;2023年6月11日&lt;/div&gt;
+    &lt;/div&gt;
+  
+  
+  
+    &lt;div class=&quot;license-meta-item&quot;&gt;
+      &lt;div&gt;许可协议&lt;/div&gt;
+      &lt;div&gt;
+        
+          
+          
+            &lt;a class=&quot;print-no-link&quot; target=&quot;_blank&quot; href=&quot;https://creativecommons.org/licenses/by/4.0/&quot;&gt;
+              &lt;span class=&quot;hint--top hint--rounded&quot; aria-label=&quot;BY - 署名&quot;&gt;
+                &lt;i class=&quot;iconfont icon-cc-by&quot;&gt;&lt;/i&gt;
+              &lt;/span&gt;
+            &lt;/a&gt;
+          
+        
+      &lt;/div&gt;
+    &lt;/div&gt;
+  
+&lt;/div&gt;
+&lt;div class=&quot;license-icon iconfont&quot;&gt;&lt;/div&gt;
+</code></pre>
+  </div>
+
+
+
+              
+<pre><code class="hljs">            &lt;div class=&quot;post-prevnext my-3&quot;&gt;
+              &lt;article class=&quot;post-prev col-6&quot;&gt;
+                
+                
+                  &lt;a href=&quot;/vue%E5%9F%BA%E7%A1%80-%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/&quot; title=&quot;事件处理&quot;&gt;
+                    &lt;i class=&quot;iconfont icon-arrowleft&quot;&gt;&lt;/i&gt;
+                    &lt;span class=&quot;hidden-mobile&quot;&gt;事件处理&lt;/span&gt;
+                    &lt;span class=&quot;visible-mobile&quot;&gt;上一篇&lt;/span&gt;
+                  &lt;/a&gt;
+                
+              &lt;/article&gt;
+              &lt;article class=&quot;post-next col-6&quot;&gt;
+                
+                
+                  &lt;a href=&quot;/vue%E5%9F%BA%E7%A1%80-%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/&quot; title=&quot;条件渲染&quot;&gt;
+                    &lt;span class=&quot;hidden-mobile&quot;&gt;条件渲染&lt;/span&gt;
+                    &lt;span class=&quot;visible-mobile&quot;&gt;下一篇&lt;/span&gt;
+                    &lt;i class=&quot;iconfont icon-arrowright&quot;&gt;&lt;/i&gt;
+                  &lt;/a&gt;
+                
+              &lt;/article&gt;
+            &lt;/div&gt;
+</code></pre>
+
+                
               </div>
             
             <hr/>
@@ -434,6 +522,13 @@
 
     </div>
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Java%E3%80%81python%E3%80%81go/" class="print-no-link">#Java、python、go</a>
+      
+    </div>
   
 </div>
 
@@ -602,7 +697,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
     </div>
   
   

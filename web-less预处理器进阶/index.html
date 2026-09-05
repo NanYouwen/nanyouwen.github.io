@@ -15,8 +15,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
@@ -24,12 +22,12 @@
     <meta name="description" content="Less(css预处理器)进阶用法作用域与命名空间​		Less 中可以定义局部变量，防止变量污染。 12345678910@outer-variable: #f00;.outer &#123;  @inner-variable: #0f0;  .inner &#123;    color: @inner-variable;    background-color: @outer-variable">
 <meta property="og:type" content="article">
 <meta property="og:title" content="web-less预处理器进阶">
-<meta property="og:url" content="https://nanyouwen.github.io/web-less%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%9B%E9%98%B6/">
+<meta property="og:url" content="https://nanyouwen.github.io/web-less%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%9B%E9%98%B6/index.html">
 <meta property="og:site_name" content="南有文的小破站">
 <meta property="og:description" content="Less(css预处理器)进阶用法作用域与命名空间​		Less 中可以定义局部变量，防止变量污染。 12345678910@outer-variable: #f00;.outer &#123;  @inner-variable: #0f0;  .inner &#123;    color: @inner-variable;    background-color: @outer-variable">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-28T14:41:11.000Z">
-<meta property="article:modified_time" content="2025-02-19T03:30:06.853Z">
+<meta property="article:modified_time" content="2025-02-19T03:30:06.000Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="Java、python、go">
 <meta name="twitter:card" content="summary_large_image">
@@ -132,7 +130,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
+                <i class="icon-home-fill"></i>
                 <span>首页</span>
               </a>
             </li>
@@ -144,7 +142,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
+                <i class="icon-archive-fill"></i>
                 <span>归档</span>
               </a>
             </li>
@@ -156,7 +154,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
+                <i class="icon-category-fill"></i>
                 <span>分类</span>
               </a>
             </li>
@@ -168,7 +166,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
+                <i class="icon-user-fill"></i>
                 <span>关于</span>
               </a>
             </li>
@@ -215,7 +213,7 @@
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2023-07-28 22:41" pubdate>
-          2023年7月28日 晚上
+          2023年7月28日 22:41:11
         </time>
       </span>
     
@@ -226,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          488 字
+          869 字
         
       </span>
     
@@ -237,21 +235,12 @@
         
         
         
-          5 分钟
+          8 分钟
         
       </span>
     
 
     
-    
-      
-        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="leancloud-page-views"></span> 次
-        </span>
-        
-      
-      
     
   </div>
 
@@ -326,6 +315,105 @@
 </ol>
 
                 
+<pre><code class="hljs">          &lt;/div&gt;
+        
+        &lt;hr/&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;post-metas my-3&quot;&gt;
+
+&lt;div class=&quot;post-meta mr-3 d-flex align-items-center&quot;&gt;
+  &lt;i class=&quot;iconfont icon-category&quot;&gt;&lt;/i&gt;
+  
+</code></pre>
+<span class="category-chains">
+  
+  
+    
+<pre><code class="hljs">  &lt;span class=&quot;category-chain&quot;&gt;
+    
+</code></pre>
+<p>  <a href="/categories/web/" class="category-chain-item">web</a></p>
+<pre><code class="hljs">  &lt;/span&gt;
+</code></pre>
+</span>
+
+<pre><code class="hljs">&lt;/div&gt;
+</code></pre>
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>web-less预处理器进阶</div>
+      <div>https://nanyouwen.github.io/web-less预处理器进阶/</div>
+    </div>
+    <div class="license-meta">
+      
+<pre><code class="hljs">    &lt;div class=&quot;license-meta-item&quot;&gt;
+      &lt;div&gt;作者&lt;/div&gt;
+      &lt;div&gt;南有文&lt;/div&gt;
+    &lt;/div&gt;
+  
+  
+    &lt;div class=&quot;license-meta-item license-meta-date&quot;&gt;
+      &lt;div&gt;发布于&lt;/div&gt;
+      &lt;div&gt;2023年7月28日&lt;/div&gt;
+    &lt;/div&gt;
+  
+  
+  
+    &lt;div class=&quot;license-meta-item&quot;&gt;
+      &lt;div&gt;许可协议&lt;/div&gt;
+      &lt;div&gt;
+        
+          
+          
+            &lt;a class=&quot;print-no-link&quot; target=&quot;_blank&quot; href=&quot;https://creativecommons.org/licenses/by/4.0/&quot;&gt;
+              &lt;span class=&quot;hint--top hint--rounded&quot; aria-label=&quot;BY - 署名&quot;&gt;
+                &lt;i class=&quot;iconfont icon-cc-by&quot;&gt;&lt;/i&gt;
+              &lt;/span&gt;
+            &lt;/a&gt;
+          
+        
+      &lt;/div&gt;
+    &lt;/div&gt;
+  
+&lt;/div&gt;
+&lt;div class=&quot;license-icon iconfont&quot;&gt;&lt;/div&gt;
+</code></pre>
+  </div>
+
+
+
+              
+<pre><code class="hljs">            &lt;div class=&quot;post-prevnext my-3&quot;&gt;
+              &lt;article class=&quot;post-prev col-6&quot;&gt;
+                
+                
+                  &lt;a href=&quot;/web-js%E4%B8%8EjQuery/&quot; title=&quot;js与jQuery&quot;&gt;
+                    &lt;i class=&quot;iconfont icon-arrowleft&quot;&gt;&lt;/i&gt;
+                    &lt;span class=&quot;hidden-mobile&quot;&gt;js与jQuery&lt;/span&gt;
+                    &lt;span class=&quot;visible-mobile&quot;&gt;上一篇&lt;/span&gt;
+                  &lt;/a&gt;
+                
+              &lt;/article&gt;
+              &lt;article class=&quot;post-next col-6&quot;&gt;
+                
+                
+                  &lt;a href=&quot;/web-less%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/&quot; title=&quot;web-less预处理器&quot;&gt;
+                    &lt;span class=&quot;hidden-mobile&quot;&gt;web-less预处理器&lt;/span&gt;
+                    &lt;span class=&quot;visible-mobile&quot;&gt;下一篇&lt;/span&gt;
+                    &lt;i class=&quot;iconfont icon-arrowright&quot;&gt;&lt;/i&gt;
+                  &lt;/a&gt;
+                
+              &lt;/article&gt;
+            &lt;/div&gt;
+</code></pre>
+
+                
               </div>
             
             <hr/>
@@ -353,6 +441,13 @@
 
     </div>
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Java%E3%80%81python%E3%80%81go/" class="print-no-link">#Java、python、go</a>
+      
+    </div>
   
 </div>
 
@@ -521,7 +616,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
     </div>
   
   

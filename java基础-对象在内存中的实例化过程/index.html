@@ -15,8 +15,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
@@ -24,7 +22,7 @@
     <meta name="description" content="java对象在内存中实例化的过程​	在Java类的实例化过程中，内存会使用到三个区域：栈区、堆区、方法区  堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身 栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java对象在内存中的实例化过程">
-<meta property="og:url" content="https://nanyouwen.github.io/java%E5%9F%BA%E7%A1%80-%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/">
+<meta property="og:url" content="https://nanyouwen.github.io/java%E5%9F%BA%E7%A1%80-%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/index.html">
 <meta property="og:site_name" content="南有文的小破站">
 <meta property="og:description" content="java对象在内存中实例化的过程​	在Java类的实例化过程中，内存会使用到三个区域：栈区、堆区、方法区  堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身 栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他">
 <meta property="og:locale" content="zh_CN">
@@ -35,7 +33,7 @@
 <meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101009168.png">
 <meta property="og:image" content="https://nanyouwen.github.io/img/java%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/image-20240801101521000.png">
 <meta property="article:published_time" content="2023-04-11T00:47:37.000Z">
-<meta property="article:modified_time" content="2025-01-07T08:22:36.585Z">
+<meta property="article:modified_time" content="2025-01-07T08:22:36.000Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="Java、python、go">
 <meta name="twitter:card" content="summary_large_image">
@@ -139,7 +137,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
+                <i class="icon-home-fill"></i>
                 <span>首页</span>
               </a>
             </li>
@@ -151,7 +149,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
+                <i class="icon-archive-fill"></i>
                 <span>归档</span>
               </a>
             </li>
@@ -163,7 +161,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
+                <i class="icon-category-fill"></i>
                 <span>分类</span>
               </a>
             </li>
@@ -175,7 +173,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
+                <i class="icon-user-fill"></i>
                 <span>关于</span>
               </a>
             </li>
@@ -222,7 +220,7 @@
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2023-04-11 08:47" pubdate>
-          2023年4月11日 早上
+          2023年4月11日 08:47:37
         </time>
       </span>
     
@@ -233,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          712 字
+          1.1k 字
         
       </span>
     
@@ -244,21 +242,12 @@
         
         
         
-          6 分钟
+          9 分钟
         
       </span>
     
 
     
-    
-      
-        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="leancloud-page-views"></span> 次
-        </span>
-        
-      
-      
     
   </div>
 
@@ -319,6 +308,99 @@
 <p>以上就是Java对象在内存中实例化的全过程。</p>
 
                 
+<pre><code class="hljs">          &lt;/div&gt;
+        
+        &lt;hr/&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;post-metas my-3&quot;&gt;
+
+&lt;div class=&quot;post-meta mr-3 d-flex align-items-center&quot;&gt;
+  &lt;i class=&quot;iconfont icon-category&quot;&gt;&lt;/i&gt;
+  
+</code></pre>
+<span class="category-chains">
+  
+  
+    
+<pre><code class="hljs">  &lt;span class=&quot;category-chain&quot;&gt;
+    
+</code></pre>
+<p>  <a href="/categories/java%E5%9F%BA%E7%A1%80/" class="category-chain-item">java基础</a></p>
+<pre><code class="hljs">  &lt;/span&gt;
+</code></pre>
+</span>
+
+<pre><code class="hljs">&lt;/div&gt;
+</code></pre>
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>java对象在内存中的实例化过程</div>
+      <div>https://nanyouwen.github.io/java基础-对象在内存中的实例化过程/</div>
+    </div>
+    <div class="license-meta">
+      
+<pre><code class="hljs">    &lt;div class=&quot;license-meta-item&quot;&gt;
+      &lt;div&gt;作者&lt;/div&gt;
+      &lt;div&gt;南有文&lt;/div&gt;
+    &lt;/div&gt;
+  
+  
+    &lt;div class=&quot;license-meta-item license-meta-date&quot;&gt;
+      &lt;div&gt;发布于&lt;/div&gt;
+      &lt;div&gt;2023年4月11日&lt;/div&gt;
+    &lt;/div&gt;
+  
+  
+  
+    &lt;div class=&quot;license-meta-item&quot;&gt;
+      &lt;div&gt;许可协议&lt;/div&gt;
+      &lt;div&gt;
+        
+          
+          
+            &lt;a class=&quot;print-no-link&quot; target=&quot;_blank&quot; href=&quot;https://creativecommons.org/licenses/by/4.0/&quot;&gt;
+              &lt;span class=&quot;hint--top hint--rounded&quot; aria-label=&quot;BY - 署名&quot;&gt;
+                &lt;i class=&quot;iconfont icon-cc-by&quot;&gt;&lt;/i&gt;
+              &lt;/span&gt;
+            &lt;/a&gt;
+          
+        
+      &lt;/div&gt;
+    &lt;/div&gt;
+  
+&lt;/div&gt;
+&lt;div class=&quot;license-icon iconfont&quot;&gt;&lt;/div&gt;
+</code></pre>
+  </div>
+
+
+
+              
+<pre><code class="hljs">            &lt;div class=&quot;post-prevnext my-3&quot;&gt;
+              &lt;article class=&quot;post-prev col-6&quot;&gt;
+                
+                
+                  &lt;a href=&quot;/java%E5%9F%BA%E7%A1%80-JVM%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/&quot; title=&quot;JVM基本概念&quot;&gt;
+                    &lt;i class=&quot;iconfont icon-arrowleft&quot;&gt;&lt;/i&gt;
+                    &lt;span class=&quot;hidden-mobile&quot;&gt;JVM基本概念&lt;/span&gt;
+                    &lt;span class=&quot;visible-mobile&quot;&gt;上一篇&lt;/span&gt;
+                  &lt;/a&gt;
+                
+              &lt;/article&gt;
+              &lt;article class=&quot;post-next col-6&quot;&gt;
+                
+                
+              &lt;/article&gt;
+            &lt;/div&gt;
+</code></pre>
+
+                
               </div>
             
             <hr/>
@@ -346,6 +428,13 @@
 
     </div>
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Java%E3%80%81python%E3%80%81go/" class="print-no-link">#Java、python、go</a>
+      
+    </div>
   
 </div>
 
@@ -508,7 +597,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
     </div>
   
   

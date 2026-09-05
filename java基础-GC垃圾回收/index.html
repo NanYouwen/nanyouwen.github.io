@@ -15,8 +15,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
@@ -24,7 +22,7 @@
     <meta name="description" content="GC垃圾回收想要实现垃圾自动回收，我们需要考虑三件事：  GC的作用区域：方法区和堆 JVM在进行GC时并不是对以下三个区统一回收，大部分时候都是回收新生区：  新生区 幸存区 老年区  GC两种种类：轻GC（普通GC，一般是清理新生区，偶尔清理幸存区）和重GC（全局GC） 引用计数法（JVM一般不采用这种方式）  复制算法  每次GC都会将Eden中活的对象移到幸存区中，一旦Eden区被GC后，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GC垃圾回收">
-<meta property="og:url" content="https://nanyouwen.github.io/java%E5%9F%BA%E7%A1%80-GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+<meta property="og:url" content="https://nanyouwen.github.io/java%E5%9F%BA%E7%A1%80-GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/index.html">
 <meta property="og:site_name" content="南有文的小破站">
 <meta property="og:description" content="GC垃圾回收想要实现垃圾自动回收，我们需要考虑三件事：  GC的作用区域：方法区和堆 JVM在进行GC时并不是对以下三个区统一回收，大部分时候都是回收新生区：  新生区 幸存区 老年区  GC两种种类：轻GC（普通GC，一般是清理新生区，偶尔清理幸存区）和重GC（全局GC） 引用计数法（JVM一般不采用这种方式）  复制算法  每次GC都会将Eden中活的对象移到幸存区中，一旦Eden区被GC后，">
 <meta property="og:locale" content="zh_CN">
@@ -33,7 +31,7 @@
 <meta property="og:image" content="https://nanyouwen.github.io/img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801130446501.png">
 <meta property="og:image" content="https://nanyouwen.github.io/img/GC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/image-20240801130941518.png">
 <meta property="article:published_time" content="2023-04-29T04:09:51.000Z">
-<meta property="article:modified_time" content="2024-12-27T08:15:43.486Z">
+<meta property="article:modified_time" content="2024-12-27T08:15:43.000Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="Java、python、go">
 <meta name="twitter:card" content="summary_large_image">
@@ -137,7 +135,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
+                <i class="icon-home-fill"></i>
                 <span>首页</span>
               </a>
             </li>
@@ -149,7 +147,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
+                <i class="icon-archive-fill"></i>
                 <span>归档</span>
               </a>
             </li>
@@ -161,7 +159,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
+                <i class="icon-category-fill"></i>
                 <span>分类</span>
               </a>
             </li>
@@ -173,7 +171,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
+                <i class="icon-user-fill"></i>
                 <span>关于</span>
               </a>
             </li>
@@ -220,7 +218,7 @@
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2023-04-29 12:09" pubdate>
-          2023年4月29日 中午
+          2023年4月29日 12:09:51
         </time>
       </span>
     
@@ -231,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          468 字
+          875 字
         
       </span>
     
@@ -242,21 +240,12 @@
         
         
         
-          4 分钟
+          8 分钟
         
       </span>
     
 
     
-    
-      
-        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="leancloud-page-views"></span> 次
-        </span>
-        
-      
-      
     
   </div>
 
@@ -340,6 +329,105 @@
 <p><strong>JVM调优就是选择合适的内存设置以及垃圾收集器GC的选择</strong></p>
 
                 
+<pre><code class="hljs">          &lt;/div&gt;
+        
+        &lt;hr/&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;post-metas my-3&quot;&gt;
+
+&lt;div class=&quot;post-meta mr-3 d-flex align-items-center&quot;&gt;
+  &lt;i class=&quot;iconfont icon-category&quot;&gt;&lt;/i&gt;
+  
+</code></pre>
+<span class="category-chains">
+  
+  
+    
+<pre><code class="hljs">  &lt;span class=&quot;category-chain&quot;&gt;
+    
+</code></pre>
+<p>  <a href="/categories/java%E5%9F%BA%E7%A1%80/" class="category-chain-item">java基础</a></p>
+<pre><code class="hljs">  &lt;/span&gt;
+</code></pre>
+</span>
+
+<pre><code class="hljs">&lt;/div&gt;
+</code></pre>
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>GC垃圾回收</div>
+      <div>https://nanyouwen.github.io/java基础-GC垃圾回收/</div>
+    </div>
+    <div class="license-meta">
+      
+<pre><code class="hljs">    &lt;div class=&quot;license-meta-item&quot;&gt;
+      &lt;div&gt;作者&lt;/div&gt;
+      &lt;div&gt;南有文&lt;/div&gt;
+    &lt;/div&gt;
+  
+  
+    &lt;div class=&quot;license-meta-item license-meta-date&quot;&gt;
+      &lt;div&gt;发布于&lt;/div&gt;
+      &lt;div&gt;2023年4月29日&lt;/div&gt;
+    &lt;/div&gt;
+  
+  
+  
+    &lt;div class=&quot;license-meta-item&quot;&gt;
+      &lt;div&gt;许可协议&lt;/div&gt;
+      &lt;div&gt;
+        
+          
+          
+            &lt;a class=&quot;print-no-link&quot; target=&quot;_blank&quot; href=&quot;https://creativecommons.org/licenses/by/4.0/&quot;&gt;
+              &lt;span class=&quot;hint--top hint--rounded&quot; aria-label=&quot;BY - 署名&quot;&gt;
+                &lt;i class=&quot;iconfont icon-cc-by&quot;&gt;&lt;/i&gt;
+              &lt;/span&gt;
+            &lt;/a&gt;
+          
+        
+      &lt;/div&gt;
+    &lt;/div&gt;
+  
+&lt;/div&gt;
+&lt;div class=&quot;license-icon iconfont&quot;&gt;&lt;/div&gt;
+</code></pre>
+  </div>
+
+
+
+              
+<pre><code class="hljs">            &lt;div class=&quot;post-prevnext my-3&quot;&gt;
+              &lt;article class=&quot;post-prev col-6&quot;&gt;
+                
+                
+                  &lt;a href=&quot;/%E5%85%B6%E4%BB%96-Docker%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B-Linux/&quot; title=&quot;Docker安装教程-Linux&quot;&gt;
+                    &lt;i class=&quot;iconfont icon-arrowleft&quot;&gt;&lt;/i&gt;
+                    &lt;span class=&quot;hidden-mobile&quot;&gt;Docker安装教程-Linux&lt;/span&gt;
+                    &lt;span class=&quot;visible-mobile&quot;&gt;上一篇&lt;/span&gt;
+                  &lt;/a&gt;
+                
+              &lt;/article&gt;
+              &lt;article class=&quot;post-next col-6&quot;&gt;
+                
+                
+                  &lt;a href=&quot;/java%E5%9F%BA%E7%A1%80-JVM%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/&quot; title=&quot;JVM基本概念&quot;&gt;
+                    &lt;span class=&quot;hidden-mobile&quot;&gt;JVM基本概念&lt;/span&gt;
+                    &lt;span class=&quot;visible-mobile&quot;&gt;下一篇&lt;/span&gt;
+                    &lt;i class=&quot;iconfont icon-arrowright&quot;&gt;&lt;/i&gt;
+                  &lt;/a&gt;
+                
+              &lt;/article&gt;
+            &lt;/div&gt;
+</code></pre>
+
+                
               </div>
             
             <hr/>
@@ -367,6 +455,13 @@
 
     </div>
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Java%E3%80%81python%E3%80%81go/" class="print-no-link">#Java、python、go</a>
+      
+    </div>
   
 </div>
 
@@ -535,7 +630,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
     </div>
   
   

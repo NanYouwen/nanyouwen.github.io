@@ -15,8 +15,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="南有文">
   <meta name="keywords" content="Java、python、go">
@@ -24,12 +22,12 @@
     <meta name="description" content="响应式基础声明响应式状态ref()在组合式 API 中，推荐使用 ref() 函数来声明响应式状态： 123import &#123; ref &#125; from &#x27;vue&#x27;const count &#x3D; ref(0)  ref() 接收参数，并将其包裹在一个带有 .value 属性的 ref 对象中返回： 1234567const count &#x3D; ref(0)console.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="响应式基础">
-<meta property="og:url" content="https://nanyouwen.github.io/vue%E5%9F%BA%E7%A1%80-%E5%93%8D%E5%BA%94%E5%BC%8F%E5%9F%BA%E7%A1%80/">
+<meta property="og:url" content="https://nanyouwen.github.io/vue%E5%9F%BA%E7%A1%80-%E5%93%8D%E5%BA%94%E5%BC%8F%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="南有文的小破站">
 <meta property="og:description" content="响应式基础声明响应式状态ref()在组合式 API 中，推荐使用 ref() 函数来声明响应式状态： 123import &#123; ref &#125; from &#x27;vue&#x27;const count &#x3D; ref(0)  ref() 接收参数，并将其包裹在一个带有 .value 属性的 ref 对象中返回： 1234567const count &#x3D; ref(0)console.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-18T14:18:39.000Z">
-<meta property="article:modified_time" content="2024-12-27T08:14:59.533Z">
+<meta property="article:modified_time" content="2024-12-27T08:14:59.000Z">
 <meta property="article:author" content="南有文">
 <meta property="article:tag" content="Java、python、go">
 <meta name="twitter:card" content="summary_large_image">
@@ -132,7 +130,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
+                <i class="icon-home-fill"></i>
                 <span>首页</span>
               </a>
             </li>
@@ -144,7 +142,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
+                <i class="icon-archive-fill"></i>
                 <span>归档</span>
               </a>
             </li>
@@ -156,7 +154,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
+                <i class="icon-category-fill"></i>
                 <span>分类</span>
               </a>
             </li>
@@ -168,7 +166,7 @@
           
             <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
+                <i class="icon-user-fill"></i>
                 <span>关于</span>
               </a>
             </li>
@@ -215,7 +213,7 @@
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2023-05-18 22:18" pubdate>
-          2023年5月18日 晚上
+          2023年5月18日 22:18:39
         </time>
       </span>
     
@@ -226,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          2.9k 字
         
       </span>
     
@@ -237,21 +235,12 @@
         
         
         
-          23 分钟
+          25 分钟
         
       </span>
     
 
     
-    
-      
-        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="leancloud-page-views"></span> 次
-        </span>
-        
-      
-      
     
   </div>
 
@@ -318,131 +307,180 @@
 <p><a target="_blank" rel="noopener" href="https://play.vuejs.org/#eNo9jUEKgzAQRa8yZKMiaNcllvYe2dgwQqiZhDhxE3L3jrW4/DPvv1/UK8Zhz6juSm82uciwIef4MOR8DImhQMIFKiwpeGgEbQwZsoE2BhsyMUwH0d66475ksuwCgSOb0CNx20ExBCc77POase8NVUN6PBdlSwKjj+vMKAlAvzOzWJ52dfYzGXXpjPoBAKX856uopDGeFfnq8XKp+gWq4FAi">在演练场中尝试一下</a></p>
 <script setup> 中的顶层的导入、声明的变量和函数可在同一组件的模板中直接使用。你可以理解为模板是在同一作用域内声明的一个 JavaScript 函数——它自然可以访问与它一起声明的所有内容。
 
-### 为什么要使用 ref
-
-简单地讨论一下 Vue 的响应式系统是如何工作的。
-
-​		当你在模板中使用了一个 ref，然后改变了这个 ref 的值时，Vue 会自动检测到这个变化，并且相应地更新 DOM。这是通过一个基于依赖追踪的响应式系统实现的。当一个组件首次渲染时，Vue 会**追踪**在渲染过程中使用的每一个 ref。然后，当一个 ref 被修改时，它会**触发**追踪它的组件的一次重新渲染。
-
-​		在标准的 JavaScript 中，检测普通变量的访问或修改是行不通的。然而，我们可以通过 getter 和 setter 方法来拦截对象属性的 get 和 set 操作。
-
-​		该 `.value` 属性给予了 Vue 一个机会来检测 ref 何时被访问或修改。在其内部，Vue 在它的 getter 中执行追踪，在它的 setter 中执行触发。从概念上讲，你可以将 ref 看作是一个像这样的对象：
-
+<h3 id="为什么要使用-ref"><a href="#为什么要使用-ref" class="headerlink" title="为什么要使用 ref"></a>为什么要使用 ref</h3><p>简单地讨论一下 Vue 的响应式系统是如何工作的。</p>
+<p>​		当你在模板中使用了一个 ref，然后改变了这个 ref 的值时，Vue 会自动检测到这个变化，并且相应地更新 DOM。这是通过一个基于依赖追踪的响应式系统实现的。当一个组件首次渲染时，Vue 会<strong>追踪</strong>在渲染过程中使用的每一个 ref。然后，当一个 ref 被修改时，它会<strong>触发</strong>追踪它的组件的一次重新渲染。</p>
+<p>​		在标准的 JavaScript 中，检测普通变量的访问或修改是行不通的。然而，我们可以通过 getter 和 setter 方法来拦截对象属性的 get 和 set 操作。</p>
+<p>​		该 <code>.value</code> 属性给予了 Vue 一个机会来检测 ref 何时被访问或修改。在其内部，Vue 在它的 getter 中执行追踪，在它的 setter 中执行触发。从概念上讲，你可以将 ref 看作是一个像这样的对象：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs vue">// 伪代码，不是真正的实现<br>const myRef = &#123;<br>  _value: 0,<br>  get value() &#123;<br>    track()<br>    return this._value<br>  &#125;,<br>  set value(newValue) &#123;<br>    this._value = newValue<br>    trigger()<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-​		另一个 ref 的好处是，与普通变量不同，你可以将 ref 传递给函数，同时保留对最新值和响应式连接的访问。当将复杂的逻辑重构为可重用的代码时，这将非常有用。
-
-该响应性系统在[深入响应式原理](https://cn.vuejs.org/guide/extras/reactivity-in-depth.html)章节中有更详细的讨论。
-
-### 深层响应性
-
-​	Ref 可以持有任何类型的值，包括深层嵌套的对象、数组或者 JavaScript 内置的数据结构，比如 `Map`。
-
-​	Ref 会使它的值具有深层响应性。这意味着即使改变嵌套对象或数组时，变化也会被检测到：
-
+<p>​		另一个 ref 的好处是，与普通变量不同，你可以将 ref 传递给函数，同时保留对最新值和响应式连接的访问。当将复杂的逻辑重构为可重用的代码时，这将非常有用。</p>
+<p>该响应性系统在<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/extras/reactivity-in-depth.html">深入响应式原理</a>章节中有更详细的讨论。</p>
+<h3 id="深层响应性"><a href="#深层响应性" class="headerlink" title="深层响应性"></a>深层响应性</h3><p>​	Ref 可以持有任何类型的值，包括深层嵌套的对象、数组或者 JavaScript 内置的数据结构，比如 <code>Map</code>。</p>
+<p>​	Ref 会使它的值具有深层响应性。这意味着即使改变嵌套对象或数组时，变化也会被检测到：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; ref &#125; from &#x27;vue&#x27;<br><br>const obj = ref(&#123;<br>  nested: &#123; count: 0 &#125;,<br>  arr: [&#x27;foo&#x27;, &#x27;bar&#x27;]<br>&#125;)<br><br>function mutateDeeply() &#123;<br>  // 以下都会按照期望工作<br>  obj.value.nested.count++<br>  obj.value.arr.push(&#x27;baz&#x27;)<br>&#125;<br></code></pre></td></tr></table></figure>
 
-非原始值将通过 [`reactive()`](https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#reactive) 转换为响应式代理，该函数将在后面讨论。
-
-​		也可以通过 [shallow ref](https://cn.vuejs.org/api/reactivity-advanced.html#shallowref) 来放弃深层响应性。对于浅层 ref，只有 `.value` 的访问会被追踪。浅层 ref 可以用于避免对大型数据的响应性开销来优化性能、或者有外部库管理其内部状态的情况。
-
-### DOM 更新时机
-
-​		当你修改了响应式状态时，DOM 会被自动更新。但是需要注意的是，DOM 更新不是同步的。Vue 会在“next tick”更新周期中缓冲所有状态的修改，以确保不管你进行了多少次状态修改，每个组件都只会被更新一次。
-
-​		要等待 DOM 更新完成后再执行额外的代码，可以使用 [nextTick()](https://cn.vuejs.org/api/general.html#nexttick) 全局 API：
-
+<p>非原始值将通过 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#reactive"><code>reactive()</code></a> 转换为响应式代理，该函数将在后面讨论。</p>
+<p>​		也可以通过 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/reactivity-advanced.html#shallowref">shallow ref</a> 来放弃深层响应性。对于浅层 ref，只有 <code>.value</code> 的访问会被追踪。浅层 ref 可以用于避免对大型数据的响应性开销来优化性能、或者有外部库管理其内部状态的情况。</p>
+<h3 id="dom-更新时机"><a href="#dom-更新时机" class="headerlink" title="DOM 更新时机"></a>DOM 更新时机</h3><p>​		当你修改了响应式状态时，DOM 会被自动更新。但是需要注意的是，DOM 更新不是同步的。Vue 会在“next tick”更新周期中缓冲所有状态的修改，以确保不管你进行了多少次状态修改，每个组件都只会被更新一次。</p>
+<p>​		要等待 DOM 更新完成后再执行额外的代码，可以使用 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/general.html#nexttick">nextTick()</a> 全局 API：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; nextTick &#125; from &#x27;vue&#x27;<br><br>async function increment() &#123;<br>  count.value++<br>  await nextTick()<br>  // 现在 DOM 已经更新了<br>&#125;<br></code></pre></td></tr></table></figure>
 
-## `reactive()`
-
-​		还有另一种声明响应式状态的方式，即使用 `reactive()` API。与将内部值包装在特殊对象中的 ref 不同，`reactive()` 将使对象本身具有响应性：
-
-js
-
+<h2 id="reactive"><a href="#reactive" class="headerlink" title="reactive()"></a><code>reactive()</code></h2><p>​		还有另一种声明响应式状态的方式，即使用 <code>reactive()</code> API。与将内部值包装在特殊对象中的 ref 不同，<code>reactive()</code> 将使对象本身具有响应性：</p>
+<p>js</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; reactive &#125; from &#x27;vue&#x27;<br><br>const state = reactive(&#123; count: 0 &#125;)<br></code></pre></td></tr></table></figure>
 
-> 参考：[为 `reactive()` 标注类型](https://cn.vuejs.org/guide/typescript/composition-api.html#typing-reactive) 
-
-在模板中使用：
-
+<blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/typescript/composition-api.html#typing-reactive">为 <code>reactive()</code> 标注类型</a> </p>
+</blockquote>
+<p>在模板中使用：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;button @click=&quot;state.count++&quot;&gt;<br>  &#123;&#123; state.count &#125;&#125;<br>&lt;/button&gt;<br></code></pre></td></tr></table></figure>
 
-​		响应式对象是 [JavaScript 代理](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)，其行为就和普通对象一样。不同的是，Vue 能够拦截对响应式对象所有属性的访问和修改，以便进行依赖追踪和触发更新。
-
-​		`reactive()` 将深层地转换对象：当访问嵌套对象时，它们也会被 `reactive()` 包装。当 ref 的值是一个对象时，`ref()` 也会在内部调用它。与浅层 ref 类似，这里也有一个 [`shallowReactive()`](https://cn.vuejs.org/api/reactivity-advanced.html#shallowreactive) API 可以选择退出深层响应性。
-
-### Reactive Proxy vs. Original
-
-值得注意的是，`reactive()` 返回的是一个原始对象的 [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)，它和原始对象是不相等的：
-
+<p>​		响应式对象是 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">JavaScript 代理</a>，其行为就和普通对象一样。不同的是，Vue 能够拦截对响应式对象所有属性的访问和修改，以便进行依赖追踪和触发更新。</p>
+<p>​		<code>reactive()</code> 将深层地转换对象：当访问嵌套对象时，它们也会被 <code>reactive()</code> 包装。当 ref 的值是一个对象时，<code>ref()</code> 也会在内部调用它。与浅层 ref 类似，这里也有一个 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/reactivity-advanced.html#shallowreactive"><code>shallowReactive()</code></a> API 可以选择退出深层响应性。</p>
+<h3 id="reactive-proxy-vs-original"><a href="#reactive-proxy-vs-original" class="headerlink" title="Reactive Proxy vs. Original"></a>Reactive Proxy vs. Original</h3><p>值得注意的是，<code>reactive()</code> 返回的是一个原始对象的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxy</a>，它和原始对象是不相等的：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vue">const raw = &#123;&#125;<br>const proxy = reactive(raw)<br><br>// 代理对象和原始对象不是全等的<br>console.log(proxy === raw) // false<br></code></pre></td></tr></table></figure>
 
-​		只有代理对象是响应式的，更改原始对象不会触发更新。因此，使用 Vue 的响应式系统的最佳实践是**仅使用你声明对象的代理版本**。
-
-​		为保证访问代理的一致性，对同一个原始对象调用 `reactive()` 会总是返回同样的代理对象，而对一个已存在的代理对象调用 `reactive()` 会返回其本身：
-
+<p>​		只有代理对象是响应式的，更改原始对象不会触发更新。因此，使用 Vue 的响应式系统的最佳实践是<strong>仅使用你声明对象的代理版本</strong>。</p>
+<p>​		为保证访问代理的一致性，对同一个原始对象调用 <code>reactive()</code> 会总是返回同样的代理对象，而对一个已存在的代理对象调用 <code>reactive()</code> 会返回其本身：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vue">// 在同一个对象上调用 reactive() 会返回相同的代理<br>console.log(reactive(raw) === proxy) // true<br><br>// 在一个代理上调用 reactive() 会返回它自己<br>console.log(reactive(proxy) === proxy) // true<br></code></pre></td></tr></table></figure>
 
-​		这个规则对嵌套对象也适用。依靠深层响应性，响应式对象内的嵌套对象依然是代理：
-
+<p>​		这个规则对嵌套对象也适用。依靠深层响应性，响应式对象内的嵌套对象依然是代理：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vue">const proxy = reactive(&#123;&#125;)<br><br>const raw = &#123;&#125;<br>proxy.nested = raw<br><br>console.log(proxy.nested === raw) // false<br></code></pre></td></tr></table></figure>
 
-### `reactive()` 的局限性
-
-`reactive()` API 有一些局限性：
-
-1. **有限的值类型**：它只能用于对象类型 (对象、数组和如 `Map`、`Set` 这样的[集合类型](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects#keyed_collections))。它不能持有如 `string`、`number` 或 `boolean` 这样的[原始类型](https://developer.mozilla.org/en-US/docs/Glossary/Primitive)。
-
-2. **不能替换整个对象**：由于 Vue 的响应式跟踪是通过属性访问实现的，因此我们必须始终保持对响应式对象的相同引用。这意味着我们不能轻易地“替换”响应式对象，因为这样的话与第一个引用的响应性连接将丢失：
-
-   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vue">let state = reactive(&#123; count: 0 &#125;)<br><br>// 上面的 (&#123; count: 0 &#125;) 引用将不再被追踪<br>// (响应性连接已丢失！)<br>state = reactive(&#123; count: 1 &#125;)<br></code></pre></td></tr></table></figure>
-
-3. **对解构操作不友好**：当我们将响应式对象的原始类型属性解构为本地变量时，或者将该属性传递给函数时，我们将丢失响应性连接：
-
-   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vue">const state = reactive(&#123; count: 0 &#125;)<br><br>// 当解构时，count 已经与 state.count 断开连接<br>let &#123; count &#125; = state<br>// 不会影响原始的 state<br>count++<br><br>// 该函数接收到的是一个普通的数字<br>// 并且无法追踪 state.count 的变化<br>// 我们必须传入整个对象以保持响应性<br>callSomeFunction(state.count)<br></code></pre></td></tr></table></figure>
-
-由于这些限制，我们建议使用 `ref()` 作为声明响应式状态的主要 API。
-
-一个 ref 会在作为响应式对象的属性被访问或修改时自动解包。换句话说，它的行为就像一个普通的属性：
-
+<h3 id="reactive-的局限性"><a href="#reactive-的局限性" class="headerlink" title="reactive() 的局限性"></a><code>reactive()</code> 的局限性</h3><p><code>reactive()</code> API 有一些局限性：</p>
+<ol>
+<li><p><strong>有限的值类型</strong>：它只能用于对象类型 (对象、数组和如 <code>Map</code>、<code>Set</code> 这样的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects#keyed_collections">集合类型</a>)。它不能持有如 <code>string</code>、<code>number</code> 或 <code>boolean</code> 这样的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/Primitive">原始类型</a>。</p>
+</li>
+<li><p><strong>不能替换整个对象</strong>：由于 Vue 的响应式跟踪是通过属性访问实现的，因此我们必须始终保持对响应式对象的相同引用。这意味着我们不能轻易地“替换”响应式对象，因为这样的话与第一个引用的响应性连接将丢失：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vue">let state = reactive(&#123; count: 0 &#125;)<br><br>// 上面的 (&#123; count: 0 &#125;) 引用将不再被追踪<br>// (响应性连接已丢失！)<br>state = reactive(&#123; count: 1 &#125;)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>对解构操作不友好</strong>：当我们将响应式对象的原始类型属性解构为本地变量时，或者将该属性传递给函数时，我们将丢失响应性连接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vue">const state = reactive(&#123; count: 0 &#125;)<br><br>// 当解构时，count 已经与 state.count 断开连接<br>let &#123; count &#125; = state<br>// 不会影响原始的 state<br>count++<br><br>// 该函数接收到的是一个普通的数字<br>// 并且无法追踪 state.count 的变化<br>// 我们必须传入整个对象以保持响应性<br>callSomeFunction(state.count)<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>由于这些限制，我们建议使用 <code>ref()</code> 作为声明响应式状态的主要 API。</p>
+<p>一个 ref 会在作为响应式对象的属性被访问或修改时自动解包。换句话说，它的行为就像一个普通的属性：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vue">const count = ref(0)<br>const state = reactive(&#123;<br>  count<br>&#125;)<br><br>console.log(state.count) // 0<br><br>state.count = 1<br>console.log(count.value) // 1<br></code></pre></td></tr></table></figure>
 
-如果将一个新的 ref 赋值给一个关联了已有 ref 的属性，那么它会替换掉旧的 ref：
-
+<p>如果将一个新的 ref 赋值给一个关联了已有 ref 的属性，那么它会替换掉旧的 ref：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vue">const otherCount = ref(2)<br><br>state.count = otherCount<br>console.log(state.count) // 2<br>// 原始 ref 现在已经和 state.count 失去联系<br>console.log(count.value) // 1<br></code></pre></td></tr></table></figure>
 
-只有当嵌套在一个深层响应式对象内时，才会发生 ref 解包。当其作为[浅层响应式对象](https://cn.vuejs.org/api/reactivity-advanced.html#shallowreactive)的属性被访问时不会解包。
-
-### 数组和集合的注意事项
-
-与 reactive 对象不同的是，当 ref 作为响应式数组或原生集合类型 (如 `Map`) 中的元素被访问时，它**不会**被解包：
-
+<p>只有当嵌套在一个深层响应式对象内时，才会发生 ref 解包。当其作为<a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/reactivity-advanced.html#shallowreactive">浅层响应式对象</a>的属性被访问时不会解包。</p>
+<h3 id="数组和集合的注意事项"><a href="#数组和集合的注意事项" class="headerlink" title="数组和集合的注意事项"></a>数组和集合的注意事项</h3><p>与 reactive 对象不同的是，当 ref 作为响应式数组或原生集合类型 (如 <code>Map</code>) 中的元素被访问时，它<strong>不会</strong>被解包：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vue">const books = reactive([ref(&#x27;Vue 3 Guide&#x27;)])<br>// 这里需要 .value<br>console.log(books[0].value)<br><br>const map = reactive(new Map([[&#x27;count&#x27;, ref(0)]]))<br>// 这里需要 .value<br>console.log(map.get(&#x27;count&#x27;).value)<br></code></pre></td></tr></table></figure>
 
-### 在模板中解包的注意事项
-
-在模板渲染上下文中，只有顶级的 ref 属性才会被解包。
-
-在下面的例子中，`count` 和 `object` 是顶级属性，但 `object.id` 不是：
-
+<h3 id="在模板中解包的注意事项"><a href="#在模板中解包的注意事项" class="headerlink" title="在模板中解包的注意事项"></a>在模板中解包的注意事项</h3><p>在模板渲染上下文中，只有顶级的 ref 属性才会被解包。</p>
+<p>在下面的例子中，<code>count</code> 和 <code>object</code> 是顶级属性，但 <code>object.id</code> 不是：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vue">const count = ref(0)<br>const object = &#123; id: ref(1) &#125;<br></code></pre></td></tr></table></figure>
 
-因此，这个表达式按预期工作：
-
+<p>因此，这个表达式按预期工作：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vue">&#123;&#123; count + 1 &#125;&#125;<br></code></pre></td></tr></table></figure>
 
-...但这个**不会**：
-
+<p>…但这个<strong>不会</strong>：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vue">&#123;&#123; object.id + 1 &#125;&#125;<br></code></pre></td></tr></table></figure>
 
-​		渲染的结果将是 `[object Object]1`，因为在计算表达式时 `object.id` 没有被解包，仍然是一个 ref 对象。为了解决这个问题，我们可以将 `id` 解构为一个顶级属性：
-
+<p>​		渲染的结果将是 <code>[object Object]1</code>，因为在计算表达式时 <code>object.id</code> 没有被解包，仍然是一个 ref 对象。为了解决这个问题，我们可以将 <code>id</code> 解构为一个顶级属性：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vue">const &#123; id &#125; = object<br></code></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vue">&#123;&#123; id + 1 &#125;&#125;<br></code></pre></td></tr></table></figure>
 
-现在渲染的结果将是 `2`。
+<p>现在渲染的结果将是 <code>2</code>。</p>
+<pre><code class="hljs">          &lt;/div&gt;
+        
+        &lt;hr/&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;post-metas my-3&quot;&gt;
+
+&lt;div class=&quot;post-meta mr-3 d-flex align-items-center&quot;&gt;
+  &lt;i class=&quot;iconfont icon-category&quot;&gt;&lt;/i&gt;
+  
+</code></pre>
+<span class="category-chains">
+  
+  
+    
+<pre><code class="hljs">  &lt;span class=&quot;category-chain&quot;&gt;
+    
+</code></pre>
+<p>  <a href="/categories/vue%E5%9F%BA%E7%A1%80/" class="category-chain-item">vue基础</a></p>
+<pre><code class="hljs">  &lt;/span&gt;
+</code></pre>
+</span>
+
+<pre><code class="hljs">&lt;/div&gt;
+</code></pre>
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>响应式基础</div>
+      <div>https://nanyouwen.github.io/vue基础-响应式基础/</div>
+    </div>
+    <div class="license-meta">
+      
+<pre><code class="hljs">    &lt;div class=&quot;license-meta-item&quot;&gt;
+      &lt;div&gt;作者&lt;/div&gt;
+      &lt;div&gt;南有文&lt;/div&gt;
+    &lt;/div&gt;
+  
+  
+    &lt;div class=&quot;license-meta-item license-meta-date&quot;&gt;
+      &lt;div&gt;发布于&lt;/div&gt;
+      &lt;div&gt;2023年5月18日&lt;/div&gt;
+    &lt;/div&gt;
+  
+  
+  
+    &lt;div class=&quot;license-meta-item&quot;&gt;
+      &lt;div&gt;许可协议&lt;/div&gt;
+      &lt;div&gt;
+        
+          
+          
+            &lt;a class=&quot;print-no-link&quot; target=&quot;_blank&quot; href=&quot;https://creativecommons.org/licenses/by/4.0/&quot;&gt;
+              &lt;span class=&quot;hint--top hint--rounded&quot; aria-label=&quot;BY - 署名&quot;&gt;
+                &lt;i class=&quot;iconfont icon-cc-by&quot;&gt;&lt;/i&gt;
+              &lt;/span&gt;
+            &lt;/a&gt;
+          
+        
+      &lt;/div&gt;
+    &lt;/div&gt;
+  
+&lt;/div&gt;
+&lt;div class=&quot;license-icon iconfont&quot;&gt;&lt;/div&gt;
+</code></pre>
+  </div>
+
+
+
+              
+<pre><code class="hljs">            &lt;div class=&quot;post-prevnext my-3&quot;&gt;
+              &lt;article class=&quot;post-prev col-6&quot;&gt;
+                
+                
+                  &lt;a href=&quot;/vue%E5%9F%BA%E7%A1%80-%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/&quot; title=&quot;计算属性&quot;&gt;
+                    &lt;i class=&quot;iconfont icon-arrowleft&quot;&gt;&lt;/i&gt;
+                    &lt;span class=&quot;hidden-mobile&quot;&gt;计算属性&lt;/span&gt;
+                    &lt;span class=&quot;visible-mobile&quot;&gt;上一篇&lt;/span&gt;
+                  &lt;/a&gt;
+                
+              &lt;/article&gt;
+              &lt;article class=&quot;post-next col-6&quot;&gt;
+                
+                
+                  &lt;a href=&quot;/vue%E5%9F%BA%E7%A1%80-%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95/&quot; title=&quot;模板语法&quot;&gt;
+                    &lt;span class=&quot;hidden-mobile&quot;&gt;模板语法&lt;/span&gt;
+                    &lt;span class=&quot;visible-mobile&quot;&gt;下一篇&lt;/span&gt;
+                    &lt;i class=&quot;iconfont icon-arrowright&quot;&gt;&lt;/i&gt;
+                  &lt;/a&gt;
+                
+              &lt;/article&gt;
+            &lt;/div&gt;
+</code></pre>
 
                 
               </div>
@@ -472,6 +510,13 @@ js
 
     </div>
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Java%E3%80%81python%E3%80%81go/" class="print-no-link">#Java、python、go</a>
+      
+    </div>
   
 </div>
 
@@ -640,7 +685,7 @@ js
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
     </div>
   
   

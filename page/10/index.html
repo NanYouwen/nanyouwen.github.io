@@ -1,0 +1,1135 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="分享学习笔记,由Hexo+Github搭建.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="南有文的小破站">
+<meta property="og:url" content="https://nanyouwen.github.io/page/10/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="分享学习笔记,由Hexo+Github搭建.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="Java、python、go">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="记录生活,热爱生活,欢迎来到南有文的小破站"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/eng-012-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%BB%86%E8%8A%82/" target="_self">
+          移动端页面的几个容易忽略细节
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/eng-012-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%BB%86%E8%8A%82/" target="_self">
+        <div>
+          我以前很容易把这类问题想成“再懂一点技术就好了”，后来才发现，很多麻烦来自没有把步骤和边界写下来。这篇文章围绕“移动端页面的几个容易忽略细节”展开，重点不是背一套术语，而是把检查触控区、字号、键盘遮挡、横屏和差网络放到一次可以复现的小任务里。电脑上看没问题，手机上按钮却被键盘盖住。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-03-09 15:33" pubdate>
+              2025-03-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web-%E5%AE%9E%E8%B7%B5/" class="category-chain-item">Web 实践</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/">#用户体验</a>
+            
+              <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/">#移动端</a>
+            
+              <a href="/tags/H5/">#H5</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/eng-011-%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C%E7%9A%84%E6%B8%A9%E6%9F%94%E5%81%9A%E6%B3%95/" target="_self">
+          表单校验的温柔做法
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/eng-011-%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C%E7%9A%84%E6%B8%A9%E6%9F%94%E5%81%9A%E6%B3%95/" target="_self">
+        <div>
+          我喜欢从一个具体的小场景开始学习，因为它会逼着我们面对空值、失败、误操作和那些不漂亮的细节。这篇文章围绕“表单校验的温柔做法”展开，重点不是背一套术语，而是把协调即时校验、提交校验和服务端校验放到一次可以复现的小任务里。用户输错一个手机号却被一串红字吓住。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-03-04 12:03" pubdate>
+              2025-03-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web-%E5%AE%9E%E8%B7%B5/" class="category-chain-item">Web 实践</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%A1%A8%E5%8D%95/">#表单</a>
+            
+              <a href="/tags/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/">#用户体验</a>
+            
+              <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/eng-010-%E6%97%A5%E5%BF%97%E4%B8%8D%E6%98%AF%E8%B6%8A%E5%A4%9A%E8%B6%8A%E5%A5%BD-%E8%83%BD%E5%9B%9E%E7%AD%94%E9%97%AE%E9%A2%98%E6%89%8D%E6%9C%89%E7%94%A8/" target="_self">
+          日志不是越多越好：能回答问题才有用
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/eng-010-%E6%97%A5%E5%BF%97%E4%B8%8D%E6%98%AF%E8%B6%8A%E5%A4%9A%E8%B6%8A%E5%A5%BD-%E8%83%BD%E5%9B%9E%E7%AD%94%E9%97%AE%E9%A2%98%E6%89%8D%E6%9C%89%E7%94%A8/" target="_self">
+        <div>
+          有些改动看起来只需要几分钟，真正花时间的却是出了意外之后，没人说得清刚才到底发生了什么。这篇文章围绕“日志不是越多越好：能回答问题才有用”展开，重点不是背一套术语，而是把从问题出发选择字段、级别、脱敏和保留时间放到一次可以复现的小任务里。日志铺满屏幕却找不到一次失败的路径。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-27 18:49" pubdate>
+              2025-02-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF/" class="category-chain-item">工程习惯</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%8E%92%E9%94%99/">#排错</a>
+            
+              <a href="/tags/%E6%97%A5%E5%BF%97/">#日志</a>
+            
+              <a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">#可观测性</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/eng-009-%E6%88%91%E5%A6%82%E4%BD%95%E7%BB%99%E9%87%8D%E5%A4%8D%E6%93%8D%E4%BD%9C%E5%86%99%E4%B8%80%E4%B8%AA%E5%B0%8F%E8%84%9A%E6%9C%AC/" target="_self">
+          我如何给重复操作写一个小脚本
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/eng-009-%E6%88%91%E5%A6%82%E4%BD%95%E7%BB%99%E9%87%8D%E5%A4%8D%E6%93%8D%E4%BD%9C%E5%86%99%E4%B8%80%E4%B8%AA%E5%B0%8F%E8%84%9A%E6%9C%AC/" target="_self">
+        <div>
+          小项目最容易让人放松警惕：东西少、参与的人少，于是许多约定只存在某个人的记忆里。这篇文章围绕“我如何给重复操作写一个小脚本”展开，重点不是背一套术语，而是把用输入、预览、执行和回滚四步写安全脚本放到一次可以复现的小任务里。批量改文件名时手一抖就改错一大片。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-22 09:23" pubdate>
+              2025-02-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="category-chain-item">开发工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%88%E7%8E%87/">#效率</a>
+            
+              <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
+            
+              <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/">#自动化</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/eng-008-%E6%B5%8F%E8%A7%88%E5%99%A8-network-%E9%9D%A2%E6%9D%BF-%E4%BB%8E%E4%B8%80%E6%AC%A1-404-%E5%BC%80%E5%A7%8B%E6%8E%92%E6%9F%A5/" target="_self">
+          浏览器 Network 面板：从一次 404 开始排查
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/eng-008-%E6%B5%8F%E8%A7%88%E5%99%A8-network-%E9%9D%A2%E6%9D%BF-%E4%BB%8E%E4%B8%80%E6%AC%A1-404-%E5%BC%80%E5%A7%8B%E6%8E%92%E6%9F%A5/" target="_self">
+        <div>
+          我以前很容易把这类问题想成“再懂一点技术就好了”，后来才发现，很多麻烦来自没有把步骤和边界写下来。这篇文章围绕“浏览器 Network 面板：从一次 404 开始排查”展开，重点不是背一套术语，而是把通过请求 URL、方法、响应、耗时和调用栈定位问题放到一次可以复现的小任务里。页面看起来空白，却不知道请求到底去了哪里。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-16 13:27" pubdate>
+              2025-02-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web-%E5%AE%9E%E8%B7%B5/" class="category-chain-item">Web 实践</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/">#浏览器</a>
+            
+              <a href="/tags/%E8%B0%83%E8%AF%95/">#调试</a>
+            
+              <a href="/tags/Network/">#Network</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/eng-007-%E6%8E%A5%E5%8F%A3%E5%87%BA%E9%94%99%E6%97%B6-%E5%85%88%E6%8A%8A%E9%97%AE%E9%A2%98%E8%AF%B4%E6%B8%85%E6%A5%9A/" target="_self">
+          接口出错时，先把问题说清楚
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/eng-007-%E6%8E%A5%E5%8F%A3%E5%87%BA%E9%94%99%E6%97%B6-%E5%85%88%E6%8A%8A%E9%97%AE%E9%A2%98%E8%AF%B4%E6%B8%85%E6%A5%9A/" target="_self">
+        <div>
+          我喜欢从一个具体的小场景开始学习，因为它会逼着我们面对空值、失败、误操作和那些不漂亮的细节。这篇文章围绕“接口出错时，先把问题说清楚”展开，重点不是背一套术语，而是把按网络、参数、权限、服务端四类问题排查放到一次可以复现的小任务里。一句“接口挂了”让前后端各自猜半天。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-11 10:39" pubdate>
+              2025-02-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web-%E5%AE%9E%E8%B7%B5/" class="category-chain-item">Web 实践</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%8E%A5%E5%8F%A3/">#接口</a>
+            
+              <a href="/tags/%E6%8E%92%E9%94%99/">#排错</a>
+            
+              <a href="/tags/HTTP/">#HTTP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/eng-006-%E6%9C%AC%E5%9C%B0%E9%85%8D%E7%BD%AE%E5%88%AB%E5%86%8D%E9%9D%A0%E8%AE%B0%E5%BF%86-env-%E7%9A%84%E4%BD%BF%E7%94%A8%E8%BE%B9%E7%95%8C/" target="_self">
+          本地配置别再靠记忆：.env 的使用边界
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/eng-006-%E6%9C%AC%E5%9C%B0%E9%85%8D%E7%BD%AE%E5%88%AB%E5%86%8D%E9%9D%A0%E8%AE%B0%E5%BF%86-env-%E7%9A%84%E4%BD%BF%E7%94%A8%E8%BE%B9%E7%95%8C/" target="_self">
+        <div>
+          有些改动看起来只需要几分钟，真正花时间的却是出了意外之后，没人说得清刚才到底发生了什么。这篇文章围绕“本地配置别再靠记忆：.env 的使用边界”展开，重点不是背一套术语，而是把区分 .env、示例配置和部署平台里的真实值放到一次可以复现的小任务里。同事因为拿不到配置把秘密发到聊天里。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-06 16:02" pubdate>
+              2025-02-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF/" class="category-chain-item">工程习惯</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%85%8D%E7%BD%AE/">#配置</a>
+            
+              <a href="/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">#环境变量</a>
+            
+              <a href="/tags/%E5%AE%89%E5%85%A8/">#安全</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/eng-005-%E5%86%99-readme-%E4%B8%8D%E6%98%AF%E6%94%B6%E5%B0%BE-%E8%80%8C%E6%98%AF%E7%BB%99%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%87%AA%E5%B7%B1%E7%95%99%E9%97%A8/" target="_self">
+          写 README 不是收尾，而是给未来的自己留门
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/eng-005-%E5%86%99-readme-%E4%B8%8D%E6%98%AF%E6%94%B6%E5%B0%BE-%E8%80%8C%E6%98%AF%E7%BB%99%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%87%AA%E5%B7%B1%E7%95%99%E9%97%A8/" target="_self">
+        <div>
+          小项目最容易让人放松警惕：东西少、参与的人少，于是许多约定只存在某个人的记忆里。这篇文章围绕“写 README 不是收尾，而是给未来的自己留门”展开，重点不是背一套术语，而是把用最小七段式记录项目目标、运行、配置、验证、发布和回滚放到一次可以复现的小任务里。三个月后重新打开项目完全想不起如何启动。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-01 10:03" pubdate>
+              2025-02-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF/" class="category-chain-item">工程习惯</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/README/">#README</a>
+            
+              <a href="/tags/%E6%96%87%E6%A1%A3/">#文档</a>
+            
+              <a href="/tags/%E5%8D%8F%E4%BD%9C/">#协作</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/eng-004-%E4%B8%80%E4%B8%AA%E5%B0%8F%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%9B%AE%E5%BD%95-%E5%88%B0%E5%BA%95%E6%80%8E%E6%A0%B7%E6%89%8D%E4%B8%8D%E4%B9%B1/" target="_self">
+          一个小项目的目录，到底怎样才不乱
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/eng-004-%E4%B8%80%E4%B8%AA%E5%B0%8F%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%9B%AE%E5%BD%95-%E5%88%B0%E5%BA%95%E6%80%8E%E6%A0%B7%E6%89%8D%E4%B8%8D%E4%B9%B1/" target="_self">
+        <div>
+          我以前很容易把这类问题想成“再懂一点技术就好了”，后来才发现，很多麻烦来自没有把步骤和边界写下来。这篇文章围绕“一个小项目的目录，到底怎样才不乱”展开，重点不是背一套术语，而是把明确 src、assets、scripts、docs 和 archive 的职责放到一次可以复现的小任务里。半年后打开项目却不敢删除任何文件。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-01-27 10:31" pubdate>
+              2025-01-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF/" class="category-chain-item">工程习惯</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/">#项目结构</a>
+            
+              <a href="/tags/%E7%BB%B4%E6%8A%A4/">#维护</a>
+            
+              <a href="/tags/%E6%95%B4%E7%90%86/">#整理</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/eng-003-%E6%8A%8A%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%93%E6%88%90%E6%A1%8C%E9%9D%A2-%E5%85%88%E5%AD%A6%E4%BC%9A%E8%BF%99-8-%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8A%A8%E4%BD%9C/" target="_self">
+          把命令行当成桌面：先学会这 8 个高频动作
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/eng-003-%E6%8A%8A%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%93%E6%88%90%E6%A1%8C%E9%9D%A2-%E5%85%88%E5%AD%A6%E4%BC%9A%E8%BF%99-8-%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8A%A8%E4%BD%9C/" target="_self">
+        <div>
+          我喜欢从一个具体的小场景开始学习，因为它会逼着我们面对空值、失败、误操作和那些不漂亮的细节。这篇文章围绕“把命令行当成桌面：先学会这 8 个高频动作”展开，重点不是背一套术语，而是把用高频命令处理日志和文件，不追求背完整手册放到一次可以复现的小任务里。找一个文件要在多个窗口里来回点。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-01-22 08:28" pubdate>
+              2025-01-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="category-chain-item">开发工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%88%E7%8E%87/">#效率</a>
+            
+              <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/">#命令行</a>
+            
+              <a href="/tags/%E7%BB%88%E7%AB%AF/">#终端</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/eng-002-git-%E6%8F%90%E4%BA%A4%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E8%AE%A9%E4%BA%BA%E4%B8%8D%E5%AE%89-%E4%B8%80%E5%A5%97%E4%B8%8D%E4%B8%A2%E4%BB%A3%E7%A0%81%E7%9A%84%E6%97%A5%E5%B8%B8%E4%B9%A0%E6%83%AF/" target="_self">
+          Git 提交为什么总让人不安：一套不丢代码的日常习惯
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/eng-002-git-%E6%8F%90%E4%BA%A4%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E8%AE%A9%E4%BA%BA%E4%B8%8D%E5%AE%89-%E4%B8%80%E5%A5%97%E4%B8%8D%E4%B8%A2%E4%BB%A3%E7%A0%81%E7%9A%84%E6%97%A5%E5%B8%B8%E4%B9%A0%E6%83%AF/" target="_self">
+        <div>
+          有些改动看起来只需要几分钟，真正花时间的却是出了意外之后，没人说得清刚才到底发生了什么。这篇文章围绕“Git 提交为什么总让人不安：一套不丢代码的日常习惯”展开，重点不是背一套术语，而是把围绕 status、add、commit、push 和回退建立动手前检查流程放到一次可以复现的小任务里。一不小心把调试文件提交到主分支。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-01-17 15:53" pubdate>
+              2025-01-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="category-chain-item">开发工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%B9%A0%E6%83%AF/">#习惯</a>
+            
+              <a href="/tags/Git/">#Git</a>
+            
+              <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">#版本控制</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/eng-001-%E7%BB%99%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%81%9A%E4%B8%80%E6%AC%A1%E5%B0%8F%E4%BD%93%E6%A3%80/" target="_self">
+          给自己的开发环境做一次小体检
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/eng-001-%E7%BB%99%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%81%9A%E4%B8%80%E6%AC%A1%E5%B0%8F%E4%BD%93%E6%A3%80/" target="_self">
+        <div>
+          小项目最容易让人放松警惕：东西少、参与的人少，于是许多约定只存在某个人的记忆里。这篇文章围绕“给自己的开发环境做一次小体检”展开，重点不是背一套术语，而是把检查版本、PATH、编辑器、SSH 和备份放到一次可以复现的小任务里。刚重装电脑后找不到一个能正常运行的项目。当问题变得具体，哪些步骤值得自动化、哪些地方必须留给人，就会清楚很多。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-01-12 13:33" pubdate>
+              2025-01-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF/" class="category-chain-item">工程习惯</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">#开发环境</a>
+            
+              <a href="/tags/%E6%95%88%E7%8E%87/">#效率</a>
+            
+              <a href="/tags/%E4%B9%A0%E6%83%AF/">#习惯</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/9/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/#board">11</a><a class="page-number" href="/page/12/#board">12</a><a class="page-number" href="/page/13/#board">13</a><a class="extend next" rel="next" href="/page/11/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

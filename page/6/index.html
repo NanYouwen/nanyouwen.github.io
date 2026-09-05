@@ -1,0 +1,1135 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="南有文">
+  <meta name="keywords" content="Java、python、go">
+  
+    <meta name="description" content="分享学习笔记,由Hexo+Github搭建.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="南有文的小破站">
+<meta property="og:url" content="https://nanyouwen.github.io/page/6/index.html">
+<meta property="og:site_name" content="南有文的小破站">
+<meta property="og:description" content="分享学习笔记,由Hexo+Github搭建.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="南有文">
+<meta property="article:tag" content="Java、python、go">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>南有文的小破站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nanyouwen.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz","app_key":"2CXMce6atpoEGWAhPiSDn4EG","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>南有文</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="记录生活,热爱生活,欢迎来到南有文的小破站"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4-%E7%94%A8%E4%B8%80%E4%B8%AA%E6%97%A5%E5%BF%97ID%E4%B8%B2%E8%B5%B7%E6%9D%A5%E8%BF%BD%E9%97%AE%E9%A2%98/" target="_self">
+          用一个日志 ID 串起来追问题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4-%E7%94%A8%E4%B8%80%E4%B8%AA%E6%97%A5%E5%BF%97ID%E4%B8%B2%E8%B5%B7%E6%9D%A5%E8%BF%BD%E9%97%AE%E9%A2%98/" target="_self">
+        <div>
+          线上问题最让人无力的场景，是用户说“刚才提交失败了”，而系统里同一分钟有几千条日志。前端看到一个网络错误，网关记录一次请求，服务端又有几条数据库日志，第三方接口还有自己的编号。它们像散在桌上的纸片，单独看都合理，合起来却不知道是不是同一件事。 给一次请求一个统一的日志 ID，或叫 request ID、trace ID，就像给一段行程发一张车票。请求从浏览器出发时带上它，经过网关、服务、任务队列和
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-11-06 19:04" pubdate>
+              2025-11-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4/" class="category-chain-item">发布与运维</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%8E%92%E9%94%99/">#排错</a>
+            
+              <a href="/tags/%E6%97%A5%E5%BF%97/">#日志</a>
+            
+              <a href="/tags/Trace-ID/">#Trace ID</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9A%84%E4%B8%8D%E6%98%AF%E6%9B%B4%E5%A4%9A%E7%9B%91%E6%8E%A7%E8%80%8C%E6%98%AF%E6%B8%85%E6%A5%9A%E6%8A%A5%E8%AD%A6/" target="_self">
+          你需要的不是更多监控，而是清楚报警
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9A%84%E4%B8%8D%E6%98%AF%E6%9B%B4%E5%A4%9A%E7%9B%91%E6%8E%A7%E8%80%8C%E6%98%AF%E6%B8%85%E6%A5%9A%E6%8A%A5%E8%AD%A6/" target="_self">
+        <div>
+          系统出了问题以后，第一反应常常是“以后多加几个监控”。于是图表越来越多，群里消息越来越响，真正故障来临时，大家反而要在一堆 CPU、请求数、日志和红点中间找答案。监控的数量不等于看得更清楚。能在需要行动的时候，告诉合适的人发生了什么、影响多大、下一步先看哪里，才是一条好报警。 我现在会把监控、日志、追踪和报警分开看。指标告诉我们趋势和异常，日志保留具体事件，追踪把一次请求走过的服务串起来，报警则是
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-11-01 09:57" pubdate>
+              2025-11-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4/" class="category-chain-item">发布与运维</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">#可观测性</a>
+            
+              <a href="/tags/%E7%9B%91%E6%8E%A7/">#监控</a>
+            
+              <a href="/tags/%E6%8A%A5%E8%AD%A6/">#报警</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%90%8E%E7%AB%AF-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%89%E5%B1%82%E9%98%B2%E7%BA%BF/" target="_self">
+          导入数据的三层防线
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%90%8E%E7%AB%AF-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%89%E5%B1%82%E9%98%B2%E7%BA%BF/" target="_self">
+        <div>
+          批量导入总让人又爱又怕。它能在一分钟里把几百条数据送进系统，也能在一分钟里把错列、重复记录和格式混乱一起送进去。手工录入慢，但每一步都有停顿；导入快，所以更需要在不同位置设置停顿和检查。真正可靠的导入，不是要求用户永远上传完美表格，而是默认人会犯错，并让错误尽量停在影响最小的地方。 我把导入理解为三层防线：提交前让用户看见自己要导什么；处理时让系统逐行判断什么能进、什么不能进；完成后让人能知道发生
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-10-27 08:56" pubdate>
+              2025-10-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%90%8E%E7%AB%AF/" class="category-chain-item">数据与后端</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5/">#数据导入</a>
+            
+              <a href="/tags/%E6%A0%A1%E9%AA%8C/">#校验</a>
+            
+              <a href="/tags/%E5%8F%AF%E6%81%A2%E5%A4%8D/">#可恢复</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%90%8E%E7%AB%AF-%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%E7%94%A8%E6%88%B7%E5%A4%9A%E7%82%B9%E4%B8%80%E6%AC%A1%E6%80%8E%E4%B9%88%E5%8A%9E/" target="_self">
+          接口幂等：用户多点一次怎么办
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%90%8E%E7%AB%AF-%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%E7%94%A8%E6%88%B7%E5%A4%9A%E7%82%B9%E4%B8%80%E6%AC%A1%E6%80%8E%E4%B9%88%E5%8A%9E/" target="_self">
+        <div>
+          用户多点一次提交按钮，并不一定是不耐烦。有时网络慢，页面没有及时给反馈；有时手指在手机上抖了一下；有时浏览器重试了请求；也有时前端刚好在重复渲染。对用户来说，他只想完成一次操作；对系统来说，却可能收到两次甚至多次一模一样的请求。若每次都照单全收，订单重复、消息重复、库存扣两遍的问题就会出现。 幂等这个词听起来有一点数学味，放到接口里可以理解得很朴素：同一个动作无论因为重试被请求多少次，最终产生的业
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-10-22 20:23" pubdate>
+              2025-10-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%90%8E%E7%AB%AF/" class="category-chain-item">数据与后端</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%8E%A5%E5%8F%A3/">#接口</a>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/">#数据一致性</a>
+            
+              <a href="/tags/%E5%B9%82%E7%AD%89/">#幂等</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/Web%E5%AE%9E%E8%B7%B5-%E5%B0%8F%E7%BD%91%E7%AB%99%E4%B9%9F%E5%80%BC%E5%BE%97%E8%AE%A4%E7%9C%9F%E5%81%9A%E6%97%A0%E9%9A%9C%E7%A2%8D/" target="_self">
+          小网站也值得认真做无障碍
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/Web%E5%AE%9E%E8%B7%B5-%E5%B0%8F%E7%BD%91%E7%AB%99%E4%B9%9F%E5%80%BC%E5%BE%97%E8%AE%A4%E7%9C%9F%E5%81%9A%E6%97%A0%E9%9A%9C%E7%A2%8D/" target="_self">
+        <div>
+          提到无障碍，很多人会先想到政府网站、大型平台或一套很长的规范，于是觉得个人站和小项目暂时顾不上。可无障碍的起点其实很普通：有人只能用键盘，有人在阳光下看不清浅灰文字，有人放大页面后发现按钮挤到屏幕外，有人网络很慢、图片加载不出来。让这些人仍能读懂内容、完成基本操作，本来就是网页该有的耐心。 它也不是一项只服务少数人的额外工作。清楚的标题层级让所有人扫读更轻松；可见的焦点让键盘用户少迷路；足够的点击
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-10-17 12:19" pubdate>
+              2025-10-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web-%E5%AE%9E%E8%B7%B5/" class="category-chain-item">Web 实践</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+            
+              <a href="/tags/%E6%97%A0%E9%9A%9C%E7%A2%8D/">#无障碍</a>
+            
+              <a href="/tags/%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%80%A7/">#可访问性</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/Web%E5%AE%9E%E8%B7%B5-%E6%8A%8A%E8%AE%BE%E8%AE%A1%E7%A8%BF%E5%BD%93%E7%BA%A6%E6%9D%9F%E4%B8%8D%E5%BD%93%E5%83%8F%E7%B4%A0%E8%80%83%E9%A2%98/" target="_self">
+          把设计稿当约束，不当像素考题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/Web%E5%AE%9E%E8%B7%B5-%E6%8A%8A%E8%AE%BE%E8%AE%A1%E7%A8%BF%E5%BD%93%E7%BA%A6%E6%9D%9F%E4%B8%8D%E5%BD%93%E5%83%8F%E7%B4%A0%E8%80%83%E9%A2%98/" target="_self">
+        <div>
+          拿到设计稿时，前端很容易进入一种熟悉的状态：量间距、调颜色、对着截图一点点挪元素。像素级还原当然重要，尤其是品牌和关键页面。但如果把设计稿只当成一张必须复刻的静态图，页面一遇到长文本、小屏幕、空数据、加载状态或真实操作，就可能立刻失去原来的秩序。 设计稿更像一组约束：什么信息最重要，哪些内容应该靠近，按钮在什么情况下可用，用户看不到数据时需要什么说明。把这些理解清楚，前端实现才能既尊重视觉，又在真
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-10-12 10:46" pubdate>
+              2025-10-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web-%E5%AE%9E%E8%B7%B5/" class="category-chain-item">Web 实践</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/">#用户体验</a>
+            
+              <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+            
+              <a href="/tags/%E8%AE%BE%E8%AE%A1/">#设计</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1%E6%8F%90%E5%BB%BA%E8%AE%AE%E4%B8%8D%E7%AD%89%E4%BA%8E%E6%8C%91%E6%AF%9B%E7%97%85/" target="_self">
+          代码评审：提建议不等于挑毛病
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1%E6%8F%90%E5%BB%BA%E8%AE%AE%E4%B8%8D%E7%AD%89%E4%BA%8E%E6%8C%91%E6%AF%9B%E7%97%85/" target="_self">
+        <div>
+          代码评审容易让人紧张。提交的人担心自己的思路被否定，评审的人担心说重了像挑刺，最后评论区只剩“LGTM”或者一串很难读懂的术语。可一份改动如果只靠作者一个人看过，许多边界、命名、权限和测试缺口就只能等线上问题来提醒。评审真正有价值的地方，不是证明谁更懂，而是让一段代码在合并前多经过一双愿意负责的眼睛。 我喜欢把评审想成一起检查一份要交出去的东西。作者最熟悉意图，评审者更容易发现“读起来像什么”“换
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-10-07 18:38" pubdate>
+              2025-10-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C/" class="category-chain-item">测试与协作</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8D%8F%E4%BD%9C/">#协作</a>
+            
+              <a href="/tags/%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1/">#代码评审</a>
+            
+              <a href="/tags/%E6%B2%9F%E9%80%9A/">#沟通</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF-%E4%BE%9D%E8%B5%96%E5%8D%87%E7%BA%A7%E4%B9%8B%E5%89%8D%E5%85%88%E7%9C%8B%E8%B0%81%E5%9C%A8%E7%94%A8%E5%AE%83/" target="_self">
+          依赖升级之前，先看谁在用它
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF-%E4%BE%9D%E8%B5%96%E5%8D%87%E7%BA%A7%E4%B9%8B%E5%89%8D%E5%85%88%E7%9C%8B%E8%B0%81%E5%9C%A8%E7%94%A8%E5%AE%83/" target="_self">
+        <div>
+          看到依赖管理器提示“有新版本可用”，很容易把升级理解成一个干净的按钮：版本号从旧变新，漏洞修了，功能多了，项目自然更好。现实里，依赖像一根接在墙里的线，它可能被很多页面、构建脚本和插件悄悄使用。更新一根线之前，先看谁接在上面，通常比按下更新更重要。 这不是鼓励永远不升级。长期不动的依赖会积累安全、兼容和维护风险；真正需要避免的是“为了让待更新列表变空而更新”。把升级当作一次小变更：知道为什么升、影
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-10-02 09:13" pubdate>
+              2025-10-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF/" class="category-chain-item">工程习惯</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%BE%9D%E8%B5%96/">#依赖</a>
+            
+              <a href="/tags/%E5%8D%87%E7%BA%A7/">#升级</a>
+            
+              <a href="/tags/%E9%A3%8E%E9%99%A9%E6%8E%A7%E5%88%B6/">#风险控制</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4-%E7%89%88%E6%9C%AC%E5%8F%B7%E7%9C%8B%E8%B5%B7%E6%9D%A5%E6%97%A0%E8%81%8A%E5%8D%B4%E8%83%BD%E6%95%91%E6%80%A5/" target="_self">
+          版本号看起来无聊，却能救急
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4-%E7%89%88%E6%9C%AC%E5%8F%B7%E7%9C%8B%E8%B5%B7%E6%9D%A5%E6%97%A0%E8%81%8A%E5%8D%B4%E8%83%BD%E6%95%91%E6%80%A5/" target="_self">
+        <div>
+          小项目刚开始时，版本号总显得很正式。代码就几个人写，网站只有一个部署环境，改完直接发布就好了，何必管它叫 1.2.3 还是“今天那版”。直到有一天，用户说“昨天还可以，今天点不了”；你打开部署记录，看见一排“update”“fix”“final final”的提交，才会意识到版本号不是为了显得专业，它是在混乱时帮人回答一个极实际的问题：现在跑的到底是哪一版？ 版本号、发布标签和变更记录像抽屉上的小
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-27 08:11" pubdate>
+              2025-09-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4/" class="category-chain-item">发布与运维</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8F%91%E5%B8%83/">#发布</a>
+            
+              <a href="/tags/%E7%89%88%E6%9C%AC/">#版本</a>
+            
+              <a href="/tags/%E5%8F%98%E6%9B%B4%E8%AE%B0%E5%BD%95/">#变更记录</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF-%E5%B0%8F%E5%8A%9F%E8%83%BD%E7%9A%84%E8%BE%B9%E7%95%8C%E5%A6%82%E4%BD%95%E4%B8%8D%E8%A2%AB%E9%9C%80%E6%B1%82%E4%B8%80%E7%82%B9%E7%82%B9%E5%90%83%E6%8E%89/" target="_self">
+          小功能的边界，如何不被需求一点点吃掉
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF-%E5%B0%8F%E5%8A%9F%E8%83%BD%E7%9A%84%E8%BE%B9%E7%95%8C%E5%A6%82%E4%BD%95%E4%B8%8D%E8%A2%AB%E9%9C%80%E6%B1%82%E4%B8%80%E7%82%B9%E7%82%B9%E5%90%83%E6%8E%89/" target="_self">
+        <div>
+          “这个功能很简单，顺手再加一个……”几乎是项目里最容易听到的话。单独看每一个补充都很合理：列表既然有了，能不能加导出；导出既然有了，能不能定时发邮箱；邮箱既然能发，能不能按角色订阅。几轮之后，原本只想让人查一查数据的小功能，已经有了权限、任务队列、通知设置和一堆没时间仔细想过的边界。 需求变多不是坏事，说明有人真的在用。但如果每次都在原路上顺手拐一小步，团队很容易失去“这次到底要解决什么”的共同认
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-22 22:19" pubdate>
+              2025-09-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF/" class="category-chain-item">工程习惯</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%BA%A7%E5%93%81/">#产品</a>
+            
+              <a href="/tags/%E9%9C%80%E6%B1%82/">#需求</a>
+            
+              <a href="/tags/%E8%8C%83%E5%9B%B4/">#范围</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E5%A6%82%E4%BD%95%E7%94%A8%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE%E6%97%A9%E4%B8%80%E7%82%B9%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98/" target="_self">
+          如何用模拟数据早一点发现问题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E5%A6%82%E4%BD%95%E7%94%A8%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE%E6%97%A9%E4%B8%80%E7%82%B9%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98/" target="_self">
+        <div>
+          接口还没完成时，前端常常只能对着空白页面等数据；接口一接通，又发现真实名字比设计稿长得多、状态比预想多一倍、列表里居然有空值和过期记录。等到最后才看到真实数据，很多问题就会在最紧张的时候一起冒出来。模拟数据的价值，正是在前面替真实世界制造一点“麻烦”。 好的模拟数据不是随便写十条“张三、李四”。它应该让界面提前遇见将来一定会遇到的情况：很长的文本、空字段、不同状态、边界日期、慢网络、错误返回、没有
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-17 19:56" pubdate>
+              2025-09-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C/" class="category-chain-item">测试与协作</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+            
+              <a href="/tags/%E6%B5%8B%E8%AF%95/">#测试</a>
+            
+              <a href="/tags/%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE/">#模拟数据</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AF%A5%E4%BB%8E%E7%94%A8%E6%88%B7%E8%B7%AF%E7%BA%BF%E5%BC%80%E5%A7%8B/" target="_self">
+          测试用例该从用户路线开始
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AF%A5%E4%BB%8E%E7%94%A8%E6%88%B7%E8%B7%AF%E7%BA%BF%E5%BC%80%E5%A7%8B/" target="_self">
+        <div>
+          测试刚开始做时，很多人会从页面上的控件数起：这个按钮点过了吗，那条接口返回过了吗，这个弹窗关得掉吗。它们当然要测，但如果只按控件排列，很容易漏掉用户真正经历的一整段路。用户不会在意某个按钮单独能不能亮，他在意的是自己能否从进入页面、填写信息、提交，到最后看见一个可信的结果。 我喜欢先画“用户路线”，再补测试点。路线不需要画得很漂亮，拿一支笔写下“从哪里来—想完成什么—中间会遇到什么—完成后去哪儿”
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-12 21:06" pubdate>
+              2025-09-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C/" class="category-chain-item">测试与协作</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B5%8B%E8%AF%95/">#测试</a>
+            
+              <a href="/tags/%E8%B4%A8%E9%87%8F/">#质量</a>
+            
+              <a href="/tags/%E7%94%A8%E6%88%B7%E8%B7%AF%E5%BE%84/">#用户路径</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/#board">13</a><a class="extend next" rel="next" href="/page/7/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
