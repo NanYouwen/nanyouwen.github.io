@@ -231,15 +231,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/java%E5%9F%BA%E7%A1%80-JVM%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_self">
-          JVM基本概念
+        <a href="/2024-37-%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E8%A6%81%E5%83%8F%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E4%B8%80%E6%A0%B7%E4%B8%8D%E6%95%B4%E9%BD%90/" target="_self">
+          测试数据要像真实世界一样不整齐
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/java%E5%9F%BA%E7%A1%80-JVM%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024-37-%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E8%A6%81%E5%83%8F%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E4%B8%80%E6%A0%B7%E4%B8%8D%E6%95%B4%E9%BD%90/" target="_self">
         <div>
-          Java虚拟机（JVM）简介Java虚拟机（Java Virtual Machine，简称JVM）是Java程序能够在各种不同平台上运行的关键。JVM的核心职责是将Java字节码翻译成机器码并执行。本文将深入浅出地介绍JVM的基本架构和工作原理。 JVM的架构JVM主要由以下几个部分组成： 1. 类加载子系统类加载子系统负责加载Java类文件，将其转换为内存中的类对象。这一过程包括以下几个步骤：
+          我想从“演示数据太干净导致线上暴露问题”这个具体场景开始。很多测试数据的问题，表面上是某个按钮、字段或命令出了差错，往下追却常常牵涉到约定没有写清、失败没有出口，或者结果没人能复核。今天先不追求一套漂亮架构，只记录先观察再动手时我会怎样做。
         </div>
       </a>
 
@@ -247,8 +247,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-22 05:39" pubdate>
-              2023-04-22
+            <time datetime="2024-08-05 08:14" pubdate>
+              2024-08-05
             </time>
           </div>
         
@@ -263,7 +263,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%90%8E%E7%AB%AF%E4%B8%8E%E6%95%B0%E6%8D%AE/" class="category-chain-item">后端与数据</a>
+  <a href="/categories/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%B4%A8%E9%87%8F/" class="category-chain-item">发布与质量</a>
   
   
 
@@ -278,7 +278,11 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Java%E3%80%81python%E3%80%81go/">#Java、python、go</a>
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/">#实践</a>
+            
+              <a href="/tags/%E5%B7%A5%E7%A8%8B/">#工程</a>
+            
+              <a href="/tags/%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/">#测试数据</a>
             
           </div>
         
@@ -292,15 +296,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/java%E5%9F%BA%E7%A1%80-%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/" target="_self">
-          java对象在内存中的实例化过程
+        <a href="/2024-36-%E6%8E%A5%E5%8F%A3%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5%E6%97%B6-%E4%B8%8D%E8%A6%81%E5%8F%AA%E8%BF%94%E5%9B%9E-401/" target="_self">
+          接口鉴权失败时，不要只返回 401
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/java%E5%9F%BA%E7%A1%80-%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024-36-%E6%8E%A5%E5%8F%A3%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5%E6%97%B6-%E4%B8%8D%E8%A6%81%E5%8F%AA%E8%BF%94%E5%9B%9E-401/" target="_self">
         <div>
-          java对象在内存中实例化的过程​	在Java类的实例化过程中，内存会使用到三个区域：栈区、堆区、方法区  堆区：存储的全部都是对象，每个对象包含了一个与之对应的class类的信息。jvm只有一个堆区（steap），它会被所有线程共享，堆中不存放基本数据类型和对象引用，他只存放对象本身 栈区：每个线程都包含一个栈区，栈中只保存基本数据类型的值和对象以及基础数据的引用。每个栈中的数据都是私有的，其他
+          我想从“用户登录过期后页面没有下一步”这个具体场景开始。很多接口安全的问题，表面上是某个按钮、字段或命令出了差错，往下追却常常牵涉到约定没有写清、失败没有出口，或者结果没人能复核。今天先不追求一套漂亮架构，只记录用一条真实数据验证时我会怎样做。
         </div>
       </a>
 
@@ -308,8 +312,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-11 08:47" pubdate>
-              2023-04-11
+            <time datetime="2024-07-29 21:08" pubdate>
+              2024-07-29
             </time>
           </div>
         
@@ -339,7 +343,661 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Java%E3%80%81python%E3%80%81go/">#Java、python、go</a>
+              <a href="/tags/%E6%8E%92%E9%94%99/">#排错</a>
+            
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/">#实践</a>
+            
+              <a href="/tags/%E6%8E%A5%E5%8F%A3%E5%AE%89%E5%85%A8/">#接口安全</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024-35-%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%B7%A5%E5%85%B7%E5%80%BC%E5%BE%97%E6%94%BE%E8%BF%9B%E6%97%A5%E5%B8%B8%E6%B5%81%E7%A8%8B/" target="_self">
+          如何判断一个工具值得放进日常流程
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024-35-%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%B7%A5%E5%85%B7%E5%80%BC%E5%BE%97%E6%94%BE%E8%BF%9B%E6%97%A5%E5%B8%B8%E6%B5%81%E7%A8%8B/" target="_self">
+        <div>
+          我想从“新工具很酷但团队没人愿意用”这个具体场景开始。很多工具选择的问题，表面上是某个按钮、字段或命令出了差错，往下追却常常牵涉到约定没有写清、失败没有出口，或者结果没人能复核。今天先不追求一套漂亮架构，只记录把抽象概念换成一次小实验时我会怎样做。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-24 19:21" pubdate>
+              2024-07-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E7%A8%8B%E4%B8%8E%E5%B7%A5%E5%85%B7/" class="category-chain-item">工程与工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/">#实践</a>
+            
+              <a href="/tags/%E5%B7%A5%E7%A8%8B/">#工程</a>
+            
+              <a href="/tags/%E5%B7%A5%E5%85%B7%E9%80%89%E6%8B%A9/">#工具选择</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024-34-%E5%89%8D%E7%AB%AF%E6%90%9C%E7%B4%A2%E6%A1%86%E7%9A%84%E9%98%B2%E6%8A%96%E4%B8%8D%E6%98%AF%E8%B6%8A%E9%95%BF%E8%B6%8A%E5%A5%BD/" target="_self">
+          前端搜索框的防抖不是越长越好
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024-34-%E5%89%8D%E7%AB%AF%E6%90%9C%E7%B4%A2%E6%A1%86%E7%9A%84%E9%98%B2%E6%8A%96%E4%B8%8D%E6%98%AF%E8%B6%8A%E9%95%BF%E8%B6%8A%E5%A5%BD/" target="_self">
+        <div>
+          我想从“用户输入时请求太多或反馈太慢”这个具体场景开始。很多搜索交互的问题，表面上是某个按钮、字段或命令出了差错，往下追却常常牵涉到约定没有写清、失败没有出口，或者结果没人能复核。今天先不追求一套漂亮架构，只记录给未来的自己留一条退路时我会怎样做。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-18 15:47" pubdate>
+              2024-07-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web-%E4%B8%8E%E5%89%8D%E7%AB%AF/" class="category-chain-item">Web 与前端</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%8E%92%E9%94%99/">#排错</a>
+            
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/">#实践</a>
+            
+              <a href="/tags/%E6%90%9C%E7%B4%A2%E4%BA%A4%E4%BA%92/">#搜索交互</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024-33-%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88%E7%9A%84%E6%97%B6%E9%97%B4%E5%BA%94%E8%AF%A5%E7%94%B1%E8%B0%81%E5%86%B3%E5%AE%9A/" target="_self">
+          缓存失效的时间应该由谁决定
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024-33-%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88%E7%9A%84%E6%97%B6%E9%97%B4%E5%BA%94%E8%AF%A5%E7%94%B1%E8%B0%81%E5%86%B3%E5%AE%9A/" target="_self">
+        <div>
+          我想从“数据改了但缓存迟迟不更新”这个具体场景开始。很多缓存策略的问题，表面上是某个按钮、字段或命令出了差错，往下追却常常牵涉到约定没有写清、失败没有出口，或者结果没人能复核。今天先不追求一套漂亮架构，只记录让别人能接着做时我会怎样做。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-11 13:06" pubdate>
+              2024-07-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%90%8E%E7%AB%AF%E4%B8%8E%E6%95%B0%E6%8D%AE/" class="category-chain-item">后端与数据</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/">#实践</a>
+            
+              <a href="/tags/%E5%B7%A5%E7%A8%8B/">#工程</a>
+            
+              <a href="/tags/%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/">#缓存策略</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024-32-%E7%BB%99%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A0%E4%B8%8A%E5%8F%AF%E8%A7%82%E5%AF%9F%E7%9A%84%E7%BB%93%E6%9E%9C/" target="_self">
+          给定时任务加上可观察的结果
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024-32-%E7%BB%99%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8A%A0%E4%B8%8A%E5%8F%AF%E8%A7%82%E5%AF%9F%E7%9A%84%E7%BB%93%E6%9E%9C/" target="_self">
+        <div>
+          我想从“任务显示成功却没有产出文件”这个具体场景开始。很多定时任务的问题，表面上是某个按钮、字段或命令出了差错，往下追却常常牵涉到约定没有写清、失败没有出口，或者结果没人能复核。今天先不追求一套漂亮架构，只记录把失败路径放到桌面上时我会怎样做。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-05 10:32" pubdate>
+              2024-07-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%B4%A8%E9%87%8F/" class="category-chain-item">发布与质量</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%8E%92%E9%94%99/">#排错</a>
+            
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/">#实践</a>
+            
+              <a href="/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">#定时任务</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024-31-css-%E9%80%89%E6%8B%A9%E5%99%A8%E5%A4%AA%E9%95%BF%E6%97%B6-%E6%88%91%E4%BC%9A%E6%80%8E%E4%B9%88%E6%95%B4%E7%90%86/" target="_self">
+          CSS 选择器太长时，我会怎么整理
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024-31-css-%E9%80%89%E6%8B%A9%E5%99%A8%E5%A4%AA%E9%95%BF%E6%97%B6-%E6%88%91%E4%BC%9A%E6%80%8E%E4%B9%88%E6%95%B4%E7%90%86/" target="_self">
+        <div>
+          我想从“一个样式只能靠一串嵌套选择器生效”这个具体场景开始。很多CSS的问题，表面上是某个按钮、字段或命令出了差错，往下追却常常牵涉到约定没有写清、失败没有出口，或者结果没人能复核。今天先不追求一套漂亮架构，只记录先观察再动手时我会怎样做。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-30 08:14" pubdate>
+              2024-06-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web-%E4%B8%8E%E5%89%8D%E7%AB%AF/" class="category-chain-item">Web 与前端</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CSS/">#CSS</a>
+            
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/">#实践</a>
+            
+              <a href="/tags/%E5%B7%A5%E7%A8%8B/">#工程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024-30-java-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E4%B8%AD%E7%9A%84%E5%87%A0%E4%B8%AA%E8%BE%B9%E7%95%8C/" target="_self">
+          Java 字符串处理中的几个边界
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024-30-java-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E4%B8%AD%E7%9A%84%E5%87%A0%E4%B8%AA%E8%BE%B9%E7%95%8C/" target="_self">
+        <div>
+          我想从“空字符串、空值和空白字符混在一起”这个具体场景开始。很多Java 基础的问题，表面上是某个按钮、字段或命令出了差错，往下追却常常牵涉到约定没有写清、失败没有出口，或者结果没人能复核。今天先不追求一套漂亮架构，只记录用一条真实数据验证时我会怎样做。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-23 21:08" pubdate>
+              2024-06-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%90%8E%E7%AB%AF%E4%B8%8E%E6%95%B0%E6%8D%AE/" class="category-chain-item">后端与数据</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%8E%92%E9%94%99/">#排错</a>
+            
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/">#实践</a>
+            
+              <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">#Java 基础</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024-29-%E6%8A%8A-%E4%B8%B4%E6%97%B6%E4%BF%AE%E4%B8%80%E4%B8%8B-%E5%86%99%E8%BF%9B%E5%8F%98%E6%9B%B4%E8%AE%B0%E5%BD%95/" target="_self">
+          把“临时修一下”写进变更记录
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024-29-%E6%8A%8A-%E4%B8%B4%E6%97%B6%E4%BF%AE%E4%B8%80%E4%B8%8B-%E5%86%99%E8%BF%9B%E5%8F%98%E6%9B%B4%E8%AE%B0%E5%BD%95/" target="_self">
+        <div>
+          我想从“线上补丁没有留下背景”这个具体场景开始。很多变更管理的问题，表面上是某个按钮、字段或命令出了差错，往下追却常常牵涉到约定没有写清、失败没有出口，或者结果没人能复核。今天先不追求一套漂亮架构，只记录把抽象概念换成一次小实验时我会怎样做。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-18 19:21" pubdate>
+              2024-06-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%B4%A8%E9%87%8F/" class="category-chain-item">发布与质量</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/">#实践</a>
+            
+              <a href="/tags/%E5%B7%A5%E7%A8%8B/">#工程</a>
+            
+              <a href="/tags/%E5%8F%98%E6%9B%B4%E7%AE%A1%E7%90%86/">#变更管理</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024-28-%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%8A%A0%E8%BD%BD%E9%80%9F%E5%BA%A6%E5%BA%94%E8%AF%A5%E6%80%8E%E6%A0%B7%E8%A7%82%E5%AF%9F/" target="_self">
+          一个页面的加载速度应该怎样观察
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024-28-%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%8A%A0%E8%BD%BD%E9%80%9F%E5%BA%A6%E5%BA%94%E8%AF%A5%E6%80%8E%E6%A0%B7%E8%A7%82%E5%AF%9F/" target="_self">
+        <div>
+          我想从“只看一个分数不知道哪里慢”这个具体场景开始。很多网页性能的问题，表面上是某个按钮、字段或命令出了差错，往下追却常常牵涉到约定没有写清、失败没有出口，或者结果没人能复核。今天先不追求一套漂亮架构，只记录给未来的自己留一条退路时我会怎样做。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-12 15:47" pubdate>
+              2024-06-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web-%E4%B8%8E%E5%89%8D%E7%AB%AF/" class="category-chain-item">Web 与前端</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%8E%92%E9%94%99/">#排错</a>
+            
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/">#实践</a>
+            
+              <a href="/tags/%E7%BD%91%E9%A1%B5%E6%80%A7%E8%83%BD/">#网页性能</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024-27-%E7%BB%99%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%BC%E5%85%A5%E5%87%86%E5%A4%87%E4%B8%80%E6%9D%A1%E9%80%80%E8%B7%AF/" target="_self">
+          给数据库导入准备一条退路
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024-27-%E7%BB%99%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%BC%E5%85%A5%E5%87%86%E5%A4%87%E4%B8%80%E6%9D%A1%E9%80%80%E8%B7%AF/" target="_self">
+        <div>
+          我想从“导入一半失败后无法判断哪些成功”这个具体场景开始。很多数据导入的问题，表面上是某个按钮、字段或命令出了差错，往下追却常常牵涉到约定没有写清、失败没有出口，或者结果没人能复核。今天先不追求一套漂亮架构，只记录让别人能接着做时我会怎样做。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-05 13:06" pubdate>
+              2024-06-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%90%8E%E7%AB%AF%E4%B8%8E%E6%95%B0%E6%8D%AE/" class="category-chain-item">后端与数据</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/">#实践</a>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5/">#数据导入</a>
+            
+              <a href="/tags/%E5%B7%A5%E7%A8%8B/">#工程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024-26-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A3%81%E7%9B%98%E5%BF%AB%E6%BB%A1%E6%97%B6%E7%9A%84%E6%8E%92%E6%9F%A5%E9%A1%BA%E5%BA%8F/" target="_self">
+          服务器磁盘快满时的排查顺序
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024-26-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A3%81%E7%9B%98%E5%BF%AB%E6%BB%A1%E6%97%B6%E7%9A%84%E6%8E%92%E6%9F%A5%E9%A1%BA%E5%BA%8F/" target="_self">
+        <div>
+          我想从“服务突然变慢却没有明显报错”这个具体场景开始。很多服务器维护的问题，表面上是某个按钮、字段或命令出了差错，往下追却常常牵涉到约定没有写清、失败没有出口，或者结果没人能复核。今天先不追求一套漂亮架构，只记录把失败路径放到桌面上时我会怎样做。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-05-30 10:32" pubdate>
+              2024-05-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%B4%A8%E9%87%8F/" class="category-chain-item">发布与质量</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%8E%92%E9%94%99/">#排错</a>
+            
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/">#实践</a>
+            
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BB%B4%E6%8A%A4/">#服务器维护</a>
             
           </div>
         
@@ -351,7 +1009,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/12/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="page-number" href="/page/12/#board">12</a><span class="page-number current">13</span>
+      <a class="extend prev" rel="prev" href="/page/12/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="page-number" href="/page/12/#board">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/#board">14</a><a class="page-number" href="/page/15/#board">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/#board">18</a><a class="extend next" rel="next" href="/page/14/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
