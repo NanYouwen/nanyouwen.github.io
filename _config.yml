@@ -1,0 +1,92 @@
+# Site identity recovered from the published static site.
+title: 南有文的小破站
+subtitle: 记录生活,热爱生活,欢迎来到南有文的小破站
+description: 分享学习笔记,由Hexo+Github搭建.
+keywords: Java、python、go
+author: 南有文
+language: zh-CN
+timezone: Asia/Shanghai
+
+# URL and permalinks deliberately match the existing GitHub Pages routes.
+url: https://nanyouwen.github.io
+root: /
+permalink: :title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# Directories
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+syntax_highlighter: highlight.js
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  enable: false
+
+# Keep a historical post's update timestamp stable when it has no explicit
+# `updated` front-matter field; otherwise a local rebuild can make it look new.
+updated_option: date
+
+# Home and archive pagination recovered from the existing rendered site.
+index_generator:
+  path: ''
+  per_page: 12
+  order_by: -date
+archive_generator:
+  per_page: 12
+  yearly: true
+  monthly: true
+  daily: false
+
+default_category: uncategorized
+category_map:
+tag_map:
+
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+per_page: 12
+pagination_dir: page
+
+# Markdown rendering compatible with Fluid 1.9.8's generated markup.
+marked:
+  prependRoot: true
+  postAsset: false
+  headerIds: true
+  anchorAlias: false
+  lazyload: false
+  modifyAnchors: 1
+  autolink: false
+
+# This regenerates the sitemap present in the published site. Fluid provides
+# its own local-search.xml generator, configured in _config.fluid.yml.
+sitemap:
+  path: sitemap.xml
+
+theme: fluid

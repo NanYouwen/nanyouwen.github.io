@@ -1,0 +1,88 @@
+# Only overrides from Fluid 1.9.8 defaults are kept here.  The values mirror
+# the published site while leaving the upstream theme maintainable via npm.
+navbar:
+  blog_title: 南有文
+  menu:
+    - { key: home, link: /, icon: iconfont icon-home-fill }
+    - { key: archive, link: /archives/, icon: iconfont icon-archive-fill }
+    - { key: category, link: /categories/, icon: iconfont icon-category-fill }
+    - { key: about, link: /about/, icon: iconfont icon-user-fill }
+
+index:
+  banner_img: /img/default.png
+  slogan:
+    enable: true
+    text: 记录生活,热爱生活,欢迎来到南有文的小破站
+    api:
+      enable: false
+
+favicon: /img/fluid.png
+apple_touch_icon: /img/fluid.png
+
+code:
+  copy_btn: true
+  language:
+    enable: true
+    default: TEXT
+
+fun_features:
+  typing:
+    enable: true
+    typeSpeed: 70
+    cursorChar: _
+    loop: false
+  anchorjs:
+    enable: true
+    element: h1,h2,h3,h4,h5,h6
+    placement: left
+    visible: hover
+    icon: ''
+  progressbar:
+    enable: true
+    height_px: 3
+    color: '#29d'
+    options:
+      showSpinner: false
+      trickleSpeed: 100
+
+post:
+  meta:
+    date:
+      enable: true
+      format: LL a
+  image_caption:
+    enable: true
+  image_zoom:
+    enable: true
+    img_url_replace: ['', '']
+  toc:
+    enable: true
+    placement: right
+    headingSelector: h1,h2,h3,h4,h5,h6
+    collapseDepth: 0
+
+lazyload:
+  enable: true
+  onlypost: false
+  loading_img: /img/loading.gif
+  offset_factor: 2
+
+web_analytics:
+  enable: true
+  follow_dnt: true
+  leancloud:
+    app_id: CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz
+    app_key: 2CXMce6atpoEGWAhPiSDn4EG
+    server_url:
+    path: window.location.pathname
+    ignore_local: false
+
+search:
+  enable: true
+  path: /local-search.xml
+  generate_path: /local-search.xml
+  field: post
+  content: true
+
+footer:
+  content: '<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>'

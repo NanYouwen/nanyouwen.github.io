@@ -1,0 +1,35 @@
+{
+  "name": "nanyouwen-hexo-source",
+  "version": "0.1.0",
+  "private": true,
+  "hexo": {
+    "version": "7.3.0"
+  },
+  "description": "Maintainable Hexo source for nanyouwen.github.io",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "clean": "hexo clean",
+    "serve": "hexo server",
+    "build": "hexo generate",
+    "check": "hexo clean && hexo generate && node tools/check-post-dates.mjs",
+    "validate:refresh": "node tools/validate-refresh.mjs"
+  },
+  "dependencies": {
+    "css": "3.0.0",
+    "hexo": "7.3.0",
+    "hexo-cli": "4.3.2",
+    "hexo-deployer-git": "4.0.0",
+    "hexo-generator-archive": "2.0.0",
+    "hexo-generator-category": "2.0.0",
+    "hexo-generator-index": "4.0.0",
+    "hexo-generator-sitemap": "3.0.1",
+    "hexo-generator-tag": "2.0.0",
+    "hexo-renderer-ejs": "2.0.0",
+    "hexo-renderer-marked": "7.0.1",
+    "hexo-renderer-stylus": "2.1.0",
+    "hexo-server": "3.0.0",
+    "hexo-theme-fluid": "1.9.8"
+  }
+}

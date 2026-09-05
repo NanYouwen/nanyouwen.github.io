@@ -1,0 +1,49 @@
+# Fluid overrides are loaded from source/_data by the theme's merge hook.
+navbar:
+  blog_title: 南有文
+  menu:
+    - { key: home, link: /, icon: icon-home-fill }
+    - { key: archive, link: /archives/, icon: icon-archive-fill }
+    - { key: category, link: /categories/, icon: icon-category-fill }
+    - { key: about, link: /about/, icon: icon-user-fill }
+
+banner_img: /img/default.png
+index_banner_img: /img/default.png
+archive_banner_img: /img/default.png
+category_banner_img: /img/default.png
+tag_banner_img: /img/default.png
+
+index:
+  banner_img: /img/default.png
+  slogan:
+    enable: true
+    text: 记录生活,热爱生活,欢迎来到南有文的小破站
+    api:
+      enable: false
+
+favicon: /img/fluid.png
+apple_touch_icon: /img/fluid.png
+
+post:
+  meta:
+    date:
+      enable: true
+      format: "YYYY年M月D日 HH:mm:ss"
+
+web_analytics:
+  enable: true
+  follow_dnt: true
+  leancloud:
+    app_id: CzjYFUPb65IF0jRA73iXqAEg-gzGzoHsz
+    app_key: 2CXMce6atpoEGWAhPiSDn4EG
+    server_url:
+    path: window.location.pathname
+    ignore_local: false
+
+local_search:
+  enable: true
+  path: /local-search.xml
+  preload: false
+
+footer:
+  content: '<a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>'
