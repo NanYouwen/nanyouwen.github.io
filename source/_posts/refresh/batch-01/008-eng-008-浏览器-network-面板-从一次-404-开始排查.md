@@ -2,7 +2,7 @@
 title: "浏览器 Network 面板：从一次 404 开始排查"
 date: "2025-02-16 13:27:42"
 updated: "2025-02-16 13:27:42"
-categories: ["Web 实践"]
+categories: ["Web 与前端"]
 tags: ["浏览器", "调试", "Network"]
 permalink: "/eng-008-浏览器-network-面板-从一次-404-开始排查/"
 ---

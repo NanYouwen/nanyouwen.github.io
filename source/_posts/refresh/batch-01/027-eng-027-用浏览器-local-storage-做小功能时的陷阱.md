@@ -2,7 +2,7 @@
 title: "用浏览器 Local Storage 做小功能时的陷阱"
 date: "2025-05-24 19:16:55"
 updated: "2025-05-24 19:16:55"
-categories: ["Web 实践"]
+categories: ["Web 与前端"]
 tags: ["浏览器存储", "隐私", "前端"]
 permalink: "/eng-027-用浏览器-local-storage-做小功能时的陷阱/"
 ---

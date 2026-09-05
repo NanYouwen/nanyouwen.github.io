@@ -2,7 +2,7 @@
 title: "第一次写自动化测试：从最易坏的流程开始"
 date: "2025-12-17 13:57:33"
 updated: "2025-12-17 13:57:33"
-categories: ["测试与协作"]
+categories: ["发布与质量"]
 tags: ["自动化测试", "质量", "实践"]
 permalink: "/testing-first-automation-start-with-fragile-flow/"
 ---

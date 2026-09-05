@@ -2,7 +2,7 @@
 title: "RAG 用人话解释：让 AI 先翻资料再回答"
 date: "2026-02-05 20:36:30"
 updated: "2026-02-05 20:36:30"
-categories: ["AI 入门"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "RAG", "知识库"]
 permalink: "/ai-rag-in-plain-language/"
 ---

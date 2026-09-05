@@ -2,7 +2,7 @@
 title: "<keep-alive>的原理和使用场景"
 date: "2024-12-20 19:04:52"
 updated: "2024-12-30 09:21:52"
-categories: ["vue进阶"]
+categories: ["Web 与前端"]
 tags: ["Java、python、go"]
 permalink: "/vue进阶-keepAlive的原理和使用场景/"
 ---

@@ -2,7 +2,7 @@
 title: "接口分页的兼容性，不只是一句 limit 和 offset"
 date: "2025-12-07 20:06:19"
 updated: "2025-12-07 20:06:19"
-categories: ["数据与后端"]
+categories: ["后端与数据"]
 tags: ["分页", "接口", "兼容性"]
 permalink: "/backend-api-pagination-compatibility/"
 ---

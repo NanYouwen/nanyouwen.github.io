@@ -2,7 +2,7 @@
 title: "把重复资料交给 AI 前，先做这三件事"
 date: "2026-01-26 20:02:26"
 updated: "2026-01-26 20:02:26"
-categories: ["AI 实践"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "资料整理", "工作流"]
 permalink: "/ai-prepare-repeated-materials-before-use/"
 ---

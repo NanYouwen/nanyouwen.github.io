@@ -2,7 +2,7 @@
 title: "不是所有任务都值得交给 Agent"
 date: "2026-04-17 22:27:12"
 updated: "2026-04-17 22:27:12"
-categories: ["AI 随笔"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "自动化"]
 permalink: "/ai-092-不是所有任务都值得交给-agent/"
 ---

@@ -2,7 +2,7 @@
 title: "给 Agent 一次失败的机会：安全沙箱的价值"
 date: "2026-08-01 17:04:54"
 updated: "2026-08-01 17:04:54"
-categories: ["AI 安全"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "沙箱"]
 permalink: "/ai-113-给-agent-一次失败的机会-安全沙箱的价值/"
 ---

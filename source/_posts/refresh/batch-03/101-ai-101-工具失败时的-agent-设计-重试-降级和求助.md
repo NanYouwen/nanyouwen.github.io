@@ -2,7 +2,7 @@
 title: "工具失败时的 Agent 设计：重试、降级和求助"
 date: "2026-06-01 20:19:01"
 updated: "2026-06-01 20:19:01"
-categories: ["Agent 工程"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "容错"]
 permalink: "/ai-101-工具失败时的-agent-设计-重试-降级和求助/"
 ---

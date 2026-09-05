@@ -2,7 +2,7 @@
 title: "多 Agent 协作，不是把人越分越多"
 date: "2026-03-23 09:20:49"
 updated: "2026-03-23 09:20:49"
-categories: ["Agent 工作流"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "多智能体"]
 permalink: "/ai-087-多-agent-协作-不是把人越分越多/"
 ---

@@ -2,7 +2,7 @@
 title: "Agent 的记忆分层：临时、长期与不该保存的东西"
 date: "2026-07-12 18:27:41"
 updated: "2026-07-12 18:27:41"
-categories: ["Agent 工程"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "记忆"]
 permalink: "/ai-109-agent-的记忆分层-临时-长期与不该保存的东西/"
 ---

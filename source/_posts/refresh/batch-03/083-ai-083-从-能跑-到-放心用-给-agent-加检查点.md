@@ -2,7 +2,7 @@
 title: "从“能跑”到“放心用”：给 Agent 加检查点"
 date: "2026-03-02 23:23:45"
 updated: "2026-03-02 23:23:45"
-categories: ["Agent 工程"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "质量"]
 permalink: "/ai-083-从-能跑-到-放心用-给-agent-加检查点/"
 ---

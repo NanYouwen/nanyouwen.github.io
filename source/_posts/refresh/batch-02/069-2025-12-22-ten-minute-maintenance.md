@@ -2,7 +2,7 @@
 title: "把每天十分钟的维护变成习惯"
 date: "2025-12-22 09:51:23"
 updated: "2025-12-22 09:51:23"
-categories: ["工程习惯"]
+categories: ["工程与工具"]
 tags: ["维护", "效率", "习惯"]
 permalink: "/engineering-ten-minute-maintenance-habit/"
 ---

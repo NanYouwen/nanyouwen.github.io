@@ -2,7 +2,7 @@
 title: "让 Agent 读文件时，先教它如何引用"
 date: "2026-03-17 07:06:39"
 updated: "2026-03-17 07:06:39"
-categories: ["Agent 实践"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "引用"]
 permalink: "/ai-086-让-agent-读文件时-先教它如何引用/"
 ---

@@ -2,7 +2,7 @@
 title: "给 Agent 分角色：研究、执行与审稿"
 date: "2026-03-28 23:30:32"
 updated: "2026-03-28 23:30:32"
-categories: ["Agent 工作流"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "角色设计"]
 permalink: "/ai-088-给-agent-分角色-研究-执行与审稿/"
 ---

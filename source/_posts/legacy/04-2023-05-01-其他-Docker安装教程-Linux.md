@@ -2,7 +2,7 @@
 title: "Docker安装教程-Linux"
 date: "2023-05-01 19:04:52"
 updated: "2024-12-24 16:27:57"
-categories: ["其他"]
+categories: ["后端与数据"]
 tags: ["Java、python、go"]
 permalink: "/其他-Docker安装教程-Linux/"
 ---

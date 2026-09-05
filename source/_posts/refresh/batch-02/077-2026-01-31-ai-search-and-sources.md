@@ -2,7 +2,7 @@
 title: "一次 AI 搜索使用笔记：答案之外还要看来源"
 date: "2026-01-31 21:22:50"
 updated: "2026-01-31 21:22:50"
-categories: ["AI 实践"]
+categories: ["AI 与 Agent"]
 tags: ["AI 搜索", "来源", "核验"]
 permalink: "/ai-search-look-beyond-the-answer-at-sources/"
 ---

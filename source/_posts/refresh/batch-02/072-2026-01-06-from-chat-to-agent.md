@@ -2,7 +2,7 @@
 title: "从聊天框到工作流：我理解的 Agent"
 date: "2026-01-06 17:44:23"
 updated: "2026-01-06 17:44:23"
-categories: ["Agent 入门"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "工作流"]
 permalink: "/agent-from-chat-to-workflow/"
 ---

@@ -2,7 +2,7 @@
 title: "如何给 Agent 留日志，方便未来复盘"
 date: "2026-06-11 09:30:18"
 updated: "2026-06-11 09:30:18"
-categories: ["Agent 工程"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "日志"]
 permalink: "/ai-103-如何给-agent-留日志-方便未来复盘/"
 ---

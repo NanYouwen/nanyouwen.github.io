@@ -2,7 +2,7 @@
 title: "年末整理：把项目交给三个月后的自己"
 date: "2025-12-27 13:55:14"
 updated: "2025-12-27 13:55:14"
-categories: ["工程习惯"]
+categories: ["工程与工具"]
 tags: ["年终总结", "整理", "项目维护"]
 permalink: "/engineering-year-end-project-handover/"
 ---

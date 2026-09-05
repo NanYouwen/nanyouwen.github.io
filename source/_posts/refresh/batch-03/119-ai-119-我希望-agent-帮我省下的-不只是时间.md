@@ -2,7 +2,7 @@
 title: "我希望 Agent 帮我省下的，不只是时间"
 date: "2026-08-31 13:46:10"
 updated: "2026-08-31 13:46:10"
-categories: ["AI 随笔"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "工作方式"]
 permalink: "/ai-119-我希望-agent-帮我省下的-不只是时间/"
 ---

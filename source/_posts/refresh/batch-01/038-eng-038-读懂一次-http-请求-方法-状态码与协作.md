@@ -2,7 +2,7 @@
 title: "读懂一次 HTTP 请求：方法、状态码与协作"
 date: "2025-07-18 23:35:04"
 updated: "2025-07-18 23:35:04"
-categories: ["Web 实践"]
+categories: ["Web 与前端"]
 tags: ["HTTP", "接口", "前后端协作"]
 permalink: "/eng-038-读懂一次-http-请求-方法-状态码与协作/"
 ---

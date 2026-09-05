@@ -2,7 +2,7 @@
 title: "模型会犯错，所以流程要能回头"
 date: "2026-01-21 11:17:23"
 updated: "2026-01-21 11:17:23"
-categories: ["AI 工程"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "可靠性"]
 permalink: "/ai-agent-design-reversible-workflows/"
 ---

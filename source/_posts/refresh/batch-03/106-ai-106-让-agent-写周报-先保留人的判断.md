@@ -2,7 +2,7 @@
 title: "让 Agent 写周报：先保留人的判断"
 date: "2026-06-26 10:16:39"
 updated: "2026-06-26 10:16:39"
-categories: ["Agent 实践"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "周报"]
 permalink: "/ai-106-让-agent-写周报-先保留人的判断/"
 ---

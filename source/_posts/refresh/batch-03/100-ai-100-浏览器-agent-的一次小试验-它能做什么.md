@@ -2,7 +2,7 @@
 title: "浏览器 Agent 的一次小试验：它能做什么"
 date: "2026-05-27 08:25:56"
 updated: "2026-05-27 08:25:56"
-categories: ["Agent 实践"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "浏览器"]
 permalink: "/ai-100-浏览器-agent-的一次小试验-它能做什么/"
 ---

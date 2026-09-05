@@ -2,7 +2,7 @@
 title: "一个简单的知识库 Agent，从资料整理开始"
 date: "2026-07-07 23:09:06"
 updated: "2026-07-07 23:09:06"
-categories: ["Agent 实践"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "知识库"]
 permalink: "/ai-108-一个简单的知识库-agent-从资料整理开始/"
 ---

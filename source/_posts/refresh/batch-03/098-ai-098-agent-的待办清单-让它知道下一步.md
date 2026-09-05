@@ -2,7 +2,7 @@
 title: "Agent 的待办清单：让它知道下一步"
 date: "2026-05-17 17:16:02"
 updated: "2026-05-17 17:16:02"
-categories: ["Agent 工作流"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "任务管理"]
 permalink: "/ai-098-agent-的待办清单-让它知道下一步/"
 ---

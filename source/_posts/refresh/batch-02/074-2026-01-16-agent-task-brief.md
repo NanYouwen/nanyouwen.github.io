@@ -2,7 +2,7 @@
 title: "第一次给 Agent 写任务说明：像交接工作一样具体"
 date: "2026-01-16 13:34:45"
 updated: "2026-01-16 13:34:45"
-categories: ["Agent 入门"]
+categories: ["AI 与 Agent"]
 tags: ["Agent", "提示词", "任务设计"]
 permalink: "/agent-write-a-clear-task-brief/"
 ---

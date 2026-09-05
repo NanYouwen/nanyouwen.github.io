@@ -2,7 +2,7 @@
 title: "长任务如何不跑偏：给 Agent 一张路线图"
 date: "2026-05-07 13:21:49"
 updated: "2026-05-07 13:21:49"
-categories: ["Agent 工程"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "规划"]
 permalink: "/ai-096-长任务如何不跑偏-给-agent-一张路线图/"
 ---

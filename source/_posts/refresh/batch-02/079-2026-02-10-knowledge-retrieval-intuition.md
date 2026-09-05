@@ -2,7 +2,7 @@
 title: "向量、关键词和“找得到”：知识库检索的直觉"
 date: "2026-02-10 11:34:17"
 updated: "2026-02-10 11:34:17"
-categories: ["AI 入门"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "检索", "RAG"]
 permalink: "/ai-knowledge-retrieval-vector-and-keyword-intuition/"
 ---

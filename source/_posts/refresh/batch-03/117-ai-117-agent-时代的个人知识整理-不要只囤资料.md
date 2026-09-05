@@ -2,7 +2,7 @@
 title: "Agent 时代的个人知识整理：不要只囤资料"
 date: "2026-08-21 16:00:41"
 updated: "2026-08-21 16:00:41"
-categories: ["Agent 实践"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "知识管理"]
 permalink: "/ai-117-agent-时代的个人知识整理-不要只囤资料/"
 ---

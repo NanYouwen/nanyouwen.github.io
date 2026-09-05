@@ -2,7 +2,7 @@
 title: "表格里那种“看不出来错”的数字"
 date: "2025-12-02 07:29:24"
 updated: "2025-12-02 07:29:24"
-categories: ["数据与后端"]
+categories: ["后端与数据"]
 tags: ["数据", "金额", "精度"]
 permalink: "/data-invisible-number-errors-in-tables/"
 ---

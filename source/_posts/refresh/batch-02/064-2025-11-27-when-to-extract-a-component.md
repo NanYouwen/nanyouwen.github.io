@@ -2,7 +2,7 @@
 title: "组件什么时候值得抽出来"
 date: "2025-11-27 15:00:07"
 updated: "2025-11-27 15:00:07"
-categories: ["Web 实践"]
+categories: ["Web 与前端"]
 tags: ["组件化", "前端", "维护"]
 permalink: "/frontend-when-to-extract-a-component/"
 ---

@@ -2,7 +2,7 @@
 title: "小团队的 AI 使用约定，从不上传什么开始"
 date: "2026-02-15 14:23:00"
 updated: "2026-02-15 14:23:00"
-categories: ["AI 安全"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "隐私"]
 permalink: "/ai-agent-small-team-usage-rules/"
 ---

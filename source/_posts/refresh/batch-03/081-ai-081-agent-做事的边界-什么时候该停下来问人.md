@@ -2,7 +2,7 @@
 title: "Agent 做事的边界：什么时候该停下来问人"
 date: "2026-02-20 22:22:38"
 updated: "2026-02-20 22:22:38"
-categories: ["Agent 实践"]
+categories: ["AI 与 Agent"]
 tags: ["AI", "Agent", "权限"]
 permalink: "/ai-081-agent-做事的边界-什么时候该停下来问人/"
 ---

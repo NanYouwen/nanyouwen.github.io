@@ -2,7 +2,7 @@
 title: "js与jQuery"
 date: "2023-08-04 21:42:31"
 updated: "2025-02-19 11:55:20"
-categories: ["web"]
+categories: ["Web 与前端"]
 tags: ["Java、python、go"]
 permalink: "/web-js与jQuery/"
 ---

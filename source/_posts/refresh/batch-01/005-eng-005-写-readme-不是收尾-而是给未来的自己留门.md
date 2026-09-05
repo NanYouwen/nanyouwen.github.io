@@ -2,7 +2,7 @@
 title: "写 README 不是收尾，而是给未来的自己留门"
 date: "2025-02-01 10:03:27"
 updated: "2025-02-01 10:03:27"
-categories: ["工程习惯"]
+categories: ["工程与工具"]
 tags: ["README", "文档", "协作"]
 permalink: "/eng-005-写-readme-不是收尾-而是给未来的自己留门/"
 ---
