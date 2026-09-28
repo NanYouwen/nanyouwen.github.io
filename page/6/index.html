@@ -231,6 +231,201 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/backend-slow-query-learn-to-observe/" target="_self">
+          慢查询从哪里来：先学会看执行
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/backend-slow-query-learn-to-observe/" target="_self">
+        <div>
+          页面慢的时候，人很容易先怪网络，接着怪服务器，最后把希望寄托在“加一个索引”上。索引确实经常有用，但它不是给数据库贴上的加速贴纸。一次慢查询真正值得做的，是先看清它究竟在等什么：是在读取太多数据、在排序、在和别的表连接，还是其实请求根本没有走到数据库。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-11-21 19:34" pubdate>
+              2025-11-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%90%8E%E7%AB%AF%E4%B8%8E%E6%95%B0%E6%8D%AE/" class="category-chain-item">后端与数据</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SQL/">#SQL</a>
+            
+              <a href="/tags/%E6%85%A2%E6%9F%A5%E8%AF%A2/">#慢查询</a>
+            
+              <a href="/tags/%E6%80%A7%E8%83%BD/">#性能</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/maintenance-dependency-incident-retrospective/" target="_self">
+          一次依赖故障后的复盘模板
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/maintenance-dependency-incident-retrospective/" target="_self">
+        <div>
+          依赖升级出问题时，最容易听到的一句话是：“昨天明明还是好的。”这句话通常是真的。我们没有改业务代码，只是安装了一个“看起来只是补丁版本”的包，构建便开始报错；又或者线上页面可以打开，但某个很少走到的按钮突然失效。小问题常常被修得很快，真正容易丢掉的是它留下的线索。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-11-16 16:51" pubdate>
+              2025-11-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AE%89%E5%85%A8%E4%B8%8E%E7%BB%B4%E6%8A%A4/" class="category-chain-item">安全与维护</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%A4%8D%E7%9B%98/">#复盘</a>
+            
+              <a href="/tags/%E4%BE%9D%E8%B5%96/">#依赖</a>
+            
+              <a href="/tags/%E6%95%85%E9%9A%9C/">#故障</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/security-password-and-keys-not-in-repository/" target="_self">
+          密码和密钥：别把它们留在仓库
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/security-password-and-keys-not-in-repository/" target="_self">
+        <div>
+          有一次帮朋友看一个小项目，问题并不复杂：项目跑不起来。打开仓库后才发现，真正能让它连接数据库的账号密码只躺在某个人电脑上的配置文件里；另一个更糟的版本，是密码直接写在代码里，随后又被提交到了远端。两种做法看起来相反，一个是“谁也拿不到”，一个是“谁都可能拿到”，本质上都是把重要信息交给了运气。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-11-11 23:15" pubdate>
+              2025-11-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AE%89%E5%85%A8%E4%B8%8E%E7%BB%B4%E6%8A%A4/" class="category-chain-item">安全与维护</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%AE%89%E5%85%A8/">#安全</a>
+            
+              <a href="/tags/%E5%AF%86%E9%92%A5/">#密钥</a>
+            
+              <a href="/tags/Git/">#Git</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%BF%90%E7%BB%B4-%E7%94%A8%E4%B8%80%E4%B8%AA%E6%97%A5%E5%BF%97ID%E4%B8%B2%E8%B5%B7%E6%9D%A5%E8%BF%BD%E9%97%AE%E9%A2%98/" target="_self">
           用一个日志 ID 串起来追问题
         </a>
@@ -343,11 +538,11 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">#可观测性</a>
-            
               <a href="/tags/%E7%9B%91%E6%8E%A7/">#监控</a>
             
               <a href="/tags/%E6%8A%A5%E8%AD%A6/">#报警</a>
+            
+              <a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">#可观测性</a>
             
           </div>
         
@@ -475,9 +670,9 @@
             
               <a href="/tags/%E6%8E%A5%E5%8F%A3/">#接口</a>
             
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/">#数据一致性</a>
-            
               <a href="/tags/%E5%B9%82%E7%AD%89/">#幂等</a>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/">#数据一致性</a>
             
           </div>
         
@@ -603,9 +798,9 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/">#用户体验</a>
-            
               <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+            
+              <a href="/tags/%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/">#用户体验</a>
             
               <a href="/tags/%E8%AE%BE%E8%AE%A1/">#设计</a>
             
@@ -803,201 +998,6 @@
               <a href="/tags/%E7%89%88%E6%9C%AC/">#版本</a>
             
               <a href="/tags/%E5%8F%98%E6%9B%B4%E8%AE%B0%E5%BD%95/">#变更记录</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF-%E5%B0%8F%E5%8A%9F%E8%83%BD%E7%9A%84%E8%BE%B9%E7%95%8C%E5%A6%82%E4%BD%95%E4%B8%8D%E8%A2%AB%E9%9C%80%E6%B1%82%E4%B8%80%E7%82%B9%E7%82%B9%E5%90%83%E6%8E%89/" target="_self">
-          小功能的边界，如何不被需求一点点吃掉
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/%E5%B7%A5%E7%A8%8B%E4%B9%A0%E6%83%AF-%E5%B0%8F%E5%8A%9F%E8%83%BD%E7%9A%84%E8%BE%B9%E7%95%8C%E5%A6%82%E4%BD%95%E4%B8%8D%E8%A2%AB%E9%9C%80%E6%B1%82%E4%B8%80%E7%82%B9%E7%82%B9%E5%90%83%E6%8E%89/" target="_self">
-        <div>
-          “这个功能很简单，顺手再加一个……”几乎是项目里最容易听到的话。单独看每一个补充都很合理：列表既然有了，能不能加导出；导出既然有了，能不能定时发邮箱；邮箱既然能发，能不能按角色订阅。几轮之后，原本只想让人查一查数据的小功能，已经有了权限、任务队列、通知设置和一堆没时间仔细想过的边界。 需求变多不是坏事，说明有人真的在用。但如果每次都在原路上顺手拐一小步，团队很容易失去“这次到底要解决什么”的共同认
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-09-22 22:19" pubdate>
-              2025-09-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%B7%A5%E7%A8%8B%E4%B8%8E%E5%B7%A5%E5%85%B7/" class="category-chain-item">工程与工具</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E4%BA%A7%E5%93%81/">#产品</a>
-            
-              <a href="/tags/%E9%9C%80%E6%B1%82/">#需求</a>
-            
-              <a href="/tags/%E8%8C%83%E5%9B%B4/">#范围</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E5%A6%82%E4%BD%95%E7%94%A8%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE%E6%97%A9%E4%B8%80%E7%82%B9%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98/" target="_self">
-          如何用模拟数据早一点发现问题
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E5%A6%82%E4%BD%95%E7%94%A8%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE%E6%97%A9%E4%B8%80%E7%82%B9%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98/" target="_self">
-        <div>
-          接口还没完成时，前端常常只能对着空白页面等数据；接口一接通，又发现真实名字比设计稿长得多、状态比预想多一倍、列表里居然有空值和过期记录。等到最后才看到真实数据，很多问题就会在最紧张的时候一起冒出来。模拟数据的价值，正是在前面替真实世界制造一点“麻烦”。 好的模拟数据不是随便写十条“张三、李四”。它应该让界面提前遇见将来一定会遇到的情况：很长的文本、空字段、不同状态、边界日期、慢网络、错误返回、没有
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-09-17 19:56" pubdate>
-              2025-09-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%B4%A8%E9%87%8F/" class="category-chain-item">发布与质量</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
-            
-              <a href="/tags/%E6%B5%8B%E8%AF%95/">#测试</a>
-            
-              <a href="/tags/%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE/">#模拟数据</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AF%A5%E4%BB%8E%E7%94%A8%E6%88%B7%E8%B7%AF%E7%BA%BF%E5%BC%80%E5%A7%8B/" target="_self">
-          测试用例该从用户路线开始
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%8D%8F%E4%BD%9C-%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AF%A5%E4%BB%8E%E7%94%A8%E6%88%B7%E8%B7%AF%E7%BA%BF%E5%BC%80%E5%A7%8B/" target="_self">
-        <div>
-          测试刚开始做时，很多人会从页面上的控件数起：这个按钮点过了吗，那条接口返回过了吗，这个弹窗关得掉吗。它们当然要测，但如果只按控件排列，很容易漏掉用户真正经历的一整段路。用户不会在意某个按钮单独能不能亮，他在意的是自己能否从进入页面、填写信息、提交，到最后看见一个可信的结果。 我喜欢先画“用户路线”，再补测试点。路线不需要画得很漂亮，拿一支笔写下“从哪里来—想完成什么—中间会遇到什么—完成后去哪儿”
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-09-12 21:06" pubdate>
-              2025-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%8F%91%E5%B8%83%E4%B8%8E%E8%B4%A8%E9%87%8F/" class="category-chain-item">发布与质量</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%B5%8B%E8%AF%95/">#测试</a>
-            
-              <a href="/tags/%E8%B4%A8%E9%87%8F/">#质量</a>
-            
-              <a href="/tags/%E7%94%A8%E6%88%B7%E8%B7%AF%E5%BE%84/">#用户路径</a>
             
           </div>
         
