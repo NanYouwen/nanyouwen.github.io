@@ -4,13 +4,13 @@ import path from 'node:path';
 const refreshDir = path.resolve('source', '_posts', 'refresh');
 const minimumHan = 1800;
 const maximumHan = 3000;
-const expectedCount = 120;
+const expectedCount = 123;
 const frontMatterPattern = /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n([\s\S]*)$/;
 const fieldPattern = (name) => new RegExp(`^${name}:\\s*["']?(.+?)["']?\\s*$`, 'm');
 
 const files = fs.existsSync(refreshDir)
   ? fs.readdirSync(refreshDir, { recursive: true })
-    .filter((file) => file.endsWith('.md') && /batch-(01|02|03)[\\/]/.test(file))
+    .filter((file) => file.endsWith('.md') && /batch-(01|02|03|04)[\\/]/.test(file))
     .map((file) => path.join(refreshDir, file))
   : [];
 
@@ -48,7 +48,7 @@ const seenPermalinks = new Set();
 for (const post of posts) {
   if (seenPermalinks.has(post.permalink)) throw new Error(`Duplicate permalink: ${post.permalink}`);
   seenPermalinks.add(post.permalink);
-  if (post.timestamp > Date.parse('2026-09-05T23:59:59+08:00')) {
+  if (post.timestamp > Date.parse('2026-09-23T23:59:59+08:00')) {
     throw new Error(`Future refresh post date: ${post.file}`);
   }
 }
