@@ -13,7 +13,7 @@
     
     <categories>
       
-      <category>RAG 工程</category>
+      <category>AI 与 Agent</category>
       
     </categories>
     
@@ -44,7 +44,7 @@
     
     <categories>
       
-      <category>RAG 工程</category>
+      <category>AI 与 Agent</category>
       
     </categories>
     
@@ -75,7 +75,7 @@
     
     <categories>
       
-      <category>RAG 实践</category>
+      <category>AI 与 Agent</category>
       
     </categories>
     
@@ -904,9 +904,9 @@
       
       <tag>AI</tag>
       
-      <tag>成本</tag>
-      
       <tag>模型选择</tag>
+      
+      <tag>成本</tag>
       
     </tags>
     
@@ -2410,9 +2410,9 @@
     
     <tags>
       
-      <tag>静态站</tag>
-      
       <tag>搜索</tag>
+      
+      <tag>静态站</tag>
       
       <tag>用户体验</tag>
       
@@ -4954,9 +4954,9 @@
     
     <tags>
       
-      <tag>实践</tag>
-      
       <tag>分页</tag>
+      
+      <tag>实践</tag>
       
       <tag>排错</tag>
       
